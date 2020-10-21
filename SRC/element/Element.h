@@ -17,20 +17,19 @@
 **   Filip C. Filippou (filippou@ce.berkeley.edu)                     **
 **                                                                    **
 ** ****************************************************************** */
-                                                                        
+
 // $Revision: 1.19 $
 // $Date: 2009-08-25 22:32:08 $
 // $Source: /usr/local/cvs/OpenSees/SRC/element/Element.h,v $
-                                                                        
-                                                                        
-// Written: fmk 
+
+// Written: fmk
 // Created: 11/96
 // Revision: A
 //
 // Description: This file contains the class definition for Element.
 // Element is an abstract base class and thus no objects of it's type
 // can be instantiated. It has pure virtual functions which must be
-// implemented in it's derived classes. 
+// implemented in it's derived classes.
 //
 // What: "@(#) Element.h, revA"
 
@@ -47,103 +46,102 @@ class Response;
 class ElementalLoad;
 class Node;
 
-class Element : public DomainComponent
-{
-  public:
-    Element(int tag, int classTag);    
-    virtual ~Element();
+class Element : public DomainComponent {
+ public:
+  Element(int tag, int classTag);
+  virtual ~Element();
 
-    // methods dealing with nodes and number of external dof
-    virtual int getNumExternalNodes(void) const =0;
-    virtual const ID &getExternalNodes(void)  =0;	
-    virtual Node **getNodePtrs(void)  =0;	
-    virtual int getNumDOF(void) =0;
-    virtual double getCharacteristicLength(void);
+  // methods dealing with nodes and number of external dof
+  virtual int getNumExternalNodes(void) const = 0;
+  virtual const ID &getExternalNodes(void) = 0;
+  virtual Node **getNodePtrs(void) = 0;
+  virtual int getNumDOF(void) = 0;
+  virtual double getCharacteristicLength(void);
 
-    // methods dealing with committed state and update
-    virtual int commitState(void);    
-    virtual int revertToLastCommit(void) = 0;        
-    virtual int revertToStart(void);                
-    virtual int update(void);
-    virtual bool isSubdomain(void);
-    
-    // methods to return the current linearized stiffness,
-    // damping and mass matrices
-    virtual const Matrix &getTangentStiff(void) =0;
-    virtual const Matrix &getInitialStiff(void) =0;
-    virtual const Matrix &getDamp(void);    
-    virtual const Matrix &getMass(void);
-    virtual const Matrix &getGeometricTangentStiff();
+  // methods dealing with committed state and update
+  virtual int commitState(void);
+  virtual int revertToLastCommit(void) = 0;
+  virtual int revertToStart(void);
+  virtual int update(void);
+  virtual bool isSubdomain(void);
 
-    // methods for applying loads
-    virtual void zeroLoad(void);	
-    virtual int addLoad(ElementalLoad *theLoad, double loadFactor);
-    virtual int addLoad(ElementalLoad *theLoad, const Vector &loadFactors);
+  // methods to return the current linearized stiffness,
+  // damping and mass matrices
+  virtual const Matrix &getTangentStiff(void) = 0;
+  virtual const Matrix &getInitialStiff(void) = 0;
+  virtual const Matrix &getDamp(void);
+  virtual const Matrix &getMass(void);
+  virtual const Matrix &getGeometricTangentStiff();
 
-    virtual int addInertiaLoadToUnbalance(const Vector &accel);
-    virtual int setRayleighDampingFactors(double alphaM, double betaK, double betaK0, double betaKc);
+  // methods for applying loads
+  virtual void zeroLoad(void);
+  virtual int addLoad(ElementalLoad *theLoad, double loadFactor);
+  virtual int addLoad(ElementalLoad *theLoad, const Vector &loadFactors);
 
-    // methods for obtaining resisting force (force includes elemental loads)
-    virtual const Vector &getResistingForce(void) =0;
-    virtual const Vector &getResistingForceIncInertia(void);        
+  virtual int addInertiaLoadToUnbalance(const Vector &accel);
+  virtual int setRayleighDampingFactors(double alphaM, double betaK,
+                                        double betaK0, double betaKc);
 
-    // method for obtaining information specific to an element
-    virtual Response *setResponse(const char **argv, int argc, 
-				  OPS_Stream &theHandler);
-    virtual int getResponse(int responseID, Information &eleInformation);
-    virtual int getResponseSensitivity(int responseID, int gradIndex,
-				       Information &eleInformation);
+  // methods for obtaining resisting force (force includes elemental loads)
+  virtual const Vector &getResistingForce(void) = 0;
+  virtual const Vector &getResistingForceIncInertia(void);
 
-    virtual int displaySelf(Renderer &, int mode, float fact, const char **displayModes=0, int numModes=0);
+  // method for obtaining information specific to an element
+  virtual Response *setResponse(const char **argv, int argc,
+                                OPS_Stream &theHandler);
+  virtual int getResponse(int responseID, Information &eleInformation);
+  virtual int getResponseSensitivity(int responseID, int gradIndex,
+                                     Information &eleInformation);
 
-// AddingSensitivity:BEGIN //////////////////////////////////////////
-    virtual int addInertiaLoadSensitivityToUnbalance(const Vector &accel, bool tag);
-    virtual const Vector & getResistingForceSensitivity(int gradIndex);
-    virtual const Matrix & getTangentStiffSensitivity(int gradIndex);
-    virtual const Matrix & getInitialStiffSensitivity(int gradIndex);
-    virtual const Matrix & getCommittedStiffSensitivity(int gradIndex);
-    virtual const Matrix & getDampSensitivity(int gradIndex);
-    virtual const Matrix & getMassSensitivity(int gradIndex);
-    virtual int   commitSensitivity(int gradIndex, int numGrads);
-// AddingSensitivity:END ///////////////////////////////////////////
+  virtual int displaySelf(Renderer &, int mode, float fact,
+                          const char **displayModes = 0, int numModes = 0);
 
-    virtual int addResistingForceToNodalReaction(int flag);
+  // AddingSensitivity:BEGIN //////////////////////////////////////////
+  virtual int addInertiaLoadSensitivityToUnbalance(const Vector &accel,
+                                                   bool tag);
+  virtual const Vector &getResistingForceSensitivity(int gradIndex);
+  virtual const Matrix &getTangentStiffSensitivity(int gradIndex);
+  virtual const Matrix &getInitialStiffSensitivity(int gradIndex);
+  virtual const Matrix &getCommittedStiffSensitivity(int gradIndex);
+  virtual const Matrix &getDampSensitivity(int gradIndex);
+  virtual const Matrix &getMassSensitivity(int gradIndex);
+  virtual int commitSensitivity(int gradIndex, int numGrads);
+  // AddingSensitivity:END ///////////////////////////////////////////
 
-    virtual int storePreviousK(int numK);
-    virtual const Matrix *getPreviousK(int num);
+  virtual int addResistingForceToNodalReaction(int flag);
 
-    virtual void onActivate();
-    virtual void onDeactivate();
+  virtual int storePreviousK(int numK);
+  virtual const Matrix *getPreviousK(int num);
 
-    void activate();
-    void deactivate();
+  virtual void onActivate();
+  virtual void onDeactivate();
 
-    bool isActive();
+  void activate();
+  void deactivate();
 
+  bool isActive();
 
-
-protected:
-#if !_DLL
-	const Vector& getRayleighDampingForces(void);
+ protected:
+#if _DLL
+  const Vector &getRayleighDampingForces(void);
 #endif
-    double alphaM, betaK, betaK0, betaKc;
-    Matrix *Kc; // pointer to hold last committed matrix if needed for rayleigh damping
+  double alphaM, betaK, betaK0, betaKc;
+  Matrix *Kc;  // pointer to hold last committed matrix if needed for rayleigh
+               // damping
 
-    Matrix **previousK;
-    int numPreviousK;
+  Matrix **previousK;
+  int numPreviousK;
 
-    int index, nodeIndex;
+  int index, nodeIndex;
 
-    static Matrix ** theMatrices; 
-    static Vector ** theVectors1; 
-    static Vector ** theVectors2; 
-    static int numMatrices;
+  static Matrix **theMatrices;
+  static Vector **theVectors1;
+  static Vector **theVectors2;
+  static int numMatrices;
 
-    bool is_this_element_active;
+  bool is_this_element_active;
 
-  private:
+ private:
 };
 
-
 #endif
-

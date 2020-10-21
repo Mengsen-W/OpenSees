@@ -21,30 +21,21 @@
 **   Joel Conte (jpconte@ucsd.edu)                                    **
 **   Philip Gill (pgill@ucsd.edu)                                     **
 ** ****************************************************************** */
-                                                                        
 
 //
 // Written by Quan Gu (qgu@ucsd.edu)
 //
 
-                                                                        
- 
 #ifndef Optimization_h
 #define Optimization_h
 
-class Optimization
-{
+class Optimization {
+ public:
+  Optimization();
+  virtual ~Optimization();
 
-public:
-	Optimization();
-	virtual ~Optimization();
-	
-
-protected:
-
-private:
-    
+ protected:
+ private:
 };
 
 #endif
-

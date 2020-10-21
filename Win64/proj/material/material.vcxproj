@@ -190,6 +190,7 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\SRC\material\GeneralElastic.cpp" />
     <ClCompile Include="..\..\..\SRC\material\nD\AcousticMedium.cpp" />
     <ClCompile Include="..\..\..\SRC\material\nD\BeamFiberMaterial2dPS.cpp" />
     <ClCompile Include="..\..\..\SRC\material\nD\ConcreteMcftNonLinear5.cpp" />
@@ -605,6 +606,7 @@
     <ClCompile Include="..\..\..\SRC\material\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\SRC\material\GeneralElastic.h" />
     <ClInclude Include="..\..\..\SRC\material\nD\AcousticMedium.h" />
     <ClInclude Include="..\..\..\SRC\material\nD\BeamFiberMaterial2dPS.h" />
     <ClInclude Include="..\..\..\SRC\material\nD\ConcreteMcftNonLinear5.h" />
