@@ -39,7 +39,8 @@
 
 #include <cmath>
 
-void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc, TCL_Char **argv) {
+void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc,
+                                 TCL_Char **argv) {
   if (argc < 3) {
     opserr << "WARNING insufficient arguments\n";
     opserr << "Want: uniaxialMaterial GeneralElasticMaterial tag? -strain {} "
@@ -89,7 +90,7 @@ void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc, TCL_Char **argv) 
     if (Tcl_SplitList(interp, argv[6], &pathSize, &pathStrings) != 0) {
       opserr << "Waring problem splitting path list " << argv[4] << " - ";
       opserr << " stress -values {path} ...\n";
-      delete[] backboneStrain;
+      delete backboneStrain;
       return nullptr;
     }
 
@@ -102,15 +103,15 @@ void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc, TCL_Char **argv) 
                << " - ";
         opserr << " -strain {path} ...\n";
 
-        delete[] backboneStrain;
-        delete[] backboneStress;
+        delete backboneStrain;
+        delete backboneStress;
         return nullptr;
       }
       (*backboneStress)(i) = value;
     }
   } else {
     opserr << "error command in generalElasticMaterial!" << endln;
-    delete[] backboneStrain;
+    delete backboneStrain;
     exit(-1);
   }
   return static_cast<void *>(
