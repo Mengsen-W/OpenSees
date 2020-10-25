@@ -43,6 +43,11 @@ OBJS       = AlphaOS.o \
 	KRAlphaExplicit.o \
 	KRAlphaExplicit_TP.o \
 	LoadControl.o \
+<<<<<<< HEAD
+=======
+	StagedLoadControl.o \
+	StagedNewmark.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	LoadPath.o \
 	MinUnbalDispNorm.o \
 	Newmark.o \
@@ -58,6 +63,10 @@ OBJS       = AlphaOS.o \
 	TRBDF2.o \
     TRBDF3.o \
 	WilsonTheta.o \
+<<<<<<< HEAD
+=======
+	GimmeMCK.o 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 all:         $(OBJS)
 

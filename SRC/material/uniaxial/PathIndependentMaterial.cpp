@@ -257,6 +257,21 @@ PathIndependentMaterial::Print(OPS_Stream &s, int flag)
     s << "\tmaterial: " << theMaterial->getTag() << endln;
 }
 
+<<<<<<< HEAD
+=======
+int
+PathIndependentMaterial::setParameter(const char **argv, int argc, Parameter &param)
+{
+  return theMaterial->setParameter(argv, argc, param);
+}
+
+int
+PathIndependentMaterial::updateParameter(int parameterID, Information &info)
+{
+  return 0;
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 double
 PathIndependentMaterial::getStressSensitivity(int gradIndex, bool conditional)
 {

@@ -35,6 +35,12 @@
 #include <ID.h>
 #include <Vector.h>
 #include <Matrix.h>
+<<<<<<< HEAD
+=======
+#include <Channel.h>
+#include <Message.h>
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <classTags.h>
 #include <iostream>
 
@@ -93,6 +99,10 @@ OutputData::operator=(const OutputData &other)
 
 std::map<int,VTK_Recorder::VtkType> VTK_Recorder::vtktypes;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 void* OPS_VTK_Recorder()
 {
     int numdata = OPS_GetNumRemainingInputArgs();
@@ -118,23 +128,46 @@ void* OPS_VTK_Recorder()
 	if(strcmp(type, "disp") == 0) {
 	    outputData.disp = true;
 	} else if(strcmp(type, "disp2") == 0) {
+<<<<<<< HEAD
 	    outputData.disp2 = true;
 	} else if(strcmp(type, "disp3") == 0) {
 	    outputData.disp3 = true;
 
 	} else if(strcmp(type, "vel") == 0) {
 	    outputData.vel = true;
+=======
+	  outputData.disp2 = true;
+	} else if(strcmp(type, "disp3") == 0) {
+	  outputData.disp3 = true;
+
+	} else if(strcmp(type, "vel") == 0) {
+	    outputData.vel = true;
+
+	    /*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	} else if(strcmp(type, "vel2") == 0) {
 	    outputData.vel2 = true;
 	} else if(strcmp(type, "vel3") == 0) {
 	    outputData.vel3 = true;
+<<<<<<< HEAD
 
 	} else if(strcmp(type, "accel") == 0) {
 	    outputData.accel = true;
+=======
+	    */
+
+	} else if(strcmp(type, "accel") == 0) {
+	    outputData.accel = true;
+	    /*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	} else if(strcmp(type, "accel2") == 0) {
 	    outputData.accel2 = true;
 	} else if(strcmp(type, "accel3") == 0) {
 	    outputData.accel3 = true;
+<<<<<<< HEAD
+=======
+	    */
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	} else if(strcmp(type, "reaction") == 0) {
 	    outputData.reaction = true;
@@ -219,10 +252,18 @@ VTK_Recorder::VTK_Recorder(const char *inputName,
      indentlevel(0), 
      quota('\"'), 
      theDomain(0),
+<<<<<<< HEAD
      echoTimeFlag(true), 
      nextTimeStampToRecord(0),
      deltaT(0), 
      counter(0)
+=======
+     nextTimeStampToRecord(0),
+     deltaT(0), 
+     counter(0),
+     initializationDone(false),
+     sendSelfCount(0)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   outputData = outData;
 
@@ -266,7 +307,11 @@ VTK_Recorder::VTK_Recorder(const char *inputName,
   //
   // spit out header to file
   //
+<<<<<<< HEAD
 
+=======
+  thePVDFile << "<?xml version="<<quota<<"1.0"<<quota<<"?>\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   thePVDFile << "<VTKFile type=\"Collection\" version=\"1.0\" \n";
   thePVDFile << "byte_order=\"LittleEndian\" \n";
   thePVDFile << "compressor=\"vtkZLibDataCompressor\">\n";
@@ -275,9 +320,33 @@ VTK_Recorder::VTK_Recorder(const char *inputName,
 }
 
 VTK_Recorder::VTK_Recorder()
+<<<<<<< HEAD
   :Recorder(RECORDER_TAGS_VTK_Recorder)
 {
 
+=======
+  :Recorder(RECORDER_TAGS_VTK_Recorder),
+   indentsize(0), 
+   precision(0),
+   indentlevel(0), 
+   quota('\"'), 
+   theDomain(0),
+   nextTimeStampToRecord(0),
+   deltaT(0), 
+   counter(0),
+   initializationDone(false),
+   sendSelfCount(0)   
+{
+  name = NULL;
+
+  //
+  // set all the possible VTK types for use in init
+  //
+
+  VTK_Recorder::setVTKType();
+
+  initDone = false;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
@@ -294,6 +363,14 @@ VTK_Recorder::~VTK_Recorder()
 int
 VTK_Recorder::record(int ctag, double timeStamp)
 {
+<<<<<<< HEAD
+=======
+  if (initializationDone == false) {
+    this->initialize();
+    initializationDone = true;
+  }
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   if (deltaT == 0.0 || timeStamp >= nextTimeStampToRecord) {
     
     if (deltaT != 0.0) 
@@ -304,10 +381,23 @@ VTK_Recorder::record(int ctag, double timeStamp)
     //
 
     char *filename = new char[2*strlen(name)+26];
+<<<<<<< HEAD
     sprintf(filename, "%s/%s%020d.vtu",name, name, counter);    
 
     thePVDFile << "<DataSet timestep=\"" << counter << "\" group=\"\" part=\"0\"";
     thePVDFile << " file=\"" << filename << "\"/>\n";
+=======
+
+    // process p0 writes the pvd file, part for each process including itself 0
+    if (sendSelfCount >= 0) {
+      for (int i=0; i<= sendSelfCount; i++) {
+	sprintf(filename, "%s/%s%d%020d.vtu",name, name, i, counter);    
+	thePVDFile << "<DataSet timestep=\"" << counter << "\" group=\"\" part=\"" << i 
+		   <<"\"" << " file=\"" << filename << "\"/>\n";
+      }
+    }
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     //
     // write vtu file
@@ -336,7 +426,10 @@ int
 VTK_Recorder::setDomain(Domain& domain)
 {
   theDomain = &domain;
+<<<<<<< HEAD
   this->initialize();
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   return 0;
 }
 
@@ -350,7 +443,16 @@ VTK_Recorder::vtu()
   }
   
   char *filename = new char[2*strlen(name)+26];
+<<<<<<< HEAD
   sprintf(filename, "%s/%s%020d.vtu",name, name, counter);
+=======
+  if (sendSelfCount < 0) {
+    sprintf(filename, "%s/%s%d%020d.vtu",name, name, -sendSelfCount, counter);    
+  } else {
+    sprintf(filename, "%s/%s%d%020d.vtu",name, name, 0, counter);    
+  }
+  
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   counter ++;
   
   std::ofstream theFileVTU;
@@ -365,6 +467,10 @@ VTK_Recorder::vtu()
   theFileVTU << std::scientific;
   
   // header
+<<<<<<< HEAD
+=======
+  theFileVTU<<"<?xml version="<<quota<<"1.0"<<quota<<"?>\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   theFileVTU<<"<VTKFile type="<<quota<<"UnstructuredGrid"<<quota;
   theFileVTU<<" version="<<quota<<"1.0"<<quota;
   theFileVTU<<" byte_order="<<quota<<"LittleEndian"<<quota;
@@ -410,6 +516,7 @@ VTK_Recorder::vtu()
   }
 
   if (outputData.disp2 == true) {
+<<<<<<< HEAD
     theFileVTU<<"<DataArray type=\"Float32\" Name=\"Disp2\" NumberOfComponents=\"" << 3 << "\" format=\"ascii\">\n";
     for (auto i : theNodeTags) {
       Node *theNode=theDomain->getNode(i);
@@ -417,6 +524,19 @@ VTK_Recorder::vtu()
       for (int i=0; i<2; i++) 
 	theFileVTU << output(i) << " ";
       theFileVTU << "0. \n";
+=======
+    theFileVTU<<"<DataArray type=\"Float32\" Name=\"Disp2\" NumberOfComponents=\"" << 2 << "\" format=\"ascii\">\n";
+    for (auto i : theNodeTags) {
+      Node *theNode=theDomain->getNode(i);
+      const Vector &output=theNode->getDisp();
+      int numDOF = output.Size();
+      for (int i=0; i<2; i++) 
+	if (i < numDOF) 
+	  theFileVTU << output(i) << " ";
+	else
+	  theFileVTU << 0.0 << " ";
+      theFileVTU << "\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
     theFileVTU<<"\n</DataArray>\n";
   }
@@ -426,14 +546,26 @@ VTK_Recorder::vtu()
     for (auto i : theNodeTags) {
       Node *theNode=theDomain->getNode(i);
       const Vector &output=theNode->getDisp();
+<<<<<<< HEAD
       for (int i=0; i<3; i++) 
 	theFileVTU << output(i) << " ";
+=======
+      int numDOF = output.Size();
+      for (int i=0; i<3; i++) 
+	if (i < numDOF) 
+	  theFileVTU << output(i) << " ";
+	else
+	  theFileVTU << 0.0 << " ";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       theFileVTU << "\n";
     }
     theFileVTU<<"\n</DataArray>\n";
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   //
   // node vel
   //
@@ -453,6 +585,7 @@ VTK_Recorder::vtu()
     theFileVTU<<"\n</DataArray>\n";
   }
 
+<<<<<<< HEAD
   if (outputData.vel2 == true) {
     theFileVTU<<"<DataArray type=\"Float32\" Name=\"Vel2\" NumberOfComponents=\"" << 3 << "\" format=\"ascii\">\n";
     for (auto i : theNodeTags) {
@@ -478,6 +611,8 @@ VTK_Recorder::vtu()
   }
 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   //
   // node accel
   //
@@ -497,6 +632,7 @@ VTK_Recorder::vtu()
     theFileVTU<<"\n</DataArray>\n";
   }
 
+<<<<<<< HEAD
   if (outputData.accel2 == true) {
     theFileVTU<<"<DataArray type=\"Float32\" Name=\"Accel2\" NumberOfComponents=\"" << 3 << "\" format=\"ascii\">\n";
     for (auto i : theNodeTags) {
@@ -525,6 +661,8 @@ VTK_Recorder::vtu()
 
 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   // 
   // switch to element data
   //
@@ -888,13 +1026,106 @@ VTK_Recorder::indent() {
 int
 VTK_Recorder::sendSelf(int commitTag, Channel &theChannel)
 {
+<<<<<<< HEAD
     return 0;
+=======
+  sendSelfCount++;
+
+  static ID idData(2+14+1);
+  int fileNameLength = 0;
+  if (name != 0)
+    fileNameLength = strlen(name);
+
+  idData(0) = fileNameLength;
+  idData(1) = -sendSelfCount; // -sendSelfCount indicates a process other than P0
+  idData(2) = outputData.disp;
+  idData(3) = outputData.disp2;
+  idData(4) = outputData.disp3;
+  idData(5) = outputData.vel;
+  idData(6) = outputData.vel2;
+  idData(7) = outputData.vel3;
+  idData(8) = outputData.accel;
+  idData(9) = outputData.accel2;
+  idData(10) = outputData.accel3;
+  idData(11) = outputData.reaction;
+  idData(12) = outputData.reaction2;
+  idData(13) = outputData.reaction3;
+  idData(14) = outputData.mass;
+  idData(15) = outputData.unbalancedLoad;
+
+  idData(16) = precision;
+
+  if (theChannel.sendID(0, commitTag, idData) < 0) {
+    opserr << "FileStream::sendSelf() - failed to send id data\n";
+    return -1;
+  }
+
+  if (fileNameLength != 0) {
+    Message theMessage(name, fileNameLength);
+    if (theChannel.sendMsg(0, commitTag, theMessage) < 0) {
+      opserr << "FileStream::sendSelf() - failed to send message\n";
+      return -1;
+    }
+  }
+
+  return 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 int
 VTK_Recorder::recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &theBroker)
 {
+<<<<<<< HEAD
     return 0;
+=======
+  static ID idData(2+14+1);
+  if (theChannel.recvID(0, commitTag, idData) < 0) {
+    opserr << "FileStream::recvSelf() - failed to recv id data\n";
+    return -1;
+  }
+
+  int fileNameLength = idData(0);
+  sendSelfCount = idData(1);
+
+  outputData.disp = idData(2);
+  outputData.disp2 = idData(3);
+  outputData.disp3 = idData(4);
+  outputData.vel = idData(5);
+  outputData.vel2 = idData(6);
+  outputData.vel3 = idData(7);
+  outputData.accel = idData(8);
+  outputData.accel2 = idData(9);
+  outputData.accel3 = idData(10);
+  outputData.reaction = idData(11);
+  outputData.reaction2 = idData(12);
+  outputData.reaction3 = idData(13);
+  outputData.mass = idData(14);
+  outputData.unbalancedLoad = idData(15);
+
+  precision = idData(16);
+
+  if (fileNameLength != 0) {
+    if (name != 0)
+      delete [] name;
+
+    name = new char[fileNameLength+1];
+
+    if (name == 0) {
+      opserr << "FileStream::recvSelf() - out of memory\n";
+      return -1;
+    }
+
+    Message theMessage(name, fileNameLength);
+    if (theChannel.recvMsg(0, commitTag, theMessage) < 0) {
+      opserr << "FileStream::recvSelf() - failed to recv message\n";
+      return -1;
+    }
+    
+    name[fileNameLength]='\0';
+  }
+
+  return 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 void
@@ -903,7 +1134,11 @@ VTK_Recorder::setVTKType()
     if (vtktypes.empty() == false) {
 	return;
     }
+<<<<<<< HEAD
     vtktypes[ELE_TAG_Subdomain] = VTK_POLY_VERTEX;
+=======
+    //    vtktypes[ELE_TAG_Subdomain] = VTK_POLY_VERTEX;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     vtktypes[ELEMENT_TAGS_WrapperElement] = VTK_POLY_VERTEX;
     vtktypes[ELE_TAG_ElasticBeam2d] = VTK_LINE;
     vtktypes[ELE_TAG_ModElasticBeam2d] = VTK_LINE;
@@ -936,6 +1171,10 @@ VTK_Recorder::setVTKType()
     vtktypes[ELE_TAG_FourNodeQuad] = VTK_QUAD;
     vtktypes[ELE_TAG_FourNodeQuad3d] = VTK_QUAD;
     vtktypes[ELE_TAG_Tri31] = VTK_TRIANGLE;
+<<<<<<< HEAD
+=======
+    vtktypes[ELE_TAG_SixNodeTri] = VTK_TRIANGLE;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     vtktypes[ELE_TAG_BeamWithHinges2d] = VTK_LINE;
     vtktypes[ELE_TAG_BeamWithHinges3d] = VTK_LINE;
     vtktypes[ELE_TAG_EightNodeBrick] = VTK_HEXAHEDRON;
@@ -957,6 +1196,11 @@ VTK_Recorder::setVTKType()
     vtktypes[ELE_TAG_PlateMITC4] = VTK_QUAD;
     vtktypes[ELE_TAG_ShellMITC4] = VTK_QUAD;
     vtktypes[ELE_TAG_ShellMITC9] = VTK_POLY_VERTEX;
+<<<<<<< HEAD
+=======
+    vtktypes[ELE_TAG_ASDShellQ4] = VTK_QUAD;
+    vtktypes[ELE_TAG_ASDShellT3] = VTK_TRIANGLE;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     vtktypes[ELE_TAG_Plate1] = VTK_QUAD;
     vtktypes[ELE_TAG_Brick] = VTK_HEXAHEDRON;
     vtktypes[ELE_TAG_BbarBrick] = VTK_HEXAHEDRON;
@@ -964,6 +1208,11 @@ VTK_Recorder::setVTKType()
     vtktypes[ELE_TAG_EnhancedQuad] = VTK_QUAD;
     vtktypes[ELE_TAG_ConstantPressureVolumeQuad] = VTK_QUAD;
     vtktypes[ELE_TAG_NineNodeMixedQuad] = VTK_POLY_VERTEX;
+<<<<<<< HEAD
+=======
+    vtktypes[ELE_TAG_NineNodeQuad] = VTK_POLY_VERTEX;
+    vtktypes[ELE_TAG_EightNodeQuad] = VTK_POLY_VERTEX;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     vtktypes[ELE_TAG_DispBeamColumn2d] = VTK_LINE;
     vtktypes[ELE_TAG_TimoshenkoBeamColumn2d] = VTK_LINE;
     vtktypes[ELE_TAG_DispBeamColumn3d] = VTK_LINE;
@@ -1088,7 +1337,10 @@ VTK_Recorder::setVTKType()
 int
 VTK_Recorder::initialize()
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   theNodeMapping.clear();
   theEleMapping.clear();
   theNodeTags.clear();
@@ -1134,12 +1386,24 @@ VTK_Recorder::initialize()
   
   numElement = 0;
   int offset = 0;
+<<<<<<< HEAD
   while ((theElement = theElements()) != 0) {
     int eleTag = theElement->getTag();
     int classTag = theElement->getClassTag();
     theEleMapping[eleTag]=numElement;
     int vtkType = vtktypes[classTag];    
     if (vtkType != 0) {
+=======
+  std::map<int,VTK_Recorder::VtkType>::iterator it;
+  while ((theElement = theElements()) != 0) {
+    int eleTag = theElement->getTag();
+    int classTag = theElement->getClassTag();
+    it = vtktypes.find(classTag);
+    if (it != vtktypes.end()) {
+      int vtkType = vtktypes[classTag];    
+      //      if (vtkType != 0) {
+      theEleMapping[eleTag]=numElement;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       theEleTags.push_back(eleTag);
       theEleClassTags.push_back(classTag);
       theEleVtkTags.push_back(vtkType);
@@ -1149,7 +1413,12 @@ VTK_Recorder::initialize()
       theEleVtkOffsets.push_back(offset);
       numElement++;
     } else {
+<<<<<<< HEAD
       opserr << "VTK_Recorder::init Element: " << eleTag << " of unknown vtk type\n";
+=======
+      if (classTag != ELE_TAG_Subdomain)
+	opserr << "VTK_Recorder::init Element: " << eleTag << " of unknown vtk type\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
   }
 

@@ -63,6 +63,12 @@ int
 setLoadConst(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 
 int 
+<<<<<<< HEAD
+=======
+setCreep(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
+
+int 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 setTime(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 
 int 
@@ -197,6 +203,12 @@ int
 getEleTags(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 
 int 
+<<<<<<< HEAD
+=======
+nodeDOFs(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
+
+int 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 nodeMass(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 
 int 
@@ -314,6 +326,7 @@ numIter(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 int 
 systemSize(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 
+<<<<<<< HEAD
 
 
 
@@ -322,4 +335,10 @@ systemSize(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv)
 
 
 
+=======
+int
+elementActivate(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
+int
+elementDeactivate(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 

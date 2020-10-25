@@ -33,5 +33,9 @@ double invert3by3Matrix(const Matrix &a, Matrix &b);
 void   invertMatrix(int n, const Matrix &a, Matrix &b);
 void   getCBDIinfluenceMatrix(int nIntegrPts, const Matrix &xi_pt, double L, Matrix &ls);
 void   getCBDIinfluenceMatrix(int nIntegrPts, double *pts, double L, Matrix &ls);
+<<<<<<< HEAD
+=======
+void   getCBDIinfluenceMatrix(int npts, double *pts, int nIntegrPts, double *ipts, double L, Matrix &ls);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #endif

@@ -31,6 +31,10 @@
 // Written by Terje Haukaas (haukaas@ce.berkeley.edu) 
 //
 
+<<<<<<< HEAD
+=======
+#include <math.h> // for fmod
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <stdlib.h>
 #include <string.h>
 #include <fstream>
@@ -80,7 +84,12 @@ using std::setiosflags;
 #include <UserDefinedRV.h>
 #include <LaplaceRV.h>
 #include <ParetoRV.h>
+<<<<<<< HEAD
 
+=======
+#include <AllIndependentTransformation.h>
+//#include <NewWhiteB.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <FunctionEvaluator.h>
 #include <GradientEvaluator.h>
 #include <HessianEvaluator.h>
@@ -161,6 +170,10 @@ using std::setiosflags;
 /////////////////////////////////////////////////////////
 ///S added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <Analyzer.h>
 #include <StaticAnalyzer.h>
 #include <DynamicAnalyzer.h>
@@ -184,6 +197,10 @@ using std::setiosflags;
 #include <RandomVibrationAnalysis.h>
 #include <AllIndependentTransformation.h>
 #include<Integrator.h>//Abbas
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 /////////////////////////////////////////////////////////
 /////E Modified by K Fujimura /////////////////////////////
 /////////////////////////////////////////////////////////
@@ -194,9 +211,17 @@ extern Integrator *theSensitivityAlgorithm;
 /////////////////////////////////////////////////////////
 /////S Modified by K Fujimura /////////////////////////////
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
 extern ReliabilityStaticAnalysis* theReliabilityStaticAnalysis;
 extern ReliabilityDirectIntegrationAnalysis* theReliabilityTransientAnalysis;
 extern Integrator* theSensitivityIntegrator;
+=======
+/*
+extern ReliabilityStaticAnalysis* theReliabilityStaticAnalysis;
+extern ReliabilityDirectIntegrationAnalysis* theReliabilityTransientAnalysis;
+extern Integrator* theSensitivityIntegrator;
+*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //extern SensitivityIntegrator* theSensitivityIntegrator; //Abbas
 
 
@@ -249,6 +274,10 @@ static SystemAnalysis *theSystemAnalysis = 0;
 /////////////////////////////////////////////////////////
 ///S added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 static Analyzer *theAnalyzer=0;
 static InitialStaticAnalysis *theInitialStaticAnalysis=0;
 static InitialPointBuilder *theInitialPointBuilder=0;
@@ -257,6 +286,10 @@ static FOSeriesSimulation *theFOSeriesSimulation= 0;
 static FirstPassageAnalyzer *theFirstPassageAnalyzer= 0;
 static RandomVibrationSimulation *theRandomVibrationSimulation= 0;
 static RandomVibrationAnalysis *theRandomVibrationAnalysis = 0;
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 /////////////////////////////////////////////////////////
 ///E added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
@@ -315,6 +348,10 @@ int TclReliabilityModelBuilder_getCutsetComponents(ClientData clientData, Tcl_In
 /////////////////////////////////////////////////////////
 ///S added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int TclReliabilityModelBuilder_addAnalyzer(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 int TclReliabilityModelBuilder_addInitialStaticAnalysis(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
 int TclReliabilityModelBuilder_addInitialPointBuilder(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
@@ -326,6 +363,10 @@ int TclReliabilityModelBuilder_runRandomVibrationAnalysis(ClientData clientData,
 /////////////////////////////////////////////////////////
 ///E added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 //--Quan --
 int TclReliabilityModelBuilder_runMonteCarloResponseAnalysis(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv);
@@ -402,6 +443,10 @@ TclReliabilityBuilder::TclReliabilityBuilder(Domain &passedDomain, Tcl_Interp *i
 /////////////////////////////////////////////////////////
 ///S added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
+=======
+  /*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   Tcl_CreateCommand(interp, "analyzer",TclReliabilityModelBuilder_addAnalyzer,(ClientData)NULL, NULL);
   Tcl_CreateCommand(interp, "initialstaticanalysis",TclReliabilityModelBuilder_addInitialStaticAnalysis,(ClientData)NULL, NULL);
   Tcl_CreateCommand(interp, "initialpoint",TclReliabilityModelBuilder_addInitialPointBuilder,(ClientData)NULL, NULL);
@@ -410,6 +455,10 @@ TclReliabilityBuilder::TclReliabilityBuilder(Domain &passedDomain, Tcl_Interp *i
   Tcl_CreateCommand(interp, "firstpassage",TclReliabilityModelBuilder_addFirstPassageAnalyzer,(ClientData)NULL, NULL);
   Tcl_CreateCommand(interp, "randomvibrationsimulation",TclReliabilityModelBuilder_addRandomVibrationSimulation,(ClientData)NULL, NULL);
   Tcl_CreateCommand(interp, "randomvibrationanalysis",TclReliabilityModelBuilder_runRandomVibrationAnalysis,(ClientData)NULL, NULL);
+<<<<<<< HEAD
+=======
+  */
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 /////////////////////////////////////////////////////////
 ///E added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
@@ -496,6 +545,10 @@ TclReliabilityBuilder::~TclReliabilityBuilder()
     delete theOutCrossingAnalysis;
   
   /////S added by K Fujimura /////
+<<<<<<< HEAD
+=======
+  /*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   if (theAnalyzer != 0)
     delete theAnalyzer;
   if (theInitialStaticAnalysis != 0)
@@ -511,7 +564,12 @@ TclReliabilityBuilder::~TclReliabilityBuilder()
   if (theRandomVibrationSimulation !=0)
 	delete theRandomVibrationSimulation ;
   if (theRandomVibrationAnalysis !=0)
+<<<<<<< HEAD
 	delete theRandomVibrationAnalysis ;
+=======
+	delete theRandomVibrationAnalysis 
+	*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   /////E added by K Fujimura /////
 
   // Quan ---
@@ -548,6 +606,10 @@ TclReliabilityBuilder::~TclReliabilityBuilder()
   theOutCrossingAnalysis = 0;
   
  /////S added by K Fujimura /////
+<<<<<<< HEAD
+=======
+  /*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   theAnalyzer=0;
   theInitialStaticAnalysis=0;
   theInitialPointBuilder = 0;
@@ -556,6 +618,10 @@ TclReliabilityBuilder::~TclReliabilityBuilder()
   theFirstPassageAnalyzer= 0;
   theRandomVibrationSimulation= 0;
   theRandomVibrationAnalysis = 0;
+<<<<<<< HEAD
+=======
+  */
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  /////E added by K Fujimura /////
  
   // Quan ---
@@ -613,6 +679,10 @@ TclReliabilityBuilder::~TclReliabilityBuilder()
   Tcl_DeleteCommand(theInterp, "getCutsetComponents");
 
   /////S added by K Fujimura /////
+<<<<<<< HEAD
+=======
+  /*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   Tcl_DeleteCommand(theInterp, "analyzer");
   Tcl_DeleteCommand(theInterp, "initialstaticanalysis");
   Tcl_DeleteCommand(theInterp, "initialpoint");
@@ -621,6 +691,10 @@ TclReliabilityBuilder::~TclReliabilityBuilder()
   Tcl_DeleteCommand(theInterp, "firstpassage");
   Tcl_DeleteCommand(theInterp, "randomvibrationsimulation");
   Tcl_DeleteCommand(theInterp, "randomvibrationanalysis");
+<<<<<<< HEAD
+=======
+  */
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   /////E added by K Fujimura /////
 
   Tcl_DeleteCommand(theInterp, "runMonteCarloResponseAnalysis");
@@ -1800,9 +1874,15 @@ TclReliabilityModelBuilder_addFilter(ClientData clientData, Tcl_Interp *interp, 
 	int tag;
 	double period_Tn, damping, dtpulse;
 
+<<<<<<< HEAD
 	if ( (strcmp(argv[2],"standard") == 0) || (strcmp(argv[2],"standardDisplacement") == 0) 
 		|| ( strcmp(argv[2],"Koo") == 0 ) || (strcmp(argv[2],"standardVelocity")==0)
 		|| (strcmp(argv[2],"standardAcceleration")==0)) {	
+=======
+	if ((strcmp(argv[2], "standard") == 0) || (strcmp(argv[2], "standardDisplacement") == 0)
+		|| (strcmp(argv[2], "Koo") == 0) || (strcmp(argv[2], "standardVelocity") == 0)
+		|| (strcmp(argv[2], "standardAcceleration") == 0)) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		if (argc != 5) {
 			opserr << "ERROR: Wrong number of arguments to filter command." << endln;
 			return TCL_ERROR;
@@ -1822,6 +1902,7 @@ TclReliabilityModelBuilder_addFilter(ClientData clientData, Tcl_Interp *interp, 
 			opserr << "ERROR: invalid input: damping \n";
 			return TCL_ERROR;
 		}
+<<<<<<< HEAD
 		if ( (strcmp(argv[2],"standard") == 0) || (strcmp(argv[2],"standardDisplacement") == 0) ) {
 			theFilter = new StandardLinearOscillatorDisplacementFilter(tag,period_Tn,damping);
 		}else if ( strcmp(argv[2],"Koo") == 0 ) {
@@ -1868,6 +1949,61 @@ TclReliabilityModelBuilder_addFilter(ClientData clientData, Tcl_Interp *interp, 
 				(tag, period_Tn, damping, dtpulse);
 		}
 	}else{
+=======
+		if ((strcmp(argv[2], "standard") == 0) || (strcmp(argv[2], "standardDisplacement") == 0)) {
+			theFilter = new StandardLinearOscillatorDisplacementFilter(tag, period_Tn, damping);
+		}
+		else if (strcmp(argv[2], "Koo") == 0) {
+			theFilter = new KooFilter(tag, period_Tn, damping);
+		}
+		else if (strcmp(argv[2], "standardVelocity") == 0) {
+			theFilter = new StandardLinearOscillatorVelocityFilter(tag, period_Tn, damping);
+		}
+		else if (strcmp(argv[2], "standardAcceleration") == 0) {
+			theFilter = new StandardLinearOscillatorAccelerationFilter(tag, period_Tn, damping);
+		}
+		else {
+			opserr << "ERROR:: Unknown type of filter. " << endln;
+			return TCL_ERROR;
+		}
+		/*
+		} else if ((strcmp(argv[2],"whitenoise") == 0)
+			|| (strcmp(argv[2],"NewStandardLinearOscillatorAcceleration") == 0) ){
+
+			if ( strcmp(argv[2],"whitenoise") == 0){
+				if (Tcl_GetInt(interp, argv[1], &tag) != TCL_OK) {
+					opserr << "ERROR: invalid input: tag \n";
+					return TCL_ERROR;
+				}
+				// GET INPUT PARAMETER (double)
+				if (Tcl_GetDouble(interp, argv[3], &period_Tn) != TCL_OK) {
+					opserr << "ERROR: invalid input: freq_wn \n";
+					return TCL_ERROR;
+				}
+				theFilter = new NewWhitenoiseFilter(tag,period_Tn);
+			}else{
+				if (Tcl_GetInt(interp, argv[1], &tag) != TCL_OK) {
+					opserr << "ERROR: invalid input: tag \n";
+					return TCL_ERROR;
+				}
+				if (Tcl_GetDouble(interp, argv[3], &period_Tn) != TCL_OK) {
+					opserr << "ERROR: invalid input: freq_wn \n";
+					return TCL_ERROR;
+				}
+				if (Tcl_GetDouble(interp, argv[4], &damping) != TCL_OK) {
+					opserr << "ERROR: invalid input: damping \n";
+					return TCL_ERROR;
+				}
+				if (Tcl_GetDouble(interp, argv[4], &dtpulse) != TCL_OK) {
+					opserr << "ERROR: invalid input: damping \n";
+					return TCL_ERROR;
+				}
+				theFilter = new NewStandardLinearOscillatorAccelerationFilter
+					(tag, period_Tn, damping, dtpulse);
+			}
+			*/
+	} else {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		opserr << "ERROR:: Unknown type of filter. " << endln;
 		return TCL_ERROR;
 	}
@@ -3008,6 +3144,10 @@ TclReliabilityModelBuilder_addFunctionEvaluator(ClientData clientData, Tcl_Inter
 /////////////////////////////////////////
 ////////S modified by K Fujimura 10/10/2004
 /////////////////////////////////////////
+<<<<<<< HEAD
+=======
+	/*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	else if (strcmp(argv[1],"Analyzer") == 0) {
 
 		// There are several alternatives for this command:
@@ -3036,6 +3176,10 @@ TclReliabilityModelBuilder_addFunctionEvaluator(ClientData clientData, Tcl_Inter
 		//theFunctionEvaluator = new AnalyzerGFunEvaluator(interp, theReliabilityDomain,
 		//theStructuralDomain,theAnalyzer);
 	}
+<<<<<<< HEAD
+=======
+	*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 /////////////////////////////////////////
 ////////E modified by K Fujimura 10/10/2004
 /////////////////////////////////////////
@@ -3149,6 +3293,10 @@ TclReliabilityModelBuilder_addGradientEvaluator(ClientData clientData, Tcl_Inter
 	////////////////////////////////////////
 	//////S modified by K Fujimura 10/10/2004
 	////////////////////////////////////////
+<<<<<<< HEAD
+=======
+	/*
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	else if (strcmp(argv[1],"Analyzer") == 0) {
 
 		bool doGradientCheck = false;
@@ -3174,12 +3322,22 @@ TclReliabilityModelBuilder_addGradientEvaluator(ClientData clientData, Tcl_Inter
 			opserr << "ERROR: Wrong number of arguments to gradGEvaluator. " << endln;
 			return TCL_ERROR;
 		}
+<<<<<<< HEAD
 		/*
 		theGradientEvaluator = new AnalyzerGradGEvaluator(interp, theReliabilityDomain,
 							 theStructuralDomain, theFunctionEvaluator,
 							 doGradientCheck);
 		*/
 	}
+=======
+		
+		theGradientEvaluator = new AnalyzerGradGEvaluator(interp, theReliabilityDomain,
+							 theStructuralDomain, theFunctionEvaluator,
+							 doGradientCheck);
+		
+	}
+	*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	////////////////////////////////////////
 	//////E modified by K Fujimura 10/10/2004
 	////////////////////////////////////////
@@ -6770,6 +6928,10 @@ TclReliabilityModelBuilder_getCutsetComponents(ClientData clientData, Tcl_Interp
 /////////////////////////////////////////////////////////
 /// (from here to the end) added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
+<<<<<<< HEAD
+=======
+/***
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int 
 TclReliabilityModelBuilder_addAnalyzer(ClientData clientData, Tcl_Interp *interp, int argc, TCL_Char **argv)
 {
@@ -7014,6 +7176,10 @@ TclReliabilityModelBuilder_addInitialStaticAnalysis(ClientData clientData, Tcl_I
 	temploads=0;
 	return TCL_OK;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 /////////////////////////////////////////////////////////
 /// added by K Fujimura for Random Vibration Analysis ///
 /////////////////////////////////////////////////////////
@@ -7996,3 +8162,8 @@ TclReliabilityModelBuilder_runRandomVibrationAnalysis(ClientData clientData, Tcl
 
 	return TCL_OK;
 }
+<<<<<<< HEAD
+=======
+
+*/
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

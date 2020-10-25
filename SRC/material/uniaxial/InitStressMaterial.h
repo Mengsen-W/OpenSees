@@ -65,7 +65,12 @@ class InitStressMaterial : public UniaxialMaterial
     void Print(OPS_Stream &s, int flag =0);
     
     int setParameter(const char **argv, int argc, Parameter &param);
+<<<<<<< HEAD
 
+=======
+    int updateParameter(int parameterID, Information &info);
+  
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // AddingSensitivity:BEGIN //////////////////////////////////////////
     double getStressSensitivity(int gradIndex, bool conditional);
     double getInitialTangentSensitivity(int gradIndex);
@@ -78,6 +83,11 @@ class InitStressMaterial : public UniaxialMaterial
     UniaxialMaterial *theMaterial;
     double epsInit;
     double sigInit;
+<<<<<<< HEAD
+=======
+
+    int findInitialStrain(void);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 

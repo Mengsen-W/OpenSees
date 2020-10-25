@@ -2012,3 +2012,22 @@ FourNodeTetrahedron::shp3d( const double ss[4], double &xsj, double shp[4][4], c
     // Return[{Nfx,Nfy,Nfz,Jdet}]];
    return ;
 }
+<<<<<<< HEAD
+=======
+
+
+void
+FourNodeTetrahedron::onActivate()
+{
+
+    Domain* theDomain = this->getDomain();
+    this->setDomain(theDomain);
+    this->update();
+}
+
+void
+FourNodeTetrahedron::onDeactivate()
+{
+
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

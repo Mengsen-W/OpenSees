@@ -1513,7 +1513,11 @@ EnhancedQuad::setResponse(const char **argv, int argc,
 
     } 
   }
+<<<<<<< HEAD
   else if (strcmp(argv[0],"stresses") ==0) {
+=======
+  else if ((strcmp(argv[0],"stress") == 0) || (strcmp(argv[0],"stresses") == 0)) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
       for (int i=0; i<4; i++) {
 	output.tag("GaussPoint");
@@ -1536,7 +1540,11 @@ EnhancedQuad::setResponse(const char **argv, int argc,
       theResponse =  new ElementResponse(this, 3, Vector(12));
   }
   
+<<<<<<< HEAD
   else if (strcmp(argv[0],"strains") ==0) {
+=======
+  else if ((strcmp(argv[0],"strain") == 0) ||(strcmp(argv[0],"strains") == 0)) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
       for (int i=0; i<4; i++) {
 	output.tag("GaussPoint");

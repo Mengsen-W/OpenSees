@@ -496,7 +496,11 @@ TclModelBuilder_addZeroLengthSection(ClientData clientData, Tcl_Interp *interp,
 
 // Command:
 //
+<<<<<<< HEAD
 // element zeroLengthContact2D $tag $slaveNd $masterNd $Kn $Kt $fs $ContactDirction
+=======
+// element zeroLengthContact2D $tag $secondaryNd $primaryNd $Kn $Kt $fs $ContactDirction
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //
 //
 
@@ -512,7 +516,11 @@ TclModelBuilder_addZeroLengthContact2D(ClientData clientData, Tcl_Interp *interp
   int ndm = theBuilder->getNDM(); // the spatial dimension of the problem
   
   //
+<<<<<<< HEAD
   // first scan the command line to obtain eleID, SlaveNode, MasterNode,
+=======
+  // first scan the command line to obtain eleID, SecondaryNode, PrimaryNode,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
   int eleTag, iNode, jNode;
   
@@ -618,7 +626,11 @@ TclModelBuilder_addZeroLengthContact2D(ClientData clientData, Tcl_Interp *interp
 
 // Command:
 //
+<<<<<<< HEAD
 // element zeroLengthContact3D $tag $slaveNd $masterNd $Kn $Kt $fs $c $ContactDir
+=======
+// element zeroLengthContact3D $tag $secondaryNd $primaryNd $Kn $Kt $fs $c $ContactDir
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //
 //
 
@@ -632,7 +644,11 @@ TclModelBuilder_addZeroLengthContact3D(ClientData clientData, Tcl_Interp *interp
   int ndm = theBuilder->getNDM(); // the spatial dimension of the problem
   
   //
+<<<<<<< HEAD
   // first scan the command line to obtain eleID, SlaveNode, MasterNode,
+=======
+  // first scan the command line to obtain eleID, SecondaryNode, PrimaryNode,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
   int eleTag, iNode, jNode;
   

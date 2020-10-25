@@ -1176,9 +1176,17 @@ Truss::setResponse(const char **argv, int argc, OPS_Stream &output)
             }
             theResponse =  new ElementResponse(this, 1, Vector(numDOF));
 
+<<<<<<< HEAD
     } else if ((strcmp(argv[0],"axialForce") == 0) || 
 	       (strcmp(argv[0],"basicForce") == 0) || 
 	       (strcmp(argv[0],"localForce") == 0) || 
+=======
+    } else if ((strcmp(argv[0],"localForce") == 0) || (strcmp(argv[0],"localForces") == 0) ) {
+            theResponse =  new ElementResponse(this, 11, Vector(numDOF));
+	    
+    } else if ((strcmp(argv[0],"axialForce") == 0) || 
+	       (strcmp(argv[0],"basicForce") == 0) || 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	       (strcmp(argv[0],"basicForces") == 0)) {
             output.tag("ResponseType", "N");
             theResponse =  new ElementResponse(this, 2, Vector(1));
@@ -1216,6 +1224,16 @@ Truss::getResponse(int responseID, Information &eleInfo)
     case 1:
         return eleInfo.setVector(this->getResistingForce());
 
+<<<<<<< HEAD
+=======
+    case 11: {
+      Vector P(numDOF);
+      P(numDOF/2) = A*theMaterial->getStress();
+      P(0) = -P(numDOF/2);
+      return eleInfo.setVector(P);	
+    }
+      
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     case 2:
       fVec(0) = A*theMaterial->getStress();
       return eleInfo.setVector(fVec);

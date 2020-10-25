@@ -114,10 +114,17 @@ double
 NormalRV::getPDFvalue(double rvValue)
 {
 	//static const double pi = std::acos(-1.0);
+<<<<<<< HEAD
 	static const double oneOverRootTwoPi = 1.0/sqrt(2.0*pi);
 	
 	//return 1 / sqrt ( 2.0 * pi ) * exp ( - 0.5 * pow ( ( ( rvValue - mu ) / sigma ), 2.0 ) );
 	return oneOverRootTwoPi * exp ( - 0.5 * pow ( ( ( rvValue - mu ) / sigma ), 2.0 ) );
+=======
+	static const double oneOverSigmaRootTwoPi = 1.0/(sigma * sqrt(2.0*pi));
+	
+	//return 1 / sqrt ( 2.0 * pi ) * exp ( - 0.5 * pow ( ( ( rvValue - mu ) / sigma ), 2.0 ) );
+	return oneOverSigmaRootTwoPi * exp ( - 0.5 * pow ( ( ( rvValue - mu ) / sigma ), 2.0 ) );
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 

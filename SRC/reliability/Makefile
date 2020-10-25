@@ -68,6 +68,7 @@ RELIABILITY_OBJS = $(FE)/domain/pattern/DiscretizedRandomProcessSeries.o \
 		$(FE)/reliability/analysis/transformation/NatafProbabilityTransformation.o \
 		$(FE)/reliability/analysis/transformation/ProbabilityTransformation.o \
 		$(FE)/reliability/analysis/transformation/AllIndependentTransformation.o \
+<<<<<<< HEAD
 		$(FE)/reliability/analysis/telm/RandomVibrationSimulatorResult.o \
 		$(FE)/reliability/analysis/telm/Analyzer.o \
 		$(FE)/reliability/analysis/telm/NewSearchWithStepSizeAndStepDirection.o \
@@ -108,6 +109,8 @@ RELIABILITY_OBJS = $(FE)/domain/pattern/DiscretizedRandomProcessSeries.o \
 		$(FE)/reliability/analysis/telm/NewDiscretizedRandomProcessSeries.o \
 		$(FE)/reliability/analysis/telm/RandomVibrationSimulation.o \
 		$(FE)/reliability/analysis/telm/localMath.o \
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		$(FE)/reliability/domain/components/CorrelationCoefficient.o \
 		$(FE)/reliability/domain/components/CorrelationCoefficientIter.o \
 		$(FE)/reliability/domain/components/RandomVariable.o \

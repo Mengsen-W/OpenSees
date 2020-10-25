@@ -72,14 +72,22 @@ RigidDiaphragm::RigidDiaphragm(Domain &theDomain, int nR, ID &nC,
     // check plane is valid, i.e. perpPlaneConstrained must be 0, 1 or 2
     if (perpPlaneConstrained < 0 || perpPlaneConstrained > 2) {
       opserr << "RigidDiaphragm::RigidDiaphragm - " << 
+<<<<<<< HEAD
 	"the dirn of perpendicular to constrained plane" << perpPlaneConstrained <<  "not valid\n";
+=======
+	"the dirn of perpendicular to constrained plane " << perpPlaneConstrained <<  " not valid\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       return;
     }
 
     // check constrainedNodes ID does not contain the retained node
     if (nC.getLocation(nR) >= 0) {
       opserr << "RigidDiaphragm::RigidDiaphragm - " << 
+<<<<<<< HEAD
 	"retained node" << nR << "is in constrained node list\n";
+=======
+	"retained node " << nR << " is in constrained node list\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       return;
     }	
     
@@ -87,14 +95,22 @@ RigidDiaphragm::RigidDiaphragm(Domain &theDomain, int nR, ID &nC,
     Node *nodeR = theDomain.getNode(nR);
     if (nodeR == 0) {
       opserr << "RigidDiaphragm::RigidDiaphragm - " << 
+<<<<<<< HEAD
 	"retained Node" <<  nR <<  "not in domain\n";
+=======
+	"retained Node " <<  nR <<  " not in domain\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       return;
     }
 
     const Vector &crdR = nodeR->getCrds();
     if ((nodeR->getNumberDOF() != 6) || (crdR.Size() != 3)){
       opserr << "RigidDiaphragm::RigidDiaphragm - " << 
+<<<<<<< HEAD
 	"retained Node" << nR << "not in 3d space with 6 dof\n";
+=======
+	"retained Node " << nR << " not in 3d space with 6 dof\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			      
 			      
       return;
@@ -205,7 +221,11 @@ RigidDiaphragm::RigidDiaphragm(Domain &theDomain, int nR, ID &nC,
 	  }
 
 	} else  // node not in 3d space
+<<<<<<< HEAD
 	  opserr << "RigidDiaphragm::RigidDiaphragm - ignoring constrained Node " << ndC << 
+=======
+	  opserr << "RigidDiaphragm::RigidDiaphragm - ignoring constrained Node  " << ndC << 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    ", not 3d node\n";
 	
       } else // node does not exist

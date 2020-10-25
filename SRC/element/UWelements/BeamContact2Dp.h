@@ -146,10 +146,17 @@ class BeamContact2Dp : public Element
 	
 	Vector mIcrd_a;                  // initial coordinates of node a
 	Vector mIcrd_b;                  // initial coordinates of node a
+<<<<<<< HEAD
 	Vector mIcrd_s;                  // initial coordinates of slave node
     Vector mDcrd_a;                  // initial coordinates of node a
 	Vector mDcrd_b;                  // initial coordinates of node a
 	Vector mDcrd_s;                  // initial coordinates of slave node
+=======
+	Vector mIcrd_s;                  // initial coordinates of secondary node
+    Vector mDcrd_a;                  // initial coordinates of node a
+	Vector mDcrd_b;                  // initial coordinates of node a
+	Vector mDcrd_s;                  // initial coordinates of secondary node
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	Vector mDisp_a_n;                // total disp & rotation of node a @ step n
 	Vector mDisp_b_n;                // total disp & rotation of node b @ step n
 };

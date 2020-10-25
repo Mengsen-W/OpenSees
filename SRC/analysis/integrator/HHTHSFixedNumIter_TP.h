@@ -73,6 +73,11 @@ public:
     int revertToLastStep(void);
     int update(const Vector &deltaU);
     int commit(void);
+<<<<<<< HEAD
+=======
+
+    const Vector &getVel(void);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     virtual int sendSelf(int commitTag, Channel &theChannel);
     virtual int recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &theBroker);

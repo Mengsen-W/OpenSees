@@ -585,6 +585,14 @@ int HHTHSFixedNumIter_TP::commit(void)
     return theModel->commitDomain();
 }
 
+<<<<<<< HEAD
+=======
+const Vector &
+HHTHSFixedNumIter_TP::getVel()
+{
+  return *Udot;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 int HHTHSFixedNumIter_TP::sendSelf(int cTag, Channel &theChannel)
 {

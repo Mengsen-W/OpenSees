@@ -197,9 +197,15 @@ main(int argc, char **argv)
   if (OPS_rank != 0) {
 
     //
+<<<<<<< HEAD
     // on slave processes we spin waiting to create & run actors
     //
     fprintf(stderr, "Slave Process Running %d\n", OPS_rank);
+=======
+    // on secondary processes we spin waiting to create & run actors
+    //
+    fprintf(stderr, "Secondary Process Running %d\n", OPS_rank);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theMachineBroker->runActors();
 
   } else {
@@ -207,7 +213,11 @@ main(int argc, char **argv)
     //
     // on process 0 we create some ShadowSubdomains & then start the OpenSees interpreter
     //
+<<<<<<< HEAD
     fprintf(stderr, "Master Process Running OpenSees Interpreter %d\n", OPS_rank);   
+=======
+    fprintf(stderr, "Primary Process Running OpenSees Interpreter %d\n", OPS_rank);   
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     //
     // set some global parameters

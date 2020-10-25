@@ -20,8 +20,13 @@ static int numUVCuniaxial = 0;
 // OPS_GetString() function: causes crash with .dll
 void* OPS_UVCuniaxial(void) {
   if (numUVCuniaxial == 0) {
+<<<<<<< HEAD
     std::cout << "Using the UVCuniaxial material, see "
       "https://www.epfl.ch/labs/resslab/resslab-tools/" << std::endl;
+=======
+    opserr << "Using the UVCuniaxial material, see "
+      "https://www.epfl.ch/labs/resslab/resslab-tools/" << endln;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     numUVCuniaxial++;
   }
   UniaxialMaterial* theMaterial = 0;
@@ -144,7 +149,13 @@ UVCuniaxial::UVCuniaxial(int tag, double E, double sy0, double qInf, double b,
   stressTrial(0.),
   stiffnessInitial(E),
   stiffnessConverged(E),
+<<<<<<< HEAD
   stiffnessTrial(E)
+=======
+  stiffnessTrial(E),
+  flowDirection(0.),
+  plasticLoading(false)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   nBackstresses = cK.size();
   for (int i = 0; i < nBackstresses; ++i) {
@@ -165,7 +176,11 @@ UVCuniaxial::~UVCuniaxial() {
  *
  * @param strainIncrement change in strain from the converged strain value
  */
+<<<<<<< HEAD
 void UVCuniaxial::returnMapping(double strainIncrement){
+=======
+void UVCuniaxial::returnMapping(double strainIncrement) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   // Initialize all the variables
   bool converged = true;
@@ -242,10 +257,16 @@ void UVCuniaxial::returnMapping(double strainIncrement){
 
   // Warn the user if the algorithm did not converge
   if (iterationNumber == MAXIMUM_ITERATIONS - 1) {
+<<<<<<< HEAD
     std::cerr << "WARNING: return mapping in UVCuniaxial does not converge!"
       << endln;
     std::cerr << "\tExiting with phi = " << phi << " > " << RETURN_MAP_TOL
       << std::endl;
+=======
+    opserr << "WARNING: return mapping in UVCuniaxial does not converge!" << endln;
+    opserr << "\tStrain increment = " << strainIncrement << endln;
+    opserr << "\tExiting with phi = " << phi << " > " << RETURN_MAP_TOL << endln;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   }
 
   // Condition for plastic loading is whether or not iterations were performed
@@ -421,7 +442,11 @@ UniaxialMaterial* UVCuniaxial::getCopy() {
  * @param theChannel
  * @return 0 if successful
  */
+<<<<<<< HEAD
 int UVCuniaxial::sendSelf(int commitTag, Channel &theChannel) {
+=======
+int UVCuniaxial::sendSelf(int commitTag, Channel& theChannel) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   static Vector data(26);  // enough space for 4 backstresses
   // Material properties
@@ -469,8 +494,13 @@ int UVCuniaxial::sendSelf(int commitTag, Channel &theChannel) {
  * @param theBroker
  * @return 0 if successful
  */
+<<<<<<< HEAD
 int UVCuniaxial::recvSelf(int commitTag, Channel &theChannel,
   FEM_ObjectBroker &theBroker) {
+=======
+int UVCuniaxial::recvSelf(int commitTag, Channel& theChannel,
+  FEM_ObjectBroker& theBroker) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   static Vector data(26);
 
   if (theChannel.recvVector(this->getDbTag(), commitTag, data) < 0) {
@@ -521,7 +551,11 @@ int UVCuniaxial::recvSelf(int commitTag, Channel &theChannel,
  * @param flag is 2 for standard output, 25000 for JSON output
  (see OPS_Globals.h)
  */
+<<<<<<< HEAD
 void UVCuniaxial::Print(OPS_Stream &s, int flag) {
+=======
+void UVCuniaxial::Print(OPS_Stream& s, int flag) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   // todo: change these back when not only .dll
   // if (flag == OPS_PRINT_PRINTMODEL_MATERIAL) {

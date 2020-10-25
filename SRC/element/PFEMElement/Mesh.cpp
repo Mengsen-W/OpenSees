@@ -369,6 +369,31 @@ Mesh::setEleArgs() {
     return 0;
 }
 
+<<<<<<< HEAD
+=======
+void*
+Mesh::getEleArgs()
+{
+    // function to call
+    void *(*OPS_Func)(const ID &info) = 0;
+    switch (eleType) {
+        case ELE_TAG_PFEMElement2DBubble:
+            OPS_Func = OPS_PFEMElement2DBubble;
+            break;
+        case ELE_TAG_PFEMElement3DBubble:
+            OPS_Func = OPS_PFEMElement3DBubble;
+            break;
+        default:
+            return 0;
+    }
+
+    ID info(2);
+    info(0) = 3; // get arguments
+    info(1) = this->getTag(); // mesh tag
+    return OPS_Func(info);
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 void
 Mesh::addEleTags(const ID &tags) {
     for (int i = 0; i < tags.Size(); ++i) {

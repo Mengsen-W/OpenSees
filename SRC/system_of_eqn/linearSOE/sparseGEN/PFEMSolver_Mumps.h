@@ -18,14 +18,20 @@
 **                                                                    **
 ** ****************************************************************** */
                                                                         
+<<<<<<< HEAD
 // $Revision: 1.0 $
 // $Date: 2012-09-17 10:51:44 $
 // $Source: /usr/local/cvs/OpenSees/SRC/system_of_eqn/linearSOE/sparseGEN/PFEMSolver_Mumps.h,v $
                                                                         
+=======
+// $Revision$
+// $Date$
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
                                                                         
 #ifndef PFEMSolver_Mumps_h
 #define PFEMSolver_Mumps_h
 
+<<<<<<< HEAD
 // File: ~/system_of_eqn/linearSOE/sparseGEN/PFEMSolver_Mumps.h
 //
 // Written: Minjie 
@@ -40,13 +46,27 @@
 
 #include <PFEMSolver.h>
 #include <dmumps_c.h>
+=======
+//
+// Written: Minjie 
+//
+#include <PFEMSolver.h>
+#ifdef _MUMPS
+#include <dmumps_c.h>
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class PFEMLinSOE;
 
 class PFEMSolver_Mumps : public PFEMSolver
 {
 public:
+<<<<<<< HEAD
     PFEMSolver_Mumps(int r, int e, int h, int s);
+=======
+    PFEMSolver_Mumps(int r, int e, int add, int s, int p=0,
+		     double tol=1e-4, int niter=100, double bittol=1e-6);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     virtual ~PFEMSolver_Mumps();
 
     virtual int solve();
@@ -59,9 +79,14 @@ public:
 private:
     
     PFEMLinSOE* theSOE;
+<<<<<<< HEAD
 
     DMUMPS_STRUC_C sid, pid;
     int myid;
+=======
+#ifdef _MUMPS
+    DMUMPS_STRUC_C sid;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     static const int JOB_INIT = -1;
     static const int JOB_END = -2;
@@ -71,8 +96,16 @@ private:
     static const int JOB_SOLVE = 6;
     static const int USE_COMM_WORLD = -987654;
     void ICNTL(DMUMPS_STRUC_C& id, int I, int val);
+<<<<<<< HEAD
 
     int relax, err, host, sym;
+=======
+#endif
+
+    int relax, err, add, sym, print;
+    double ptol, Bitol;
+    int pmaxiter;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

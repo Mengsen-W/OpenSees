@@ -152,6 +152,10 @@ class Domain
 
     // methods to query the state of the domain
     virtual double  getCurrentTime(void) const;
+<<<<<<< HEAD
+=======
+    virtual int getCreep(void) const;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     virtual int     getCommitTag(void) const;    	
     virtual int getNumElements(void) const;
     virtual int getNumNodes(void) const;
@@ -173,7 +177,12 @@ class Domain
     // methods to update the domain
     virtual  void setCommitTag(int newTag);    	
     virtual  void setCurrentTime(double newTime);    
+<<<<<<< HEAD
     virtual  void setCommittedTime(double newTime);        
+=======
+    virtual  void setCommittedTime(double newTime);
+    virtual void setCreep(int newCreep);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     virtual  void applyLoad(double pseudoTime);
     virtual  void setLoadConstant(void);
     virtual void  unsetLoadConstant(void);
@@ -233,6 +242,12 @@ class Domain
     virtual int calculateNodalReactions(int flag);
 	Recorder* getRecorder(int tag);	//by SAJalali
 
+<<<<<<< HEAD
+=======
+    virtual int activateElements(const ID& elementList);
+    virtual int deactivateElements(const ID& elementList);
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   protected:    
 
     virtual int buildEleGraph(Graph *theEleGraph);

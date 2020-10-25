@@ -66,8 +66,13 @@ class TclInterpreter: public DL_Interpreter
     virtual void resetInput(int cArg);
 
     // methods for interpreters to output results
+<<<<<<< HEAD
     virtual int setInt(int *, int numArgs);
     virtual int setDouble(double *, int numArgs);
+=======
+    virtual int setInt(int *, int numArgs, bool scalar);
+    virtual int setDouble(double *, int numArgs, bool scalar);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     virtual int setString(const char*);
     
   private:

@@ -86,8 +86,13 @@ void* OPS_LoadControlIntegrator()
     return new LoadControl(lambda,numIter,mLambda[0],mLambda[1]);
 }
 
+<<<<<<< HEAD
 LoadControl::LoadControl(double dLambda, int numIncr, double min, double max)
 :StaticIntegrator(INTEGRATOR_TAGS_LoadControl),
+=======
+LoadControl::LoadControl(double dLambda, int numIncr, double min, double max, int classtag)
+    : StaticIntegrator(classtag),
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  deltaLambda(dLambda), 
  specNumIncrStep(numIncr), numIncrLastStep(numIncr),
  dLambdaMin(min), dLambdaMax(max), gradNumber(0), sensitivityFlag(0)

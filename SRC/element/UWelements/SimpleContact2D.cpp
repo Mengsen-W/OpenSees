@@ -70,7 +70,11 @@ OPS_SimpleContact2D(void)
   Element *theElement = 0;
 
   if (OPS_GetNumRemainingInputArgs() != 8) {
+<<<<<<< HEAD
     opserr << "Invalid #args,  want: element SimpleContact2D eleTag? iNode? jNode? slaveNode? lambdaNode? matTag? tolGap? tolForce?\n";
+=======
+    opserr << "Invalid #args,  want: element SimpleContact2D eleTag? iNode? jNode? secondaryNode? lambdaNode? matTag? tolGap? tolForce?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
     
@@ -271,6 +275,7 @@ SimpleContact2D::setDomain(Domain *theDomain)
 	dcrdS = theNodes[2]->getCrds();
 	dispL.Zero();
 
+<<<<<<< HEAD
 	// length of master segment
 	Vector L = (dcrd2 - dcrd1);
 	Lmaster  = L.Norm();
@@ -282,6 +287,19 @@ SimpleContact2D::setDomain(Domain *theDomain)
 	
 	// error check that node 1 and node 2 are not in same location
 	if (Lmaster < tolGap ) { 
+=======
+	// length of primary segment
+	Vector L = (dcrd2 - dcrd1);
+	Lprimary  = L.Norm();
+	Lsquare  = L^L;
+
+	// adjust cohesion force
+	theMaterial->ScaleCohesion(Lprimary);
+	theMaterial->ScaleTensileStrength(Lprimary);
+	
+	// error check that node 1 and node 2 are not in same location
+	if (Lprimary < tolGap ) { 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	  opserr << "SimpleContact2D::SimpleContact2D - node 1 and node 2 share same coordinates\n";
 	  opserr << "Program Terminated\n";
 	  exit(-1);
@@ -289,15 +307,25 @@ SimpleContact2D::setDomain(Domain *theDomain)
 	
 	
 	// tangent vector
+<<<<<<< HEAD
 	T = L/Lmaster;
 	
 	// normal vector to master surface
+=======
+	T = L/Lprimary;
+	
+	// normal vector to primary surface
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	n(0) = -T(1);
 	n(1) =  T(0);
 	// n(2) =  0.0;
 	
 	// initialize xsi_n
+<<<<<<< HEAD
 	xsi_n = (2*dcrdS - dcrd1 - dcrd2 )^T / Lmaster;
+=======
+	xsi_n = (2*dcrdS - dcrd1 - dcrd2 )^T / Lprimary;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	
 	
 	// call the base class method
@@ -386,7 +414,11 @@ SimpleContact2D::update(void)
 
 	gap = n ^ ( dcrdS - N1*dcrd1 - N2*dcrd2 );  
 
+<<<<<<< HEAD
 	xsi_nplus1 = (2*dcrdS - dcrd1 - dcrd2)^T / Lmaster;
+=======
+	xsi_nplus1 = (2*dcrdS - dcrd1 - dcrd2)^T / Lprimary;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		
 	Bn(0) = -N1*n(0);
 	Bn(1) = -N1*n(1);
@@ -421,7 +453,11 @@ SimpleContact2D::update(void)
 
 	if (inContact) {	
 
+<<<<<<< HEAD
 	   slip = 0.5 * (xsi_nplus1 - xsi_n) * Lmaster;
+=======
+	   slip = 0.5 * (xsi_nplus1 - xsi_n) * Lprimary;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	
 	   Vector strain(3);
 

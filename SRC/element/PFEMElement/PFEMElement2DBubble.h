@@ -116,10 +116,19 @@ private:
     static Matrix K;
     static Vector P;
     static Matrix C;
+<<<<<<< HEAD
+=======
+    Matrix M, D;
+    Vector F, Fp;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     void setJ();
     void setdJ();
     static void setC();
+<<<<<<< HEAD
+=======
+    int updateMatrix();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     // responses
     double getM() const;

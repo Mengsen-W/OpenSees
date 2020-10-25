@@ -87,6 +87,18 @@ class PlaneStressUserMaterial: public NDMaterial{
     int sendSelf(int commitTag, Channel &theChannel);
     int recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &theBroker);
 
+<<<<<<< HEAD
+=======
+    //cracking output - added by V.K. Papanikolaou [AUTh] - start
+    const Vector& getCracking();
+    //cracking output - added by V.K. Papanikolaou [AUTh] - end
+
+    //set/getResponse - added by V.K. Papanikolaou [AUTh] - start
+    Response* setResponse(const char** argv, int argc, OPS_Stream& s);
+    int getResponse(int responseID, Information& matInformation);
+    //set/getResponse - added by V.K. Papanikolaou [AUTh] - end
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 private :
     Vector strain0, strain, stress0, stress;
     Matrix tangent, eTangent;

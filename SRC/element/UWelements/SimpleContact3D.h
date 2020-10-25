@@ -109,7 +109,11 @@ class SimpleContact3D : public Element
 
     Vector project(Vector XiEta0);
     
+<<<<<<< HEAD
     // method to obtain projection point on master surface
+=======
+    // method to obtain projection point on primary surface
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Vector GetPoint(Vector XiEta);
     // method to update base vectors g1 & g2
     int UpdateBase(Vector XiEta);
@@ -140,7 +144,11 @@ class SimpleContact3D : public Element
 
     Vector d;
 
+<<<<<<< HEAD
     Matrix x;				// matrix of cartesian coords of nodes 1-4, slave
+=======
+    Matrix x;				// matrix of cartesian coords of nodes 1-4, secondary
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Matrix g_metric;		// metric tensor
 	Matrix G_metric;		// contravariant metric tensor
 

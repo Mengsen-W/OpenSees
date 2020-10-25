@@ -37,7 +37,11 @@ node 16  [expr  $bx/2] [expr  $by/2] [expr 3*$h]
 node 17  [expr  $bx/2] [expr -$by/2] [expr 3*$h] 
 node 18  [expr -$bx/2] [expr -$by/2] [expr 3*$h]
 
+<<<<<<< HEAD
 # Master nodes for rigid diaphragm
+=======
+# Retained nodes for rigid diaphragm
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #    tag X Y          Z 
 node  9  0 0         $h 
 node 14  0 0 [expr 2*$h]
@@ -51,12 +55,20 @@ fix  3   1  1  1  1  1  1
 fix  4   1  1  1  1  1  1
 
 # Define rigid diaphragm multi-point constraints
+<<<<<<< HEAD
 #               normalDir  master     slaves
+=======
+#               normalDir  retained constrained
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 rigidDiaphragm     3          9     5  6  7  8
 rigidDiaphragm     3         14    10 11 12 13
 rigidDiaphragm     3         19    15 16 17 18
 
+<<<<<<< HEAD
 # Constraints for rigid diaphragm master nodes
+=======
+# Constraints for rigid diaphragm retained nodes
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #   tag DX DY DZ RX RY RZ
 fix  9   0  0  1  1  1  0
 fix 14   0  0  1  1  1  0
@@ -174,6 +186,7 @@ element nonlinearBeamColumn  24 18  15   $np  $beamSec     2
 # 10% of column capacity
 set p [expr 0.1*$fc*$h*$h]
 
+<<<<<<< HEAD
 # Mass lumped at master nodes
 set g 386.4;            # Gravitational constant
 set m [expr (4.0*$p)/$g]
@@ -182,6 +195,16 @@ set m [expr (4.0*$p)/$g]
 set i [expr $m*($bx*$bx+$by*$by)/12.0]
 
 # Set mass at the master nodes
+=======
+# Mass lumped at retained nodes
+set g 386.4;            # Gravitational constant
+set m [expr (4.0*$p)/$g]
+
+# Rotary inertia of floor about retained node
+set i [expr $m*($bx*$bx+$by*$by)/12.0]
+
+# Set mass at the retained nodes
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #    tag MX MY MZ RX RY RZ
 mass  9  $m $m  0  0  0 $i
 mass 14  $m $m  0  0  0 $i

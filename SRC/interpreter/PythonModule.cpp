@@ -43,6 +43,10 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #include "PythonModule.h"
 #include "PythonStream.h"
+<<<<<<< HEAD
+=======
+#include <OPS_Globals.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // define opserr
 static PythonStream sserr;
@@ -137,7 +141,20 @@ PythonModule::getString() {
         return 0;
     }
 
+<<<<<<< HEAD
     return PyUnicode_AsUTF8(o);
+=======
+    PyObject* space = PyUnicode_FromString(" ");
+    PyObject* empty = PyUnicode_FromString("");
+    PyObject* newo = PyUnicode_Replace(o, space, empty, -1);
+    const char* res = PyUnicode_AsUTF8(newo);
+
+    Py_DECREF(newo);
+    Py_DECREF(space);
+    Py_DECREF(empty);
+
+    return res;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #else
     if (!PyString_Check(o)) {
         return 0;
@@ -158,15 +175,25 @@ PythonModule::resetInput(int cArg) {
 }
 
 int
+<<<<<<< HEAD
 PythonModule::setInt(int *data, int numArgs) {
     wrapper.setOutputs(data, numArgs);
+=======
+PythonModule::setInt(int *data, int numArgs, bool scalar) {
+    wrapper.setOutputs(data, numArgs, scalar);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     return 0;
 }
 
 int
+<<<<<<< HEAD
 PythonModule::setDouble(double *data, int numArgs) {
     wrapper.setOutputs(data, numArgs);
+=======
+PythonModule::setDouble(double *data, int numArgs, bool scalar) {
+    wrapper.setOutputs(data, numArgs, scalar);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     return 0;
 }
@@ -277,6 +304,19 @@ initopensees(void)
     Py_INCREF(st->error);
     PyModule_AddObject(pymodule, "OpenSeesError", st->error);
 
+<<<<<<< HEAD
+=======
+    char version[10];
+    const char *py_version = ".6";
+    for (int i = 0; i < 5; ++i) {
+        version[i] = OPS_VERSION[i];
+    }
+    for (int i = 0; i < 3; ++i) {
+        version[5 + i] = py_version[i];
+    }
+    PyModule_AddStringConstant(pymodule, "__version__", version);
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     sserr.setError(st->error);
 
     Py_AtExit(cleanupFunc);

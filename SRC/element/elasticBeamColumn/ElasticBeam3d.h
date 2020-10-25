@@ -52,10 +52,18 @@ class ElasticBeam3d : public Element
 		  double Jx, double Iy, double Iz,
           int Nd1, int Nd2, CrdTransf &theTransf,
           double rho = 0.0, int cMass = 0,
+<<<<<<< HEAD
           int sectionTag = 0);
 
     ElasticBeam3d(int tag, int Nd1, int Nd2, SectionForceDeformation *section, 
 		  CrdTransf &theTransf, double rho = 0.0, int cMass = 0);
+=======
+		  int releasez = 0, int releasey = 0);
+
+    ElasticBeam3d(int tag, int Nd1, int Nd2, SectionForceDeformation *section, 
+		  CrdTransf &theTransf, double rho = 0.0, int cMass = 0,
+		  int releasez = 0, int releasey = 0);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     ~ElasticBeam3d();
 
@@ -101,8 +109,15 @@ class ElasticBeam3d : public Element
 
     double rho;
     int cMass;
+<<<<<<< HEAD
     int sectionTag;
 
+=======
+
+    int releasez; // moment release for bending about z-axis 0=none, 1=I, 2=J, 3=I,J
+    int releasey; // same for y-axis
+    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     static Matrix K;
     static Vector P;
     Vector Q;

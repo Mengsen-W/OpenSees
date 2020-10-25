@@ -115,6 +115,13 @@ class Tri31 : public Element
     static Vector P;		// Element resisting force vector
     Vector Q;		        // Applied nodal loads
     double b[2];		// Body forces
+<<<<<<< HEAD
+=======
+
+	double appliedB[2]; // Body forces applied with load pattern
+	int applyLoad;      // flag for body force in load
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Vector pressureLoad;	// Pressure load at nodes
 
     double thickness;	        // Element thickness
@@ -131,8 +138,13 @@ class Tri31 : public Element
 
     Matrix *Ki;
 
+<<<<<<< HEAD
     int numgp; // number of guess points
 	int numnodes; // number of nodes
+=======
+    static constexpr int numgp = 1; // number of gauss points
+	static constexpr int numnodes = 3; // number of nodes
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

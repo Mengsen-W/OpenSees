@@ -208,9 +208,15 @@ class ForceBeamColumn2d: public Element
   // following are added for subdivision of displacement increment
   int    maxSubdivisions;       // maximum number of subdivisons of dv for local iterations
   
+<<<<<<< HEAD
   static Vector *vsSubdivide;
   static Vector *SsrSubdivide;
   static Matrix *fsSubdivide;
+=======
+  static Vector vsSubdivide[];
+  static Vector SsrSubdivide[];
+  static Matrix fsSubdivide[];
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   //static int maxNumSections;
 
   // AddingSensitivity:BEGIN //////////////////////////////////////////

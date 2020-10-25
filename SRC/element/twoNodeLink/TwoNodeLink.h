@@ -97,7 +97,11 @@ public:
     // public methods for element recorder
     Response *setResponse(const char **argv, int argc, OPS_Stream &s);
     int getResponse(int responseID, Information &eleInfo);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     int setParameter(const char **argv, int argc, Parameter &param);
 
 private:
@@ -107,8 +111,13 @@ private:
     void setUp();
     void setTranGlobalLocal();
     void setTranLocalBasic();
+<<<<<<< HEAD
     void addPDeltaForces(Vector &pLocal);
     void addPDeltaStiff(Matrix &kLocal);
+=======
+    void addPDeltaForces(Vector &pLocal, const Vector &qBasic);
+    void addPDeltaStiff(Matrix &kLocal, const Vector& qBasic);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     // private attributes - a copy for each object of the class
     int numDIM;                         // 1, 2, or 3 dimensions
@@ -132,7 +141,11 @@ private:
     
     Vector ub;          // trial displacements in basic system
     Vector ubdot;       // trial velocities in basic system
+<<<<<<< HEAD
     Vector qb;          // measured forces in basic system
+=======
+    Vector qb;          // resisting forces in basic system
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Vector ul;          // displacements in local system
     Matrix Tgl;         // transformation matrix from global to local system
     Matrix Tlb;         // transformation matrix from local to basic system

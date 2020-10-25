@@ -70,7 +70,11 @@ OPS_SimpleContact3D(void)
   Element *theElement = 0;
 
   if (OPS_GetNumRemainingInputArgs() != 10) {
+<<<<<<< HEAD
     opserr << "Invalid #args,  want: element SimpleContact3D eleTag? iNode? jNode? kNode? lNode? slaveNode? lambdaNode? matTag? tolGap? tolForce?\n";
+=======
+    opserr << "Invalid #args,  want: element SimpleContact3D eleTag? iNode? jNode? kNode? lNode? secondaryNode? lambdaNode? matTag? tolGap? tolForce?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
     
@@ -293,6 +297,7 @@ SimpleContact3D::setDomain(Domain *theDomain)
         dcrdS = theNodes[4]->getCrds();
         dispL.Zero();
         
+<<<<<<< HEAD
         // length of master segments
         Vector L1       = (dcrd2 - dcrd1);
         // double L1master = L1.Norm();
@@ -302,6 +307,17 @@ SimpleContact3D::setDomain(Domain *theDomain)
         // double L3master      = L3.Norm();
         Vector L4       = (dcrd1 - dcrd4);
         // double L4master = L4.Norm();
+=======
+        // length of primary segments
+        Vector L1       = (dcrd2 - dcrd1);
+        // double L1primary = L1.Norm();
+        Vector L2       = (dcrd3 - dcrd2);
+        // double L2primary = L2.Norm();
+        Vector L3       = (dcrd4 - dcrd3);
+        // double L3primary      = L3.Norm();
+        Vector L4       = (dcrd1 - dcrd4);
+        // double L4primary = L4.Norm();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
         // error check that nodes are not in same location
         if (fabs(L1(0)) < tolGap && fabs(L1(1)) < tolGap && fabs(L1(2)) < tolGap ) { 
@@ -348,7 +364,11 @@ SimpleContact3D::setDomain(Domain *theDomain)
                 KinvLin(0,1) = -g_metric(0,1)/detKLin;
                 KinvLin(1,1) =  g_metric(0,0)/detKLin;
 
+<<<<<<< HEAD
         // normal vector to master surface
+=======
+        // normal vector to primary surface
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         n(0) = g1(1)*g2(2) - g1(2)*g2(1);
         n(1) = g1(2)*g2(0) - g1(0)*g2(2);
         n(2) = g1(0)*g2(1) - g1(1)*g2(0);
@@ -409,7 +429,11 @@ SimpleContact3D::commitState()
         KinvLin(1,1) =  g_metric(0,0)/detKLin;
 
 
+<<<<<<< HEAD
         // normal vector to master surface
+=======
+        // normal vector to primary surface
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         n(0) = g1(1)*g2(2) - g1(2)*g2(1);
         n(1) = g1(2)*g2(0) - g1(0)*g2(2);
         n(2) = g1(0)*g2(1) - g1(1)*g2(0);

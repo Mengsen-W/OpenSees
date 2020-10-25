@@ -300,9 +300,15 @@ IncrementalIntegrator::setModalDampingFactors(const Vector &factors)
 }
 */
 
+<<<<<<< HEAD
 /* slow code
 int 
 IncrementalIntegrator::addModalDampingForce(void)
+=======
+ /*
+int 
+IncrementalIntegrator::addModalDampingForce(const Vector *modalDampingValues)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   int res = 0;
   
@@ -344,9 +350,15 @@ IncrementalIntegrator::addModalDampingForce(void)
 
   return res;
 }
+<<<<<<< HEAD
 */
 
  /*int 
+=======
+ */
+
+/*int 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 IncrementalIntegrator::addModalDampingForce(void)
 {
   int res = 0;
@@ -518,8 +530,13 @@ IncrementalIntegrator::addModalDampingForce(const Vector *modalDampingValues)
     this->setupModal(modalDampingValues);
   }
 
+<<<<<<< HEAD
 
   const Vector &vel = this->getVel();
+=======
+  const Vector &vel = this->getVel();
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   dampingForces->Zero();
 
   for (int i=0; i<numModes; i++) {
@@ -527,15 +544,27 @@ IncrementalIntegrator::addModalDampingForce(const Vector *modalDampingValues)
     double eigenvalue = (*eigenValues)(i);
     if (eigenvalue > 0) {
       double wn = sqrt(eigenvalue);
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       double *eigenVectorI = &eigenVectors[numDOF*i];
       double beta = 0.0;
       
       for (int j=0; j<numDOF; j++) {
 	double eij = eigenVectorI[j];
+<<<<<<< HEAD
 	if (eij != 0)
 	  beta += eij * vel(j);
       }
       
+=======
+	if (eij != 0) {
+	  beta += eij * vel(j);
+	}
+      }
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       beta = -2.0 * (*modalDampingValues)(i) * wn * beta;
 
       for (int j=0; j<numDOF; j++) {

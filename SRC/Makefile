@@ -34,6 +34,10 @@ all:
 	@$(CD) $(FE)/api; $(MAKE);
 	@$(CD) $(FE)/reliability; $(MAKE);
 	@$(CD) $(FE)/optimization; $(MAKE);
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/string; $(MAKE);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	@$(AR) $(ARFLAGS) $(FE_LIBRARY) $(MATRIX_LIBS) 
 	@$(AR) $(ARFLAGS) $(FE_LIBRARY) $(ELE_LIBS) 
 	@$(AR) $(ARFLAGS) $(FE_LIBRARY) $(MATERIAL_LIBS)
@@ -91,6 +95,10 @@ all:
 	@$(CD) $(FE)/api; $(MAKE);
 	@$(CD) $(FE)/damage; $(MAKE);
 	@$(CD) $(FE)/api; $(MAKE);
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/string; $(MAKE);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	@$(AR) $(ARFLAGS) $(FE_LIBRARY) $(MATRIX_LIBS) 
 	@$(AR) $(ARFLAGS) $(FE_LIBRARY) $(ELE_LIBS) 
 	@$(AR) $(ARFLAGS) $(FE_LIBRARY) $(MATERIAL_LIBS)
@@ -125,6 +133,10 @@ all:
 
 endif
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 TCL_COMMAND_LIBS = $(FE)/domain/pattern/TclPatternCommand.o \
 	$(FE)/domain/pattern/TclSeriesCommand.o \
 	$(FE)/domain/pattern/TclSeriesIntegratorCommand.o \
@@ -214,6 +226,10 @@ REMO_LIBS = $(FE)/element/nonlinearBeamColumn/matrixutil/MatrixUtil.o \
 	$(FE)/element/forceBeamColumn/ForceBeamColumnCBDI2d.o \
 	$(FE)/element/forceBeamColumn/ForceBeamColumnWarping2d.o \
 	$(FE)/element/forceBeamColumn/ForceBeamColumn3d.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/forceBeamColumn/ForceBeamColumnCBDI3d.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/forceBeamColumn/ElasticForceBeamColumn2d.o \
 	$(FE)/element/forceBeamColumn/ElasticForceBeamColumnWarping2d.o \
 	$(FE)/element/forceBeamColumn/ElasticForceBeamColumn3d.o \
@@ -222,6 +238,10 @@ REMO_LIBS = $(FE)/element/nonlinearBeamColumn/matrixutil/MatrixUtil.o \
 	$(FE)/element/forceBeamColumn/CompositeSimpsonBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/LegendreBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/RadauBeamIntegration.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/forceBeamColumn/SimpsonBeamIntegration.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/forceBeamColumn/NewtonCotesBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/HingeMidpointBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/HingeEndpointBeamIntegration.o \
@@ -268,6 +288,10 @@ GGD_LIBS = $(FE)/element/joint/MP_Joint2D.o \
 	$(FE)/element/joint/MP_Joint3D.o \
 	$(FE)/element/joint/Joint2D.o \
 	$(FE)/element/joint/Joint3D.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/joint/LehighJoint2d.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/joint/BeamColumnJoint2d.o \
 	$(FE)/element/joint/BeamColumnJoint3d.o \
 	$(FE)/element/joint/ElasticTubularJoint.o \
@@ -414,6 +438,11 @@ RECORDER_LIBS = $(FE)/recorder/Recorder.o \
 	$(FE)/recorder/PVDRecorder.o \
 	$(FE)/recorder/GmshRecorder.o \
 	$(FE)/recorder/MPCORecorder.o \
+<<<<<<< HEAD
+=======
+	$(FE)/recorder/ElementRecorderRMS.o \
+	$(FE)/recorder/NodeRecorderRMS.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/recorder/VTK_Recorder.o 
 
 
@@ -515,6 +544,16 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/elasticBeamColumn/ElasticTimoshenkoBeam2d.o \
 	$(FE)/element/elasticBeamColumn/ElasticTimoshenkoBeam3d.o \
 	$(FE)/element/elasticBeamColumn/WheelRail.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/elasticBeamColumn/WheelRail.o \
+	$(FE)/element/elasticBeamColumn/WheelRail.o \
+	$(FE)/element/gradientInelasticBeamColumn/GradientInelasticBeamColumn2d.o \
+	$(FE)/element/gradientInelasticBeamColumn/GradientInelasticBeamColumn3d.o \
+	$(FE)/element/gradientInelasticBeamColumn/TclGradientInelasticBeamColumnCommand.o \
+	$(FE)/element/mixedBeamColumn/MixedBeamColumn2d.o \
+	$(FE)/element/mixedBeamColumn/MixedBeamColumn3d.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/fourNodeQuad/FourNodeQuad.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuad3d.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuadWithSensitivity.o \
@@ -522,6 +561,12 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/fourNodeQuad/EnhancedQuad.o \
 	$(FE)/element/componentElement/ComponentElement2d.o \
 	$(FE)/element/fourNodeQuad/NineNodeMixedQuad.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/fourNodeQuad/NineNodeQuad.o \
+	$(FE)/element/fourNodeQuad/EightNodeQuad.o \
+	$(FE)/element/fourNodeQuad/SixNodeTri.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/shell/ShellMITC4.o \
 	$(FE)/element/shell/ShellMITC4Thermal.o \
 	$(FE)/element/shell/ShellMITC9.o \
@@ -530,6 +575,10 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/shell/ShellDKGT.o \
 	$(FE)/element/shell/ShellNLDKGT.o \
 	$(FE)/element/shell/ShellNLDKGQThermal.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/shell/ASDShellQ4.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/shell/R3vectors.o \
 	$(FE)/element/shell/ShellANDeS.o \
 	$(FE)/element/brick/Brick.o \
@@ -603,6 +652,10 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/PFEMElement/TriGaussPoints.o \
 	$(FE)/element/PFEMElement/HigherOrder.o \
 	$(FE)/element/PFEMElement/Mesh.o \
+<<<<<<< HEAD
+=======
+	$(FE)/element/PFEMElement/PFEMContact2D.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/element/UWelements/SSPquad.o \
 	$(FE)/element/UWelements/SSPquadUP.o \
 	$(FE)/element/UWelements/SSPbrick.o \
@@ -634,14 +687,36 @@ else
 endif
 
 
+<<<<<<< HEAD
 ifdef PLAINCONCRETE_FLAG
 	PLAINCONCRETE = $(FE)/material/nD/PlainConcrete.o $(FE)/material/nD/forumat.o
+=======
+ifdef FILIP_FLAG
+	FILIP = $(FE)/element/filip/BeamColumn2DwLHNMYS.o \
+	$(FE)/element/filip/BeamColumn3DwLHNMYS.o \
+	$(FE)/element/filip/GPYS.o
+else
+	FILIP = 
+endif
+
+
+ifdef PLAINCONCRETE_FLAG
+	PLAINCONCRETE = $(FE)/material/nD/PlainConcrete.o $(FE)/material/nD/forumat.o \
+       $(FE)/element/PML/PMLDynamicSymmDamp3D.o \
+       $(FE)/element/PML/PML3D.o \
+       $(FE)/element/PML/PMLDynamicSymmDamp2D.o \
+       $(FE)/element/PML/PML2D.o
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 else
 	PLAINCONCRETE = 
 endif
 
 ifdef H5DRM_FLAG
+<<<<<<< HEAD
 	H5DRM = $(FE)/domain/pattern/drm/H5DRM.o \
+=======
+	H5DRM = $(FE)/domain/pattern/drm/H5DRM.o
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 else
 	H5DRM = 
 endif
@@ -667,6 +742,12 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/MultiLinear.o \
 	$(FE)/material/uniaxial/HookGap.o \
 	$(FE)/material/uniaxial/UVCuniaxial.o \
+<<<<<<< HEAD
+=======
+	$(FE)/material/uniaxial/IMKBilin.o \
+	$(FE)/material/uniaxial/IMKPinching.o \
+	$(FE)/material/uniaxial/IMKPeakOriented.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/material/uniaxial/HardeningMaterial.o \
 	$(FE)/material/uniaxial/HardeningMaterial2.o \
 	$(FE)/material/uniaxial/ParallelMaterial.o \
@@ -745,8 +826,13 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/pyUCLA.o \
 	$(FE)/material/uniaxial/FatigueMaterial.o \
 	$(FE)/material/uniaxial/SAWSMaterial.o \
+<<<<<<< HEAD
 	$(FE)/material/uniaxial/snap/Bilin.o \
 	$(FE)/material/uniaxial/snap/Bilin02.o \
+=======
+	$(FE)/material/uniaxial/Bilin.o \
+	$(FE)/material/uniaxial/Bilin02.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/material/uniaxial/ConfinedConcrete01.o \
 	$(FE)/material/uniaxial/CableMaterial.o \
 	$(FE)/material/uniaxial/ENTMaterial.o \
@@ -762,6 +848,16 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/GNGMaterial.o \
 	$(FE)/material/uniaxial/SelfCenteringMaterial.o \
 	$(FE)/material/uniaxial/SPSW02.o \
+<<<<<<< HEAD
+=======
+	$(FE)/material/uniaxial/TDConcrete.o \
+	$(FE)/material/uniaxial/TDConcreteEXP.o \
+	$(FE)/material/uniaxial/TDConcreteMC10.o \
+	$(FE)/material/uniaxial/TDConcreteMC10NL.o \
+	$(FE)/material/uniaxial/TDConcreteMC10NL.o \
+	$(FE)/material/uniaxial/DegradingPinchedBW.o \
+	$(FE)/material/uniaxial/SLModel.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/material/uniaxial/MaterialState.o \
 	$(FE)/material/uniaxial/backbone/HystereticBackbone.o \
 	$(FE)/material/uniaxial/backbone/ArctangentBackbone.o \
@@ -792,7 +888,11 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/nD/NDMaterial.o \
 	$(FE)/material/nD/PlaneStressLayeredMaterial.o \
 	$(FE)/material/nD/PlaneStressRebarMaterial.o \
+<<<<<<< HEAD
 	$(DAMAGE_2P) $(FE)/material/nD/WrapperNDMaterial.o \
+=======
+	$(DAMAGE_2P) $(H5DRM) $(FE)/material/nD/WrapperNDMaterial.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/material/nD/UVCplanestress.o \
 	$(FE)/material/nD/UVCmultiaxial.o \
 	$(FE)/material/nD/J2Plasticity.o \
@@ -857,6 +957,10 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/nD/ElasticIsotropicPlateFiber.o \
 	$(FE)/material/nD/ElasticIsotropicBeamFiber.o \
 	$(FE)/material/nD/ElasticIsotropicBeamFiber2d.o \
+<<<<<<< HEAD
+=======
+	$(FE)/material/nD/IncrementalElasticIsotropicThreeDimensional.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/material/nD/ElasticOrthotropicMaterial.o \
 	$(FE)/material/nD/ElasticOrthotropicThreeDimensional.o \
 	$(FE)/material/nD/PlaneStressMaterial.o \
@@ -895,7 +999,11 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/nD/ConcreteS.o \
 	$(FE)/material/nD/SimplifiedJ2.o \
 	$(FE)/material/nD/PlaneStressSimplifiedJ2.o \
+<<<<<<< HEAD
 	$(FE)/material/nD/PlaneStressUserMaterial.o $(PLAINCONCRETE) \
+=======
+	$(FE)/material/nD/PlaneStressUserMaterial.o $(PLAINCONCRETE) $(FILIP)\
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/material/nD/PlateFromPlaneStressMaterial.o \
 	$(FE)/material/nD/PlateRebarMaterial.o \
 	$(FE)/material/nD/stressDensityModel/stressDensity.o \
@@ -1009,11 +1117,23 @@ SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o \
 	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSolver.o
 endif
 
+<<<<<<< HEAD
 # ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
 # SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o \
 # 	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSuperLU.o \
 # 	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenColLinSOE.o 
 # endif
+=======
+ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
+SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o \
+	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSuperLU.o \
+	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenColLinSOE.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSOE.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSolver.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSOE.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSolver.o
+endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 CUDA_CLASSES = 
 
@@ -1049,6 +1169,10 @@ SequentialSysOfEqn_LIBS =	$(FE)/system_of_eqn/linearSOE/LinearSOE.o \
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMLinSOE.o \
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMSolver.o \
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMSolver_Umfpack.o \
+<<<<<<< HEAD
+=======
+	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMSolver_Mumps.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMCompressibleLinSOE.o \
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMCompressibleSolver.o \
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/PFEMQuasiLinSOE.o \
@@ -1159,7 +1283,11 @@ DOMAIN_LIBS =  $(FE)/domain/component/DomainComponent.o \
 	$(FE)/domain/pattern/drm/DRMLoadPattern.o \
 	$(FE)/domain/pattern/drm/DRMLoadPatternWrapper.o \
 	$(FE)/domain/pattern/drm/DRMInputHandler.o \
+<<<<<<< HEAD
 	$(FE)/domain/pattern/drm/PlaneDRMInputHandler.o $(H5DRM) \
+=======
+	$(FE)/domain/pattern/drm/PlaneDRMInputHandler.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/domain/groundMotion/GroundMotion.o \
 	$(FE)/domain/groundMotion/GroundMotionRecord.o \
 	$(FE)/domain/groundMotion/InterpolatedGroundMotion.o \
@@ -1220,6 +1348,11 @@ ANALYSIS_LIBS = $(FE)/analysis/analysis/Analysis.o \
 	$(FE)/analysis/integrator/IncrementalIntegrator.o \
 	$(FE)/analysis/integrator/StaticIntegrator.o \
 	$(FE)/analysis/integrator/LoadControl.o \
+<<<<<<< HEAD
+=======
+	$(FE)/analysis/integrator/StagedLoadControl.o \
+	$(FE)/analysis/integrator/StagedNewmark.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/analysis/integrator/EQPath.o \
 	$(FE)/analysis/integrator/LoadPath.o \
 	$(FE)/analysis/integrator/ArcLength.o \
@@ -1230,6 +1363,10 @@ ANALYSIS_LIBS = $(FE)/analysis/analysis/Analysis.o \
 	$(FE)/analysis/integrator/DistributedDisplacementControl.o \
 	$(FE)/analysis/integrator/TransientIntegrator.o \
 	$(FE)/analysis/integrator/Newmark.o \
+<<<<<<< HEAD
+=======
+	$(FE)/analysis/integrator/GimmeMCK.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(FE)/analysis/integrator/PFEMIntegrator.o \
 	$(FE)/analysis/integrator/TRBDF2.o \
 	$(FE)/analysis/integrator/TRBDF3.o \
@@ -1348,6 +1485,10 @@ wipe: spotless
 	@$(CD) $(FE)/api; $(MAKE) wipe;
 	@$(CD) $(FE)/interpreter; $(MAKE) wipe;
 	@$(CD) $(FE)/damage; $(MAKE) wipe;
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/string; $(MAKE) wipe;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 

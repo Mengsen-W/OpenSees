@@ -36,7 +36,11 @@
 //
 // What: "@(#) ActorSubdomain.h, revA"
 
+<<<<<<< HEAD
 #include <Subdomain.h>
+=======
+#include "Subdomain.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <Actor.h>
 
 class ActorSubdomain: public Subdomain, public Actor

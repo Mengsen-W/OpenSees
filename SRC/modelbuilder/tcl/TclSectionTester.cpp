@@ -76,6 +76,7 @@ TclSectionTester::TclSectionTester(Domain &theDomain, Tcl_Interp *interp, int cT
   Tcl_CreateCommand(interp, "sectionTest", TclSectionTester_setSection,
 		    (ClientData)NULL, NULL);
   
+<<<<<<< HEAD
   Tcl_CreateCommand(interp, "strainSection", TclSectionTester_setStrainSection,
 		    (ClientData)NULL, NULL);
   
@@ -83,6 +84,15 @@ TclSectionTester::TclSectionTester(Domain &theDomain, Tcl_Interp *interp, int cT
 		    (ClientData)NULL, NULL);
   
   Tcl_CreateCommand(interp, "tangSection", TclSectionTester_getTangSection,
+=======
+  Tcl_CreateCommand(interp, "strainSectionTest", TclSectionTester_setStrainSection,
+		    (ClientData)NULL, NULL);
+  
+  Tcl_CreateCommand(interp, "stressSectionTest", TclSectionTester_getStressSection,
+		    (ClientData)NULL, NULL);
+  
+  Tcl_CreateCommand(interp, "tangSectionTest", TclSectionTester_getTangSection,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		    (ClientData)NULL, NULL);
   
   
@@ -96,9 +106,15 @@ TclSectionTester::~TclSectionTester()
   theTclBuilder =0;
 
   Tcl_DeleteCommand(theInterp, "sectionTest");
+<<<<<<< HEAD
   Tcl_DeleteCommand(theInterp, "strainSection");
   Tcl_DeleteCommand(theInterp, "stressSection");
   Tcl_DeleteCommand(theInterp, "tangSection");
+=======
+  Tcl_DeleteCommand(theInterp, "strainSectionTest");
+  Tcl_DeleteCommand(theInterp, "stressSectionTest");
+  Tcl_DeleteCommand(theInterp, "tangSectionTest");
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
@@ -119,14 +135,22 @@ TclSectionTester_setSection(ClientData clientData, Tcl_Interp *interp, int argc,
 
   // check number of arguments in command line
   if (argc < 2) {
+<<<<<<< HEAD
     opserr << "WARNING bad command - want: uniaxialTest matID?\n";
+=======
+    opserr << "WARNING bad command - want: sectionTest secID?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return TCL_ERROR;
   }    
 
   // get the matID form command line
   int sectionID;
   if (Tcl_GetInt(interp, argv[1], &sectionID) != TCL_OK) {
+<<<<<<< HEAD
     opserr << "WARNING could not read sectionID: uniaxialTest sectionID?\n";
+=======
+    opserr << "WARNING could not read sectionID: sectionTest sectionID?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return TCL_ERROR;
   }
 
@@ -162,7 +186,11 @@ TclSectionTester_setStrainSection(ClientData clientData, Tcl_Interp *interp,
 
   // check number of arguments in command line
   if (argc < 2) {
+<<<<<<< HEAD
     opserr <<  "WARNING bad command - want: strainNdTest strain?\n";
+=======
+    opserr <<  "WARNING bad command - want: strainSectionTest strain?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return TCL_ERROR;
   }    
 
@@ -170,8 +198,13 @@ TclSectionTester_setStrainSection(ClientData clientData, Tcl_Interp *interp,
   static Vector data;
   double strain;
   for (int i=1; i<argc; i++) {
+<<<<<<< HEAD
     if (Tcl_GetDouble(interp, argv[1], &strain) != TCL_OK) {
       opserr << "WARNING could not read strain: strainNdTest strain?\n";
+=======
+    if (Tcl_GetDouble(interp, argv[i], &strain) != TCL_OK) {
+      opserr << "WARNING could not read strain: strainSectionTest strain1? strain2? ... strainN?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       return TCL_ERROR;
     }
     data(i-1) = strain;
@@ -203,7 +236,11 @@ int  TclSectionTester_getStressSection(ClientData clientData, Tcl_Interp *interp
     }
     return TCL_OK;
   } else {
+<<<<<<< HEAD
     opserr <<  "WARNING no active Section - use uniaxialTest comman\n";    
+=======
+    opserr <<  "WARNING no active Section - use sectionTest command\n";    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return TCL_ERROR;
   }
 }
@@ -224,6 +261,7 @@ int  TclSectionTester_getTangSection(ClientData clientData, Tcl_Interp *interp,
       }
     return TCL_OK;
   } else {
+<<<<<<< HEAD
     opserr << "WARNING no active Section - use uniaxialTest command\n";    
     return TCL_ERROR;
   }
@@ -233,3 +271,9 @@ int  TclSectionTester_getTangSection(ClientData clientData, Tcl_Interp *interp,
 
 
 
+=======
+    opserr << "WARNING no active Section - use sectionTest command\n";    
+    return TCL_ERROR;
+  }
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

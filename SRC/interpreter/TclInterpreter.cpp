@@ -64,6 +64,13 @@ terms specified in this license.
 
 #include "TclInterpreter.h"
 #include <string.h>
+<<<<<<< HEAD
+=======
+#include <StandardStream.h>
+
+StandardStream sserr;
+OPS_Stream *opserrPtr = &sserr;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #ifndef _WIN32
 #include <unistd.h>
@@ -229,7 +236,13 @@ TclInterpreter::TclInterpreter(int argc, char **argv)
 
   /* fmk - beginning of modifications for OpenSees */
   fprintf(stderr,"\n\n\t OpenSees -- Open System For Earthquake Engineering Simulation");
+<<<<<<< HEAD
   fprintf(stderr,"\n\tPacific Earthquake Engineering Research Center -- 3.0.0\n\n");
+=======
+  fprintf(stderr,"\n\tPacific Earthquake Engineering Research Center -- ");
+  fprintf(stderr, OPS_VERSION);
+  fprintf(stderr, "\n\n");
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
   fprintf(stderr,"\t    (c) Copyright 1999,2000 The Regents of the University of California");
   fprintf(stderr,"\n\t\t\t\t All Rights Reserved\n");    
@@ -560,14 +573,22 @@ TclInterpreter::resetInput(int cArg)
 }
 
 int
+<<<<<<< HEAD
 TclInterpreter::setInt(int* data, int numArgs)
+=======
+TclInterpreter::setInt(int* data, int numArgs, bool scalar)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     wrapper.setOutputs(interp, data, numArgs);
     return 0;
 }
 
 int
+<<<<<<< HEAD
 TclInterpreter::setDouble(double* data, int numArgs)
+=======
+TclInterpreter::setDouble(double* data, int numArgs, bool scalar)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     wrapper.setOutputs(interp, data, numArgs);
     return 0;

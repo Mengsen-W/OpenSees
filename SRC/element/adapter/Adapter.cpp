@@ -68,7 +68,16 @@ void* OPS_Adapter()
     while (OPS_GetNumRemainingInputArgs() > 0) {
         int node;
         numdata = 1;
+<<<<<<< HEAD
         if (OPS_GetIntInput(&numdata, &node) < 0) {
+=======
+        int numArgs = OPS_GetNumRemainingInputArgs();
+        if (OPS_GetIntInput(&numdata, &node) < 0) {
+            if (numArgs > OPS_GetNumRemainingInputArgs()) {
+                // move current arg back by one
+                OPS_ResetCurrentInputArg(-1);
+            }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             break;
         }
         nodes(numNodes++) = node;
@@ -80,8 +89,14 @@ void* OPS_Adapter()
     ID *dofs = new ID[numNodes];
     for (int i = 0; i < numNodes; i++) {
         type = OPS_GetString();
+<<<<<<< HEAD
         if (strcmp(type, "-dof") != 0) {
             opserr << "WARNING expecting -dof dofNdi\n";
+=======
+        if (strcmp(type, "-dof") != 0 && strcmp(type, "-dir") != 0) {
+            opserr << "WARNING expecting -dof dofNd"
+                << i + 1 << ", but got " << type << endln;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             return 0;
         }
         ID dofsi(ndf);
@@ -89,7 +104,16 @@ void* OPS_Adapter()
         while (OPS_GetNumRemainingInputArgs() > 0) {
             int dof;
             numdata = 1;
+<<<<<<< HEAD
             if (OPS_GetIntInput(&numdata, &dof) < 0) {
+=======
+            int numArgs = OPS_GetNumRemainingInputArgs();
+            if (OPS_GetIntInput(&numdata, &dof) < 0) {
+                if (numArgs > OPS_GetNumRemainingInputArgs()) {
+                    // move current arg back by one
+                    OPS_ResetCurrentInputArg(-1);
+                }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
                 break;
             }
             if (dof < 1 || ndf < dof) {

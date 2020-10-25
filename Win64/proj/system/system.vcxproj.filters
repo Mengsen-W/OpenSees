@@ -229,6 +229,12 @@
     <ClCompile Include="..\..\..\SRC\system_of_eqn\linearSOE\sparseGEN\PFEMSolver_LumpM.cpp">
       <Filter>sparseGEN</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="..\..\..\SRC\system_of_eqn\linearSOE\sparseGEN\PFEMSolver_Mumps.cpp">
+      <Filter>sparseGEN</Filter>
+    </ClCompile>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SRC\system_of_eqn\linearSOE\DomainSolver.h">
@@ -399,5 +405,11 @@
     <ClInclude Include="..\..\..\SRC\system_of_eqn\linearSOE\sparseGEN\PFEMSolver_LumpM.h">
       <Filter>sparseGEN</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="..\..\..\SRC\system_of_eqn\linearSOE\sparseGEN\PFEMSolver_Mumps.h">
+      <Filter>sparseGEN</Filter>
+    </ClInclude>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   </ItemGroup>
 </Project>

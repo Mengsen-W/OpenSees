@@ -655,7 +655,11 @@ ReinforcingSteel::sendSelf(int cTag, Channel &theChannel)
 {
   int res = 0;
   int index =0;
+<<<<<<< HEAD
   static Vector data(75+12*LastRule_RS/2);
+=======
+  static Vector data(75+12*(LastRule_RS/2+1));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
   data(index++) = this->getTag();
   data(index++) = reduction;
@@ -763,7 +767,11 @@ ReinforcingSteel::recvSelf(int cTag, Channel &theChannel,
 {
   int res = 0;
   int index =0;
+<<<<<<< HEAD
   static Vector data(75+12*LastRule_RS/2);
+=======
+  static Vector data(75+12*(LastRule_RS/2+1));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   res = theChannel.recvVector(this->getDbTag(), cTag, data);
   
   if (res < 0) {

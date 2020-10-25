@@ -77,6 +77,7 @@ def toOpenSeesPy(infile, outfile):
             secTag = info[6]
             eleTag = info[2]
             Np = info[5]
+<<<<<<< HEAD
             Np = 3
             outfile.write('ops.beamIntegration(\'Legendre\',%s,%s,%s)\n' % (eleTag,secTag,Np))
             outfile.write('ops.element(\'%s\',%s,%s,%s,%s,%s)\n' % (info[1],eleTag,info[3],info[4],info[7],eleTag))
@@ -85,6 +86,22 @@ def toOpenSeesPy(infile, outfile):
         # For everything else, have to do the first one before loop because of the commas
         if isfloat(info[1]):        
             outfile.write('ops.%s(%s' % (info[0],info[1]))
+=======
+            if info[1] == 'dispBeamColumn':
+                outfile.write('ops.beamIntegration(\'Legendre\',%s,%s,%s)\n' % (eleTag,secTag,Np))
+            if info[1] == 'forceBeamColumn':
+                outfile.write('ops.beamIntegration(\'Lobatto\',%s,%s,%s)\n' % (eleTag,secTag,Np))
+            outfile.write('ops.element(\'%s\',%s,%s,%s,%s,%s)\n' % (info[1],eleTag,info[3],info[4],info[7],eleTag))
+            continue
+
+        # Change print to printModel
+        if info[0] == 'print':
+            info[0] = 'printModel'
+        
+        # For everything else, have to do the first one before loop because of the commas
+        if isfloat(info[1]):        
+            outfile.write('ops.%s(%s' % (info[0],info[1]))            
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         else:
             outfile.write('ops.%s(\'%s\'' % (info[0],info[1]))
         # Now loop through the rest with preceding commas
@@ -96,6 +113,14 @@ def toOpenSeesPy(infile, outfile):
             if info[i] == '}':
                 writeClose = False                
                 break
+<<<<<<< HEAD
+=======
+            if info[0] == 'recorder':
+                # If it's a recorder, make everything immediately  after material, section, or fiber a string
+                if info[i-1] in ['material','section','fiber'] and isfloat(info[i]):
+                    outfile.write(',str(%s)' % info[i])
+                    continue
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             if isfloat(info[i]):
                 outfile.write(',%s' % info[i])
             else:

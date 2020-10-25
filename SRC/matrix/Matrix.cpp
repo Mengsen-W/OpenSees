@@ -188,12 +188,20 @@ Matrix::Matrix(const Matrix &other)
 // Move ctor
 #ifdef USE_CXX11
 Matrix::Matrix(Matrix &&other)
+<<<<<<< HEAD
 :numRows(other.numRows), numCols(other.numCols), dataSize(other.dataSize), data(other.data), fromFree(0)
+=======
+:numRows(other.numRows), numCols(other.numCols), dataSize(other.dataSize), data(other.data), fromFree(other.fromFree)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   other.numRows = 0;
   other.numCols = 0;
   other.dataSize = 0;
   other.data = 0;
+<<<<<<< HEAD
+=======
+  other.fromFree = 1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 #endif
 
@@ -203,9 +211,18 @@ Matrix::Matrix(Matrix &&other)
 
 Matrix::~Matrix()
 {
+<<<<<<< HEAD
   if (data != 0) 
     if (fromFree == 0)
       delete [] data; 
+=======
+  if (data != 0 ) {
+    if (fromFree == 0 && dataSize > 0){
+      delete [] data; 
+      data = 0;
+    }
+  }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   //  if (data != 0) free((void *) data);
 }
     
@@ -220,8 +237,15 @@ Matrix::setData(double *theData, int row, int col)
   // delete the old if allocated
   if (data != 0) 
     if (fromFree == 0)
+<<<<<<< HEAD
       delete [] data; 
 
+=======
+    {
+      delete [] data; 
+      data = 0;
+    }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   numRows = row;
   numCols = col;
   dataSize = row*col;
@@ -269,8 +293,15 @@ Matrix::resize(int rows, int cols) {
 
     // free the old space
     if (data != 0) 
+<<<<<<< HEAD
       if (fromFree == 0)
 	delete [] data; 
+=======
+      if (fromFree == 0){
+	delete [] data; 
+        data = 0;
+      }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     //  if (data != 0) free((void *) data);
 
     fromFree = 0;
@@ -389,6 +420,10 @@ Matrix::Solve(const Vector &b, Vector &x) const
 
       if (matrixWork != 0) {
 	delete [] matrixWork;
+<<<<<<< HEAD
+=======
+        matrixWork = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       }
       matrixWork = new (nothrow) double[dataSize];
       sizeDoubleWork = dataSize;
@@ -405,6 +440,10 @@ Matrix::Solve(const Vector &b, Vector &x) const
 
       if (intWork != 0) {
 	delete [] intWork;
+<<<<<<< HEAD
+=======
+        intWork = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       }
       intWork = new (nothrow) int[n];
       sizeIntWork = n;
@@ -484,6 +523,10 @@ Matrix::Solve(const Matrix &b, Matrix &x) const
 
       if (matrixWork != 0) {
 	delete [] matrixWork;
+<<<<<<< HEAD
+=======
+        matrixWork = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       }
       matrixWork = new (nothrow) double[dataSize];
       sizeDoubleWork = dataSize;
@@ -500,6 +543,10 @@ Matrix::Solve(const Matrix &b, Matrix &x) const
 
       if (intWork != 0) {
 	delete [] intWork;
+<<<<<<< HEAD
+=======
+        intWork = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       }
       intWork = new (nothrow) int[n];
       sizeIntWork = n;
@@ -583,6 +630,10 @@ Matrix::Invert(Matrix &theInverse) const
 
       if (matrixWork != 0) {
 	delete [] matrixWork;
+<<<<<<< HEAD
+=======
+        matrixWork = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       }
       matrixWork = new (nothrow) double[dataSize];
       sizeDoubleWork = dataSize;
@@ -599,6 +650,10 @@ Matrix::Invert(Matrix &theInverse) const
 
       if (intWork != 0) {
 	delete [] intWork;
+<<<<<<< HEAD
+=======
+        intWork = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       }
       intWork = new (nothrow) int[n];
       sizeIntWork = n;
@@ -1187,7 +1242,14 @@ Matrix::operator=(const Matrix &other)
 #endif
 
       if (this->data != 0)
+<<<<<<< HEAD
 	  delete [] this->data;
+=======
+      {
+	  delete [] this->data;
+          this->data = 0;
+      }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       
       int theSize = other.numCols*other.numRows;
       
@@ -1220,6 +1282,7 @@ Matrix::operator=( Matrix &&other)
     return *this;
 
 
+<<<<<<< HEAD
   if (this->data != 0)
     delete [] this->data;
         
@@ -1227,10 +1290,26 @@ Matrix::operator=( Matrix &&other)
   this->dataSize = other.numCols*other.numRows;
   this->numCols = other.numCols;
   this->numRows = other.numRows;
+=======
+  if (this->data != 0 && fromFree == 0){
+    delete [] this->data;
+    this->data = 0;
+  }
+        
+  this->data = other.data;
+  this->dataSize = other.numCols*other.numRows;
+  this->numCols = other.numCols;
+  this->numRows = other.numRows;
+  this->fromFree = other.fromFree;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   other.data = 0;
   other.dataSize = 0;
   other.numCols = 0;
   other.numRows = 0;
+<<<<<<< HEAD
+=======
+  other.fromFree = 1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   return *this;
 }
@@ -1989,3 +2068,27 @@ Matrix::Eigen3(const Matrix &M)
 
   return 0;
 }
+<<<<<<< HEAD
+=======
+
+
+
+Vector Matrix::diagonal() const
+{
+  
+  if (numRows != numCols)
+  {
+    opserr << "Matrix::diagonal() - Matrix is not square numRows = " << numRows << " numCols = " << numCols << " returning truncated diagonal." << endln;
+  }
+
+  int size = numRows < numCols ? numRows : numCols;
+  Vector diagonal(size);
+
+  for (int i = 0; i < size; ++i)
+  {
+    diagonal(i) = data[i*numRows + i];
+  }
+
+  return diagonal;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

@@ -148,6 +148,11 @@ class ZeroLengthND : public Element
     // Class wide vectors for storing NDMaterial strains
     static Vector v2;
     static Vector v3;
+<<<<<<< HEAD
+=======
+    static Vector v5;
+    static Vector v6;    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

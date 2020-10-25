@@ -28,13 +28,25 @@
 // if you change some of the variables, you must recompile ALL the code.
 
 
+<<<<<<< HEAD
 #define OPS_VERSION "3.0.3"
 
+=======
+#define OPS_VERSION "3.2.2"
+
+#ifdef _WIN32
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #ifndef _WIN64
 #define WIN_ARCH "32-Bit"
 #else
 #define WIN_ARCH "64-Bit"
 #endif
+<<<<<<< HEAD
+=======
+#else
+#define WIN_ARCH "64-Bit"
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #define _USING_OpenSees_STREAMS
 #include <OPS_Stream.h>
@@ -63,6 +75,10 @@ class Element;
 
 extern double   ops_Dt;                // current delta T for current domain doing an update
 // extern double  *ops_Gravity;        // gravity factors for current domain undergoing an update
+<<<<<<< HEAD
+=======
+extern int ops_Creep;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 extern Domain  *ops_TheActiveDomain;   // current domain undergoing an update
 extern Element *ops_TheActiveElement;  // current element undergoing an update
 

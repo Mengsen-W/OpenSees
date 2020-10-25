@@ -525,6 +525,7 @@ void J2Plasticity :: plastic_integrator( )
      while ( fabs(resid) > tolerance ) {
 
         resid = norm_tau 
+<<<<<<< HEAD
               - (2.0*shear) * gamma 
               - root23 * q( xi_n + root23*gamma ) 
               - (eta/dt) * gamma ;
@@ -532,6 +533,17 @@ void J2Plasticity :: plastic_integrator( )
         tang =  - (2.0*shear)  
                 - two3 * qprime( xi_n + root23*gamma )
                 - (eta/dt) ;
+=======
+	  - (2.0*shear) * gamma 
+	  - root23 * q( xi_n + root23*gamma );
+	if (eta > 0.0 && dt > 0.0)
+	  resid -= (eta/dt) * gamma ;
+
+        tang =  - (2.0*shear)  
+	  - two3 * qprime( xi_n + root23*gamma );
+	if (eta > 0.0 && dt > 0.0)
+	  tang -= (eta/dt) ;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
         gamma -= ( resid / tang ) ;
 
@@ -560,8 +572,14 @@ void J2Plasticity :: plastic_integrator( )
      //compute the terms for plastic part of tangent
 
      theta =  (2.0*shear)  
+<<<<<<< HEAD
            +  two3 * qprime( xi_nplus1 )
            +  (eta/dt) ;
+=======
+       +  two3 * qprime( xi_nplus1 );
+     if (eta > 0.0 && dt > 0.0)
+       theta += (eta/dt) ;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
      theta_inv = 1.0/theta ;
 

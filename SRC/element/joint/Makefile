@@ -5,6 +5,10 @@ OBJS       = TclJoint2dCommand.o \
 	MP_Joint2D.o \
 	BeamColumnJoint2d.o \
 	Joint3D.o \
+<<<<<<< HEAD
+=======
+	LehighJoint2d.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	MP_Joint3D.o \
 	BeamColumnJoint3d.o \
 	ElasticTubularJoint.o \

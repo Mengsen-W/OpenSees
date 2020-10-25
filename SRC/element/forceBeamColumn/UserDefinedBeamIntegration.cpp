@@ -140,12 +140,23 @@ UserDefinedBeamIntegration::setParameter(const char **argv, int argc, Parameter 
 
   int Np = wts.Size();
 
+<<<<<<< HEAD
   if (strcmp(argv[0],"pt") == 0 && point <= Np)
     return param.addObject(point, this);
 
   else if (strcmp(argv[0],"wt") == 0 && point <= Np)
     return param.addObject(10+point, this);
 
+=======
+  if (strcmp(argv[0],"pt") == 0 && point <= Np) {
+    param.setValue(pts(point-1));
+    return param.addObject(point, this);
+  }
+  else if (strcmp(argv[0],"wt") == 0 && point <= Np) {
+    param.setValue(wts(point-1));
+    return param.addObject(10+point, this);
+  }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   else
     return -1;
 }

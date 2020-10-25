@@ -27,7 +27,11 @@
 // Date: July 02 2010
 
 /*
+<<<<<<< HEAD
  - element zeroLengthInterface2D eleTag? -sNdNum sNdNum? -mNdNum mNdNum? –dof sdof? mdof? -Nodes Nodes? Kn? Kt? phi?
+=======
+ - element zeroLengthInterface2D eleTag? -sNdNum sNdNum? -pNdNum pNdNum? –dof sdof? mdof? -Nodes Nodes? Kn? Kt? phi?
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  Description: This file contains the implementation for the ZeroLengthInterface2D class.
 */
 
@@ -50,6 +54,7 @@
 //*********************************************************************
 //  Full Constructor:
 
+<<<<<<< HEAD
 ZeroLengthInterface2D::ZeroLengthInterface2D(int tag, int sNdNum, int mNdNum, int sDof, int mDof, const ID& Nodes,
 					     double Knormal, double Ktangent, double frictionAngle)
   :Element(tag,ELE_TAG_ZeroLengthInterface2D),
@@ -62,6 +67,20 @@ ZeroLengthInterface2D::ZeroLengthInterface2D(int tag, int sNdNum, int mNdNum, in
   numberNodes = SlaveNodeNum + MasterNodeNum;
   SlaveDof = sDof;
   MasterDof = mDof;
+=======
+ZeroLengthInterface2D::ZeroLengthInterface2D(int tag, int sNdNum, int pNdNum, int sDof, int pDof, const ID& Nodes,
+					     double Knormal, double Ktangent, double frictionAngle)
+  :Element(tag,ELE_TAG_ZeroLengthInterface2D),
+   connectedExternalNodes(sNdNum + pNdNum),
+   N(6), T(6), ContactNormal(2), Ki(0), load(0)
+{
+  //static data
+  SecondaryNodeNum = sNdNum;
+  PrimaryNodeNum = pNdNum;
+  numberNodes = SecondaryNodeNum + PrimaryNodeNum;
+  SecondaryDof = sDof;
+  PrimaryDof = pDof;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
   // allocate contact force vector
   pressure.resize(numberNodes);
@@ -80,7 +99,11 @@ ZeroLengthInterface2D::ZeroLengthInterface2D(int tag, int sNdNum, int mNdNum, in
       normal_gap(i) = 0;
     }
   
+<<<<<<< HEAD
   int alloc = SlaveDof * SlaveNodeNum + MasterDof * MasterNodeNum;
+=======
+  int alloc = SecondaryDof * SecondaryNodeNum + PrimaryDof * PrimaryNodeNum;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
   // static data for 2D
   stiff.resize(alloc, alloc);
@@ -408,8 +431,13 @@ ZeroLengthInterface2D::getResponse(int responseID, Information &eleInfo)
 }
 
 // Private methods
+<<<<<<< HEAD
 // determine the slave/master pair in contact, and setup Vectors (N,T1,T2)
 int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
+=======
+// determine the secondary/primary pair in contact, and setup Vectors (N,T1,T2)
+int ZeroLengthInterface2D::contactDetect(int s, int p1, int p2, int stage)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   //+--------------+-----------------+----------------+----------------+---------------+
   // NOTES: some methods to get displacements from nodes
@@ -421,6 +449,7 @@ int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
   //+--------------+-----------------+----------------+----------------+--------------
   ////////////////////////////// for transient gap ///////////////////////////////////
   // DEFINE:
+<<<<<<< HEAD
   // gap = (U_master-U_slave) / dot(ContactNormal),
   // defines overlapped normal distance, always keep positive (+) when contacted
   ///*
@@ -441,18 +470,48 @@ int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
     //opserr << "trial_slave: " << trial_slave(i) << "\n";
     //opserr << "trial_master1: " << trial_master1(i) << "\n";
     //opserr << "trial_master2: " << trial_master2(i) << "\n";
+=======
+  // gap = (U_primary-U_secondary) / dot(ContactNormal),
+  // defines overlapped normal distance, always keep positive (+) when contacted
+  ///*
+  // get current position and after trial displacement for (secondary, primary1, primary2) nodes
+  int i;
+  const Vector &xs = nodePointers[s]->getCrds();
+  const Vector &uxs = nodePointers[s]->getTrialDisp();
+  const Vector &x1 = nodePointers[p1]->getCrds();
+  const Vector &ux1= nodePointers[p1]->getTrialDisp();
+  const Vector &x2 = nodePointers[p2]->getCrds();
+  const Vector &ux2= nodePointers[p2]->getTrialDisp();
+  
+  Vector trial_secondary(2), trial_primary1(2), trial_primary2(2);
+  for (i = 0; i < 2; i++) {
+    trial_secondary(i) = xs(i) + uxs(i);
+    trial_primary1(i) = x1(i) + ux1(i);
+    trial_primary2(i) = x2(i) + ux2(i);
+    //opserr << "trial_secondary: " << trial_secondary(i) << "\n";
+    //opserr << "trial_primary1: " << trial_primary1(i) << "\n";
+    //opserr << "trial_primary2: " << trial_primary2(i) << "\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   }
   
   // calculate normal gap for contact
   Vector diff(2);
   Vector ContactTangent(2);
   for (i = 0; i < 2; i++) {
+<<<<<<< HEAD
     diff(i) = trial_master2(i) - trial_master1(i);
+=======
+    diff(i) = trial_primary2(i) - trial_primary1(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     //opserr << "diff: " << diff(i) << "\n";
   }
   double L  = diff.Norm();
   // tangent vector
+<<<<<<< HEAD
   for (i = 0; i < 2; i++) ContactTangent(i) = (1/L) * (trial_master2(i) - trial_master1(i));
+=======
+  for (i = 0; i < 2; i++) ContactTangent(i) = (1/L) * (trial_primary2(i) - trial_primary1(i));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   // normal vector
   ContactNormal(0) = - ContactTangent(1);
   ContactNormal(1) = ContactTangent(0);
@@ -461,8 +520,13 @@ int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
   double alpha = 0;
   double alpha_bar = 0;
   for (i = 0; i < 2; i++) {
+<<<<<<< HEAD
     alpha += (1/L) * (trial_slave(i) - trial_master1(i)) * ContactTangent(i);
     normal_gap(s) += (trial_slave(i) - trial_master1(i)) * ContactNormal(i);
+=======
+    alpha += (1/L) * (trial_secondary(i) - trial_primary1(i)) * ContactTangent(i);
+    normal_gap(s) += (trial_secondary(i) - trial_primary1(i)) * ContactNormal(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     diff(i) = x2(i) - x1(i);
   }
   
@@ -476,6 +540,7 @@ int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
     // we have another way to define the gap, can replace previous code block if want
     ////////////////////////////// for dynamic gap //////////////////////////////////
     const Vector   // get current trial incremental position
+<<<<<<< HEAD
     &U_slave = nodePointers[0]->getCrds() + nodePointers[0]->getIncrDisp();
     const Vector
     &U_master= nodePointers[1]->getCrds() + nodePointers[1]->getIncrDisp();
@@ -483,12 +548,26 @@ int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
     int i;
     for (i=0; i<2; i++){
     gap += (U_master(i)-U_slave(i))* ContactNormal(i);
+=======
+    &U_secondary = nodePointers[0]->getCrds() + nodePointers[0]->getIncrDisp();
+    const Vector
+    &U_primary= nodePointers[1]->getCrds() + nodePointers[1]->getIncrDisp();
+    gap=0;
+    int i;
+    for (i=0; i<2; i++){
+    gap += (U_primary(i)-U_secondary(i))* ContactNormal(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
     gap+=gap_n;
     ///////////////// for dynamic gap //////////////////////
     */
+<<<<<<< HEAD
   // stage = 0 means searching slave nodes against master segments
   // stage = 1 means searching master nodes against slave segments
+=======
+  // stage = 0 means searching secondary nodes against primary segments
+  // stage = 1 means searching primary nodes against secondary segments
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   if ((stage == 0  && normal_gap(s) >= 0 && alpha > 0 && alpha < 1) ||
       (stage == 1  && normal_gap(s) >= 0 && alpha >= 0 && alpha <= 1)) { // in contact
     N(0) = ContactNormal(0);
@@ -512,6 +591,7 @@ int ZeroLengthInterface2D::contactDetect(int s, int m1, int m2, int stage)
 }
 
 /*
+<<<<<<< HEAD
 void  ZeroLengthInterface2D::GlobalResidAndTangentOrder2(int slave, int master1, int master2)
 {
     // create a vector for converting local matrix to global
@@ -547,10 +627,48 @@ void  ZeroLengthInterface2D::GlobalResidAndTangentOrder2(int slave, int master1,
 		loctoglob[3] = (3 * master1) + 1; 
 	    loctoglob[4] = (3 * master2); 
 		loctoglob[5] = (3 * master2) + 1; 
+=======
+void  ZeroLengthInterface2D::GlobalResidAndTangentOrder2(int secondary, int primary1, int primary2)
+{
+    // create a vector for converting local matrix to global
+	int sdofNd = nodePointers[secondary]->getNumberDOF();
+	int p1dofNd = nodePointers[primary1]->getNumberDOF();
+	int p2dofNd = nodePointers[primary2]->getNumberDOF();
+
+	if (sdofNd == 2 && p1dofNd == 3 && p2dofNd == 3) {
+        loctoglob[0] = (2 * secondary);
+		loctoglob[1] = (2 * secondary) + 1;
+	    loctoglob[2] = (2 * SecondaryNodeNum) + (3 * (primary1 - SecondaryNodeNum)); 
+		loctoglob[3] = (2 * SecondaryNodeNum) + (3 * (primary1 - SecondaryNodeNum)) + 1; 
+	    loctoglob[4] = (2 * SecondaryNodeNum) + (3 * (primary2 - SecondaryNodeNum)); 
+		loctoglob[5] = (2 * SecondaryNodeNum) + (3 * (primary2 - SecondaryNodeNum)) + 1;
+	} else if (sdofNd == 3 && p1dofNd == 2 && p2dofNd == 2) {
+        loctoglob[0] = (2 * SecondaryNodeNum) + (3 * (secondary - SecondaryNodeNum));
+		loctoglob[1] = (2 * SecondaryNodeNum) + (3 * (secondary - SecondaryNodeNum)) + 1;
+	    loctoglob[2] = (2 * primary1); 
+		loctoglob[3] = (2 * primary1) + 1; 
+	    loctoglob[4] = (2 * primary2); 
+		loctoglob[5] = (2 * primary2) + 1;
+	} else if (sdofNd == 2 && p1dofNd == 2 && p2dofNd == 2) {
+		loctoglob[0] = (2 * secondary); 
+		loctoglob[1] = (2 * secondary) + 1; 
+	    loctoglob[2] = (2 * primary1); 
+		loctoglob[3] = (2 * primary1) + 1; 
+	    loctoglob[4] = (2 * primary2); 
+		loctoglob[5] = (2 * primary2) + 1; 
+	} else if (sdofNd == 3 && p1dofNd == 3 && p2dofNd == 3) {
+	    loctoglob[0] = (3 * secondary); 
+		loctoglob[1] = (3 * secondary) + 1; 
+	    loctoglob[2] = (3 * primary1); 
+		loctoglob[3] = (3 * primary1) + 1; 
+	    loctoglob[4] = (3 * primary2); 
+		loctoglob[5] = (3 * primary2) + 1; 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	}
 
 }
 */
+<<<<<<< HEAD
 void  ZeroLengthInterface2D::GlobalResidAndTangentOrder(int slave, int master1, int master2)
 {
     // create a vector for converting local matrix to global
@@ -570,16 +688,45 @@ void  ZeroLengthInterface2D::GlobalResidAndTangentOrder(int slave, int master1, 
 		{
 			int add = SlaveDof * SlaveNodeNum;
 			int pos = nd[i] - SlaveNodeNum;
+=======
+void  ZeroLengthInterface2D::GlobalResidAndTangentOrder(int secondary, int primary1, int primary2)
+{
+    // create a vector for converting local matrix to global
+	int sdofNd = nodePointers[secondary]->getNumberDOF();
+	int p1dofNd = nodePointers[primary1]->getNumberDOF();
+	int p2dofNd = nodePointers[primary2]->getNumberDOF();
+	int nd[3] = { secondary, primary1, primary2 };
+	int dof[3] = { sdofNd, p1dofNd, p2dofNd };
+	
+	for (int i = 0 ; i < 3 ; i++)
+	{
+		if (dof[i] == SecondaryDof)
+		{
+			loctoglob[2 * i]     = (dof[i] * nd[i]);
+			loctoglob[2 * i + 1] = (dof[i] * nd[i] + 1);
+		} else if (dof[i] == PrimaryDof)
+		{
+			int add = SecondaryDof * SecondaryNodeNum;
+			int pos = nd[i] - SecondaryNodeNum;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			loctoglob[2 * i]     = (dof[i] * pos) + add;
 			loctoglob[2 * i + 1] = (dof[i] * pos + 1) + add;
 		} else
 		{
+<<<<<<< HEAD
 			// error message dof is no equal with either of slave and master dofs
+=======
+			// error message dof is no equal with either of secondary and primary dofs
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		}
 	}
 }
 
+<<<<<<< HEAD
 void  ZeroLengthInterface2D::formLocalResidAndTangent( int tang_flag , int slave, int master1, int master2, int stage)
+=======
+void  ZeroLengthInterface2D::formLocalResidAndTangent( int tang_flag , int secondary, int primary1, int primary2, int stage)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
 	// trial frictional force vectors (in local coordinate)
     double t_trial;
@@ -589,16 +736,25 @@ void  ZeroLengthInterface2D::formLocalResidAndTangent( int tang_flag , int slave
 	int i, j;
 
 	// set the first value to zero
+<<<<<<< HEAD
 	pressure(slave) = 0;
+=======
+	pressure(secondary) = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     t_trial=0;
 
 	// int IsContact;
 	// detect contact and set flag
+<<<<<<< HEAD
     ContactFlag = contactDetect(slave,master1,master2, stage);
+=======
+    ContactFlag = contactDetect(secondary,primary1,primary2, stage);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	if (ContactFlag == 1) // contacted
 	{
 	    // create a vector for converting local matrix to global
+<<<<<<< HEAD
         GlobalResidAndTangentOrder(slave, master1, master2);
 
 		// contact presure;
@@ -607,11 +763,25 @@ void  ZeroLengthInterface2D::formLocalResidAndTangent( int tang_flag , int slave
 	    double ng = normal_gap(slave);
 
 		t_trial = Kt * (shear_gap(slave) - stored_shear_gap(slave));  // trial shear force
+=======
+        GlobalResidAndTangentOrder(secondary, primary1, primary2);
+
+		// contact presure;
+	    pressure(secondary) = Kn * normal_gap(secondary);  // pressure is positive if in contact
+
+	    double ng = normal_gap(secondary);
+
+		t_trial = Kt * (shear_gap(secondary) - stored_shear_gap(secondary));  // trial shear force
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
         // Coulomb friction law, trial state
 		//TtrNorm=t_trial.Norm();
 		TtrNorm = sqrt(t_trial * t_trial);
+<<<<<<< HEAD
 		Phi = TtrNorm - fc * pressure(slave);
+=======
+		Phi = TtrNorm - fc * pressure(secondary);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 		if (Phi <= 0 ) { // stick case
  			if ( tang_flag == 1 ) {
@@ -623,7 +793,11 @@ void  ZeroLengthInterface2D::formLocalResidAndTangent( int tang_flag , int slave
 				}
 			} //endif tang_flag
 			// force
+<<<<<<< HEAD
 			for (i = 0; i < 6; i++) resid(loctoglob[i]) += pressure(slave) * N(i) + t_trial * T(i);    //2D
+=======
+			for (i = 0; i < 6; i++) resid(loctoglob[i]) += pressure(secondary) * N(i) + t_trial * T(i);    //2D
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		} // end if stick
 		else {           // slide case, non-symmetric stiff
             ContactFlag=2;  // set the contactFlag for sliding
@@ -636,8 +810,13 @@ void  ZeroLengthInterface2D::formLocalResidAndTangent( int tang_flag , int slave
 				} //endfor j
    			    // force
 			} // endif tang_flag
+<<<<<<< HEAD
             double shear = fc * pressure(slave) * (t_trial/TtrNorm);
 			for (i = 0; i < 6; i++) resid(loctoglob[i]) += (pressure(slave) * N(i)) + (shear * T(i)) ;      //2D
+=======
+            double shear = fc * pressure(secondary) * (t_trial/TtrNorm);
+			for (i = 0; i < 6; i++) resid(loctoglob[i]) += (pressure(secondary) * N(i)) + (shear * T(i)) ;      //2D
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		} //endif slide
 	}  // endif ContactFlag==1
 }
@@ -649,25 +828,43 @@ void  ZeroLengthInterface2D::formGlobalResidAndTangent( int tang_flag )
 	// but on contrary in the second loop the node to node contact 
 	// will be considered and this can be controlled by "stage = 0 or 1"
 
+<<<<<<< HEAD
 	// loop over slave nodes and find the nodes 
     // which are in contact with master's segments
 	for (int i = 0 ; i < SlaveNodeNum; i++) {
 		for (int j = SlaveNodeNum ; j < SlaveNodeNum + MasterNodeNum - 1; j++) {
+=======
+	// loop over secondary nodes and find the nodes 
+    // which are in contact with primary's segments
+	for (int i = 0 ; i < SecondaryNodeNum; i++) {
+		for (int j = SecondaryNodeNum ; j < SecondaryNodeNum + PrimaryNodeNum - 1; j++) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			formLocalResidAndTangent( tang_flag, i, j, j+1 , 0);  // stage = 0 //
         }
     }
 
+<<<<<<< HEAD
     // loop over master nodes and find the nodes 
     // which are in contact with slave's segments
 	for (int i = SlaveNodeNum ; i < SlaveNodeNum + MasterNodeNum; i++) {
 		for (int j = 0 ; j < SlaveNodeNum - 1; j++) {
+=======
+    // loop over primary nodes and find the nodes 
+    // which are in contact with secondary's segments
+	for (int i = SecondaryNodeNum ; i < SecondaryNodeNum + PrimaryNodeNum; i++) {
+		for (int j = 0 ; j < SecondaryNodeNum - 1; j++) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             formLocalResidAndTangent( tang_flag, i, j, j+1 , 1);  // stage = 1 //
         }
     }
 }
 
 
+<<<<<<< HEAD
 // element zeroLengthInterface2D $eleTag -sNdNum $sNdNum -mNdNum $mNdNum -dof $sdof $mdof -Nodes $Nodes $Kn $Kt $phi
+=======
+// element zeroLengthInterface2D $eleTag -sNdNum $sNdNum -pNdNum $pNdNum -dof $sdof $mdof -Nodes $Nodes $Kn $Kt $phi
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //
 
 static int numZeroLengthInterface2D = 0;
@@ -685,7 +882,11 @@ OPS_ZeroLengthInterface2D(void) {
   int numData = 0;  
 
   // get the ele tag
+<<<<<<< HEAD
   int eleTag, sNdNum, mNdNum, sDOF, mDOF;
+=======
+  int eleTag, sNdNum, pNdNum, sDOF, mDOF;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   numData = 1;
 
   if (OPS_GetInt(&numData, &eleTag) != 0) {
@@ -700,7 +901,11 @@ OPS_ZeroLengthInterface2D(void) {
     return 0;
   }
 
+<<<<<<< HEAD
   // get the number of slave nodes
+=======
+  // get the number of secondary nodes
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   numData = 1;
   if (OPS_GetInt(&numData, &sNdNum) != 0) {
     opserr << "ZeroLengthInterface2D::WARNING invalied sNdNum \n";
@@ -710,14 +915,24 @@ OPS_ZeroLengthInterface2D(void) {
   numData = 10;
   nextString = OPS_GetString();
 
+<<<<<<< HEAD
   if (strcmp(nextString,"-mNdNum") != 0) {
     opserr << "ZeroLengthInterface2D:: expecting -mNdNum\n";
+=======
+  if (strcmp(nextString,"-mNdNum") != 0 && strcmp(nextString,"-pNdNum") != 0) {
+    opserr << "ZeroLengthInterface2D:: expecting -pNdNum\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
   
   numData = 1;
+<<<<<<< HEAD
   if (OPS_GetInt(&numData, &mNdNum) != 0) {
     opserr << "ZeroLengthInterface2D::WARNING invalied sNdNum \n";
+=======
+  if (OPS_GetInt(&numData, &pNdNum) != 0) {
+    opserr << "ZeroLengthInterface2D::WARNING invalied pNdNum \n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
 
@@ -726,7 +941,11 @@ OPS_ZeroLengthInterface2D(void) {
 
   if (strcmp(nextString,"-dof") != 0) {
     opserr << "ZeroLengthInterface2D:: expecting -sdof in "<<
+<<<<<<< HEAD
       "element zeroLengthInterface2D eleTag? -sNdNum sNdNum? -mNdNum mNdNum? -dof sdof? mdof? -Nodes Nodes? Kn? Kt? phi? \n" ;
+=======
+      "element zeroLengthInterface2D eleTag? -sNdNum sNdNum? -pNdNum pNdNum? -dof sdof? mdof? -Nodes Nodes? Kn? Kt? phi? \n" ;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
 
@@ -744,9 +963,15 @@ OPS_ZeroLengthInterface2D(void) {
 
   // a quick check on number of args
   int argc = OPS_GetNumRemainingInputArgs();
+<<<<<<< HEAD
   if (argc < 3 + sNdNum + mNdNum) {
     opserr << "ZeroLengthInterface2D::WARNING too few arguments " <<
       "element zeroLengthInterface2D eleTag? -sNdNum sNdNum? -mNdNum mNdNum? -dof sdof? mdof? -Nodes Nodes? Kn? Kt? phi? \n" ;
+=======
+  if (argc < 3 + sNdNum + pNdNum) {
+    opserr << "ZeroLengthInterface2D::WARNING too few arguments " <<
+      "element zeroLengthInterface2D eleTag? -sNdNum sNdNum? -pNdNum pNdNum? -dof sdof? mdof? -Nodes Nodes? Kn? Kt? phi? \n" ;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
 
@@ -759,7 +984,11 @@ OPS_ZeroLengthInterface2D(void) {
   }
 
   // read the Nodes values
+<<<<<<< HEAD
   numData = sNdNum+mNdNum;
+=======
+  numData = sNdNum+pNdNum;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   int *theNodeData = new int[numData];
   ID  Nodes(theNodeData, numData);
 
@@ -781,7 +1010,11 @@ OPS_ZeroLengthInterface2D(void) {
   // now we create the element and add it to the domain
   //
   
+<<<<<<< HEAD
   theEle = new ZeroLengthInterface2D(eleTag, sNdNum, mNdNum, sDOF, mDOF, Nodes, dData[0], dData[1], dData[2]);
+=======
+  theEle = new ZeroLengthInterface2D(eleTag, sNdNum, pNdNum, sDOF, mDOF, Nodes, dData[0], dData[1], dData[2]);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   return theEle;
 }
 

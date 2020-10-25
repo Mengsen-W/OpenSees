@@ -273,7 +273,11 @@ LysmerTriangle::UpdateBase(double Xi, double Eta)
   	myNI(2) = 0.5;
 
 
+<<<<<<< HEAD
 	  // normal vector to master surface as cross product of g1 and g2
+=======
+	  // normal vector to primary surface as cross product of g1 and g2
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     myNhat(0) = g1(1)*g2(2) - g1(2)*g2(1);
     myNhat(1) = g1(2)*g2(0) - g1(0)*g2(2);
     myNhat(2) = g1(0)*g2(1) - g1(1)*g2(0);

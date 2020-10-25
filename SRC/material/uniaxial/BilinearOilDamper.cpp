@@ -344,18 +344,32 @@ double BilinearOilDamper::getStress(void)
 
 double BilinearOilDamper::getTangent(void)
 {
+<<<<<<< HEAD
+=======
+  // Why is this return 0.0? -- MHS
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   return 0.0;
 }
 
 double BilinearOilDamper::getInitialTangent(void)
 {
+<<<<<<< HEAD
   return 0.0;
+=======
+  //return 0.0;
+  return K; // MHS
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 double BilinearOilDamper::getDampTangent(void)
 {
+<<<<<<< HEAD
   
   return 0.0; 
+=======
+  //return 0.0;
+  return C; // Needs to return something, something is better than nothing -- MHS
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 

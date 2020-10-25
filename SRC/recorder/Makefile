@@ -9,7 +9,13 @@ endif
 OBJS       = Recorder.o \
 	DatastoreRecorder.o \
 	ElementRecorder.o \
+<<<<<<< HEAD
 	NodeRecorder.o \
+=======
+	ElementRecorderRMS.o \
+	NodeRecorder.o \
+	NodeRecorderRMS.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	EnvelopeElementRecorder.o \
 	NormElementRecorder.o \
 	NormEnvelopeElementRecorder.o \

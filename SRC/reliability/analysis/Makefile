@@ -17,7 +17,10 @@ all:
 	     @$(CD) $(FE)/reliability/analysis/rootFinding; $(MAKE);
 	     @$(CD) $(FE)/reliability/analysis/stepSize; $(MAKE);
 	     @$(CD) $(FE)/reliability/analysis/transformation; $(MAKE);
+<<<<<<< HEAD
 	     @$(CD) $(FE)/reliability/analysis/telm; $(MAKE);
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 
 # Miscellaneous
@@ -43,6 +46,9 @@ wipe: spotless
 	     @$(CD) $(FE)/reliability/analysis/rootFinding; $(MAKE) wipe;
 	     @$(CD) $(FE)/reliability/analysis/stepSize; $(MAKE) wipe;
 	     @$(CD) $(FE)/reliability/analysis/transformation; $(MAKE) wipe;
+<<<<<<< HEAD
 	     @$(CD) $(FE)/reliability/analysis/telm; $(MAKE) wipe;
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.

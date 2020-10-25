@@ -81,7 +81,16 @@ void* OPS_TwoNodeLink()
     while (OPS_GetNumRemainingInputArgs() > 0) {
         int mattag;
         numdata = 1;
+<<<<<<< HEAD
         if (OPS_GetIntInput(&numdata, &mattag) < 0) {
+=======
+        int numArgs = OPS_GetNumRemainingInputArgs();
+        if (OPS_GetIntInput(&numdata, &mattag) < 0) {
+            if (numArgs > OPS_GetNumRemainingInputArgs()) {
+                // move current arg back by one
+                OPS_ResetCurrentInputArg(-1);
+            }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             break;
         }
         UniaxialMaterial* mat = OPS_getUniaxialMaterial(mattag);
@@ -95,7 +104,11 @@ void* OPS_TwoNodeLink()
     
     // dirs
     type = OPS_GetString();
+<<<<<<< HEAD
     if (strcmp(type, "-dir") != 0) {
+=======
+    if (strcmp(type, "-dir") != 0 && strcmp(type, "-dof") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         opserr << "WARNING expecting -dir dirs\n";
         return 0;
     }
@@ -602,13 +615,18 @@ const Matrix& TwoNodeLink::getTangentStiff()
     // zero the matrix
     theMatrix->Zero();
     
+<<<<<<< HEAD
     // get resisting forces and stiffnesses
+=======
+    // get resisting force and stiffness
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Matrix kb(numDIR,numDIR);
     for (int i=0; i<numDIR; i++)  {
         qb(i) = theMaterials[i]->getStress();
         kb(i,i) = theMaterials[i]->getTangent();
     }
     
+<<<<<<< HEAD
     // transform from basic to local system
     Matrix kl(numDOF,numDOF);
     kl.addMatrixTripleProduct(0.0, Tlb, kb, 1.0);
@@ -618,6 +636,17 @@ const Matrix& TwoNodeLink::getTangentStiff()
         this->addPDeltaStiff(kl);
     
     // transform from local to global system
+=======
+    // transform stiffness from basic to local system
+    Matrix kl(numDOF,numDOF);
+    kl.addMatrixTripleProduct(0.0, Tlb, kb, 1.0);
+    
+    // add P-Delta effects to local stiffness
+    if (Mratio.Size() == 4)
+        this->addPDeltaStiff(kl, qb);
+    
+    // transform stiffness from local to global system
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theMatrix->addMatrixTripleProduct(0.0, Tgl, kl, 1.0);
     //Matrix kg(numDOF,numDOF);
     //kg.addMatrixTripleProduct(0.0, Tgl, kl, 1.0);
@@ -632,17 +661,29 @@ const Matrix& TwoNodeLink::getInitialStiff()
     // zero the matrix
     theMatrix->Zero();
     
+<<<<<<< HEAD
     // get initial stiffnesses
+=======
+    // get initial stiffness
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Matrix kbInit(numDIR,numDIR);
     for (int i=0; i<numDIR; i++)  {
         kbInit(i,i) = theMaterials[i]->getInitialTangent();
     }
     
+<<<<<<< HEAD
     // transform from basic to local system
     Matrix klInit(numDOF,numDOF);
     klInit.addMatrixTripleProduct(0.0, Tlb, kbInit, 1.0);
     
     // transform from local to global system
+=======
+    // transform stiffness from basic to local system
+    Matrix klInit(numDOF,numDOF);
+    klInit.addMatrixTripleProduct(0.0, Tlb, kbInit, 1.0);
+    
+    // transform stiffness from local to global system
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theMatrix->addMatrixTripleProduct(0.0, Tgl, klInit, 1.0);
     //Matrix kgInit(numDOF,numDOF);
     //kgInit.addMatrixTripleProduct(0.0, Tgl, klInit, 1.0);
@@ -657,7 +698,11 @@ const Matrix& TwoNodeLink::getDamp()
     // zero the matrix
     theMatrix->Zero();
     
+<<<<<<< HEAD
     // call base class to setup Rayleigh damping
+=======
+    // call base class to set up Rayleigh damping
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     double factThis = 0.0;
     if (addRayleigh == 1)  {
         (*theMatrix) = this->Element::getDamp();
@@ -670,11 +715,19 @@ const Matrix& TwoNodeLink::getDamp()
         cb(i,i) = theMaterials[i]->getDampTangent();
     }
     
+<<<<<<< HEAD
     // transform from basic to local system
     Matrix cl(numDOF,numDOF);
     cl.addMatrixTripleProduct(0.0, Tlb, cb, 1.0);
     
     // transform from local to global system and add to cg
+=======
+    // transform damping from basic to local system
+    Matrix cl(numDOF,numDOF);
+    cl.addMatrixTripleProduct(0.0, Tlb, cb, 1.0);
+    
+    // transform damping from local to global system
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theMatrix->addMatrixTripleProduct(factThis, Tgl, cl, 1.0);
     //Matrix cg(numDOF,numDOF);
     //cg.addMatrixTripleProduct(factThis, Tgl, cl, 1.0);
@@ -694,7 +747,11 @@ const Matrix& TwoNodeLink::getMass()
         double m = 0.5*mass;
         int numDOF2 = numDOF/2;
         for (int i=0; i<numDIM; i++)  {
+<<<<<<< HEAD
             (*theMatrix)(i,i) = m;
+=======
+            (*theMatrix)(i,i)                 = m;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             (*theMatrix)(i+numDOF2,i+numDOF2) = m;
         }
     }
@@ -754,6 +811,7 @@ const Vector& TwoNodeLink::getResistingForce()
     // zero the residual
     theVector->Zero();
     
+<<<<<<< HEAD
     // get resisting forces
     for (int i=0; i<numDIR; i++)
         qb(i) = theMaterials[i]->getStress();
@@ -767,6 +825,21 @@ const Vector& TwoNodeLink::getResistingForce()
         this->addPDeltaForces(ql);
     
     // determine resisting forces in global system
+=======
+    // get resisting force
+    for (int i=0; i<numDIR; i++)
+        qb(i) = theMaterials[i]->getStress();
+    
+    // determine resisting force in local system
+    Vector ql(numDOF);
+    ql.addMatrixTransposeVector(0.0, Tlb, qb, 1.0);
+    
+    // add P-Delta effects to local force
+    if (Mratio.Size() == 4)
+        this->addPDeltaForces(ql, qb);
+    
+    // determine resisting force in global system
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theVector->addMatrixTransposeVector(0.0, Tgl, ql, 1.0);
     
     return *theVector;
@@ -775,19 +848,31 @@ const Vector& TwoNodeLink::getResistingForce()
 
 const Vector& TwoNodeLink::getResistingForceIncInertia()
 {
+<<<<<<< HEAD
     // this already includes damping forces from materials
+=======
+    // this already includes damping force from materials
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     this->getResistingForce();
     
     // subtract external load
     theVector->addVector(1.0, *theLoad, -1.0);
     
+<<<<<<< HEAD
     // add the damping forces from rayleigh damping
+=======
+    // add the damping force from Rayleigh damping
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (addRayleigh == 1)  {
         if (alphaM != 0.0 || betaK != 0.0 || betaK0 != 0.0 || betaKc != 0.0)
             theVector->addVector(1.0, this->getRayleighDampingForces(), 1.0);
     }
     
+<<<<<<< HEAD
     // add inertia forces from element mass
+=======
+    // add inertia force from element mass
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (mass != 0.0)  {
         const Vector &accel1 = theNodes[0]->getTrialAccel();
         const Vector &accel2 = theNodes[1]->getTrialAccel();
@@ -1204,7 +1289,11 @@ int TwoNodeLink::getResponse(int responseID, Information &eleInfo)
         theVector->addMatrixTransposeVector(0.0, Tlb, qb, 1.0);
         // add P-Delta effects to local forces
         if (Mratio.Size() == 4)
+<<<<<<< HEAD
             this->addPDeltaForces(*theVector);
+=======
+            this->addPDeltaForces(*theVector, qb);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         
         return eleInfo.setVector(*theVector);
         
@@ -1408,7 +1497,11 @@ void TwoNodeLink::setTranLocalBasic()
 }
 
 
+<<<<<<< HEAD
 void TwoNodeLink::addPDeltaForces(Vector &pLocal)
+=======
+void TwoNodeLink::addPDeltaForces(Vector &pLocal, const Vector& qBasic)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     int dirID;
     double N = 0.0;
@@ -1420,7 +1513,11 @@ void TwoNodeLink::addPDeltaForces(Vector &pLocal)
         
         // get axial force and local disp differences
         if (dirID == 0)
+<<<<<<< HEAD
             N = qb(i);
+=======
+            N = qBasic(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         else if (dirID == 1 && numDIM > 1)
             deltal1 = ul(1+numDOF/2) - ul(1);
         else if (dirID == 2 && numDIM > 2)
@@ -1501,7 +1598,11 @@ void TwoNodeLink::addPDeltaForces(Vector &pLocal)
 }
 
 
+<<<<<<< HEAD
 void TwoNodeLink::addPDeltaStiff(Matrix &kLocal)
+=======
+void TwoNodeLink::addPDeltaStiff(Matrix &kLocal, const Vector& qBasic)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     int dirID;
     double N = 0.0;
@@ -1509,7 +1610,11 @@ void TwoNodeLink::addPDeltaStiff(Matrix &kLocal)
     // get axial force
     for (int i=0; i<numDIR; i++)  {
         if ((*dir)(i) == 0)
+<<<<<<< HEAD
             N = qb(i);
+=======
+            N = qBasic(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
     
     if (N != 0.0)  {

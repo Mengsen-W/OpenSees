@@ -1,7 +1,11 @@
 include ../../../../Makefile.def
 
 ifdef H5DRM_FLAG
+<<<<<<< HEAD
   	H5_FILE = H5DRM.p
+=======
+	H5_FILE = H5DRM.o
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 else
 	H5_FIle = 
 endif
@@ -12,7 +16,12 @@ OBJS       = Mesh3DSubdomain.o \
 	DRMLoadPattern.o \
 	DRMLoadPatternWrapper.o \
 	DRMInputHandler.o \
+<<<<<<< HEAD
 	PlaneDRMInputHandler.o $(H5_FILE)
+=======
+	PlaneDRMInputHandler.o \
+	$(H5_FILE)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 all:         $(OBJS)
 

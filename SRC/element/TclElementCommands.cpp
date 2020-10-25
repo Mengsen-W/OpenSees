@@ -124,11 +124,22 @@ extern void *OPS_ShellDKGQ(void);     //Added by Lisha Wang, Xinzheng Lu, Linlin
 extern void *OPS_ShellNLDKGQ(void);   //Added by Lisha Wang, Xinzheng Lu, Linlin Xie, Song Cen & Quan Gu
 extern void *OPS_ShellDKGT(void);     //Added by Shuhao Zhang and  Xinzheng Lu 
 extern void *OPS_ShellNLDKGT(void);   //Added by Shuhao Zhang and  Xinzheng Lu 
+<<<<<<< HEAD
+=======
+extern void *OPS_ASDShellQ4(void);   // Massimo Petracca (ASDEA)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 extern void *OPS_Quad4FiberOverlay(void);
 extern void *OPS_Brick8FiberOverlay(void);
 extern void *OPS_QuadBeamEmbedContact(void);
 extern void *OPS_TripleFrictionPendulum(void);
 extern void *OPS_Truss2(void);
+<<<<<<< HEAD
+=======
+#ifdef _HAVE_PML
+extern void *OPS_PML3D(void);
+extern void *OPS_PML2D(void);
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 extern void *OPS_CorotTruss2(void);
 extern void *OPS_ZeroLengthImpact3D(void);
 extern void *OPS_HDR(void);
@@ -148,7 +159,12 @@ extern void *OPS_PFEMElement2DBubble(const ID &info);
 extern void *OPS_PFEMElement2Dmini(const ID &info);
 extern void *OPS_PFEMElement2D();
 #ifdef _HAVE_LHNMYS
+<<<<<<< HEAD
 extern void* OPS_BeamColumnwLHNMYS(void);
+=======
+extern void* OPS_BeamColumn2DwLHNMYS(void);
+extern void* OPS_BeamColumn3DwLHNMYS(void);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #endif
 extern void *OPS_ShellMITC4Thermal(void);//Added by L.Jiang [SIF]
 extern void *OPS_ShellNLDKGQThermal(void);//Added by L.Jiang [SIF]
@@ -175,6 +191,13 @@ extern void *OPS_SingleFPSimple2d(void);
 extern void *OPS_SingleFPSimple3d(void);
 extern void *OPS_RJWatsonEQS2d(void);
 extern void *OPS_RJWatsonEQS3d(void);
+<<<<<<< HEAD
+=======
+//extern void* OPS_GradientInelasticBeamColumn2d();
+//extern void* OPS_GradientInelasticBeamColumn3d();
+
+extern void* OPS_LehighJoint2d(void);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 extern int TclModelBuilder_addFeapTruss(ClientData clientData, Tcl_Interp *interp,  int argc,
 					TCL_Char **argv, Domain*, TclModelBuilder *, int argStart);
@@ -208,6 +231,21 @@ extern int
 TclModelBuilder_addNineNodeMixedQuad(ClientData, Tcl_Interp *, int, TCL_Char **,
 				     Domain*, TclModelBuilder *);
 
+<<<<<<< HEAD
+=======
+extern int
+TclModelBuilder_addNineNodeQuad(ClientData, Tcl_Interp *, int, TCL_Char **,
+								Domain*, TclModelBuilder *);
+
+extern int
+TclModelBuilder_addEightNodeQuad(ClientData, Tcl_Interp *, int, TCL_Char **,
+								Domain*, TclModelBuilder *);
+
+extern int
+TclModelBuilder_addSixNodeTri(ClientData, Tcl_Interp *, int, TCL_Char **,
+							  Domain*, TclModelBuilder *);
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // GLF
 extern int
@@ -266,7 +304,10 @@ TclModelBuilder_addForceBeamColumn(ClientData, Tcl_Interp *, int, TCL_Char **,
 extern int
 TclModelBuilder_addBeamColumnJoint(ClientData, Tcl_Interp *, int, TCL_Char **, Domain*, int);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //Rohit Kraul
 extern int
 TclModelBuilder_addElastic2dGNL(ClientData, Tcl_Interp *, int, TCL_Char **,
@@ -332,6 +373,13 @@ extern int
 TclModelBuilder_addWheelRail(ClientData clientData, Tcl_Interp *interp, int argc,
 	TCL_Char **argv, Domain*, TclModelBuilder *, int argStart);
 
+<<<<<<< HEAD
+=======
+// MSN
+extern int
+TclModelBuilder_addGradientInelasticBeamColumn(ClientData, Tcl_Interp*, int, TCL_Char**,
+	Domain*, TclModelBuilder*);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 int
 TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
@@ -478,6 +526,7 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
     }
 
+<<<<<<< HEAD
   }
 
   #ifdef _HAVE_LHNMYS
@@ -485,12 +534,53 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
     Element *theEle = 0;
     ID info;
     theEle = (Element *)OPS_BeamColumnwLHNMYS();
+=======
+#ifdef _HAVE_PML
+  } else if ((strcmp(argv[1],"PML") == 0) || (strcmp(argv[1],"pml")) == 0) {
+    Element *theEle = 0;
+    ID info;
+    if (OPS_GetNDM() == 2)
+      theEle = (Element *)OPS_PML2D();
+    else
+      theEle = (Element *)OPS_PML3D();
     if (theEle != 0) 
       theElement = theEle;
     else {
       opserr << "TclElementCommand -- unable to create element of type : " << argv[1] << endln;
       return TCL_ERROR;
     }
+
+#endif
+
+  /* } else if (strcmp(argv[1], "gradientInelasticBeamColumn") == 0) {
+
+    Element *theEle = 0;
+    if (OPS_GetNDM() == 2)
+      theEle = (Element *)OPS_GradientInelasticBeamColumn2d();
+    else
+      theEle = (Element *)OPS_GradientInelasticBeamColumn3d();
+
+    if (theEle != 0) 
+      theElement = theEle;
+    else {
+      opserr << "TclElementCommand -- unable to create element of type : " << argv[1] << endln;
+      return TCL_ERROR;
+    }
+  }*/
+
+#ifdef _HAVE_LHNMYS
+  } else if (strcmp(argv[1],"beamColumn2DwLHNMYS") == 0) {
+    Element *theEle = 0;
+    ID info;
+    theEle = (Element *)OPS_BeamColumn2DwLHNMYS();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
+    if (theEle != 0) 
+      theElement = theEle;
+    else {
+      opserr << "TclElementCommand -- unable to create element of type : " << argv[1] << endln;
+      return TCL_ERROR;
+    }
+<<<<<<< HEAD
   }
   #endif
 
@@ -506,6 +596,34 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
 }//End of WheelRail element TCL command*/
 
   else if ((strcmp(argv[1],"ElasticTimoshenkoBeam") == 0) || (strcmp(argv[1],"elasticTimoshenkoBeam")) == 0) {
+=======
+  
+  } else if (strcmp(argv[1],"beamColumn3DwLHNMYS") == 0) {
+    Element *theEle = 0;
+    ID info;
+    theEle = (Element *)OPS_BeamColumn3DwLHNMYS();
+    if (theEle != 0) 
+      theElement = theEle;
+    else {
+      opserr << "TclElementCommand -- unable to create element of type : " << argv[1] << endln;
+      return TCL_ERROR;
+    }
+  
+#endif
+
+  // Beginning of WheelRail element TCL command
+  //Added by Quan Gu and Yongdou Liu, et al. on 2018/10/31
+  } else if((strcmp(argv[1], "WheelRail") == 0)) {
+    // ------------------------------add------------------------------------------
+    int eleArgStart = 1;
+    int result = TclModelBuilder_addWheelRail(clientData, interp, argc, argv,
+					      theTclDomain, theTclBuilder, eleArgStart);
+    return result;
+    
+  //End of WheelRail element TCL command*/
+
+  } else if ((strcmp(argv[1],"ElasticTimoshenkoBeam") == 0) || (strcmp(argv[1],"elasticTimoshenkoBeam")) == 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Element *theEle = 0;
     if (OPS_GetNDM() == 2)
       theEle = (Element *)OPS_ElasticTimoshenkoBeam2d();
@@ -774,6 +892,18 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
       return TCL_ERROR;
     } 
     
+<<<<<<< HEAD
+=======
+  } else if (strcmp(argv[1],"ASDShellQ4") == 0) {
+    
+    void *theEle = OPS_ASDShellQ4();
+    if (theEle != 0) 
+      theElement = (Element *)theEle;
+    else {
+      opserr << "TclElementCommand -- unable to create element of type : " << argv[1] << endln;
+      return TCL_ERROR;
+    }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
   } else if ((strcmp(argv[1],"CoupledZeroLength") == 0) || (strcmp(argv[1],"ZeroLengthCoupled") == 0)) {
     
@@ -1342,6 +1472,10 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
 	     strcmp(argv[1],"forceBeamColumnCBDI") == 0  || 
 	     strcmp(argv[1],"forceBeamColumnCSBDI") == 0  || 
 	     strcmp(argv[1],"forceBeamColumnWarping") == 0  || 
+<<<<<<< HEAD
+=======
+	     strcmp(argv[1],"forceBeamColumnThermal") == 0  || 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	     strcmp(argv[1],"elasticForceBeamColumnWarping") == 0  || 
 	     strcmp(argv[1],"dispBeamColumnNL") == 0  || 
 	     strcmp(argv[1],"dispBeamColumnThermal") == 0  || 
@@ -1382,6 +1516,21 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
 						      theTclDomain,
 						      theTclBuilder);
     return result;
+<<<<<<< HEAD
+=======
+  } else if (strcmp(argv[1],"quad9n") == 0) {
+    int result = TclModelBuilder_addNineNodeQuad(clientData, interp, argc, argv,
+						 theTclDomain, theTclBuilder);
+    return result;
+  } else if (strcmp(argv[1],"quad8n") == 0) {
+    int result = TclModelBuilder_addEightNodeQuad(clientData, interp, argc, argv,
+						 theTclDomain, theTclBuilder);
+    return result;
+  } else if (strcmp(argv[1],"tri6n") == 0) {
+    int result = TclModelBuilder_addSixNodeTri(clientData, interp, argc, argv,
+						 theTclDomain, theTclBuilder);
+    return result;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   } else if (strcmp(argv[1],"quadUP") == 0) {
     int result = TclModelBuilder_addFourNodeQuadUP(clientData, interp, argc, argv,
 						   theTclDomain, theTclBuilder);
@@ -1464,7 +1613,22 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
     int result = TclModelBuilder_addJoint3D(clientData, interp, argc, argv,
 					    theTclDomain, theTclBuilder);
     return result;
+<<<<<<< HEAD
   } else if ((strcmp(argv[1], "inelastic2dYS01")== 0) ||
+=======
+  }  
+  else if ((strcmp(argv[1],"LehighJoint2D") == 0) ||
+	   (strcmp(argv[1],"LehighJoint2d") == 0)) {
+    void *theEle = OPS_LehighJoint2d();
+    if (theEle != 0)
+      theElement = (Element *)theEle;
+    else {
+      opserr << "TCL -- unable to create element of type: " << argv[1] << endln;
+      return TCL_ERROR;
+    }  
+  } 
+  else if ((strcmp(argv[1], "inelastic2dYS01")== 0) ||
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	     (strcmp(argv[1], "inelastic2dYS02")== 0) ||
 	     (strcmp(argv[1], "inelastic2dYS03")== 0) ||
 	     (strcmp(argv[1], "inelastic2dYS04")== 0) ||
@@ -1514,6 +1678,16 @@ TclModelBuilderElementCommand(ClientData clientData, Tcl_Interp *interp,
 						 theTclDomain, theTclBuilder);
     return result;
   }
+<<<<<<< HEAD
+=======
+	
+	// MSN
+	else if (strcmp(argv[1], "gradientInelasticBeamColumn") == 0) {
+		int result = TclModelBuilder_addGradientInelasticBeamColumn(clientData, interp, argc, argv,
+			theTclDomain, theTclBuilder);
+		return result;
+	}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   else {
 
@@ -1855,7 +2029,11 @@ int TclModelBuilder_addMultipleShearSpring(ClientData clientData,
   return TCL_OK;
 }
 
+<<<<<<< HEAD
 static bool errDetected(bool ifNoError,char *msg){
+=======
+static bool errDetected(bool ifNoError,const char *msg){
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   if (ifNoError){
     opserr << "" << endln;
     opserr << "========================================" << endln;
@@ -2806,6 +2984,7 @@ int TclModelBuilder_addYamamotoBiaxialHDR(ClientData clientData,
 
 
 
+<<<<<<< HEAD
   int
 	  TclModelBuilder_addWheelRail(ClientData clientData, Tcl_Interp *interp, int argc,
 		  TCL_Char **argv, Domain *theTclDomain, TclModelBuilder *theTclBuilder,
@@ -2999,3 +3178,197 @@ int TclModelBuilder_addYamamotoBiaxialHDR(ClientData clientData,
 		  return 0;
 
   }
+=======
+int
+TclModelBuilder_addWheelRail(ClientData clientData, Tcl_Interp *interp, int argc,
+			     TCL_Char **argv, Domain *theTclDomain, TclModelBuilder *theTclBuilder,
+			     int eleArgStart)
+{
+  // ensure the destructor has not been called - 
+  if (theTclBuilder == 0) {
+    opserr << "WARNING builder has been destroyed - elasticBeamColumn \n";
+    return TCL_ERROR;
+  }
+  
+  int ndm = theTclBuilder->getNDM();
+  int ndf = theTclBuilder->getNDF();
+  
+  Element *theElement = 0;
+  
+  int pTag, pnLoad;
+  //-------------Beginning of a 2D wheel-rail element(By Quan Gu, Yongdou Liu, et al.) on 2018/10/29
+  if (ndm == 2) {
+    
+    // check plane frame problem has 3 dof per node
+    if (ndf != 3) {
+      opserr << "WARNING invalid ndf: " << ndf;
+      opserr << ", for plane problem need 3 - elasticBeamColumn \n";
+      return TCL_ERROR;
+    }
+    
+    // check the number of arguments
+    if ((argc - eleArgStart) < 8) {
+      opserr << "WARNING bad command - want: elasticBeamColumn beamId iNode jNode A E I <alpha> <d> transTag <-mass m> <-cMass>\n";
+      printCommand(argc, argv);
+      return TCL_ERROR;
+    }
+    
+    // get the id, end nodes, and section properties
+    int pNd1, transTag;
+    
+    double pDeltT, pVel, pInitLocation, pRWheel, pI, pE, pA;
+    
+    if (Tcl_GetInt(interp, argv[1 + eleArgStart], &pTag) != TCL_OK) {
+      opserr << "WARNING invalid pTag: " << argv[1 + eleArgStart];
+      opserr << " - WheelRail pTag iNode jNode";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[2 + eleArgStart], &pDeltT) != TCL_OK) {
+      opserr << "WARNING invalid pDeltT - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[3 + eleArgStart], &pVel) != TCL_OK) {
+      opserr << "WARNING invalid pVel - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[4 + eleArgStart], &pInitLocation) != TCL_OK) {
+      opserr << "WARNING invalid pInitLocation - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetInt(interp, argv[5 + eleArgStart], &pNd1) != TCL_OK) {
+      opserr << "WARNING invalid pNd1 - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[6 + eleArgStart], &pRWheel) != TCL_OK) {
+      opserr << "WARNING invalid pRWheel - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[7 + eleArgStart], &pI) != TCL_OK) {
+      opserr << "WARNING invalid pI - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[8 + eleArgStart], &pE) != TCL_OK) {
+      opserr << "WARNING invalid pE - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetDouble(interp, argv[9 + eleArgStart], &pA) != TCL_OK) {
+      opserr << "WARNING invalid pA - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+    if (Tcl_GetInt(interp, argv[10 + eleArgStart], &transTag) != TCL_OK) {
+      opserr << "WARNING invalid transTag - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    CrdTransf *theTransRWheel = OPS_getCrdTransf(transTag);
+    
+    if (Tcl_GetInt(interp, argv[11 + eleArgStart], &pnLoad) != TCL_OK) {
+      opserr << "WARNING invalid I - WheelRail " << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    //----------------------------------
+    Vector * pNodeList = 0;
+    Vector * pDeltaYList = 0;
+    Vector * pDeltaYLocationList = 0;
+    
+    if (strcmp(argv[12 + eleArgStart], "-NodeList") == 0) {
+      int pathSize;
+      TCL_Char **pathStrings;
+      
+      int debug = Tcl_SplitList(interp, argv[13 + eleArgStart], &pathSize, &pathStrings);
+      
+      if (Tcl_SplitList(interp, argv[13 + eleArgStart], &pathSize, &pathStrings) != TCL_OK) {
+	opserr << "WARNING problem splitting path list " << argv[13 + eleArgStart] << " - ";
+	opserr << " NodeList -values {path} ... \n";
+	return TCL_OK;
+      }
+      pNodeList = new Vector(pathSize);
+      for (int i = 0; i < pathSize; i++) {
+	double value;
+	int debug = Tcl_GetDouble(interp, pathStrings[i], &value);
+	if (Tcl_GetDouble(interp, pathStrings[i], &value) != TCL_OK) {
+	  opserr << "WARNING problem reading path data value " <<
+	    pathStrings[i] << " - ";
+	  opserr << " -strain {path} ... \n";
+	  return 0;
+	}
+	(*pNodeList)(i) = value;
+      } //for
+    }
+    if (strcmp(argv[14 + eleArgStart], "-DeltaYList") == 0) {
+      int pathSize;
+      TCL_Char **pathStrings;
+      if (Tcl_SplitList(interp, argv[15 + eleArgStart], &pathSize, &pathStrings) != TCL_OK) {
+	opserr << "WARNING problem splitting path list " << argv[15 + eleArgStart] << " - ";
+	opserr << " NodeList -values {path} ... \n";
+	return TCL_OK;
+      }
+      pDeltaYList = new Vector(pathSize);
+      for (int i = 0; i < pathSize; i++) {
+	double value;
+	if (Tcl_GetDouble(interp, pathStrings[i], &value) != TCL_OK) {
+	  opserr << "WARNING problem reading path data value " <<
+	    pathStrings[i] << " - ";
+	  opserr << " -strain {path} ... \n";
+	  return 0;
+	}
+	(*pDeltaYList)(i) = value;
+      } //for
+    }
+    if (strcmp(argv[16 + eleArgStart], "-LocationList") == 0) {
+      int pathSize;
+      TCL_Char **pathStrings;
+      if (Tcl_SplitList(interp, argv[17 + eleArgStart], &pathSize, &pathStrings) != TCL_OK) {
+	opserr << "WARNING problem splitting path list " << argv[17 + eleArgStart] << " - ";
+	opserr << " NodeList -values {path} ... \n";
+	return TCL_OK;
+      }
+      pDeltaYLocationList = new Vector(pathSize);
+      for (int i = 0; i < pathSize; i++) {
+	double value;
+	if (Tcl_GetDouble(interp, pathStrings[i], &value) != TCL_OK) {
+	  opserr << "WARNING problem reading path data value " <<
+	    pathStrings[i] << " - ";
+	  opserr << " -strain {path} ... \n";
+	  return 0;
+	}
+	(*pDeltaYLocationList)(i) = value;
+      } //for
+    }
+    theElement = new WheelRail(pTag, pDeltT, pVel, pInitLocation, pNd1, pRWheel, pI, pE, pA, theTransRWheel, pnLoad,
+			       pNodeList, pDeltaYList, pDeltaYLocationList);
+    
+    
+    if (theElement == 0) {
+      opserr << "WARNING ran out of memory creating beam - WheelRail ";
+      opserr << pTag << " iNode jNode A E I\n";
+      return TCL_ERROR;
+    }
+    
+  } //--------------End of a 2D wheel-rail element(By Quan Gu, Yongdou Liu, et al.) on 2018/10/29 */
+  else if (ndm == 3) {
+    
+    opserr << "Have not developed yet." << endln;
+    return TCL_ERROR;
+    
+  }
+	  
+  //add the WheelRail element to the Domain
+  if (theTclDomain->addElement(theElement) == false) {
+    opserr << "WARNING could not add element to the domain\n";
+    opserr << "YamamotoBiaxialHDR element: " << pTag << endln;
+    delete theElement;
+    return TCL_ERROR;
+  }
+  
+  return 0;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

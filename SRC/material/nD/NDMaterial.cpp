@@ -208,8 +208,11 @@ NDMaterial::getStrain(void)
    return errVector;    
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //Functions for obtaining and updating temperature-dependent information Added by L.Jiang [SIF]
 double
 NDMaterial::getThermalTangentAndElongation(double &TempT, double &ET, double &Elong)
@@ -234,8 +237,12 @@ NDMaterial::getTempAndElong()
 //end of adding thermo-mechanical functions, L.Jiang [SIF]
 
 Response*
+<<<<<<< HEAD
 NDMaterial::setResponse (const char **argv, int argc, 
 			 OPS_Stream &output)
+=======
+NDMaterial::setResponse (const char **argv, int argc, OPS_Stream &output)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   Response *theResponse =0;
   const char *matType = this->getType();
@@ -285,7 +292,11 @@ NDMaterial::setResponse (const char **argv, int argc,
       for (int i=0; i<size; i++) 
 	output.tag("ResponseType","UnknownStrain");
     }      
+<<<<<<< HEAD
     theResponse =  new MaterialResponse(this, 2, this->getStress());
+=======
+    theResponse =  new MaterialResponse(this, 2, this->getStrain());
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   }
   //Adding temperature and thermal expansion output,L.Jiang [SIF]
   else if (strcmp(argv[0], "TempAndElong") == 0 || strcmp(argv[0], "TempAndElong") == 0) {
@@ -297,6 +308,7 @@ NDMaterial::setResponse (const char **argv, int argc,
 	  }
 	  //opserr<<"tempElong "<<this->getTempAndElong()<<endln;
 	  theResponse = new MaterialResponse(this, 3, this->getTempAndElong());
+<<<<<<< HEAD
 
   }
   else if (strcmp(argv[0], "Tangent") == 0 || strcmp(argv[0], "tangent") == 0) {
@@ -305,6 +317,21 @@ NDMaterial::setResponse (const char **argv, int argc,
 
   }
   //end of adding output request,L.Jiang [SIF]
+=======
+  }
+  //end of adding output request,L.Jiang [SIF]
+  else if (strcmp(argv[0], "Tangent") == 0 || strcmp(argv[0], "tangent") == 0) {
+	  const Matrix &res = this->getTangent();
+	  theResponse = new MaterialResponse(this, 4, this->getTangent());
+  }
+  //default damage output - added by V.K. Papanikolaou [AUTh] - start
+  else if (strcmp(argv[0], "Damage") == 0 || strcmp(argv[0], "damage") == 0) {
+      static Vector vec = Vector(3);
+      for (int i = 0; i < 3; i++) vec[i] = 0;
+      theResponse = new MaterialResponse(this, 5, vec);  // zero vector
+  }
+  //default damage output - added by V.K. Papanikolaou [AUTh] - end 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   output.endTag(); // NdMaterialOutput
 
@@ -326,8 +353,11 @@ NDMaterial::getResponse (int responseID, Information &matInfo)
   }
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 // AddingSensitivity:BEGIN ////////////////////////////////////////
 const Vector &
 NDMaterial::getStressSensitivity(int gradIndex, bool conditional)
@@ -355,18 +385,30 @@ NDMaterial::getDampTangentSensitivity(int gradIndex)
 	static Matrix dummy(1,1);
 	return dummy;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 const Matrix &
 NDMaterial::getTangentSensitivity(int gradIndex)
 {
 	static Matrix dummy(1,1);
 	return dummy;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 const Matrix &
 NDMaterial::getInitialTangentSensitivity(int gradIndex)
 {
 	static Matrix dummy(1,1);
 	return dummy;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int
 NDMaterial::commitSensitivity(const Vector & strainSensitivity, int gradIndex, int numGrads)
 {

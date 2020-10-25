@@ -25,6 +25,7 @@
 class Channel;
 class UniaxialMaterial;
 
+<<<<<<< HEAD
 #define ELE_TAG_WheelRail 10035443001
 
 class WheelRail : public Element
@@ -35,6 +36,25 @@ class WheelRail : public Element
 		Vector * pNodeList,
 		Vector * pDeltaYList=0,Vector * pDeltaYLocationList=0);
 
+=======
+class WheelRail : public Element
+{
+  public:
+    WheelRail(int pTag, 
+	      double pDeltT, 
+	      double pVel, 
+	      double pInitLocation, 
+	      int pNd1, 
+	      double pRWheel,
+	      double pI,
+	      double pE,
+	      double pA,
+	      CrdTransf *ptheCoordTransf,
+	      int pnLoad,
+	      Vector * pNodeList,
+	      Vector * pDeltaYList=0,
+	      Vector * pDeltaYLocationList=0);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     ~WheelRail();
 
     const char *getClassType(void) const {return "WheelRail";};
@@ -56,6 +76,10 @@ class WheelRail : public Element
     // public methods to obtain stiffness, mass, damping and 
     const Matrix &getTangentStiff(void);
     const Matrix &getInitialStiff(void);    
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     //---------new Algorithm--------------
     void NewtonBisection(Vector limits,double uWheel);
     double FalsePostionAlgorithm(Vector limits,double uWheel);
@@ -86,17 +110,31 @@ class WheelRail : public Element
  private:
 //--------------------members in the construtor--------------------------
 
+<<<<<<< HEAD
+=======
+    Vector *P;
+    Matrix *theTangent;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     ID  connectedExternalNodes;    // must reset using above four values   // contains the tags of the end nodes
     ID activeDof;
     
     Node **theNodes;
+<<<<<<< HEAD
     Vector *P;
     Matrix *theTangent;
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     CrdTransf *theCoordTransf;
     Domain *theDomain;
     
+<<<<<<< HEAD
     Vector shapFun1,shapFun2;
+=======
+    Vector shapFun1;
+    Vector shapFun2;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     double deltT,vel,initLocation;
     double I,E,A;
@@ -110,13 +148,25 @@ class WheelRail : public Element
     int numRailNodeList;
     int theNumOfDeltaYList;
     
+<<<<<<< HEAD
     Vector rearRailNode,frontRailNode,railDisp;
+=======
+    Vector rearRailNode;
+    Vector frontRailNode;
+    Vector railDisp;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     Vector * theNodeList;
     Vector * theDeltaYList;
     Vector * theDeltaYLocationList;
     
+<<<<<<< HEAD
     static Vector contactData,localActiveForce,activeData;
+=======
+    static Vector contactData;
+    static Vector localActiveForce;
+    static Vector activeData;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 };
 

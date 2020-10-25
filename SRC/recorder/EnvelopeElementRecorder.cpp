@@ -249,6 +249,10 @@ OPS_EnvelopeElementRecorder()
         }
     }
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // data handler
     if (eMode == DATA_STREAM && filename != 0)
         theOutputStream = new DataFileStream(filename, OVERWRITE, 2, 0, closeOnWrite, precision, doScientific);
@@ -1013,4 +1017,8 @@ double EnvelopeElementRecorder::getRecordedValue(int clmnId, int rowOffset, bool
 	if (reset)
 		first = true;
 	return res;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

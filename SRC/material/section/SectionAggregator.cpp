@@ -110,6 +110,15 @@ void* OPS_SectionAggregator()
 	codes[codes.Size()] = code;
     }
 
+<<<<<<< HEAD
+=======
+    int nMats = (int)theMats.size();
+    if (nMats == 0) {
+      opserr << "No material is given\n";
+      return 0;
+    }
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // section
     if (OPS_GetNumRemainingInputArgs() > 1) {
 	const char* flag = OPS_GetString();
@@ -128,8 +137,11 @@ void* OPS_SectionAggregator()
 	}
     }
 
+<<<<<<< HEAD
     int nMats = (int)theMats.size();
 	
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (theSec) {
 	return new SectionAggregator (tag, *theSec, nMats, &theMats[0], codes);
     } else {
@@ -139,6 +151,65 @@ void* OPS_SectionAggregator()
     return 0;
 }
 
+<<<<<<< HEAD
+=======
+void* OPS_UniaxialSection()
+{
+  int numdata = OPS_GetNumRemainingInputArgs();
+  if (numdata < 3) {
+    opserr << "WARNING insufficient arguments\n";
+    opserr << "Want: section Uniaxial tag? 1DTag? code?" << endln;
+    return 0;
+  }
+  
+  int data[2];
+  numdata = 2;
+  if (OPS_GetIntInput(&numdata, data) < 0) {
+    opserr << "WARNING invalid integer" << endln;
+    return 0;
+  }
+  
+  int code;
+  const char* type = OPS_GetString();
+  if (strcmp(type,"Mz") == 0)
+    code = SECTION_RESPONSE_MZ;
+  else if (strcmp(type,"P") == 0)
+    code = SECTION_RESPONSE_P;
+  else if (strcmp(type,"Vy") == 0)
+    code = SECTION_RESPONSE_VY;
+  else if (strcmp(type,"My") == 0)
+    code = SECTION_RESPONSE_MY;
+  else if (strcmp(type,"Vz") == 0)
+    code = SECTION_RESPONSE_VZ;
+  else if (strcmp(type,"T") == 0)
+    code = SECTION_RESPONSE_T;
+  else {
+    opserr << "WARNING invalid code" << endln;
+    opserr << "Uniaxial section: " << data[0] << endln;
+    return 0;
+  }
+  
+  // Retrieve the uniaxial material from the model builder
+  UniaxialMaterial *theMat = OPS_getUniaxialMaterial(data[1]);
+  
+  if (theMat == 0) {
+    opserr << "WARNING uniaxial material does not exist\n";
+    opserr << "uniaxial material: " << data[0];
+    opserr << "\nUniaxial section: " << data[1] << endln;
+    return 0;
+  }
+  
+  // Parsing was successful, allocate the section
+  //theSection = new GenericSection1d (tag, *theMat, code);
+  
+  UniaxialMaterial *theMats[1];
+  theMats[0] = theMat;
+  ID codeID(1);
+  codeID(0) = code;
+  return new SectionAggregator(data[0], 1, theMats, codeID);
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #define maxOrder 10
 
 // Assumes section order is less than or equal to maxOrder.

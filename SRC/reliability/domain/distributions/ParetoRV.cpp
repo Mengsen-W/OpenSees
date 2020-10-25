@@ -119,9 +119,21 @@ ParetoRV::getCDFvalue(double rvValue)
 
 
 double
+<<<<<<< HEAD
 ParetoRV::getInverseCDFvalue(double rvValue)
 {
 	return 0.0;
+=======
+ParetoRV::getInverseCDFvalue(double probValue)
+{
+	if (k <= 0) {
+		// shape should be greater than 0
+		return 0.0;
+	}
+	else {
+		return pow((1 - probValue) / pow(u, k), -1 / k);
+	}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 

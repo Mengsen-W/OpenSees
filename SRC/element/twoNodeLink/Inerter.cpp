@@ -59,7 +59,11 @@ void* OPS_Inerter()
     int ndf = OPS_GetNDF();
     if (OPS_GetNumRemainingInputArgs() < 7) {
         opserr << "WARNING insufficient arguments\n";
+<<<<<<< HEAD
         opserr << "Want: inerter eleTag iNode jNode -dir dirs -mass mb <-orient <x1 x2 x3> y1 y2 y3> <-pDelta Mratios> <-doRayleigh> <-damp cb> <-mass m>\n";
+=======
+        opserr << "Want: inerter eleTag iNode jNode -dir dirs -inertance ib <-orient <x1 x2 x3> y1 y2 y3> <-pDelta Mratios> <-doRayleigh> <-damp cb> <-mass m>\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         return 0;
     }
     
@@ -73,7 +77,11 @@ void* OPS_Inerter()
     
     // dirs
     const char* type = OPS_GetString();
+<<<<<<< HEAD
     if (strcmp(type, "-dir") != 0) {
+=======
+    if (strcmp(type, "-dir") != 0 && strcmp(type, "-dof") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         opserr << "WARNING expecting -dir dirs\n";
         return 0;
     }
@@ -82,7 +90,16 @@ void* OPS_Inerter()
     while (OPS_GetNumRemainingInputArgs() > 0) {
         int dir;
         numdata = 1;
+<<<<<<< HEAD
         if (OPS_GetIntInput(&numdata, &dir) < 0) {
+=======
+        int numArgs = OPS_GetNumRemainingInputArgs();
+        if (OPS_GetIntInput(&numdata, &dir) < 0) {
+            if (numArgs > OPS_GetNumRemainingInputArgs()) {
+                // move current arg back by one
+                OPS_ResetCurrentInputArg(-1);
+            }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             break;
         }
         if (dir < 1 || ndf < dir) {
@@ -96,11 +113,19 @@ void* OPS_Inerter()
     // inertance matrix terms
     type = OPS_GetString();
     if (strcmp(type, "-inertance") != 0 && strcmp(type, "-inertia") != 0) {
+<<<<<<< HEAD
         opserr << "WARNING expecting -inertance mij\n";
         return 0;
     }
     if (OPS_GetNumRemainingInputArgs() < numDIR*numDIR) {
         opserr << "WARNING wrong number of mij specified\n";
+=======
+        opserr << "WARNING expecting -inertance ib\n";
+        return 0;
+    }
+    if (OPS_GetNumRemainingInputArgs() < numDIR*numDIR) {
+        opserr << "WARNING wrong number of ib values specified\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         return 0;
     }
     numdata = 1;
@@ -121,7 +146,11 @@ void* OPS_Inerter()
     double mass = 0.0;
     if (OPS_GetNumRemainingInputArgs() < 1) {
         return new Inerter(idata[0], ndm, idata[1], idata[2],
+<<<<<<< HEAD
             dirs[0], ib);
+=======
+            dirs, ib);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
     
     while (OPS_GetNumRemainingInputArgs() > 0) {
@@ -172,7 +201,11 @@ void* OPS_Inerter()
         }
         else if (strcmp(type, "-damp") == 0) {
             if (OPS_GetNumRemainingInputArgs() < numDIR*numDIR) {
+<<<<<<< HEAD
                 opserr << "WARNING wrong number of cij specified\n";
+=======
+                opserr << "WARNING wrong number of cb values specified\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
                 return 0;
             }
             numdata = 1;
@@ -216,12 +249,20 @@ void* OPS_Inerter()
 // responsible for allocating the necessary space needed
 // by each object and storing the tags of the end nodes.
 Inerter::Inerter(int tag, int dim, int Nd1, int Nd2, 
+<<<<<<< HEAD
     const ID &direction, const Matrix &inertia,
+=======
+    const ID &direction, const Matrix &inertance,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     const Vector _y, const Vector _x, const Vector Mr,
     int addRay, const Matrix *damp, double m)
     : Element(tag, ELE_TAG_Inerter),
     numDIM(dim), numDOF(0), connectedExternalNodes(2),
+<<<<<<< HEAD
     numDIR(direction.Size()), dir(direction), ib(inertia), cb(0),
+=======
+    numDIR(direction.Size()), dir(direction), ib(inertance), cb(0),
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     x(_x), y(_y), Mratio(Mr), addRayleigh(addRay), mass(m),
     L(0.0), onP0(true), trans(3,3), ub(0), ubdot(0), ubdotdot(0), qb(0), ul(0),
     Tgl(0,0), Tlb(0,0), theMatrix(0), theVector(0), theLoad(0)
@@ -485,7 +526,11 @@ int Inerter::revertToLastCommit()
 
 
 int Inerter::revertToStart()
+<<<<<<< HEAD
 {   
+=======
+{
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // reset trial history variables
     ub.Zero();
     ubdot.Zero();
@@ -508,7 +553,11 @@ int Inerter::update()
     const Vector &acc1 = theNodes[0]->getTrialAccel();
     const Vector &acc2 = theNodes[1]->getTrialAccel();
     
+<<<<<<< HEAD
     int numDOF2 = numDOF/2;
+=======
+    int numDOF2 = numDOF / 2;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Vector ug(numDOF), ugdot(numDOF), ugdotdot(numDOF);
     Vector uldot(numDOF), uldotdot(numDOF);
     for (int i=0; i<numDOF2; i++)  {
@@ -554,19 +603,45 @@ const Matrix& Inerter::getDamp()
     // zero the matrix
     theMatrix->Zero();
     
+<<<<<<< HEAD
     // call base class to setup Rayleigh damping
     double factThis = 0.0;
     if (addRayleigh == 1 && alphaM != 0.0) {
         (*theMatrix) = this->Element::getDamp();
+=======
+    // set up Rayleigh damping (can not call base class)
+    double factThis = 0.0;
+    if (addRayleigh == 1 && alphaM != 0.0 && mass != 0.0) {
+        int numDOF2 = numDOF / 2;
+        double c = alphaM * 0.5 * mass;
+        for (int i = 0; i < numDIM; i++) {
+            (*theMatrix)(i,i)                 = c;
+            (*theMatrix)(i+numDOF2,i+numDOF2) = c;
+        }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         factThis = 1.0;
     }
     
     // now add damping from optional user input
     if (cb != 0) {
+<<<<<<< HEAD
         // transform from basic to local system
         Matrix cl(numDOF, numDOF);
         cl.addMatrixTripleProduct(0.0, Tlb, *cb, 1.0);
         
+=======
+        // transform damping from basic to local system
+        Matrix cl(numDOF, numDOF);
+        cl.addMatrixTripleProduct(0.0, Tlb, *cb, 1.0);
+        
+        // add P-Delta effects to local damping
+        if (Mratio.Size() == 4) {
+            Vector qdb(numDIR);
+            qdb.addMatrixVector(0.0, *cb, ubdot, 1.0);
+            this->addPDeltaStiff(cl, qdb);
+        }
+        
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         // transform from local to global system and add to cg
         theMatrix->addMatrixTripleProduct(factThis, Tgl, cl, 1.0);
     }
@@ -580,6 +655,7 @@ const Matrix& Inerter::getMass()
     // zero the matrix
     theMatrix->Zero();
     
+<<<<<<< HEAD
     // form mass matrix
     if (mass != 0.0) {
         double m = 0.5*mass;
@@ -587,6 +663,28 @@ const Matrix& Inerter::getMass()
         for (int i = 0; i < numDIM; i++) {
             (*theMatrix)(i, i) = m;
             (*theMatrix)(i + numDOF2, i + numDOF2) = m;
+=======
+    // transform inertance from basic to local system
+    Matrix il(numDOF, numDOF);
+    il.addMatrixTripleProduct(0.0, Tlb, ib, 1.0);
+    
+    // add P-Delta effects to local inertance
+    if (Mratio.Size() == 4) {
+        qb.addMatrixVector(0.0, ib, ubdotdot, 1.0);
+        this->addPDeltaStiff(il, qb);
+    }
+    
+    // transform inertance from local to global system
+    theMatrix->addMatrixTripleProduct(0.0, Tgl, il, 1.0);
+    
+    // now add element mass (from self weight of inerter)
+    if (mass != 0.0) {
+        int numDOF2 = numDOF / 2;
+        double m = 0.5 * mass;
+        for (int i = 0; i < numDIM; i++) {
+            (*theMatrix)(i,i)                 += m;
+            (*theMatrix)(i+numDOF2,i+numDOF2) += m;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         }
     }
     
@@ -630,10 +728,17 @@ int Inerter::addInertiaLoadToUnbalance(const Vector &accel)
     
     // want to add ( - fact * M R * accel ) to unbalance
     // take advantage of lumped mass matrix
+<<<<<<< HEAD
     double m = 0.5*mass;
     for (int i = 0; i < numDIM; i++) {
         (*theLoad)(i)           -= m * Raccel1(i);
         (*theLoad)(i + numDOF2) -= m * Raccel2(i);
+=======
+    double m = 0.5 * mass;
+    for (int i = 0; i < numDIM; i++) {
+        (*theLoad)(i)         -= m * Raccel1(i);
+        (*theLoad)(i+numDOF2) -= m * Raccel2(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
     
     return 0;
@@ -645,6 +750,7 @@ const Vector& Inerter::getResistingForce()
     // zero the residual
     theVector->Zero();
     
+<<<<<<< HEAD
     // get inertia forces from inertance
     qb.addMatrixVector(0.0, ib, ubdotdot, 1.0);
     
@@ -657,6 +763,21 @@ const Vector& Inerter::getResistingForce()
         this->addPDeltaForces(ql);
     
     // determine inertia forces in global system
+=======
+    // get inertia force from inertance
+    // (do this here because of recorder)
+    qb.addMatrixVector(0.0, ib, ubdotdot, 1.0);
+    
+    // determine inertia force in local system
+    Vector ql(numDOF);
+    ql.addMatrixTransposeVector(0.0, Tlb, qb, 1.0);
+    
+    // add P-Delta effects to local force
+    if (Mratio.Size() == 4)
+        this->addPDeltaForces(ql, qb);
+    
+    // determine inertia force in global system
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theVector->addMatrixTransposeVector(1.0, Tgl, ql, 1.0);
     
     return *theVector;
@@ -665,12 +786,17 @@ const Vector& Inerter::getResistingForce()
 
 const Vector& Inerter::getResistingForceIncInertia()
 {
+<<<<<<< HEAD
     // this already includes inertia forces from inerter
+=======
+    // this already includes inertia force from inerter
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     this->getResistingForce();
     
     // subtract external load
     theVector->addVector(1.0, *theLoad, -1.0);
     
+<<<<<<< HEAD
     // add the damping forces from rayleigh damping
     if (addRayleigh == 1 && alphaM != 0.0)
             theVector->addVector(1.0, this->getRayleighDampingForces(), 1.0);
@@ -692,6 +818,40 @@ const Vector& Inerter::getResistingForceIncInertia()
     }
     
     // add inertia forces from element mass
+=======
+    // add the damping force from Rayleigh damping
+    if (addRayleigh == 1 && alphaM != 0.0 && mass != 0.0) {
+        const Vector& vel1 = theNodes[0]->getTrialVel();
+        const Vector& vel2 = theNodes[1]->getTrialVel();
+
+        int numDOF2 = numDOF / 2;
+        double c = alphaM * 0.5 * mass;
+        for (int i = 0; i < numDIM; i++) {
+            (*theVector)(i)           += c * vel1(i);
+            (*theVector)(i + numDOF2) += c * vel2(i);
+        }
+    }
+    
+    // add damping force from optional user input
+    if (cb != 0) {
+        // get damping force
+        Vector qdb(numDIR);
+        qdb.addMatrixVector(0.0, *cb, ubdot, 1.0);
+        
+        // transform damping force from basic to local system
+        Vector qdl(numDOF);
+        qdl.addMatrixTransposeVector(0.0, Tlb, qdb, 1.0);
+        
+        // add P-Delta effects to local force
+        if (Mratio.Size() == 4)
+            this->addPDeltaForces(qdl, qdb);
+        
+        // transform damping force from local to global system
+        theVector->addMatrixTransposeVector(1.0, Tgl, qdl, 1.0);
+    }
+    
+    // add inertia force from element mass (self weight of inerter)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (mass != 0.0) {
         const Vector &accel1 = theNodes[0]->getTrialAccel();
         const Vector &accel2 = theNodes[1]->getTrialAccel();
@@ -1065,12 +1225,23 @@ int Inerter::getResponse(int responseID, Information &eleInfo)
         // determine resisting forces in local system
         theVector->addMatrixTransposeVector(0.0, Tlb, qb, 1.0);
         // add P-Delta effects to local forces
+<<<<<<< HEAD
         if (Mratio.Size() == 4)
             this->addPDeltaForces(*theVector);
         
         return eleInfo.setVector(*theVector);
         
     case 3:  // basic forces
+=======
+        if (Mratio.Size() == 4) {
+            qb.addMatrixVector(0.0, ib, ubdotdot, 1.0);
+            this->addPDeltaForces(*theVector, qb);
+        }
+        return eleInfo.setVector(*theVector);
+        
+    case 3:  // basic forces
+        qb.addMatrixVector(0.0, ib, ubdotdot, 1.0);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         return eleInfo.setVector(qb);
         
     case 4:  // local displacements
@@ -1086,6 +1257,10 @@ int Inerter::getResponse(int responseID, Information &eleInfo)
         return eleInfo.setVector(ubdotdot);
         
     case 8:  // basic accelerations and basic forces
+<<<<<<< HEAD
+=======
+        qb.addMatrixVector(0.0, ib, ubdotdot, 1.0);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         defoAndForce.Zero();
         defoAndForce.Assemble(ubdotdot,0);
         defoAndForce.Assemble(qb,numDIR);
@@ -1253,7 +1428,11 @@ void Inerter::setTranLocalBasic()
 }
 
 
+<<<<<<< HEAD
 void Inerter::addPDeltaForces(Vector &pLocal)
+=======
+void Inerter::addPDeltaForces(Vector &pLocal, const Vector &qBasic)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     int dirID;
     double N = 0.0;
@@ -1265,7 +1444,11 @@ void Inerter::addPDeltaForces(Vector &pLocal)
         
         // get axial force and local disp differences
         if (dirID == 0)
+<<<<<<< HEAD
             N = qb(i);
+=======
+            N = qBasic(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         else if (dirID == 1 && numDIM > 1)
             deltal1 = ul(1+numDOF/2) - ul(1);
         else if (dirID == 2 && numDIM > 2)
@@ -1346,7 +1529,11 @@ void Inerter::addPDeltaForces(Vector &pLocal)
 }
 
 
+<<<<<<< HEAD
 void Inerter::addPDeltaStiff(Matrix &kLocal)
+=======
+void Inerter::addPDeltaStiff(Matrix &kLocal, const Vector &qBasic)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     int dirID;
     double N = 0.0;
@@ -1354,7 +1541,11 @@ void Inerter::addPDeltaStiff(Matrix &kLocal)
     // get axial force
     for (int i=0; i<numDIR; i++)  {
         if (dir(i) == 0)
+<<<<<<< HEAD
             N = qb(i);
+=======
+            N = qBasic(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
     
     if (N != 0.0)  {

@@ -98,6 +98,10 @@ class LinearCrdTransf2dInt: public CrdTransf
   // methods used in post-processing only
   const Vector &getPointGlobalCoordFromLocal(const Vector &localCoords);
   const Vector &getPointGlobalDisplFromBasic(double xi, const Vector &basicDisps);
+<<<<<<< HEAD
+=======
+  const Vector &getPointLocalDisplFromBasic(double xi, const Vector &basicDisps);  
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   
  private:
   int  computeElemtLengthAndOrient(void);

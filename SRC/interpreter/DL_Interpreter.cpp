@@ -97,13 +97,21 @@ DL_Interpreter::resetInput(int cArg)
 }
 
 int
+<<<<<<< HEAD
 DL_Interpreter::setInt(int *, int numArgs)
+=======
+DL_Interpreter::setInt(int *, int numArgs, bool scalar)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     return -1;
 }
 
 int
+<<<<<<< HEAD
 DL_Interpreter::setDouble(double *, int numArgs)
+=======
+DL_Interpreter::setDouble(double *, int numArgs, bool scalar)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     return -1;
 }

@@ -33,6 +33,16 @@
 #include <SSPquadUP.h>
 #include <SSPquad.h>
 #include <elementAPI.h>
+<<<<<<< HEAD
+=======
+#include <FluidSolidPorousMaterial.h>
+#include <TzSimple1.h>
+#include <iostream>
+#include <FourNodeQuad.h>
+#include <FourNodeQuadUP.h>
+#include <Nine_Four_Node_QuadUP.h>
+#include <TimeSeries.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // Control on internal iteration between spring components
 const int TZmaxIterations = 20;

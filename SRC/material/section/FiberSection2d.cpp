@@ -943,10 +943,17 @@ FiberSection2d::setResponse(const char **argv, int argc,
     int count = 0;
     return theResponse = new MaterialResponse(this, 7, count);
   }
+<<<<<<< HEAD
   //by SAJalali
   else if ((strcmp(argv[0], "energy") == 0) || (strcmp(argv[0], "Energy") == 0)) {
 	  return theResponse = new MaterialResponse(this, 8, getEnergy());
   }
+=======
+  //by SAJalali
+  else if ((strcmp(argv[0], "energy") == 0) || (strcmp(argv[0], "Energy") == 0)) {
+	  return theResponse = new MaterialResponse(this, 8, getEnergy());
+  }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // If not a fiber response, call the base class method
 return SectionForceDeformation::setResponse(argv, argc, output);
@@ -1080,7 +1087,11 @@ FiberSection2d::setParameter(const char **argv, int argc, Parameter &param)
   }
 
   // Check if it belongs to the section integration
+<<<<<<< HEAD
   else if (strstr(argv[0],"integration") != 0) {
+=======
+  if (strstr(argv[0],"integration") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (sectionIntegr != 0)
       return sectionIntegr->setParameter(&argv[1], argc-1, param);
     else
@@ -1088,7 +1099,11 @@ FiberSection2d::setParameter(const char **argv, int argc, Parameter &param)
   }
 
   int ok = 0;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   for (int i = 0; i < numFibers; i++) {
     ok = theMaterials[i]->setParameter(argv, argc, param);
     if (ok != -1)

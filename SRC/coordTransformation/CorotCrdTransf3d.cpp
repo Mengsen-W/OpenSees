@@ -2161,6 +2161,20 @@ CorotCrdTransf3d::getPointGlobalDisplFromBasic(double xi, const Vector &uxb)
 }
 
 
+<<<<<<< HEAD
+=======
+const Vector &
+CorotCrdTransf3d::getPointLocalDisplFromBasic(double xi, const Vector &uxb)
+{
+    static Vector uxg(3);
+    opserr << " CorotCrdTransf3d::getPointLocalDisplFromBasic: not implemented yet" ;
+    
+    
+    return uxg;  
+}
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 void
 CorotCrdTransf3d::Print(OPS_Stream &s, int flag)
 {

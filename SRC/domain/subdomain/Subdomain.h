@@ -53,7 +53,11 @@ class EigenSOE;
 class ConvergenceTest;
 class FE_Element;
 
+<<<<<<< HEAD
 #include <SubdomainNodIter.h>
+=======
+#include "SubdomainNodIter.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class Subdomain: public Element, public Domain
 {

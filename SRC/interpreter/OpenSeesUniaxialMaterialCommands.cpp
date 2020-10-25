@@ -167,6 +167,14 @@ void* OPS_SteelMP();
 void* OPS_SmoothPSConcrete();
 void* OPS_UniaxialJ2Plasticity();
 void* OPS_OOHystereticMaterial();
+<<<<<<< HEAD
+=======
+void* OPS_UVCuniaxial();
+void* OPS_IMKBilin();
+void* OPS_IMKPinching();
+void* OPS_IMKPeakOriented();
+void* OPS_SLModel();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 void* OPS_ArctangentBackbone();
 void* OPS_BilinearBackbone();
@@ -326,6 +334,14 @@ namespace {
 	uniaxialMaterialsMap.insert(std::make_pair("SmoothPSConcrete", &OPS_SmoothPSConcrete));
 	uniaxialMaterialsMap.insert(std::make_pair("UniaxialJ2Plasticity", &OPS_UniaxialJ2Plasticity));
 	uniaxialMaterialsMap.insert(std::make_pair("OOHysteretic", &OPS_OOHystereticMaterial));
+<<<<<<< HEAD
+=======
+	uniaxialMaterialsMap.insert(std::make_pair("UVCuniaxial", &OPS_UVCuniaxial));
+	uniaxialMaterialsMap.insert(std::make_pair("IMKBilin", &OPS_IMKBilin));
+	uniaxialMaterialsMap.insert(std::make_pair("IMKPinching", &OPS_IMKPinching));
+	uniaxialMaterialsMap.insert(std::make_pair("IMKPeakOriented", &OPS_IMKPeakOriented));
+	uniaxialMaterialsMap.insert(std::make_pair("SLModel", &OPS_SLModel));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	return 0;
     }
@@ -487,7 +503,11 @@ int OPS_getStrain()
 
     int numData = 1;
 
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numData, &strain) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numData, &strain, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr<<"failed to set strain\n";
 	return -1;
     }
@@ -507,7 +527,11 @@ int OPS_getStress()
 
     int numData = 1;
 
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numData, &stress) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numData, &stress, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr<<"failed to set stress\n";
 	return -1;
     }
@@ -527,7 +551,11 @@ int OPS_getTangent()
 
     int numData = 1;
 
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numData, &tangent) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numData, &tangent, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr<<"failed to set tangent\n";
 	return -1;
     }
@@ -547,7 +575,11 @@ int OPS_getDampTangent()
 
     int numData = 1;
 
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numData, &tangent) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numData, &tangent, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr<<"failed to set damp tangent\n";
 	return -1;
     }

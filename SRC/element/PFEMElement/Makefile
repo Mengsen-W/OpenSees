@@ -1,6 +1,15 @@
 include ../../../Makefile.def
 
+<<<<<<< HEAD
 OBJS = PFEMElement2D.o PFEMElement2DFIC.o PFEMElement3D.o TclModelBuilder_addPFEMElement.o PFEMElement2DCompressible.o PFEMElement2DQuasi.o PFEMElement2DBubble.o PFEMElement3DBubble.o tetgen.o predicates.o triangle.o PFEMElement2Dmini.o TriangleMeshGenerator.o TetMeshGenerator.o BackgroundMesh.o  Particle.o ParticleGroup.o BackgroundDef.o TaylorHood2D.o TriGaussPoints.o HigherOrder.o MINI.o Mesh.o LineMeshGenerator.o LineMesh.o TriMesh.o TetMesh.o QuadMeshGenerator.o QuadMesh.o
+=======
+OBJS = PFEMElement2D.o PFEMElement2DFIC.o PFEMElement3D.o TclModelBuilder_addPFEMElement.o \
+       PFEMElement2DCompressible.o PFEMElement2DQuasi.o PFEMElement2DBubble.o PFEMElement3DBubble.o \
+       tetgen.o predicates.o triangle.o PFEMElement2Dmini.o TriangleMeshGenerator.o TetMeshGenerator.o \
+       BackgroundMesh.o  Particle.o ParticleGroup.o BackgroundDef.o TaylorHood2D.o TriGaussPoints.o \
+       HigherOrder.o MINI.o Mesh.o LineMeshGenerator.o LineMesh.o TriMesh.o TetMesh.o \
+       QuadMeshGenerator.o QuadMesh.o PFEMContact2D.o
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 all: $(OBJS)
 

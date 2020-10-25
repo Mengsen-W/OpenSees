@@ -1,5 +1,9 @@
 ######################################################################
+<<<<<<< HEAD
 # Master file for py pushover analysis to illustrate PySimple1Gen
+=======
+# Main file for py pushover analysis to illustrate PySimple1Gen
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 # command
 #
 # Created by Scott Brandenberg, April 30, 2004.

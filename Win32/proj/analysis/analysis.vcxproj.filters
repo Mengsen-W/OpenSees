@@ -365,6 +365,18 @@
     <ClCompile Include="..\..\..\SRC\analysis\integrator\EQPath.cpp">
       <Filter>integrator</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="..\..\..\SRC\analysis\integrator\GimmeMCK.cpp">
+      <Filter>integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SRC\analysis\integrator\StagedLoadControl.cpp">
+      <Filter>integrator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SRC\analysis\integrator\StagedNewmark.cpp">
+      <Filter>integrator</Filter>
+    </ClCompile>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SRC\analysis\analysis\Analysis.h">
@@ -691,5 +703,17 @@
     <ClInclude Include="..\..\..\SRC\analysis\integrator\EQPath.h">
       <Filter>integrator</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="..\..\..\SRC\analysis\integrator\GimmeMCK.h">
+      <Filter>integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SRC\analysis\integrator\StagedLoadControl.h">
+      <Filter>integrator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SRC\analysis\integrator\StagedNewmark.h">
+      <Filter>integrator</Filter>
+    </ClInclude>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   </ItemGroup>
 </Project>

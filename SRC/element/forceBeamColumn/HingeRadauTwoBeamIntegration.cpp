@@ -198,6 +198,7 @@ HingeRadauTwoBeamIntegration::setParameter(const char **argv, int argc,
   if (argc < 1)
     return -1;
 
+<<<<<<< HEAD
   if (strcmp(argv[0],"lpI") == 0)
     return param.addObject(1, this);
 
@@ -207,6 +208,20 @@ HingeRadauTwoBeamIntegration::setParameter(const char **argv, int argc,
   if (strcmp(argv[0],"lp") == 0)
     return param.addObject(3, this);
 
+=======
+  if (strcmp(argv[0],"lpI") == 0) {
+    param.setValue(lpI);
+    return param.addObject(1, this);
+  }
+  if (strcmp(argv[0],"lpJ") == 0) {
+    param.setValue(lpJ);
+    return param.addObject(2, this);
+  }
+  if (strcmp(argv[0],"lp") == 0) {
+    param.setValue(lpI);
+    return param.addObject(3, this);
+  }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   return -1;
 }
 

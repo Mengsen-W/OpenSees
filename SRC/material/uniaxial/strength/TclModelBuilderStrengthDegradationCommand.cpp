@@ -47,6 +47,7 @@ extern void *OPS_ConstantStrengthDegradation(void);
 extern void *OPS_ACIStrengthDegradation(void);
 extern void *OPS_PetrangeliStrengthDegradation(void);
 
+<<<<<<< HEAD
 #include <packages.h>
 
 extern int OPS_ResetInputNoBuilder(ClientData clientData, 
@@ -56,6 +57,11 @@ extern int OPS_ResetInputNoBuilder(ClientData clientData,
 				   TCL_Char **argv, 
 				   Domain *domain);
 
+=======
+#include <elementAPI.h>
+#include <packages.h>
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 static void printCommand(int argc, TCL_Char **argv)
 {
   opserr << "Input command: ";

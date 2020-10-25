@@ -90,6 +90,10 @@ class PlaneStrainMaterial: public NDMaterial{
     int recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &theBroker);
 
     int setParameter(const char **argv, int argc, Parameter &param);
+<<<<<<< HEAD
+=======
+    Response* setResponse(const char** argv, int argc, OPS_Stream& s);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 private :
     NDMaterial *theMaterial ;  //pointer to three dimensional material

@@ -12,7 +12,13 @@
 
 #include <math.h>
 #include <stdlib.h>
+<<<<<<< HEAD
 #include <PressureDependMultiYield.h>
+=======
+
+#include <PressureDependMultiYield.h>
+#include <MultiYieldSurface.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <Information.h>
 #include <ID.h>
 #include <MaterialResponse.h>

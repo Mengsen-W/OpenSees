@@ -137,13 +137,24 @@ Vector::~Vector()
 {
   if (theData != 0 && fromFree == 0) 
     delete [] theData;
+<<<<<<< HEAD
+=======
+  theData = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
 int 
 Vector::setData(double *newData, int size){
+<<<<<<< HEAD
   if (theData != 0 && fromFree == 0) 
     delete [] theData;      
+=======
+  if (theData != 0 && fromFree == 0) {
+    delete [] theData;      
+    theData = 0;
+  }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   sz = size;
   theData = newData;
   fromFree = 1;
@@ -171,8 +182,15 @@ Vector::resize(int newSize){
   else if (newSize > sz) {
 
     // delete the old array
+<<<<<<< HEAD
     if (theData != 0 && fromFree == 0) 
 	delete [] theData;
+=======
+    if (theData != 0 && fromFree == 0) {
+	delete [] theData;
+  theData = 0;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     sz = 0;
     fromFree = 0;
     
@@ -651,9 +669,16 @@ Vector::operator[](int x)
       dataNew[j] = 0.0;
     
     if (fromFree == 0)
+<<<<<<< HEAD
       if (theData != 0)
 	delete [] theData;
 
+=======
+      if (theData != 0){
+	delete [] theData;
+  theData = 0;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theData = dataNew;
     sz = x+1;
   }
@@ -732,8 +757,15 @@ Vector::operator=(const Vector &V)
 #endif
 
 	  // Check that we are not deleting an empty Vector
+<<<<<<< HEAD
 	  if (this->theData != 0) delete [] this->theData;
 
+=======
+	  if (this->theData != 0){
+      delete [] this->theData;
+      this->theData = 0;
+    }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	  this->sz = V.sz;
 	  
 	  // Check that we are not creating an empty Vector
@@ -757,7 +789,14 @@ Vector::operator=(Vector &&V)
   // first check we are not trying v = v
   if (this != &V) {
     // opserr << "move assign!\n";
+<<<<<<< HEAD
     if (this->theData != 0) delete [] this->theData;
+=======
+    if (this->theData != 0){ 
+      delete [] this->theData;
+      this->theData = 0;
+    }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     theData = V.theData;
     this->sz = V.sz;
     V.theData = 0;

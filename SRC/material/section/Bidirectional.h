@@ -51,7 +51,11 @@ class Bidirectional : public SectionForceDeformation
     Bidirectional();
     ~Bidirectional();
 
+<<<<<<< HEAD
     const char *getClassType(void) const {return "Bidirectionald";};
+=======
+    const char *getClassType(void) const {return "Bidirectional";};
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     int setTrialSectionDeformation(const Vector &v);
     const Matrix &getSectionTangent(void);

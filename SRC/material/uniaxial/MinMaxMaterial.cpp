@@ -368,7 +368,11 @@ MinMaxMaterial::setParameter(const char **argv, int argc, Parameter &param)
 {
   //
   // I suppose epsMin and epsMax could be parameters, but not for now -- MHS
+<<<<<<< HEAD
   // 
+=======
+  //
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   return theMaterial->setParameter(argv, argc, param);
 }
   
@@ -377,3 +381,49 @@ MinMaxMaterial::updateParameter(int parameterID, Information &info)
 {
   return 0;
 }
+<<<<<<< HEAD
+=======
+
+double
+MinMaxMaterial::getStressSensitivity(int gradIndex, bool conditional)
+{
+  if (Cfailed)
+    return 0.0;
+  else 
+    return theMaterial->getStressSensitivity(gradIndex, conditional);
+}
+
+double
+MinMaxMaterial::getStrainSensitivity(int gradIndex)
+{
+  return theMaterial->getStrainSensitivity(gradIndex);
+}
+
+double
+MinMaxMaterial::getInitialTangentSensitivity(int gradIndex)
+{
+  return theMaterial->getInitialTangentSensitivity(gradIndex);
+}
+
+double
+MinMaxMaterial::getDampTangentSensitivity(int gradIndex)
+{
+  return theMaterial->getDampTangentSensitivity(gradIndex);
+}
+
+double
+MinMaxMaterial::getRhoSensitivity(int gradIndex)
+{
+  return theMaterial->getRhoSensitivity(gradIndex);
+}
+
+int   
+MinMaxMaterial::commitSensitivity(double strainGradient,
+				  int gradIndex, int numGrads)
+{
+  if (Cfailed)
+    return 0;
+  else
+    return theMaterial->commitSensitivity(strainGradient, gradIndex, numGrads);
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

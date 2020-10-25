@@ -58,7 +58,12 @@ int  Element::numMatrices(0);
 Element::Element(int tag, int cTag) 
   :DomainComponent(tag, cTag), alphaM(0.0), 
   betaK(0.0), betaK0(0.0), betaKc(0.0), 
+<<<<<<< HEAD
    Kc(0), previousK(0), numPreviousK(0), index(-1), nodeIndex(-1)
+=======
+      Kc(0), previousK(0), numPreviousK(0), index(-1), nodeIndex(-1),
+      is_this_element_active(true)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   // does nothing
   ops_TheActiveElement = this;
@@ -681,11 +686,19 @@ double Element::getCharacteristicLength(void)
   for (int i=0; i<numNodes; i++) {
     Node *nodeI = theNodes[i];
     Vector iCoords = nodeI->getCrds();
+<<<<<<< HEAD
     int iDOF = nodeI->getNumberDOF();
     for (int j=i+1; j<numNodes; j++) {
       Node *nodeJ = theNodes[j];
       Vector jCoords = nodeJ->getCrds();      
       int jDOF = nodeI->getNumberDOF();
+=======
+    int iDOF = iCoords.Size(); // nodeI->getNumberDOF(); // bugfix: Massimo Petracca 03/25/2020
+    for (int j=i+1; j<numNodes; j++) {
+      Node *nodeJ = theNodes[j];
+      Vector jCoords = nodeJ->getCrds();      
+      int jDOF = jCoords.Size(); // nodeI->getNumberDOF(); // bugfix: Massimo Petracca 03/25/2020
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       double ijLength = 0;
       for (int k=0; k<iDOF && k<jDOF; k++) {
 	ijLength += (jCoords(k)-iCoords(k))*(jCoords(k)-iCoords(k)); //Tesser
@@ -770,3 +783,55 @@ Element::getGeometricTangentStiff()
     
     return *theMatrix;
 }
+<<<<<<< HEAD
+=======
+
+void Element::activate()
+{
+    // opserr << "Activating element # " << this->getTag() << endln;
+    is_this_element_active = true;
+    this->onActivate();
+}
+
+void Element::deactivate()
+{
+    // opserr << "Deactivating element # " << this->getTag() << endln;
+    is_this_element_active = false;
+    this->onDeactivate();
+}
+
+
+void Element::onActivate()
+{
+    static bool report_once = true;
+    if (report_once)
+    {
+        opserr << "onActivate not implemented for this element. classTag = " << this->getClassTag() << endln;
+        report_once = false;
+    }
+}
+
+void Element::onDeactivate()
+{   static bool report_once = true;
+    if (report_once)
+    {
+        opserr << "onDeactivate not implemented for this element. classTag = " << this->getClassTag() << endln;
+        report_once = false;
+    }
+}    
+
+
+bool  Element::isActive()
+{
+    // opserr << "Element::isActive() [tag = " << this->getTag() << "] = ";
+    // if (is_this_element_active)
+    // {
+    //     opserr << "TRUE" << endln;
+    // }
+    // else
+    // {
+    //     opserr << "FALSE" << endln;
+    // }
+    return is_this_element_active;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

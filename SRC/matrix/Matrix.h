@@ -64,6 +64,10 @@ class Matrix
     inline int noCols() const;
     void Zero(void);
     int resize(int numRow, int numCol);
+<<<<<<< HEAD
+=======
+    Vector diagonal() const;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     int  Assemble(const Matrix &,const ID &rows, const ID &cols, 
 		  double fact = 1.0);  

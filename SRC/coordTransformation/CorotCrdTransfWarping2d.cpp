@@ -898,6 +898,18 @@ CorotCrdTransfWarping2d::getPointGlobalDisplFromBasic (double xi, const Vector &
 }
 
 
+<<<<<<< HEAD
+=======
+const Vector &
+CorotCrdTransfWarping2d::getPointLocalDisplFromBasic (double xi, const Vector &uxb)
+{
+    opserr << " CorotCrdTransfWarping2d::getPointLocalDisplFromBasic: not implemented yet" ;
+    
+    return uxg;  
+}
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 void
 CorotCrdTransfWarping2d::Print(OPS_Stream &s, int flag)
 {

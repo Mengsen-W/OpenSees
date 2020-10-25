@@ -55,7 +55,12 @@ class DisplacementControl : public StaticIntegrator
 {
    public:
       DisplacementControl(int node, int dof, double increment, Domain *theDomain,
+<<<<<<< HEAD
 	    int numIncrStep, double minIncrement, double maxIncrement );
+=======
+			  int numIncrStep, double minIncrement, double maxIncrement,
+			  int tangFlag = 0);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
       ~DisplacementControl();
 
@@ -104,7 +109,11 @@ class DisplacementControl : public StaticIntegrator
       Domain *theDomain;    // the domain containing the node being followed
       int theDofID;         // the system level id of the dof being followed
       Vector *deltaUhat, *deltaUbar, *deltaU,*phat,*deltaUstep,*dphatdh;
+<<<<<<< HEAD
     //  Vector *deltaUhat_newStep ;
+=======
+      //  Vector *deltaUhat_newStep ;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       Vector *dLAMBDAdh; 
       ///////////////////////////////////////Abbas/////////////////////////////////////////
       // Pointers used for sensitivity analysis
@@ -117,18 +126,29 @@ class DisplacementControl : public StaticIntegrator
       // *Residual    : the residual forces that are required to obtain the dLambdadh
       // *Residual2   : the residual forces required to obtain dUdh
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       // the reference load vector
       double deltaLambdaStep, currentLambda;  // dLambda(i) & current value of lambda  
       double dLambdaStepDh ;//Abbas
       double specNumIncrStep, numIncrLastStep; // Jd & J(i-1) 
       double minIncrement, maxIncrement; // min/max values of deltaU at (i)
 
+<<<<<<< HEAD
+=======
+      int tangFlag;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       // adding sensitivity
       int gradNumber;
       int sensitivityFlag;
       FE_Element *theEle;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

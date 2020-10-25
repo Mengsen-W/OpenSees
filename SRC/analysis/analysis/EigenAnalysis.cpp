@@ -45,7 +45,11 @@
 #include <ConstraintHandler.h>
 #include <EigenIntegrator.h>
 #include <Domain.h>
+<<<<<<< HEAD
 #include <Timer.h>
+=======
+//#include <Timer.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <FE_Element.h>
 #include <DOF_Group.h>
 #include <FE_EleIter.h>

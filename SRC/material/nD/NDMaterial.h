@@ -82,6 +82,7 @@ class NDMaterial : public Material
     virtual const char *getType(void) const = 0;
     virtual int getOrder(void) const {return 0;};  //??
 
+<<<<<<< HEAD
     virtual Response *setResponse (const char **argv, int argc, 
 				   OPS_Stream &s);
     virtual int getResponse (int responseID, Information &matInformation);
@@ -95,6 +96,20 @@ class NDMaterial : public Material
     virtual double         getRhoSensitivity        (int gradIndex);
     virtual int            commitSensitivity        (const Vector & strainGradient, int gradIndex, int numGrads);
 // AddingSensitivity:END ///////////////////////////////////////////
+=======
+    virtual Response *setResponse (const char **argv, int argc, OPS_Stream &s);
+    virtual int getResponse (int responseID, Information &matInformation);
+
+    // AddingSensitivity:BEGIN //////////////////////////////////////////
+    virtual const Vector & getStressSensitivity         (int gradIndex, bool conditional);
+    virtual const Vector & getStrainSensitivity         (int gradIndex);
+    virtual const Matrix & getTangentSensitivity        (int gradIndex);
+    virtual const Matrix & getInitialTangentSensitivity (int gradIndex);
+    virtual const Matrix & getDampTangentSensitivity    (int gradIndex);
+    virtual double         getRhoSensitivity            (int gradIndex);
+    virtual int            commitSensitivity            (const Vector & strainGradient, int gradIndex, int numGrads);
+    // AddingSensitivity:END ///////////////////////////////////////////
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   protected:
 

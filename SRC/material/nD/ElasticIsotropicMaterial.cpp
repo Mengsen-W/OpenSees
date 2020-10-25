@@ -58,7 +58,11 @@ OPS_ElasticIsotropicMaterial(void)
   int numArgs = OPS_GetNumRemainingInputArgs();
   
   if (numArgs < 3) {
+<<<<<<< HEAD
     opserr << "Want: nDMaterial ElasticIsotropic $tag $E $V <$rho>" << endln;
+=======
+    opserr << "Want: nDMaterial ElasticIsotropic $tag $E $nu <$rho>" << endln;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;	
   }
   
@@ -68,7 +72,11 @@ OPS_ElasticIsotropicMaterial(void)
   
   int numData = 1;
   if (OPS_GetInt(&numData, iData) != 0) {
+<<<<<<< HEAD
     opserr << "WARNING invalid integer tag: nDMaterial EasticIsotropic \n";
+=======
+    opserr << "WARNING invalid integer tag: nDMaterial ElasticIsotropic \n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }
   
@@ -78,7 +86,11 @@ OPS_ElasticIsotropicMaterial(void)
     numData = 2;
   
   if (OPS_GetDouble(&numData, dData) != 0) {
+<<<<<<< HEAD
     opserr << "WARNING invalid data: nDMaterial EasticIsotropic : " << iData[0] <<"\n";
+=======
+    opserr << "WARNING invalid data: nDMaterial ElasticIsotropic : " << iData[0] <<"\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
   }  
   

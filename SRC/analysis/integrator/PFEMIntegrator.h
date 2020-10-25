@@ -31,7 +31,11 @@
 //
 // Description: This file contains the class definition for PFEMIntegrator.
 // PFEMIntegrator is an algorithmic class for performing a PFEM analysis
+<<<<<<< HEAD
 // using the BackEuler integration scheme.
+=======
+// using the Newmark or BackEuler integration scheme.
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //
 // What: "@(#) PFEMIntegrator.h, revA"
 
@@ -40,13 +44,17 @@
 
 class DOF_Group;
 class FE_Element;
+<<<<<<< HEAD
 class Vector;
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class PFEMIntegrator : public TransientIntegrator
 {
 public:
     // constructors
     PFEMIntegrator();
+<<<<<<< HEAD
 
     // destructor
     ~PFEMIntegrator();
@@ -69,12 +77,41 @@ public:
     
     void Print(OPS_Stream &s, int flag = 0);        
     
+=======
+    PFEMIntegrator(double gamma, double beta, int disp, int init);
+
+    // destructor
+    ~PFEMIntegrator();
+
+    // methods which define what the FE_Element and DOF_Groups add
+    // to the system of equation object.
+    int formEleTangent(FE_Element *theEle);
+    int formNodTangent(DOF_Group *theDof);
+    int formEleResidual(FE_Element* theEle);
+    int formNodUnbalance(DOF_Group* theDof);
+    int formTangent(int statFlag);
+
+    int domainChanged(void);
+    int newStep(double deltaT);
+    int revertToLastStep(void);
+    int update(const Vector &deltaU);
+    int commit();
+
+    const Vector &getVel(void);
+    
+    virtual int sendSelf(int commitTag, Channel &theChannel);
+    virtual int recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &theBroker);
+
+    void Print(OPS_Stream &s, int flag = 0);
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // AddingSensitivity:BEGIN //////////////////////////////////
     int revertToStart();
     int formSensitivityRHS(int gradNum);
     int formIndependentSensitivityRHS();
     int formIndependentSensitivityLHS(int statusFlag = CURRENT_TANGENT);
     int saveSensitivity   (const Vector &v, int gradNum, int numGrads);
+<<<<<<< HEAD
     int commitSensitivity (int gradNum, int numGrads);  
     // AddingSensitivity:END ////////////////////////////////////
     
@@ -82,10 +119,23 @@ protected:
     
     double c1, c2, c3;              // some constants we need to keep
     double c4, c5, c6;              // some constants we need to keep
+=======
+    int commitSensitivity (int gradNum, int numGrads);
+    // AddingSensitivity:END ////////////////////////////////////
+
+protected:
+    int displ;      // a flag indicating whether displ(1), vel(2) or accel(3) increments
+    int init;  // 1-disp, 2-vel, 3-accel
+    double gamma;
+    double beta;
+
+    double c1, c2, c3;              // some constants we need to keep
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Vector *Ut, *Utdot, *Utdotdot;  // response quantities at time t
     Vector *U, *Udot, *Udotdot;     // response quantities at time t+deltaT
     bool determiningMass;           // flag to check if just want the mass contribution
 
+<<<<<<< HEAD
     // Adding sensitivity
     int sensitivityFlag;
     int gradNumber;
@@ -93,6 +143,21 @@ protected:
     /////////////////////
     
 private:
+=======
+    // Adding Sensitivity
+    int sensitivityFlag;
+    int gradNumber;
+    Vector *massMatrixMultiplicator;
+    Vector *dampingMatrixMultiplicator;
+    int assemblyFlag;
+    Vector independentRHS;
+    Vector dUn, dVn, dAn;
+    //////////////////////
+
+private:
+    int populateU();
+    int populateUn();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

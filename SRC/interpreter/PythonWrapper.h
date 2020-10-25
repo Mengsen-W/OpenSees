@@ -74,8 +74,13 @@ public:
     void incrCurrentArg() {currentArg++;}
 
     // set outputs
+<<<<<<< HEAD
     void setOutputs(int* data, int numArgs);
     void setOutputs(double* data, int numArgs);
+=======
+    void setOutputs(int* data, int numArgs, bool scalar);
+    void setOutputs(double* data, int numArgs, bool scalar);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     void setOutputs(const char* str);
     PyObject* getResults();
 

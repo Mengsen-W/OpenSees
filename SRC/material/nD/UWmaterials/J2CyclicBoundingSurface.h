@@ -47,16 +47,37 @@ public:
 	J2CyclicBoundingSurface();
 
 	//full constructor
+<<<<<<< HEAD
 	J2CyclicBoundingSurface(int    tag,
+=======
+	J2CyclicBoundingSurface(int tag,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		double G,
 		double K,
 		double su,
 		double rho,
 		double h,
 		double m,
+<<<<<<< HEAD
 		double k_in,
 		double beta);
 
+=======
+		double h0,
+		double chi,
+		double beta);
+
+	J2CyclicBoundingSurface(int tag, int classTag,
+		double G,
+		double K,
+		double su,
+		double rho,
+		double h,
+		double m,
+		double h0,
+		double chi,
+		double beta);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	//destructor
 	virtual ~J2CyclicBoundingSurface();
@@ -94,6 +115,11 @@ public:
 	virtual int updateParameter(int responseID, Information &info);
 	virtual int activateParameter(int paramID);
 
+<<<<<<< HEAD
+=======
+	virtual const Matrix& getDampTangent();
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	virtual int setTrialStrain(const Vector &strain_from_element);
 	virtual int setTrialStrain(const Vector &v, const Vector &r);
 
@@ -121,6 +147,10 @@ protected:
 	double m_density;     // material density
 	double m_h_par;       // exponential hardening parameter
 	double m_m_par;       // exponential hardening parameter
+<<<<<<< HEAD
+=======
+	double m_h0_par;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	double m_beta;        // Integration scheme parameter beta = 0, explicit. beta = 1, implicit. beta = 0.5 mid point rule
 
 
@@ -136,12 +166,30 @@ protected:
 	//material response 
 	Vector m_stress_n;           //stress vector time n
 	Vector m_stress_np1;         //stress vector time n+1
+<<<<<<< HEAD
 	Matrix m_Cep;
 	Matrix m_Ce;
 
 	//material input
 	Vector m_strain_n;           //strain vector time n
 	Vector m_strain_np1;         //strain vector time n+1
+=======
+	Vector m_stress_vis_n;
+	Vector m_stress_vis_n1;
+	Vector m_stress_t_n1;
+	Matrix m_Cep;
+	Matrix m_Ce;
+
+	// viscous behavior
+	double m_chi;
+	Matrix m_D;
+
+	//material input
+	Vector m_strain_n;           //strain vector time n
+	Vector m_strain_np1;         //strain vector time n+1
+	Vector m_strainRate_n;
+	Vector m_strainRate_n1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	bool m_isElast2Plast;
 
@@ -152,6 +200,10 @@ protected:
 	void	integrate();
 	void	elastic_integrator();
 	void	plastic_integrator();
+<<<<<<< HEAD
+=======
+	void    viscoElastic_integrator();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	void    calcInitialTangent();
 
@@ -172,5 +224,8 @@ protected:
 	bool debugFlag;
 
 }; //end of J2CyclicBoundingSurface declarations
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #endif

@@ -216,7 +216,11 @@ DistributedDiagonalSOE::setSize(Graph &theGraph)
       }
     }
 
+<<<<<<< HEAD
     // now recv each of the shared DOFs & merge with mine to form the master list
+=======
+    // now recv each of the shared DOFs & merge with mine to form the primary list
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     for (int j=0; j<numChannels; j++) {
       Channel *theChannel = theChannels[j];
       theChannel->recvID(0, 0, otherSize);	

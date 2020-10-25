@@ -81,7 +81,11 @@ void* OPS_ZeroLengthContact2D()
     }
 
     const char* type = OPS_GetString();
+<<<<<<< HEAD
     if (strcmp(type,"-normal") == 0) {
+=======
+    if (strcmp(type,"-normal") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "ZeroLengthContact2D:: expecting "<<
 	    "- element ZeroLengthContact2D eleTag? iNode? jNode? Kn? Kt? fs? -normal Nx? Ny? \n" ;
 	return 0;
@@ -122,7 +126,11 @@ ZeroLengthContact2D::ZeroLengthContact2D(int tag,
 	Kt = Ktangent;
 	fs = frictionRatio;
 
+<<<<<<< HEAD
 	// assign outward contact normal of master block
+=======
+	// assign outward contact normal of primary block
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  	ContactNormal(0) = normal(0)/normal.Norm();
 	ContactNormal(1) = normal(1)/normal.Norm();
 
@@ -668,7 +676,11 @@ ZeroLengthContact2D::getResponse(int responseID, Information &eleInfo)
 
 // Private methods
 
+<<<<<<< HEAD
 // determine the slave/master pair in contact, and setup Vectors (N,T1,T2)
+=======
+// determine the secondary/primary pair in contact, and setup Vectors (N,T1,T2)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  int ZeroLengthContact2D::contactDetect(void)
  {
   	//opserr<< this->getTag()<< " ZeroLengthContact2D::contactDetect" <<endln;
@@ -685,6 +697,7 @@ ZeroLengthContact2D::getResponse(int responseID, Information &eleInfo)
 
 	  ////////////////////////////// for transient gap ///////////////////////////////////
       // DEFINE:
+<<<<<<< HEAD
 	  // gap = (U_master-U_slave) \dot (ContactNormal),
 	  // defines overlapped normal distance, always keep positive (+) when contacted
       ///*
@@ -697,12 +710,27 @@ ZeroLengthContact2D::getResponse(int responseID, Information &eleInfo)
 		   int i;
 		   for (i=0; i<2; i++){
 				   gap += (U_master(i)-U_slave(i))* ContactNormal(i);
+=======
+	  // gap = (U_primary-U_secondary) \dot (ContactNormal),
+	  // defines overlapped normal distance, always keep positive (+) when contacted
+      ///*
+		   const Vector   // get current trial position
+	  		       &U_secondary = nodePointers[0]->getCrds() + nodePointers[0]->getTrialDisp();
+
+           const Vector
+	  		       &U_primary= nodePointers[1]->getCrds() + nodePointers[1]->getTrialDisp();
+	       gap=0;
+		   int i;
+		   for (i=0; i<2; i++){
+				   gap += (U_primary(i)-U_secondary(i))* ContactNormal(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		   }
        //*////////////////////////////// for transient gap ///////////////////////////////
 
 	  // we have another way to define the gap, can replace previous code block if want
       /*/////////////// for dynamic gap //////////////////////
 	   	  const Vector   // get current trial incremental position
+<<<<<<< HEAD
 	   		   &U_slave = nodePointers[0]->getCrds() + nodePointers[0]->getIncrDisp();
 
             const Vector
@@ -711,6 +739,16 @@ ZeroLengthContact2D::getResponse(int responseID, Information &eleInfo)
 	  	  int i;
 	  	  for (i=0; i<2; i++){
 	  	       gap += (U_master(i)-U_slave(i))* ContactNormal(i);
+=======
+	   		   &U_secondary = nodePointers[0]->getCrds() + nodePointers[0]->getIncrDisp();
+
+            const Vector
+	  		   &U_primary= nodePointers[1]->getCrds() + nodePointers[1]->getIncrDisp();
+	        gap=0;
+	  	  int i;
+	  	  for (i=0; i<2; i++){
+	  	       gap += (U_primary(i)-U_secondary(i))* ContactNormal(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             }
             gap+=gap_n;
 
@@ -745,8 +783,13 @@ void  ZeroLengthContact2D::formResidAndTangent( int tang_flag )
 
 
 	// trial displacement vectors
+<<<<<<< HEAD
  	Vector DispTrialS(2); // trial disp for slave node
 	Vector DispTrialM(2); // trial disp for master node
+=======
+ 	Vector DispTrialS(2); // trial disp for secondary node
+	Vector DispTrialP(2); // trial disp for primary node
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	// trial frictional force vectors (in local coordinate)
     double t_trial;
     double TtrNorm;
@@ -778,18 +821,30 @@ void  ZeroLengthContact2D::formResidAndTangent( int tang_flag )
        // pressure = Kn*gap + lambda;  // changed for augmented lagrange
 
 		DispTrialS=nodePointers[0]->getTrialDisp();
+<<<<<<< HEAD
         DispTrialM=nodePointers[1]->getTrialDisp();
 
         //opserr<<"DispTrialS " << DispTrialS;
         //opserr<<"DispTrialM " << DispTrialM;
+=======
+        DispTrialP=nodePointers[1]->getTrialDisp();
+
+        //opserr<<"DispTrialS " << DispTrialS;
+        //opserr<<"DispTrialP " << DispTrialP;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
        //nodal displacements
         double ul[4];
 
 		ul[0]=DispTrialS(0);
 		ul[1]=DispTrialS(1);
+<<<<<<< HEAD
  		ul[2]=DispTrialM(0);
 		ul[3]=DispTrialM(1);
+=======
+ 		ul[2]=DispTrialP(0);
+		ul[3]=DispTrialP(1);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 		t_trial = 0;
         xi=0;
@@ -899,12 +954,20 @@ void  ZeroLengthContact2D::formResidAndTangent( int tang_flag )
 						      ___\/____
 						     /         \       /\
              Rx(1)     ---\ /    (1)    \     /||\n    Note: (t,n) follows RightHand rule
+<<<<<<< HEAD
 	         =shear*t  ---/ \   slave   /      ||
+=======
+	         =shear*t  ---/ \   secondary   /      ||
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 							 \_________/       ||_____\t
 						-----------------------*------/
                         |                      |
                         |                      |
+<<<<<<< HEAD
 						|    (2) Master        |/---- Rx(2) = shear*(-t)
+=======
+						|    (2) Primary        |/---- Rx(2) = shear*(-t)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 						|                      |\----
 						------------------------
                                   /\

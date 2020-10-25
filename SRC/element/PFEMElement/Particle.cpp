@@ -29,9 +29,17 @@
 
 #include "Particle.h"
 
+<<<<<<< HEAD
 Particle::Particle()
         : coord(), velocity(), accel(), pressure(0), pdot(0), gtag(0),
           updated(false), dt(0.0), fixed(false) {
+=======
+size_t Particle::curr_tag = 1;
+
+Particle::Particle()
+        : coord(), coordn(), velocity(), accel(), pressure(0), pdot(0), gtag(0),
+          updated(false), dt(0.0), fixed(false), tag(curr_tag++) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 Particle::~Particle() {

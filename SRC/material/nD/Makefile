@@ -41,6 +41,10 @@ OBJS       = NDMaterial.o \
 	ElasticIsotropicPlaneStress2D.o \
 	ElasticIsotropicPlateFiber.o \
 	ElasticIsotropicThreeDimensional.o \
+<<<<<<< HEAD
+=======
+	IncrementalElasticIsotropicThreeDimensional.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	ElasticOrthotropicMaterial.o \
 	ElasticOrthotropicThreeDimensional.o \
 	PressureDependentElastic3D.o \
@@ -107,7 +111,11 @@ tidy:
 	@$(RM) $(RMFLAGS) Makefile.bak *~ #*# core
 
 clean: tidy
+<<<<<<< HEAD
 	@$(RM) $(RMFLAGS) $(OBJS) *.o
+=======
+	@$(RM) $(RMFLAGS) $(OBJS) *.o *.mod
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	@$(RM) $(RMFLAGS) .inslog*
 	@$(RM) $(RMFLAGS) tca.map
 

@@ -62,7 +62,11 @@ OPS_BeamContact2Dp(void)
   int numRemainingInputArgs = OPS_GetNumRemainingInputArgs();
 
   if (numRemainingInputArgs < 7) {
+<<<<<<< HEAD
     opserr << "Invalid #args, want: element BeamContact2Dp eleTag? iNode? jNode? slaveNode? matTag? width? penalty? <cSwitch>?\n";
+=======
+    opserr << "Invalid #args, want: element BeamContact2Dp eleTag? iNode? jNode? secondaryNode? matTag? width? penalty? <cSwitch>?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	return 0;
   }
 
@@ -275,7 +279,11 @@ BeamContact2Dp::setDomain(Domain *theDomain)
 	ma_1 = (mDcrd_b - mDcrd_a)/mLength;
 	mb_1 = ma_1;
 
+<<<<<<< HEAD
 	// perform projection of slave node to beam centerline
+=======
+	// perform projection of secondary node to beam centerline
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	mXi = ((mDcrd_b - mDcrd_s)^(mDcrd_b - mDcrd_a))/mLength;  // initial assumption
 	mXi = Project(mXi);                                       // actual location
 
@@ -387,7 +395,11 @@ BeamContact2Dp::update(void)
     double rot_b;
     Vector x_c(BC2Dp_NUM_DIM);
 
+<<<<<<< HEAD
 	// update slave node coordinates
+=======
+	// update secondary node coordinates
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	mDcrd_s = mIcrd_s + theNodes[2]->getTrialDisp();
 
 	// update nodal coordinates
@@ -972,7 +984,11 @@ Response*
 BeamContact2Dp::setResponse(const char **argv, int argc, OPS_Stream &eleInfo)
 {
 	if (strcmp(argv[0],"force") == 0 || strcmp(argv[0],"forces") == 0) {
+<<<<<<< HEAD
 		// forces on slave node
+=======
+		// forces on secondary node
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		return new ElementResponse(this, 1, Vector(2));
 
 	} else if (strcmp(argv[0],"frictionforce") == 0 || strcmp(argv[0],"frictionforces") == 0) {
@@ -983,8 +999,14 @@ BeamContact2Dp::setResponse(const char **argv, int argc, OPS_Stream &eleInfo)
 		// scalar contact forces
 		return new ElementResponse(this, 3, Vector(2));
 
+<<<<<<< HEAD
 	} else if (strcmp(argv[0],"masterforce") == 0 || strcmp(argv[0],"masterforces") == 0) {
 		// reactions (forces and moments) on master nodes
+=======
+	} else if (strcmp(argv[0],"masterforce") == 0 || strcmp(argv[0],"masterforces") == 0 ||
+		   strcmp(argv[0],"primaryforce") == 0 || strcmp(argv[0],"primaryforces") == 0) {
+		// reactions (forces and moments) on primary nodes
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		return new ElementResponse(this, 4, Vector(6));
 
     } else if (strcmp(argv[0],"gap") == 0) {
@@ -1005,8 +1027,13 @@ BeamContact2Dp::getResponse(int responseID, Information &eleInfo)
 	// initialize variables
 	Vector force(2);
 	Vector frictForce(2);
+<<<<<<< HEAD
 	Vector slaveForce(2);
 	Vector masterForce(6);
+=======
+	Vector secondaryForce(2);
+	Vector primaryForce(6);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     Vector theGap(1);
 
 	// get contact "stress" vector
@@ -1014,10 +1041,17 @@ BeamContact2Dp::getResponse(int responseID, Information &eleInfo)
 
 	if (responseID == 1) {
 
+<<<<<<< HEAD
 		// forces on slave node
 		slaveForce(0) = -mInternalForces(6);
 		slaveForce(1) = -mInternalForces(7);
 		return eleInfo.setVector(slaveForce);
+=======
+		// forces on secondar node
+		secondaryForce(0) = -mInternalForces(6);
+		secondaryForce(1) = -mInternalForces(7);
+		return eleInfo.setVector(secondaryForce);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	
 	} else if (responseID == 2) {
 
@@ -1034,6 +1068,7 @@ BeamContact2Dp::getResponse(int responseID, Information &eleInfo)
 
 	} else if (responseID == 4) {
 
+<<<<<<< HEAD
 		// reactions (forces and moments) on master nodes
 		for (int i = 0;  i < 3; i++) {
 
@@ -1041,6 +1076,15 @@ BeamContact2Dp::getResponse(int responseID, Information &eleInfo)
 			masterForce(i+3) = -mInternalForces(i+3);
 		}
 		return eleInfo.setVector(masterForce);
+=======
+		// reactions (forces and moments) on primary nodes
+		for (int i = 0;  i < 3; i++) {
+
+			primaryForce(i)   = -mInternalForces(i);
+			primaryForce(i+3) = -mInternalForces(i+3);
+		}
+		return eleInfo.setVector(primaryForce);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     } else if (responseID == 5) {
         theGap(0) = mGap;

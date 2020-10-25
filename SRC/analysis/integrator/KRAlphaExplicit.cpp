@@ -21,8 +21,13 @@
 #include <KRAlphaExplicit.h>
 #include <FE_Element.h>
 #include <LinearSOE.h>
+<<<<<<< HEAD
 #include <FullGenLinSOE.h>
 #include <FullGenLinLapackSolver.h>
+=======
+#include "fullGEN/FullGenLinSOE.h"
+#include "fullGEN/FullGenLinLapackSolver.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <AnalysisModel.h>
 #include <Vector.h>
 #include <DOF_Group.h>
@@ -553,6 +558,14 @@ int KRAlphaExplicit::commit(void)
     return theModel->commitDomain();
 }
 
+<<<<<<< HEAD
+=======
+const Vector &
+KRAlphaExplicit::getVel()
+{
+  return *Udot;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 int KRAlphaExplicit::sendSelf(int cTag, Channel &theChannel)
 {

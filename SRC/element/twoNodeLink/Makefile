@@ -1,7 +1,13 @@
 
 include ../../../Makefile.def
+<<<<<<< HEAD
 OBJS       = LinearElasticSpring.o \
     TwoNodeLink.o Inerter.o
+=======
+OBJS = Inerter.o \
+       LinearElasticSpring.o \
+	   TwoNodeLink.o
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 # Compilation control
 

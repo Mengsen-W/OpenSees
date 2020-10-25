@@ -138,6 +138,7 @@ void getCBDIinfluenceMatrix(int nIntegrPts, double *pts, double L, Matrix &ls)
    Matrix l(nIntegrPts, nIntegrPts);
    Matrix I(nIntegrPts,nIntegrPts);      // an identity matrix for matrix inverse
 
+<<<<<<< HEAD
    for (i = 1; i <= nIntegrPts; i++)
       for (j = 1; j <= nIntegrPts; j++)
       {
@@ -147,6 +148,16 @@ void getCBDIinfluenceMatrix(int nIntegrPts, double *pts, double L, Matrix &ls)
          G(i0,j0) =  pow(xi,j-1);
          l(i0,j0) = (pow(xi,j+1)-xi)/(j*(j+1));
       }
+=======
+   for (i = 0; i < nIntegrPts; i++) {
+     xi = pts[i];
+     for (j = 1; j <= nIntegrPts; j++) {
+       j0 = j - 1;
+       G(i,j0) =  pow(xi,j-1);
+       l(i,j0) = (pow(xi,j+1)-xi)/(j*(j+1));
+     }
+   }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
    
    I.Zero();
    for (i=0; i<nIntegrPts; i++)
@@ -154,13 +165,54 @@ void getCBDIinfluenceMatrix(int nIntegrPts, double *pts, double L, Matrix &ls)
 
    //invertMatrix(nIntegrPts, G, Ginv);
    if (G.Solve(I,Ginv) < 0)
+<<<<<<< HEAD
      opserr << "LargeDispBeamCol3d::getCBDIinfluenceMatrix() - could not invert G\n";
+=======
+     opserr << "getCBDIinfluenceMatrix() - could not invert G\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       
    // ls = l * Ginv * (L*L);
    ls.addMatrixProduct(0.0, l, Ginv, L*L);
 }
 
+<<<<<<< HEAD
 
 
 
 
+=======
+void getCBDIinfluenceMatrix(int nPts, double *pts, int nIntegrPts, double *integrPts, double L, Matrix &ls)
+{
+   // setup Vandermode and CBDI influence matrices
+   int i, j, i0, j0;
+   double xi;
+   Matrix G(nIntegrPts, nIntegrPts); 
+   Matrix Ginv(nIntegrPts, nIntegrPts);
+   Matrix l(nPts, nIntegrPts);
+   Matrix I(nIntegrPts,nIntegrPts);      // an identity matrix for matrix inverse
+
+   // Loop over columns
+   for (j = 1; j <= nIntegrPts; j++) {
+     j0 = j - 1;
+     for (i = 0; i < nIntegrPts; i++) {
+       xi = integrPts[i];
+       G(i,j0) =  pow(xi,j-1);
+     }
+     for (i = 0; i < nPts; i++) {
+       xi = pts[i];
+       l(i,j0) = (pow(xi,j+1)-xi)/(j*(j+1));
+     }
+   }
+   
+   I.Zero();
+   for (i=0; i<nIntegrPts; i++)
+     I(i,i) = 1.0;
+
+   //invertMatrix(nIntegrPts, G, Ginv);
+   if (G.Solve(I,Ginv) < 0)
+     opserr << "getCBDIinfluenceMatrix() - could not invert G\n";
+      
+   // ls = l * Ginv * (L*L);
+   ls.addMatrixProduct(0.0, l, Ginv, L*L);
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

@@ -45,20 +45,30 @@
 #include <PeerNGAMotion.h>
 #include <string.h>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #ifdef _RELIABILITY
 #include <DiscretizedRandomProcessSeries.h>
 #include <SimulatedRandomProcessSeries.h>
 #include <Spectrum.h>
 #include <RandomNumberGenerator.h>
 #include <ReliabilityDomain.h>
+<<<<<<< HEAD
 #include <NewDiscretizedRandomProcessSeries.h>
+=======
+//#include <NewDiscretizedRandomProcessSeries.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 extern ReliabilityDomain *theReliabilityDomain;
 extern RandomNumberGenerator *theRandomNumberGenerator;
 #endif
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <SimulationInformation.h>
 extern SimulationInformation simulationInfo;
 //extern const char * getInterpPWD(Tcl_Interp *interp);  // commands.cpp
@@ -79,6 +89,7 @@ extern void *OPS_PulseSeries(void);
 extern void *OPS_PeerMotion(void);
 extern void *OPS_PeerNGAMotion(void);
 
+<<<<<<< HEAD
 #include <TclModelBuilder.h>
 
 extern int OPS_ResetInput(ClientData clientData, 
@@ -90,6 +101,11 @@ extern int OPS_ResetInput(ClientData clientData,
 			  TclModelBuilder *builder);
 
 
+=======
+#include <elementAPI.h>
+#include <TclModelBuilder.h>
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 TimeSeries *
 TclTimeSeriesCommand(ClientData clientData, 
 		     Tcl_Interp *interp,
@@ -98,7 +114,11 @@ TclTimeSeriesCommand(ClientData clientData,
 		     Domain *theDomain)
 {
   // note the 1 instead of usual 2
+<<<<<<< HEAD
   OPS_ResetInput(clientData, interp, 1, argc, argv, theDomain, 0);	  
+=======
+    OPS_ResetInputNoBuilder(clientData, interp, 1, argc, argv, theDomain);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			    
   TimeSeries *theSeries = 0;
 
@@ -325,7 +345,10 @@ TclTimeSeriesCommand(ClientData clientData,
 
       endMarker++;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     if (filePathName != 0 && fileTimeName == 0 && timeIncr != 0.0) {
       //      const char *pwd = getInterpPWD(interp);
@@ -399,7 +422,10 @@ TclTimeSeriesCommand(ClientData clientData,
     }
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   else if ((strcmp(argv[0],"PeerNGADatabase") == 0) || (strcmp(argv[0],"PeerNGAMotion") == 0)) {
 
 
@@ -435,7 +461,10 @@ TclTimeSeriesCommand(ClientData clientData,
     }
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #ifdef _RELIABILITY
 
   else if (strcmp(argv[0],"DiscretizedRandomProcess") == 0) {
@@ -486,6 +515,10 @@ TclTimeSeriesCommand(ClientData clientData,
   }
   
    ///// added by K Fujimura /////
+<<<<<<< HEAD
+=======
+   /*FMK RELIABILITY
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   else if (strcmp(argv[0],"NewDiscretizedRandomProcess") == 0) {
     
     double mean, maxStdv;
@@ -530,9 +563,15 @@ TclTimeSeriesCommand(ClientData clientData,
     }	
     
     // Parsing was successful, create the random process series object
+<<<<<<< HEAD
     theSeries = new NewDiscretizedRandomProcessSeries(numModFuncs,theModFUNCS,mean,maxStdv);       	
   }
 
+=======
+  theSeries = new NewDiscretizedRandomProcessSeries(numModFuncs,theModFUNCS,mean,maxStdv);       	
+  }
+  */
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   else if (strcmp(argv[0],"SimulatedRandomProcess") == 0) {
     
     int spectrumTag, numFreqIntervals;
@@ -573,8 +612,11 @@ TclTimeSeriesCommand(ClientData clientData,
 
 #endif
 
+<<<<<<< HEAD
 
 	
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   else {
     for (int i = 0; i < argc; i++)
       opserr << argv[i] << ' ';
@@ -611,4 +653,7 @@ TclSeriesCommand(ClientData clientData, Tcl_Interp *interp, TCL_Char *arg)
   cleanup(argv);
   return theSeries;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

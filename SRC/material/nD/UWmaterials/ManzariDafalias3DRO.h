@@ -29,7 +29,11 @@
 #include <stdlib.h> 
 #include <math.h> 
 
+<<<<<<< HEAD
 #include <ManzariDafaliasRO.h>
+=======
+#include "ManzariDafaliasRO.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class ManzariDafalias3DRO : public ManzariDafaliasRO
 {

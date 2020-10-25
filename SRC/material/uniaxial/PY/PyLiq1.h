@@ -57,6 +57,7 @@
 
 #include <UniaxialMaterial.h>
 #include <Domain.h>
+<<<<<<< HEAD
 #include <FourNodeQuad.h>
 #include <FluidSolidPorousMaterial.h>
 #include <PressureDependMultiYield.h>
@@ -72,6 +73,16 @@
 
 
 	class PyLiq1 : public PySimple1
+=======
+//#include <InitialStateAnalysisWrapper.h>
+#include "PySimple1.h"
+#include <iostream>
+#include <string>
+
+class TimeSeries;
+
+class PyLiq1 : public PySimple1
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
   public:
   PyLiq1(int tag, int classtag, int soilType, double pult, double y50, double drag,

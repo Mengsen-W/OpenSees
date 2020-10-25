@@ -4,7 +4,11 @@ OBJS       = ForceBeamColumn2d.o ForceBeamColumn3d.o \
 	ForceBeamColumn2dThermal.o \
 	ElasticForceBeamColumn2d.o ElasticForceBeamColumn3d.o \
 	ElasticForceBeamColumnWarping2d.o \
+<<<<<<< HEAD
 	ForceBeamColumnCBDI2d.o \
+=======
+	ForceBeamColumnCBDI2d.o ForceBeamColumnCBDI3d.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	ForceBeamColumnWarping2d.o \
 	TclForceBeamColumnCommand.o \
 	BeamIntegration.o \
@@ -17,6 +21,10 @@ OBJS       = ForceBeamColumn2d.o ForceBeamColumn3d.o \
 	HingeRadauBeamIntegration.o \
 	HingeRadauTwoBeamIntegration.o \
 	UserDefinedBeamIntegration.o \
+<<<<<<< HEAD
+=======
+	SimpsonBeamIntegration.o \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	UserDefinedHingeIntegration.o \
 	DistHingeIntegration.o \
 	RegularizedHingeIntegration.o \

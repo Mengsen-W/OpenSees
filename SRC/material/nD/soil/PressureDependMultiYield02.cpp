@@ -19,6 +19,10 @@
 #include <Parameter.h>
 #include <string.h>
 #include <elementAPI.h>
+<<<<<<< HEAD
+=======
+#include <MultiYieldSurface.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 int PressureDependMultiYield02::matCount=0;
 int* PressureDependMultiYield02::loadStagex = 0;  //=0 if elastic; =1 if plastic

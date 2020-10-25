@@ -112,13 +112,30 @@ class Element : public DomainComponent
     virtual int storePreviousK(int numK);
     virtual const Matrix *getPreviousK(int num);
 
+<<<<<<< HEAD
 #if _DLL
 	const Vector& getRayleighDampingForces(void);
 #endif
+=======
+    virtual void onActivate();
+    virtual void onDeactivate();
+
+    void activate();
+    void deactivate();
+
+    bool isActive();
+
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 protected:
 #if !_DLL
 	const Vector& getRayleighDampingForces(void);
 #endif
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     double alphaM, betaK, betaK0, betaKc;
     Matrix *Kc; // pointer to hold last committed matrix if needed for rayleigh damping
 
@@ -132,6 +149,11 @@ protected:
     static Vector ** theVectors2; 
     static int numMatrices;
 
+<<<<<<< HEAD
+=======
+    bool is_this_element_active;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   private:
 };
 

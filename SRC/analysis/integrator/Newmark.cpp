@@ -50,7 +50,11 @@
 #include <LoadPatternIter.h>
 #include <elementAPI.h>
 #include <fstream>
+<<<<<<< HEAD
 #include<ReliabilityDomain.h>//Abbas
+=======
+//#include<ReliabilityDomain.h>//Abbas
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include<Parameter.h>
 #include<ParameterIter.h>//Abbas
 static bool converged = false;
@@ -102,9 +106,15 @@ OPS_Newmark(void)
 }
 
 
+<<<<<<< HEAD
 Newmark::Newmark()
     : TransientIntegrator(INTEGRATOR_TAGS_Newmark),
       displ(1), gamma(0), beta(0), 
+=======
+Newmark::Newmark(int classTag)
+    : TransientIntegrator(classTag),
+      displ(true), gamma(0), beta(0), 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       c1(0.0), c2(0.0), c3(0.0), 
       Ut(0), Utdot(0), Utdotdot(0), U(0), Udot(0), Udotdot(0),
       determiningMass(false),
@@ -116,8 +126,13 @@ Newmark::Newmark()
 }
 
 
+<<<<<<< HEAD
 Newmark::Newmark(double _gamma, double _beta, int dispFlag, bool aflag)
     : TransientIntegrator(INTEGRATOR_TAGS_Newmark),
+=======
+Newmark::Newmark(double _gamma, double _beta, bool dispFlag, bool aflag, int classTag_)
+    : TransientIntegrator(classTag_),
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       displ(dispFlag), gamma(_gamma), beta(_beta), 
       c1(0.0), c2(0.0), c3(0.0), 
       Ut(0), Utdot(0), Utdotdot(0), U(0), Udot(0), Udotdot(0),
@@ -479,7 +494,11 @@ int Newmark::update(const Vector &deltaU)
         
         (*Udotdot) += deltaU;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // update the response at the DOFs
     theModel->setResponse(*U,*Udot,*Udotdot);
     if (theModel->updateDomain() < 0)  {

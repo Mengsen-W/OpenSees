@@ -129,6 +129,18 @@ void* OPS_PFEMElement2DBubble(const ID &info)
             data[i] = mdata(i);
         }
 
+<<<<<<< HEAD
+=======
+    } else if (info.Size()>0 && info(0)==3) {
+        if (info.Size() < 2) {
+            opserr << "WARNING: need info -- inmesh, meshtag\n";
+            return 0;
+        }
+
+        // get the data for a mesh
+        Vector& mdata = meshdata[info(1)];
+        return &mdata;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 
     return new PFEMElement2DBubble(idata[0],idata[1],idata[2],idata[3],
@@ -138,7 +150,13 @@ void* OPS_PFEMElement2DBubble(const ID &info)
 // for FEM_ObjectBroker, recvSelf must invoke
 PFEMElement2DBubble::PFEMElement2DBubble()
         :Element(0, ELE_TAG_PFEMElement2DBubble), ntags(6),
+<<<<<<< HEAD
          rho(0), mu(0), bx(0), by(0), J(0.0), dJ(6), numDOFs(),thickness(1.0), kappa(-1), parameterID(0)
+=======
+         rho(0), mu(0), bx(0), by(0), J(0.0), dJ(6),
+         numDOFs(),thickness(1.0), kappa(-1), parameterID(0),
+         M(), D(), F(), Fp()
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     for(int i=0;i<3;i++)
     {
@@ -156,7 +174,12 @@ PFEMElement2DBubble::PFEMElement2DBubble(int tag, int nd1, int nd2, int nd3,
                                          double thk, double ka)
         :Element(tag, ELE_TAG_PFEMElement2DBubble), ntags(6),
          rho(r), mu(m), bx(b1), by(b2), J(0.0), dJ(6), numDOFs(),
+<<<<<<< HEAD
          thickness(thk), kappa(ka), parameterID(0)
+=======
+         thickness(thk), kappa(ka), parameterID(0),
+         M(), D(), F(), Fp()
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
     ntags(0)=nd1; ntags(2)=nd2; ntags(4)=nd3;
     ntags(1)=nd1; ntags(3)=nd2; ntags(5)=nd3;
@@ -182,8 +205,11 @@ PFEMElement2DBubble::~PFEMElement2DBubble()
     }
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int
 PFEMElement2DBubble::getNumExternalNodes() const
 {
@@ -222,6 +248,62 @@ int PFEMElement2DBubble::commitState()
 }
 
 int
+<<<<<<< HEAD
+=======
+PFEMElement2DBubble::updateMatrix()
+{
+    int ndf = getNumDOF();
+    M.resize(ndf, ndf);
+    M.Zero();
+    D.resize(ndf, ndf);
+    D.Zero();
+    F.resize(6);
+    F.Zero();
+    Fp.resize(3);
+    Fp.Zero();
+
+    // mass
+    double m = getM();
+    double mp = getMp();
+    for(int a=0; a<3; a++) {
+        M(numDOFs(2*a), numDOFs(2*a)) = m;          // Mxd
+        M(numDOFs(2*a)+1, numDOFs(2*a)+1) = m;      // Myd
+
+        for(int b=0; b<3; b++) {
+            if(a == b) {
+                M(numDOFs(2*a+1), numDOFs(2*b+1)) = 2*mp;   // Mp
+            } else {
+                M(numDOFs(2*a+1), numDOFs(2*b+1)) = mp;   // Mp
+            }
+        }
+    }
+
+    // damp
+    Vector G(6);
+    getG(G);
+    Matrix L(3,3);
+    getL(L);
+    for(int a=0; a<3; a++) {
+        for(int b=0; b<3; b++) {
+            D(numDOFs(2*a+1), numDOFs(2*b)) = G(2*b);   // GxT
+            D(numDOFs(2*a+1), numDOFs(2*b)+1) = G(2*b+1); // GyT
+
+            D(numDOFs(2*a), numDOFs(2*b+1)) = -G(2*a);   // -Gx
+            D(numDOFs(2*a)+1, numDOFs(2*b+1)) = -G(2*a+1); // -Gy
+
+            D(numDOFs(2*a+1), numDOFs(2*b+1)) = L(a,b);   // bubble
+        }
+    }
+
+    // force
+    getFp(Fp);
+    getF(F);
+
+    return 0;
+}
+
+int
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 PFEMElement2DBubble::update()
 {
     if (dispon) {
@@ -242,6 +324,10 @@ PFEMElement2DBubble::update()
 
     if (dispon) {
         setdJ();
+<<<<<<< HEAD
+=======
+        updateMatrix();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 
     return 0;
@@ -250,6 +336,7 @@ PFEMElement2DBubble::update()
 const Matrix&
 PFEMElement2DBubble::getMass()
 {
+<<<<<<< HEAD
 
     // resize K
     int ndf = this->getNumDOF();
@@ -274,11 +361,15 @@ PFEMElement2DBubble::getMass()
     }
 
     return K;
+=======
+    return M;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 const Matrix&
 PFEMElement2DBubble::getDamp()
 {
+<<<<<<< HEAD
 
     // resize K
     int ndf = this->getNumDOF();
@@ -305,6 +396,9 @@ PFEMElement2DBubble::getDamp()
     }
 
     return K;
+=======
+    return D;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 const Matrix&
@@ -351,6 +445,14 @@ PFEMElement2DBubble::getResistingForce()
 const Vector&
 PFEMElement2DBubble::getResistingForceIncInertia()
 {
+<<<<<<< HEAD
+=======
+    if (!dispon) {
+        if (M.noCols() == 0) {
+            updateMatrix();
+        }
+    }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     // resize P
     int ndf = this->getNumDOF();
@@ -376,21 +478,31 @@ PFEMElement2DBubble::getResistingForceIncInertia()
 
     }
 
+<<<<<<< HEAD
     // bubble force
     Vector fp(3);
     getFp(fp);
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // internal force
     P.addMatrixVector(1.0, getMass(), vdot, 1.0);
     P.addMatrixVector(1.0, getDamp(), v, 1.0);
 
     // external force
+<<<<<<< HEAD
     Vector F(6);
     getF(F);
     for(int i=0; i<3; i++) {
         P(numDOFs(2*i)) -= F(2*i);
         P(numDOFs(2*i)+1) -= F(2*i+1);
         P(numDOFs(2*i+1)) -= fp(i);
+=======
+    for(int i=0; i<3; i++) {
+        P(numDOFs(2*i)) -= F(2*i);
+        P(numDOFs(2*i)+1) -= F(2*i+1);
+        P(numDOFs(2*i+1)) -= Fp(i);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 
     return P;

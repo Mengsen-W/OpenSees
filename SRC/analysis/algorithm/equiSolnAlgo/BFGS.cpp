@@ -80,7 +80,10 @@ BFGS::BFGS(int theTangentToUse, int n )
   z  = new Vector*[numberLoops+3];
 
   //  r  = new (Vector*)[numberLoops+3];
+<<<<<<< HEAD
   opserr << "HELLO3\n";
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   residOld = 0;
   residNew = 0;
   du = 0;

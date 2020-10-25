@@ -265,6 +265,11 @@ int OPS_sectionStiffness();
 int OPS_sectionFlexibility();
 int OPS_sectionLocation();
 int OPS_sectionWeight();
+<<<<<<< HEAD
+=======
+int OPS_sectionDisplacement();
+int OPS_cbdiDisplacement();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int OPS_basicDeformation();
 int OPS_basicForce();
 int OPS_basicStiffness();
@@ -285,6 +290,10 @@ int OPS_loadConst();
 int OPS_calculateNodalReactions();
 int OPS_rayleighDamping();
 int OPS_setTime();
+<<<<<<< HEAD
+=======
+int OPS_setCreep();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int OPS_removeObject();
 int OPS_addNodalMass();
 int OPS_buildModel();
@@ -315,6 +324,10 @@ int OPS_sdfResponse();
 int OPS_getNumThreads();
 int OPS_setNumThreads();
 int OPS_setStartNodeTag();
+<<<<<<< HEAD
+=======
+int OPS_partition();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // OpenSeesReliabilityCommands.cpp
 int OPS_randomVariable();
@@ -327,6 +340,10 @@ int OPS_getRVInverseCDF();
 int OPS_addCorrelate();
 int OPS_probabilityTransformation();
 int OPS_transformUtoX();
+<<<<<<< HEAD
+=======
+int OPS_wipeReliability();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 /* OpenSeesCommands.cpp */
 int OPS_wipe();
@@ -405,6 +422,10 @@ void* OPS_PFEMSolver();
 void* OPS_PFEMCompressibleSolver();
 void* OPS_PFEMQuasiSolver();
 void* OPS_PFEMSolver_Umfpack();
+<<<<<<< HEAD
+=======
+void* OPS_PFEMSolver_Mumps();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 void* OPS_PFEMSolver_Laplace();
 void* OPS_PFEMSolver_LumpM();
 void* OPS_SymSparseLinSolver();
@@ -432,6 +453,10 @@ void* OPS_CTestRelativeTotalNormDispIncr();
 void* OPS_LoadControlIntegrator();
 void* OPS_DisplacementControlIntegrator();
 void* OPS_Newmark();
+<<<<<<< HEAD
+=======
+void* OPS_GimmeMCK();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 void* OPS_ArcLength();
 void* OPS_ArcLength1();
 void* OPS_HSConstraint();
@@ -487,8 +512,12 @@ void* OPS_BFGS();
 
 // commands that changed or added:
 //
+<<<<<<< HEAD
 //    missing : video, partition,
 //              reliability, wipeReliability,
+=======
+//    missing : video,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //              FiberThermal, FiberInt,
 //              UCFiber, TclModelBuilderYS_SectionCommand, yieldSurface_BC,
 //              ysEvolutionModel, plasticMaterial, cyclicModel, damageModel,

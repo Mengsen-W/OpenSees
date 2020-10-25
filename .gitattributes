@@ -3568,6 +3568,11 @@ SRC/material/uniaxial/CubicSpline.cpp -text
 SRC/material/uniaxial/CubicSpline.h -text
 SRC/material/uniaxial/DamperMaterial.cpp -text
 SRC/material/uniaxial/DamperMaterial.h -text
+<<<<<<< HEAD
+=======
+SRC/material/uniaxial/DegradingPinchedBW.cpp -text
+SRC/material/uniaxial/DegradingPinchedBW.h -text
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 SRC/material/uniaxial/DoddRestr.cpp -text
 SRC/material/uniaxial/DoddRestr.h -text
 SRC/material/uniaxial/DoddRestrepo.f -text

@@ -822,7 +822,11 @@ UDP_Socket::getBytesAvailable()
 char *
 UDP_Socket::addToProgram()
 {
+<<<<<<< HEAD
     char *tcp = " 2 ";
+=======
+    const char *tcp = " 2 ";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     char  my_InetAddr[MAX_INET_ADDR];
     char  myPortNum[8];

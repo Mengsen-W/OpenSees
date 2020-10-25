@@ -88,9 +88,15 @@ Matrix ForceBeamColumn3d::theMatrix(12,12);
 Vector ForceBeamColumn3d::theVector(12);
 double ForceBeamColumn3d::workArea[200];
 
+<<<<<<< HEAD
 Vector *ForceBeamColumn3d::vsSubdivide = 0;
 Matrix *ForceBeamColumn3d::fsSubdivide = 0;
 Vector *ForceBeamColumn3d::SsrSubdivide = 0;
+=======
+Vector ForceBeamColumn3d::vsSubdivide[maxNumSections];
+Matrix ForceBeamColumn3d::fsSubdivide[maxNumSections];
+Vector ForceBeamColumn3d::SsrSubdivide[maxNumSections];
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 void* OPS_ForceBeamColumn3d()
 {
@@ -195,6 +201,7 @@ ForceBeamColumn3d::ForceBeamColumn3d():
 
   theNodes[0] = 0;  
   theNodes[1] = 0;
+<<<<<<< HEAD
 
   if (vsSubdivide == 0)
     vsSubdivide  = new Vector [maxNumSections];
@@ -206,6 +213,8 @@ ForceBeamColumn3d::ForceBeamColumn3d():
     opserr << "ForceBeamColumn3d::ForceBeamColumn3d() -- failed to allocate Subdivide arrays";   
     exit(-1);
   }
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 // constructor which takes the unique element tag, sections,
@@ -248,6 +257,7 @@ ForceBeamColumn3d::ForceBeamColumn3d (int tag, int nodeI, int nodeJ,
   }
 
   this->setSectionPointers(numSec, sec);
+<<<<<<< HEAD
 
   if (vsSubdivide == 0)
     vsSubdivide  = new Vector [maxNumSections];
@@ -259,6 +269,8 @@ ForceBeamColumn3d::ForceBeamColumn3d (int tag, int nodeI, int nodeJ,
     opserr << "ForceBeamColumn3d::ForceBeamColumn3d() -- failed to allocate Subdivide arrays";   
     exit(-1);
   }
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 // ~ForceBeamColumn3d():
@@ -2527,7 +2539,11 @@ ForceBeamColumn3d::getInitialDeformations(Vector &v0)
        }
      }
 
+<<<<<<< HEAD
 	 if (flag == OPS_PRINT_CURRENTSTATE) {
+=======
+    if (flag == OPS_PRINT_CURRENTSTATE) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
        s << "\nElement: " << this->getTag() << " Type: ForceBeamColumn3d ";
        s << "\tConnected Nodes: " << connectedExternalNodes ;
        s << "\tNumber of Sections: " << numSections;
@@ -2556,11 +2572,19 @@ ForceBeamColumn3d::getInitialDeformations(Vector &v0)
 	 << P        << " " << MZ2 << " " << -VY+p0[2] << " " 
 	 << MY2 << " " <<  VZ+p0[4] << " " << -T << endln;
 
+<<<<<<< HEAD
        if (flag == 1) { 
 	 for (int i = 0; i < numSections; i++)
 	   s << "\numSections "<<i<<" :" << *sections[i];
        }
      }
+=======
+       for (int i = 0; i < numSections; i++) {
+	 //opserr << "Section Type: " << theSections[i]->getClassTag() << endln;
+	 sections[i]->Print(s,flag);
+       }
+    }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	 if (flag == OPS_PRINT_PRINTMODEL_JSON) {
 		 s << "\t\t\t{";
@@ -2701,7 +2725,11 @@ ForceBeamColumn3d::getInitialDeformations(Vector &v0)
       // tangent drift
     } else if (strcmp(argv[0],"tangentDrift") == 0) {
       theResponse = new ElementResponse(this, 6, Vector(4));
+<<<<<<< HEAD
   
+=======
+      
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     } else if (strcmp(argv[0],"getRemCriteria1") == 0) {
       theResponse = new ElementResponse(this, 7, Vector(2));
 
@@ -2744,8 +2772,32 @@ ForceBeamColumn3d::getInitialDeformations(Vector &v0)
 
     else if (strcmp(argv[0],"integrationWeights") == 0)
       theResponse = new ElementResponse(this, 11, Vector(numSections));
+<<<<<<< HEAD
     
     else if (strcmp(argv[0],"section") ==0) { 
+=======
+
+    else if (strcmp(argv[0],"sectionDisplacements") == 0) {
+      if (argc > 1 && strcmp(argv[1],"local") == 0)
+	theResponse = new ElementResponse(this, 1111, Matrix(numSections,3));
+      else
+	theResponse = new ElementResponse(this, 111, Matrix(numSections,3));
+    }
+    
+    else if (strcmp(argv[0],"cbdiDisplacements") == 0)
+      theResponse = new ElementResponse(this, 112, Matrix(20,3));
+
+    else if (strcmp(argv[0],"xaxis") == 0 || strcmp(argv[0],"xlocal") == 0)
+      theResponse = new ElementResponse(this, 201, Vector(3));
+
+    else if (strcmp(argv[0],"yaxis") == 0 || strcmp(argv[0],"ylocal") == 0)
+      theResponse = new ElementResponse(this, 202, Vector(3));
+
+    else if (strcmp(argv[0],"zaxis") == 0 || strcmp(argv[0],"zlocal") == 0)
+      theResponse = new ElementResponse(this, 203, Vector(3));
+    
+    else if (strstr(argv[0],"section") != 0) { 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
       if (argc > 1) {
 
@@ -2893,6 +2945,115 @@ ForceBeamColumn3d::getResponse(int responseID, Information &eleInfo)
     return eleInfo.setVector(weights);
   }
 
+<<<<<<< HEAD
+=======
+  else if (responseID == 111 || responseID == 1111) {
+    double L = crdTransf->getInitialLength();
+    double pts[maxNumSections];
+    beamIntegr->getSectionLocations(numSections, L, pts);
+    // CBDI influence matrix
+    Matrix ls(numSections, numSections);
+    getCBDIinfluenceMatrix(numSections, pts, L, ls);
+    // Curvature vector
+    Vector kappaz(numSections); // about section z
+    Vector kappay(numSections); // about section y
+    for (int i = 0; i < numSections; i++) {
+      const ID &code = sections[i]->getType();
+      const Vector &e = sections[i]->getSectionDeformation();
+      int order = sections[i]->getOrder();
+      for (int j = 0; j < order; j++) {
+	if (code(j) == SECTION_RESPONSE_MZ)
+	  kappaz(i) += e(j);
+	if (code(j) == SECTION_RESPONSE_MY)
+	  kappay(i) += e(j);
+      }
+    }
+    // Displacement vector
+    Vector dispsy(numSections); // along local y
+    Vector dispsz(numSections); // along local z    
+    dispsy.addMatrixVector(0.0, ls, kappaz,  1.0);
+    dispsz.addMatrixVector(0.0, ls, kappay, -1.0);    
+    beamIntegr->getSectionLocations(numSections, L, pts);
+    static Vector uxb(3);
+    static Vector uxg(3);
+    Matrix disps(numSections,3);
+    vp = crdTransf->getBasicTrialDisp();
+    for (int i = 0; i < numSections; i++) {
+      uxb(0) = pts[i]*vp(0); // linear shape function
+      uxb(1) = dispsy(i);
+      uxb(2) = dispsz(i);
+      if (responseID == 111)
+	uxg = crdTransf->getPointGlobalDisplFromBasic(pts[i],uxb);
+      else
+	uxg = crdTransf->getPointLocalDisplFromBasic(pts[i],uxb);
+      disps(i,0) = uxg(0);
+      disps(i,1) = uxg(1);
+      disps(i,2) = uxg(2);            
+    }
+    return eleInfo.setMatrix(disps);
+  }
+
+  else if (responseID == 112) {
+    double L = crdTransf->getInitialLength();
+    double ipts[maxNumSections];
+    beamIntegr->getSectionLocations(numSections, L, ipts);
+    // CBDI influence matrix
+    double pts[20];
+    for (int i = 0; i < 20; i++)
+      pts[i] = 1.0/(20-1)*i;
+    Matrix ls(20, numSections);
+    getCBDIinfluenceMatrix(20, pts, numSections, ipts, L, ls);
+    // Curvature vector
+    Vector kappaz(numSections); // about section z
+    Vector kappay(numSections); // about section y    
+    for (int i = 0; i < numSections; i++) {
+      const ID &code = sections[i]->getType();
+      const Vector &e = sections[i]->getSectionDeformation();
+      int order = sections[i]->getOrder();
+      for (int j = 0; j < order; j++) {
+	if (code(j) == SECTION_RESPONSE_MZ)
+	  kappaz(i) += e(j);
+	if (code(j) == SECTION_RESPONSE_MY)
+	  kappay(i) += e(j);
+      }
+    }
+    // Displacement vector
+    Vector dispsy(20); // along local y
+    Vector dispsz(20); // along local z    
+    dispsy.addMatrixVector(0.0, ls, kappaz,  1.0);
+    dispsz.addMatrixVector(0.0, ls, kappay, -1.0);    
+    static Vector uxb(3);
+    static Vector uxg(3);
+    Matrix disps(20,3);
+    vp = crdTransf->getBasicTrialDisp();
+    for (int i = 0; i < 20; i++) {
+      uxb(0) = pts[i]*vp(0); // linear shape function
+      uxb(1) = dispsy(i);
+      uxb(2) = dispsz(i);      
+      uxg = crdTransf->getPointGlobalDisplFromBasic(pts[i],uxb);
+      disps(i,0) = uxg(0);
+      disps(i,1) = uxg(1);
+      disps(i,2) = uxg(2);            
+    }
+    return eleInfo.setMatrix(disps);
+  }
+
+  else if (responseID >= 201 && responseID <= 203) {
+    static Vector xlocal(3);
+    static Vector ylocal(3);
+    static Vector zlocal(3);
+
+    crdTransf->getLocalAxes(xlocal,ylocal,zlocal);
+    
+    if (responseID == 201)
+      return eleInfo.setVector(xlocal);
+    if (responseID == 202)
+      return eleInfo.setVector(ylocal);
+    if (responseID == 203)
+      return eleInfo.setVector(zlocal);    
+  }
+  
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   else if (responseID == 12)
     return eleInfo.setVector(this->getRayleighDampingForces());
 
@@ -3485,7 +3646,11 @@ ForceBeamColumn3d::commitSensitivity(int gradNumber, int numGrads)
   dqdh.addMatrixVector(1.0, kv, dvdh, 1.0);  // A dudh
 
   if (crdTransf->isShapeSensitivity()) {
+<<<<<<< HEAD
     //const Vector &dAdh_u = crdTransf->getBasicTrialDispShapeSensitivity();
+=======
+    //const Vector &dAdh_u = crdTransf->getBasicTrialDispShapeSensitivity(gradNumber);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     //dqdh.addMatrixVector(1.0, kv, dAdh_u, 1.0);  // dAdh u
   }
 

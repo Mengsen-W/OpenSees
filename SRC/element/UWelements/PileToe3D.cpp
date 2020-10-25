@@ -542,7 +542,11 @@ PileToe3D::getResponse(int responseID, Information &eleInfo)
   Vector mReactions(6);
   if (responseID == 1) {
 
+<<<<<<< HEAD
      // full reactions on master nodes
+=======
+     // full reactions on primary nodes
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
      for (int ii=0; ii<6; ii++) {
           mReactions(ii)   = -mInternalForces(ii);
      }

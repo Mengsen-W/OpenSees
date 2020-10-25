@@ -13,6 +13,10 @@
  *
  */
 #include "DRMLoadPatternWrapper.h"
+<<<<<<< HEAD
+=======
+#include "PlaneDRMInputHandler.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 DRMLoadPatternWrapper::DRMLoadPatternWrapper(int ttag, double cfact, char** on_files, int sfiles,  double ddt,
 					     int numsteps, int* filedata, int fileDatasize,

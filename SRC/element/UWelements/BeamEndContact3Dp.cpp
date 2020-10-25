@@ -282,7 +282,11 @@ BeamEndContact3Dp::update(void)
 		rot_a(i) = disp_a(i+3);
 	}
 
+<<<<<<< HEAD
 	// update slave node coordinates
+=======
+	// update secondary node coordinates
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	mDcrd_s = mIcrd_s + theNodes[1]->getTrialDisp();
 
 	// update the normal vector
@@ -544,11 +548,20 @@ Response*
 BeamEndContact3Dp::setResponse(const char **argv, int argc, OPS_Stream &eleInfo)
 {
 	if (strcmp(argv[0],"force") == 0 || strcmp(argv[0],"forces") == 0) {
+<<<<<<< HEAD
 		// forces on slave node
 		return new ElementResponse(this, 1, Vector(3));
 
 	} else if (strcmp(argv[0],"masterforce") == 0 || strcmp(argv[0],"masterforces") == 0) {
 		// reactions (forces and moments) on master node
+=======
+		// forces on secondary node
+		return new ElementResponse(this, 1, Vector(3));
+
+	} else if (strcmp(argv[0],"masterforce") == 0 || strcmp(argv[0],"masterforces") == 0 ||
+		   strcmp(argv[0],"primaryforce") == 0 || strcmp(argv[0],"primaryforces") == 0) {
+		// reactions (forces and moments) on primary node
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		return new ElementResponse(this, 2, Vector(6));
 
 	} else {
@@ -563,6 +576,7 @@ int
 BeamEndContact3Dp::getResponse(int responseID, Information &eleInfo)
 {
 	// initialize variables
+<<<<<<< HEAD
 	Vector slaveForce(3);
 	Vector masterForce(6);
 
@@ -583,6 +597,28 @@ BeamEndContact3Dp::getResponse(int responseID, Information &eleInfo)
 			masterForce(i+3) = -mInternalForces(i+3);
 		}
 		return eleInfo.setVector(masterForce);
+=======
+	Vector secondaryForce(3);
+	Vector primaryForce(6);
+
+	if (responseID == 1) {
+
+		// forces on secondary node
+		secondaryForce(0) = -mInternalForces(6);
+		secondaryForce(1) = -mInternalForces(7);
+		secondaryForce(2) = -mInternalForces(8);
+		return eleInfo.setVector(secondaryForce);
+	
+    } else if (responseID == 2) {
+
+		// reactions (forces and moments) on primary node
+		for (int i = 0;  i < 3; i++) {
+
+			primaryForce(i)   = -mInternalForces(i);
+			primaryForce(i+3) = -mInternalForces(i+3);
+		}
+		return eleInfo.setVector(primaryForce);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	} else {
 		// otherwise response quantity is unknown for the BeamEndContact3Dp class

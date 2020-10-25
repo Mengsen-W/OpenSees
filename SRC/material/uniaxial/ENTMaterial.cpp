@@ -203,9 +203,16 @@ ENTMaterial::Print(OPS_Stream &s, int flag)
 int
 ENTMaterial::setParameter(const char **argv, int argc, Parameter &param)
 {
+<<<<<<< HEAD
   if (strcmp(argv[0],"E") == 0)
     return param.addObject(1, this);
 
+=======
+  if (strcmp(argv[0],"E") == 0) {
+    param.setValue(E);
+    return param.addObject(1, this);
+  }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   return -1;
 }
 

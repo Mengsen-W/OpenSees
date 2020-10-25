@@ -41,8 +41,15 @@
 # 
 # Written: Andreas Schellenberg (andreas.schellenberg@gmail.com)
 # Date: June 2017
+<<<<<<< HEAD
 #
 def create(ops, id, h, b, cover, coreID, coverID, steelID, numBars, barArea, nfCoreY, nfCoreZ, nfCoverY, nfCoverZ, GJ):
+=======
+
+from opensees import *
+
+def create(id, h, b, cover, coreID, coverID, steelID, numBars, barArea, nfCoreY, nfCoreZ, nfCoverY, nfCoverZ, GJ):
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     # The distance from the section z-axis to the edge of the cover concrete
     # in the positive y direction
@@ -58,6 +65,7 @@ def create(ops, id, h, b, cover, coreID, coverID, steelID, numBars, barArea, nfC
     coreZ = coverZ - cover
     
     # Define the fiber section
+<<<<<<< HEAD
     ops.section("Fiber", id, "-GJ", GJ)
     
     # Define the core patch
@@ -72,6 +80,22 @@ def create(ops, id, h, b, cover, coreID, coverID, steelID, numBars, barArea, nfC
     # Define the steel along constant values of y (in the z direction)
     ops.layer("straight", steelID, numBars, barArea, -coreY, coreZ, -coreY, -coreZ)
     ops.layer("straight", steelID, numBars, barArea,  coreY, coreZ,  coreY, -coreZ)
+=======
+    section("Fiber", id, "-GJ", GJ)
+    
+    # Define the core patch
+    patch("quad", coreID, nfCoreZ, nfCoreY, -coreY, coreZ, -coreY, -coreZ, coreY, -coreZ, coreY, coreZ)
+    
+    # Define the four cover patches
+    patch("quad", coverID, 1,        nfCoverY, -coverY,  coverZ, -coreY,   coreZ,   coreY,   coreZ,   coverY,  coverZ)
+    patch("quad", coverID, 1,        nfCoverY, -coreY,  -coreZ,  -coverY, -coverZ,  coverY, -coverZ,  coreY,  -coreZ)
+    patch("quad", coverID, nfCoverZ, 1,        -coverY,  coverZ, -coverY, -coverZ, -coreY,  -coreZ,  -coreY,   coreZ)
+    patch("quad", coverID, nfCoverZ, 1,         coreY,   coreZ,   coreY,  -coreZ,   coverY, -coverZ,  coverY,  coverZ)
+    
+    # Define the steel along constant values of y (in the z direction)
+    layer("straight", steelID, numBars, barArea, -coreY, coreZ, -coreY, -coreZ)
+    layer("straight", steelID, numBars, barArea,  coreY, coreZ,  coreY, -coreZ)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     # Determine the spacing for the remaining bars in the y direction
     spacingY = (2.0*coreY)/(numBars-1)
@@ -80,5 +104,10 @@ def create(ops, id, h, b, cover, coreID, coverID, steelID, numBars, barArea, nfC
     numBars = numBars-2
     
     # Define remaining steel in the y direction
+<<<<<<< HEAD
     ops.layer("straight", steelID, numBars, barArea, (coreY-spacingY),  coreZ, (-coreY+spacingY),  coreZ)
     ops.layer("straight", steelID, numBars, barArea, (coreY-spacingY), -coreZ, (-coreY+spacingY), -coreZ)
+=======
+    layer("straight", steelID, numBars, barArea, (coreY-spacingY),  coreZ, (-coreY+spacingY),  coreZ)
+    layer("straight", steelID, numBars, barArea, (coreY-spacingY), -coreZ, (-coreY+spacingY), -coreZ)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

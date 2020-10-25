@@ -728,6 +728,43 @@ DOF_Group::incrNodeAccel(const Vector &udotdot)
     myNode->incrTrialAccel(accel);
 }
 
+<<<<<<< HEAD
+=======
+const Vector & 
+DOF_Group::getTrialDisp()
+{
+    if (myNode == 0) {
+	opserr << "DOF_Group::getTrialDisp: no associated Node ";
+	opserr << " returning the error Vector\n";
+	return errVect;
+    }
+    return myNode->getTrialDisp();
+}
+
+
+const Vector & 
+DOF_Group::getTrialVel()
+{
+    if (myNode == 0) {
+	opserr << "DOF_Group::getTrialVel: no associated Node ";
+	opserr << " returning the error Vector\n";
+	return errVect;	
+    }
+    return myNode->getTrialVel();
+}
+
+
+const Vector & 
+DOF_Group::getTrialAccel()
+{
+    if (myNode == 0) {
+	opserr << "DOF_Group::getTrialAccel: no associated Node ";
+	opserr << " returning the error Vector\n";
+	return errVect;	
+    }
+    return myNode->getTrialAccel();
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 
 void

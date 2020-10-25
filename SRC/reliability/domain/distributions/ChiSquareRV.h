@@ -54,7 +54,11 @@ public:
 	// RV functionality
 	double getPDFvalue(double rvValue);
 	double getCDFvalue(double rvValue);
+<<<<<<< HEAD
 	double getInverseCDFvalue(double rvValue); 
+=======
+	double getInverseCDFvalue(double probValue); 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	
     // sensitivity of CDF with respect to distribution parameters
     int getCDFparameterSensitivity(Vector &dFdP);

@@ -115,7 +115,11 @@ DistributedBandSPDLinSOE::setSize(Graph &theGraph)
   else {
 
     // from each distributed soe recv it's graph
+<<<<<<< HEAD
     // and merge them into master graph
+=======
+    // and merge them into primary graph
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     FEM_ObjectBroker theBroker;
     for (int j=0; j<numChannels; j++) {
       Channel *theChannel = theChannels[j];
@@ -156,7 +160,11 @@ DistributedBandSPDLinSOE::setSize(Graph &theGraph)
     data(1) = half_band;
 
     // to each distributed soe send the size data
+<<<<<<< HEAD
     // and merge them into master graph
+=======
+    // and merge them into primary graph
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     for (int j=0; j<numChannels; j++) {
       Channel *theChannel = theChannels[j];

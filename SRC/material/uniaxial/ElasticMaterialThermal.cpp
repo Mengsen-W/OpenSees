@@ -108,11 +108,23 @@ OPS_ElasticMaterialThermal(void)
 }
 
 
+<<<<<<< HEAD
 ElasticMaterialThermal::ElasticMaterialThermal(int tag, double e, double alpha, double et, double eneg, int softindex)
 :UniaxialMaterial(tag,MAT_TAG_ElasticMaterialThermal),
  trialStrain(0.0),  trialStrainRate(0.0), Epos(e),
  E0(e),Alpha(alpha),eta(et), parameterID(0),
 ThermalElongation(0),Temp(0)
+=======
+double ElasticMaterialThermal::SteelRedFactors[12] = { 1.0, 0.9, 0.8 ,0.7, 0.6 ,0.31, 0.13, 0.09, 0.0675, 0.045, 0.0225 , 0.0 };
+double ElasticMaterialThermal::ConcRedFactors[12] = { 0.625, 0.4318 ,0.3036, 0.1875 ,0.1, 0.045, 0.03, 0.015, 0.008 , 0.004,0.001,0.0 };
+
+ElasticMaterialThermal::ElasticMaterialThermal(int tag, double e, double alpha, double et, double eneg, int softindex)
+:UniaxialMaterial(tag,MAT_TAG_ElasticMaterialThermal),
+ trialStrain(0.0), trialStrainRate(0.0), committedStrain(0.0), committedStrainRate(0.0),
+ Epos(e), eta(et),
+ Alpha(alpha), E0(e), softIndex(softindex),
+ ThermalElongation(0),Temp(0), parameterID(0)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
 	if (eneg <1e-10) {
 		Eneg0 = e;
@@ -124,6 +136,7 @@ ThermalElongation(0),Temp(0)
 		Eneg = eneg;
 	}
 
+<<<<<<< HEAD
 	softIndex = softindex;
 	if (softIndex == 0) {
 		//doNothing
@@ -144,12 +157,25 @@ ThermalElongation(0),Temp(0)
 		opserr << "ElasticMaterialThermal " << this->getTag() << " receives an invalid softening index" << endln;
 	}
 		
+=======
+	if (softIndex < 0 || softIndex > 2) {
+	  opserr << "ElasticMaterialThermal " << this->getTag() << " receives an invalid softening index, setting softening index to 0" << endln;
+	  softIndex = 0;
+	}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 ElasticMaterialThermal::ElasticMaterialThermal()
 :UniaxialMaterial(0,MAT_TAG_ElasticMaterialThermal),
+<<<<<<< HEAD
  trialStrain(0.0),  trialStrainRate(0.0),Epos(0.0),Eneg(0.0), Eneg0(0.0),
  E0(0.0),Alpha(0.0), eta(0.0), parameterID(0),ThermalElongation(0),Temp(0), softIndex(0), redfactors(0)
+=======
+ trialStrain(0.0),  trialStrainRate(0.0), committedStrain(0.0), committedStrainRate(0.0),
+ Epos(0.0),Eneg(0.0), eta(0.0),
+ Alpha(0.0), E0(0.0), Eneg0(0.0), softIndex(0),
+ ThermalElongation(0), Temp(0), parameterID(0)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 {
 	
 }
@@ -424,6 +450,7 @@ ElasticMaterialThermal::commitSensitivity(double strainGradient,
 double
 ElasticMaterialThermal::getElongTangent(double TempT, double& ET, double& Elong, double TempTmax)
 {
+<<<<<<< HEAD
 	double ThermalElongation;
 	Temp = TempT;
 	if (softIndex != 0) {
@@ -481,6 +508,76 @@ ElasticMaterialThermal::getElongTangent(double TempT, double& ET, double& Elong,
 		ET = E0;
 		ThermalElongation = Alpha * TempT;
 	}
+=======
+  double ThermalElongation; // Why in the world is this defined as a local variable using
+  // the same name as a private class variable??? MHS
+  ThermalElongation = 0.0; // Let me go ahead and initialize it too....
+  
+  Temp = TempT;
+  if (softIndex != 0) {
+
+    double *redfactors = 0;
+    if (softIndex == 1)
+      redfactors = SteelRedFactors;
+    if (softIndex == 2)
+      redfactors = ConcRedFactors;
+    
+    for (int i = 0; i < 13; i++) {
+      if (Temp <= 80 + 100 * i)
+	{
+	  if (i == 0) {
+	    Epos = E0 * (1.0 - Temp * (1.0 - redfactors[0]) / 80);
+	    Eneg = Eneg0 * (1.0 - Temp * (1.0 - redfactors[0]) / 80);
+	  }
+	  else if (i == 12) {
+	    opserr << "Warning:The temperature " << Temp << " for SteelECthermal is out of range\n";
+	    return -1;
+	  }
+	  else {
+	    Epos = E0 * (redfactors[i - 1] - (Temp + 20 - 100 * i) * (redfactors[i - 1] - redfactors[i]) / 100);
+	    Eneg = Eneg0 * (redfactors[i - 1] - (Temp + 20 - 100 * i) * (redfactors[i - 1] - redfactors[i]) / 100);
+	  }
+	  break;
+	}
+      
+    }
+    
+    if (softIndex == 1) {
+      if (Temp <= 1) {
+	ThermalElongation = Temp * 1.2164e-5;
+      }
+      else if (Temp <= 730) {
+	ThermalElongation = -2.416e-4 + 1.2e-5 * (Temp + 20) + 0.4e-8 * (Temp + 20) * (Temp + 20);
+      }
+      else if (Temp <= 840) {
+	ThermalElongation = 11e-3;
+      }
+      else if (Temp <= 1180) {
+	ThermalElongation = -6.2e-3 + 2e-5 * (Temp + 20);
+      }
+    }
+    else if (softIndex == 2) {
+      if (Temp <= 1) {
+	ThermalElongation = Temp * 9.213e-6;
+      }
+      else if (Temp <= 680) {
+	ThermalElongation = -1.8e-4 + 9e-6 * (Temp + 20) + 2.3e-11 * (Temp + 20) * (Temp + 20) * (Temp + 20);
+      }
+      else if (Temp <= 1180) {
+	ThermalElongation = 14e-3;
+      }
+      
+    }
+    Elong = ThermalElongation;
+    
+  }
+  else {
+    ET = E0;
+    ThermalElongation = Alpha * TempT;
+  }
+  
+  return 0.0; // We have to return something, why is this function not void? ... MHS
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 double
@@ -525,4 +622,8 @@ ElasticMaterialThermal::getVariable(const char *variable, Information &info)
 		return 0;
 	}
 	return -1;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

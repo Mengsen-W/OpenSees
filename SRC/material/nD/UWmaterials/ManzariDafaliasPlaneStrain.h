@@ -33,7 +33,11 @@
 #include <Vector.h>
 #include <Matrix.h>
 
+<<<<<<< HEAD
 #include <ManzariDafalias.h>
+=======
+#include "ManzariDafalias.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class ManzariDafaliasPlaneStrain : public ManzariDafalias
 {

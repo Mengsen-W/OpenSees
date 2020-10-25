@@ -72,6 +72,11 @@ public:
     virtual int getNumEleNodes() const {return numelenodes;}
 
     virtual int setEleArgs();
+<<<<<<< HEAD
+=======
+    virtual void* getEleArgs();
+    virtual bool hasEleArgs() {return eleType != 0;}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     virtual bool isFluid() const {return fluid;}
 

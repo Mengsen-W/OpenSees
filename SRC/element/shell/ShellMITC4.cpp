@@ -22,7 +22,12 @@
 // $Date: 2011/03/10 22:51:21 $
 // $Source: /usr/local/cvs/OpenSees/SRC/element/shell/ShellMITC4.cpp,v $
 
+<<<<<<< HEAD
 // Written: Leopoldo Tesser, Diego A. Talledo, Véronique Le Corvec
+=======
+// Original implementation: Ed "C++" Love
+// Reimplementation: Leopoldo Tesser, Diego A. Talledo, Véronique Le Corvec
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 //
 // Bathe MITC 4 four node shell element with membrane and drill
 // Ref: Dvorkin,Bathe, A continuum mechanics based four node shell

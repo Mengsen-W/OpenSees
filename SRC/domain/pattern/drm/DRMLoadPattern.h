@@ -34,6 +34,7 @@
 #ifndef DRMLoadPattern_h
 #define DRMLoadPattern_h
 
+<<<<<<< HEAD
 #include <Mesh3DSubdomain.h>
 #include <PlaneDRMInputHandler.h>
 #include <LoadPattern.h>
@@ -46,6 +47,15 @@
 #include <Element.h>
 #include <map>
 #include <set>
+=======
+#include <LoadPattern.h>
+#include <map>
+#include <set>
+#include <fstream>
+
+class DRMInputHandler;
+class Domain;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class DRMLoadPattern : public LoadPattern
 {
@@ -58,7 +68,10 @@ class DRMLoadPattern : public LoadPattern
     void applyLoad(double time);
 
     void setMaps();
+<<<<<<< HEAD
     
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
  private:
    Domain *myDomain;
@@ -68,8 +81,11 @@ class DRMLoadPattern : public LoadPattern
    std::map<int,int> eNodes;
    std::map<int,Element*> elem;
    
+<<<<<<< HEAD
 
    
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
    std::map<int,Vector*> storage;
    std::map<int,int> storage2;
 

@@ -1,6 +1,7 @@
 #ifndef Mesh3DSubdomain_h
 #define Mesh3DSubdomain_h
 
+<<<<<<< HEAD
 #include <stdlib.h>
 #include <iostream>
 #include <OPS_Globals.h>
@@ -42,6 +43,14 @@
 #include <math.h>
 
 using namespace std;
+=======
+#include <Element.h>
+#include <map>
+#include <set>
+
+class Domain;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 class Mesh3DSubdomain {
 
@@ -81,9 +90,12 @@ class Mesh3DSubdomain {
     int myLastStartNodeTag;
     int myLastEle;
     int myLastNode;
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

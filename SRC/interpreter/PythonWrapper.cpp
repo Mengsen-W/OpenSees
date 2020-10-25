@@ -95,6 +95,7 @@ PythonWrapper::getMethods()
 }
 
 void
+<<<<<<< HEAD
 PythonWrapper::setOutputs(int* data, int numArgs)
 {
     if (numArgs == 0) return;
@@ -105,10 +106,26 @@ PythonWrapper::setOutputs(int* data, int numArgs)
     currentResult = PyList_New(numArgs);
     for (int i=0; i<numArgs; i++) {
 	PyList_SET_ITEM(currentResult, i, Py_BuildValue("i", data[i]));
+=======
+PythonWrapper::setOutputs(int* data, int numArgs, bool scalar)
+{
+    if (numArgs < 0) numArgs = 0;
+
+    if (scalar) {
+        if (numArgs > 0) {
+            currentResult = Py_BuildValue("i", data[0]);
+        }
+    } else {
+        currentResult = PyList_New(numArgs);
+        for (int i = 0; i < numArgs; i++) {
+            PyList_SET_ITEM(currentResult, i, Py_BuildValue("i", data[i]));
+        }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 }
 
 void
+<<<<<<< HEAD
 PythonWrapper::setOutputs(double* data, int numArgs)
 {
     if (numArgs == 0) return;
@@ -119,6 +136,21 @@ PythonWrapper::setOutputs(double* data, int numArgs)
     currentResult = PyList_New(numArgs);
     for (int i=0; i<numArgs; i++) {
 	PyList_SET_ITEM(currentResult, i, Py_BuildValue("d", data[i]));
+=======
+PythonWrapper::setOutputs(double* data, int numArgs, bool scalar)
+{
+    if (numArgs < 0) numArgs = 0;
+
+    if (scalar) {
+        if (numArgs > 0) {
+            currentResult = Py_BuildValue("d", data[0]);
+        }
+    } else {
+        currentResult = PyList_New(numArgs);
+        for (int i = 0; i < numArgs; i++) {
+            PyList_SET_ITEM(currentResult, i, Py_BuildValue("d", data[i]));
+        }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 }
 
@@ -241,6 +273,21 @@ static PyObject *Py_ops_wipe(PyObject *self, PyObject *args)
     return wrapper->getResults();
 }
 
+<<<<<<< HEAD
+=======
+static PyObject *Py_ops_wipeReliability(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_wipeReliability() < 0) {
+	opserr<<(void*)0;
+	return NULL;
+    }
+
+    return wrapper->getResults();
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 static PyObject *Py_ops_model(PyObject *self, PyObject *args)
 {
     wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
@@ -685,6 +732,21 @@ static PyObject *Py_ops_getTime(PyObject *self, PyObject *args)
     return wrapper->getResults();
 }
 
+<<<<<<< HEAD
+=======
+static PyObject *Py_ops_setCreep(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_setCreep() < 0) {
+	opserr<<(void*)0;
+	return NULL;
+    }
+
+    return wrapper->getResults();
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 static PyObject *Py_ops_eleResponse(PyObject *self, PyObject *args)
 {
     wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
@@ -1429,6 +1491,33 @@ static PyObject *Py_ops_sectionWeight(PyObject *self, PyObject *args)
     return wrapper->getResults();
 }
 
+<<<<<<< HEAD
+=======
+static PyObject *Py_ops_sectionDisplacement(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_sectionDisplacement() < 0) {
+	opserr<<(void*)0;
+	return NULL;
+    }
+
+    return wrapper->getResults();
+}
+
+static PyObject *Py_ops_cbdiDisplacement(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_cbdiDisplacement() < 0) {
+	opserr<<(void*)0;
+	return NULL;
+    }
+
+    return wrapper->getResults();
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 static PyObject *Py_ops_basicDeformation(PyObject *self, PyObject *args)
 {
     wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
@@ -2138,6 +2227,22 @@ static PyObject *Py_ops_unloadingRule(PyObject *self, PyObject *args)
     return wrapper->getResults();
 }
 
+<<<<<<< HEAD
+=======
+static PyObject *Py_ops_partition(PyObject *self, PyObject *args)
+{
+    wrapper->resetCommandLine(PyTuple_Size(args), 1, args);
+
+    if (OPS_partition() < 0) {
+	opserr<<(void*)0;
+	return NULL;
+    }
+
+    return wrapper->getResults();
+}
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 /////////////////////////////////////////////////
 ////////////// Add Python commands //////////////
 /////////////////////////////////////////////////
@@ -2189,6 +2294,10 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("equalDOF", &Py_ops_equalDOF);
     addCommand("nodeEigenvector", &Py_ops_nodeEigenvector);
     addCommand("getTime", &Py_ops_getTime);
+<<<<<<< HEAD
+=======
+    addCommand("setCreep", &Py_ops_setCreep);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     addCommand("eleResponse", &Py_ops_eleResponse);
     addCommand("sp", &Py_ops_SP);
     addCommand("fixX", &Py_ops_fixX);
@@ -2202,8 +2311,13 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("printA", &Py_ops_printA);
     addCommand("printB", &Py_ops_printB);
     addCommand("printGID", &Py_ops_printGID);
+<<<<<<< HEAD
     addCommand("getCTestNorms", &Py_ops_getCTestNorms);
     addCommand("getCTestIter", &Py_ops_getCTestIter);
+=======
+    addCommand("testNorm", &Py_ops_getCTestNorms);
+    addCommand("testIter", &Py_ops_getCTestIter);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     addCommand("recorder", &Py_ops_recorder);
     addCommand("database", &Py_ops_database);
     addCommand("save", &Py_ops_save);
@@ -2251,6 +2365,11 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("sectionFlexibility", &Py_ops_sectionFlexibility);
     addCommand("sectionLocation", &Py_ops_sectionLocation);
     addCommand("sectionWeight", &Py_ops_sectionWeight);
+<<<<<<< HEAD
+=======
+    addCommand("sectionDisplacement", &Py_ops_sectionDisplacement);
+    addCommand("cbdiDisplacement", &Py_ops_cbdiDisplacement);        
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     addCommand("basicDeformation", &Py_ops_basicDeformation);
     addCommand("basicForce", &Py_ops_basicForce);
     addCommand("basicStiffness", &Py_ops_basicStiffness);
@@ -2302,6 +2421,10 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("getInverseCDF", &Py_ops_getRVInverseCDF);
     addCommand("correlate", &Py_ops_addCorrelate);
     addCommand("transformUtoX", &Py_ops_transformUtoX);
+<<<<<<< HEAD
+=======
+    addCommand("wipeReliability", &Py_ops_wipeReliability);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     addCommand("updateMaterialStage", &Py_ops_updateMaterialStage);
     addCommand("sdfResponse", &Py_ops_sdfResponse);
     addCommand("probabilityTransformation", &Py_ops_probabilityTransformation);
@@ -2313,6 +2436,10 @@ PythonWrapper::addOpenSeesCommands()
     addCommand("stiffnessDegradation", &Py_ops_stiffnessDegradation);
     addCommand("strengthDegradation", &Py_ops_strengthDegradation);
     addCommand("unloadingRule", &Py_ops_unloadingRule);
+<<<<<<< HEAD
+=======
+    addCommand("partition", &Py_ops_partition);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     PyMethodDef method = {NULL,NULL,0,NULL};
     methodsOpenSees.push_back(method);

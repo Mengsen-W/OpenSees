@@ -26,11 +26,16 @@
 //            
 
 #include <J2CyclicBoundingSurface.h>
+<<<<<<< HEAD
 
 
 #include <Information.h>
 #include <Parameter.h>
 
+=======
+#include <Information.h>
+#include <Parameter.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <string.h>
 #include <Channel.h>
 #include <FEM_ObjectBroker.h>
@@ -38,16 +43,27 @@
 
 //parameters
 
+<<<<<<< HEAD
 char  unsigned      J2CyclicBoundingSurface::m_ElastFlag = 1;
 
+=======
+char  unsigned      J2CyclicBoundingSurface::m_ElastFlag = 1;  // --> default visco-elasto -plastic   
+//char  unsigned      J2CyclicBoundingSurface::m_ElastFlag = 2; // default visco-elastic
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 void* OPS_J2CyclicBoundingSurfaceMaterial()
 {
 	int numdata = OPS_GetNumRemainingInputArgs();
 
+<<<<<<< HEAD
 	if (numdata < 9) {
 		opserr << "WARNING: Insufficient arguements\n";
 		opserr << "Want: nDMaterial J2CyclicBoundingSurface tag? G? K? su? rho? h? m? k_in? beta?\n";
+=======
+	if (numdata < 10) {
+		opserr << "WARNING: Insufficient arguements\n";
+		opserr << "Want: nDMaterial J2CyclicBoundingSurface tag? G? K? su? rho? h? m? k_in?  chi? beta?\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		return 0;
 	}
 
@@ -59,9 +75,15 @@ void* OPS_J2CyclicBoundingSurfaceMaterial()
 		return 0;
 	}
 
+<<<<<<< HEAD
 	double data[8] = { 0,0,0,0,0,0,0,0 };
 	numdata = OPS_GetNumRemainingInputArgs();
 	if (numdata != 8) {
+=======
+	double data[9] = { 0,0,0,0,0,0,0,0,0 };
+	numdata = OPS_GetNumRemainingInputArgs();
+	if (numdata != 9) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		opserr << "WARNING error in  J2CyclicBoundingSurface number of arg incorrect\n";
 		return 0;
 	}
@@ -70,7 +92,11 @@ void* OPS_J2CyclicBoundingSurfaceMaterial()
 		return 0;
 	}
 
+<<<<<<< HEAD
 	NDMaterial* mat = new J2CyclicBoundingSurface(tag, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
+=======
+	NDMaterial* mat = new J2CyclicBoundingSurface(tag, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	if (mat == 0) {
 		opserr << "WARNING: failed to create J2CyclicBoundingSurface material\n";
 		return 0;
@@ -96,11 +122,21 @@ J2CyclicBoundingSurface::J2CyclicBoundingSurface(int  tag,
 	double rho,
 	double h,
 	double m,
+<<<<<<< HEAD
 	double k_in,
 	double beta)
 	:
 	NDMaterial(tag, ND_TAG_J2CyclicBoundingSurface),
 	m_sigma0_n(6), m_sigma0_np1(6), m_stress_n(6), m_stress_np1(6), m_strain_np1(6), m_strain_n(6), m_Cep(6, 6), m_Ce(6, 6)
+=======
+	double h0,
+	double chi,
+	double beta)
+	:
+	NDMaterial(tag, ND_TAG_J2CyclicBoundingSurface),
+	m_sigma0_n(6), m_sigma0_np1(6), m_stress_n(6), m_stress_np1(6), m_strain_np1(6), 
+	m_strain_n(6), m_strainRate_n(6), m_strainRate_n1(6), m_Cep(6, 6), m_Ce(6, 6), 
+	m_D(6, 6), m_stress_vis_n(6), m_stress_vis_n1(6), m_stress_t_n1(6)
 {
 	double m_poiss = (3.*K - 2.*G) / 2. / (3. * K + G);
 
@@ -115,12 +151,72 @@ J2CyclicBoundingSurface::J2CyclicBoundingSurface(int  tag,
 	m_shear = G;  // E / 2 / (1 + nu);
 	m_R = sqrt(8. / 3.)*su;
 	m_density = rho;
+	m_kappa_inf = 1.0e10;
+	m_h_par = h;
+	m_m_par = m;
+	m_h0_par = h0;
+	m_beta = beta;
+	m_kappa_n = m_kappa_inf;
+	m_kappa_np1 = m_kappa_inf;
+	m_psi_n = 2.*m_shear;
+	m_chi = chi;
+
+	m_isElast2Plast = false;
+	debugFlag = false;
+	small = 1.0e-10;
+
+	calcInitialTangent();
+}
+
+//full constructor
+J2CyclicBoundingSurface::J2CyclicBoundingSurface(int  tag, int classTag,
+	double G,
+	double K,
+	double su,
+	double rho,
+	double h,
+	double m,
+	double h0,
+	double chi,
+	double beta)
+	:
+	NDMaterial(tag, classTag),
+	m_sigma0_n(6), m_sigma0_np1(6), m_stress_n(6), m_stress_np1(6), m_strain_np1(6), 
+	m_strain_n(6), m_strainRate_n(6), m_strainRate_n1(6), m_Cep(6, 6), m_Ce(6, 6), 
+	m_D(6, 6), m_stress_vis_n(6), m_stress_vis_n1(6), m_stress_t_n1(6)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
+{
+	double m_poiss = (3.*K - 2.*G) / 2. / (3. * K + G);
+
+	if (m_poiss > 0.5) {
+		opserr << "\n ERROR! J2CyclicBoundingSurface Poiss can not be grater than 0.50!" << endln;
+		exit(-1);
+		return;
+	}
+
+	m_su = su;
+	m_bulk = K; // E / 3 / (1-2*nu)
+	m_shear = G;  // E / 2 / (1 + nu);
+	m_R = sqrt(8. / 3.)*su;
+	m_density = rho;
+<<<<<<< HEAD
 	m_kappa_inf = k_in;
 	m_h_par = h;
 	m_m_par = m;
 	m_beta = beta;
 	m_kappa_n = m_kappa_inf;
 	m_psi_n = 2.*m_shear;
+=======
+	m_kappa_inf = 1.0e10;
+	m_h_par = h;
+	m_m_par = m;
+	m_h0_par = h0;
+	m_beta = beta;
+	m_kappa_n = m_kappa_inf;
+	m_kappa_np1 = m_kappa_inf;
+	m_psi_n = 2.*m_shear;
+	m_chi = chi;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	m_isElast2Plast = false;
 	debugFlag = false;
@@ -147,28 +243,65 @@ void J2CyclicBoundingSurface::integrate()
 
 	if (m_ElastFlag == 0) // Force elastic response
 		elastic_integrator();
+<<<<<<< HEAD
 	else   // ElastoPlastic response
 		plastic_integrator();
 
+=======
+	else if (m_ElastFlag == 1)  // ElastoPlastic response
+		plastic_integrator();
+	else if (m_ElastFlag == 2)
+		viscoElastic_integrator();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 void J2CyclicBoundingSurface::elastic_integrator()
 {
 	Vector dStrain = m_strain_np1 - m_strain_n; //delta strain for the step
 	m_stress_np1 = m_stress_n + m_Ce * dStrain;
+<<<<<<< HEAD
+=======
+	m_stress_t_n1 = m_stress_np1;
+}
+
+void J2CyclicBoundingSurface::viscoElastic_integrator()
+{
+	// Update using strain rate from element
+	//Vector dStrain = m_strain_np1 - m_strain_n; //delta strain for the step
+	//m_stress_vis_n1 = m_D * (m_beta * m_strainRate_n1 + (1.0 - m_beta) * m_strainRate_n);
+	//m_stress_np1 = m_stress_n + m_Ce * dStrain + m_D * ((1 - m_beta) * m_strainRate_n + m_beta * m_strainRate_n1);
+
+	//Update using strain rate approx as dStrain/dt (needs global ops_Dt)
+	Vector dStrain = m_strain_np1 - m_strain_n; //delta strain for the step
+	//m_stress_vis_n1 = m_D * (m_beta * m_strainRate_n1 + (1.0 - m_beta) * m_strainRate_n);
+	if (ops_Dt > 0.0) { m_stress_vis_n1 = m_D * (dStrain) / ops_Dt; }
+	else { m_stress_vis_n1 = m_stress_vis_n; }
+	//m_stress_np1 = m_stress_n + m_Ce * dStrain + (m_stress_vis_n1 - m_stress_vis_n);
+	//m_stress_t_n1 = m_stress_np1;
+	m_stress_np1 = m_stress_n + m_Ce * dStrain;
+	m_stress_t_n1 = m_stress_np1 + m_stress_vis_n1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
 //plastic integration routine
 void J2CyclicBoundingSurface::plastic_integrator()
+<<<<<<< HEAD
 {
+=======
+{  
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	const double tol_rel = (1.0e-10);
 	Vector eye(6);
 	eye(0) = 1.0;
 	eye(1) = 1.0;
 	eye(2) = 1.0;
 
+<<<<<<< HEAD
 	Vector dStrain     = m_strain_np1 - m_strain_n;  //incremental strain for the step
+=======
+	Vector dStrain = m_strain_np1 - m_strain_n;  //incremental strain for the step
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	Vector dStrain_dev = getDevPart(dStrain);        //incremental deviatoric strain
 	double dStrain_vol = trace(dStrain);             //incremental volumetric strain
 
@@ -185,6 +318,7 @@ void J2CyclicBoundingSurface::plastic_integrator()
 	dev_sigma0_np1 = getDevPart(m_sigma0_np1);
 
 	double loadingCond = -1;
+<<<<<<< HEAD
 	double norm_dev_stress_n   = sqrt(inner_product(dev_stress_n, dev_stress_n, 1));
 	double norm_dev_sigma0_np1 = sqrt(inner_product(dev_sigma0_np1, dev_sigma0_np1, 1));
 
@@ -193,11 +327,26 @@ void J2CyclicBoundingSurface::plastic_integrator()
 
 	// check loading/unloading
 	double temp_numerator   = inner_product( -(1 + m_kappa_n) * dev_stress_n - m_kappa_n * (1 + m_kappa_n)*(dev_stress_n - dev_sigma0_np1), dStrain_dev, 3 );
+=======
+	double norm_dev_stress_n = sqrt(inner_product(dev_stress_n, dev_stress_n, 1));
+	double norm_dev_sigma0_np1 = sqrt(inner_product(dev_sigma0_np1, dev_sigma0_np1, 1));
+
+	m_kappa_np1 = m_kappa_n;
+	m_psi_np1 = m_psi_n;
+
+	m_stress_np1.Zero();
+
+	// check loading/unloading
+
+	// this is how it's written in the paper
+	/*double temp_numerator = inner_product(-(1 + m_kappa_n) * dev_stress_n - m_kappa_n * (1 + m_kappa_n)*(dev_stress_n - dev_sigma0_np1), dStrain_dev, 3);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	double temp_denominator = inner_product(  (1 + m_kappa_n) * dev_stress_n - m_kappa_n * dev_sigma0_np1, (dev_stress_n - dev_sigma0_np1), 1 );
 
 	if (abs(temp_denominator) < small)
 		loadingCond = 0.0;
 	else
+<<<<<<< HEAD
 		loadingCond = temp_numerator / temp_denominator;
 
 	if (loadingCond > 0.0)
@@ -224,6 +373,41 @@ void J2CyclicBoundingSurface::plastic_integrator()
 		else
 			devStrainDir = dStrain_dev / devStrainNorm;
 
+=======
+		loadingCond = temp_numerator / temp_denominator;*/
+
+    // this is how we do it
+	loadingCond = inner_product(m_kappa_n / (1 + m_kappa_n) * dev_sigma0_np1 - dev_stress_n, dStrain_dev, 3);
+
+	if (loadingCond > 0.0)
+	{
+		if (debugFlag)
+			opserr << "Unloading happened." << endln;
+
+		m_sigma0_np1 = m_stress_n;
+		dev_sigma0_np1 = getDevPart(m_sigma0_np1);
+		loadingCond = 0.0;
+	}
+
+	if (vector_norm(dev_stress_n - dev_sigma0_np1, 1) == 0.0)
+	{
+		// unloading (or beginning of loading) just happened
+		if (debugFlag)
+			opserr << "Initial loading." << endln;
+
+		Vector devStrainDir(6);
+		double devStrainNorm = vector_norm(dStrain_dev, 2);
+		if (abs(devStrainNorm) < small) {
+			m_stress_np1 = m_stress_n + m_bulk * dStrain_vol * eye + m_psi_np1 * convert_to_stressLike(dStrain_dev);
+			return;
+		}
+		else
+			devStrainDir = dStrain_dev / devStrainNorm;
+
+		m_psi_np1 = 2 * m_shear;
+		m_kappa_np1 = 1.0e10;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		H_np1 = H(m_kappa_np1);
 
 		Vector res(2); double res_norm;
@@ -250,7 +434,11 @@ void J2CyclicBoundingSurface::plastic_integrator()
 				break;
 			}
 
+<<<<<<< HEAD
 			Vector temp = (dev_stress_n + (1.0 + m_kappa_np1) * m_psi_np1 * convert_to_stressLike(dStrain_dev) );
+=======
+			Vector temp = (dev_stress_n + (1.0 + m_kappa_np1) * m_psi_np1 * convert_to_stressLike(dStrain_dev));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			temp = temp / vector_norm(temp, 1);
 			Ktan(0, 0) = (1.0 + 3.0 * m_shear *  m_beta / H_np1) / (2.0 * m_shear);
 			Ktan(0, 1) = (-3.0 * m_shear * m_psi_np1 * m_beta * m_m_par / m_h_par / pow(m_kappa_np1, m_m_par + 1.0)) / (2.0 * m_shear);
@@ -266,23 +454,46 @@ void J2CyclicBoundingSurface::plastic_integrator()
 			H_np1 = H(m_kappa_np1);
 
 			// calculate new residual
+<<<<<<< HEAD
 			res(0) = m_psi_np1 * (1.0 + 3.0 * m_shear * ( + m_beta / H_np1)) / (2.0 * m_shear) - 1.0;
 			res(1) = vector_norm(dev_stress_n + (1.0 + m_kappa_np1) * m_psi_np1 * convert_to_stressLike(dStrain_dev) , 1) / m_R - 1.0;
+=======
+			res(0) = m_psi_np1 * (1.0 + 3.0 * m_shear * (+m_beta / H_np1)) / (2.0 * m_shear) - 1.0;
+			res(1) = vector_norm(dev_stress_n + (1.0 + m_kappa_np1) * m_psi_np1 * convert_to_stressLike(dStrain_dev), 1) / m_R - 1.0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 			res_norm = vector_norm(res, 3);
 		}
 
+<<<<<<< HEAD
 		
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	}
 	else
 	{
 		if (debugFlag) opserr << "Loading continues..." << endln;
+<<<<<<< HEAD
+=======
+
+		Vector devStrainDir(6);
+		double devStrainNorm = vector_norm(dStrain_dev, 2);
+		if (abs(devStrainNorm) < small) {
+			m_stress_np1 = m_stress_n + m_bulk * dStrain_vol * eye + m_psi_np1 * convert_to_stressLike(dStrain_dev);
+			return;
+		}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		// calculate the initial residual
 		H_n = H(m_kappa_n);
 		H_np1 = H(m_kappa_np1);
 
 		Vector res(2); double res_norm;
+<<<<<<< HEAD
 		res(0) = m_psi_np1 * (1.0 + 3.0 * m_shear * ((1 - m_beta) / H_n +  m_beta / H_np1)) / ( 2.0 * m_shear ) - 1.0;
+=======
+		res(0) = m_psi_np1 * (1.0 + 3.0 * m_shear * ((1 - m_beta) / H_n + m_beta / H_np1)) / (2.0 * m_shear) - 1.0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		res(1) = vector_norm(dev_stress_n + (1.0 + m_kappa_np1) * m_psi_np1 * convert_to_stressLike(dStrain_dev) + m_kappa_np1 * (dev_stress_n - dev_sigma0_np1), 1) / m_R - 1.0;;
 
 		res_norm = vector_norm(res, 3);
@@ -306,10 +517,17 @@ void J2CyclicBoundingSurface::plastic_integrator()
 			}
 
 			Vector temp = (dev_stress_n + (1.0 + m_kappa_np1) * m_psi_np1 * convert_to_stressLike(dStrain_dev) + m_kappa_np1 * (dev_stress_n - dev_sigma0_np1));
+<<<<<<< HEAD
 			temp = temp / vector_norm(temp,1);
 			Ktan(0, 0) = (1.0 + 3.0 * m_shear * ((1 - m_beta) / H_n + m_beta / H_np1)) / (2.0 * m_shear);
 			Ktan(0, 1) = (-3.0 * m_shear * m_psi_np1 * m_beta * m_m_par / m_h_par / pow(m_kappa_np1, m_m_par + 1.0)) / (2.0 * m_shear);
 			Ktan(1, 0) = ((1 + m_kappa_np1) * inner_product(temp, dStrain_dev,3)) / m_R;
+=======
+			temp = temp / vector_norm(temp, 1);
+			Ktan(0, 0) = (1.0 + 3.0 * m_shear * ((1 - m_beta) / H_n + m_beta / H_np1)) / (2.0 * m_shear);
+			Ktan(0, 1) = (-3.0 * m_shear * m_psi_np1 * m_beta * m_m_par / m_h_par / pow(m_kappa_np1, m_m_par + 1.0)) / (2.0 * m_shear);
+			Ktan(1, 0) = ((1 + m_kappa_np1) * inner_product(temp, dStrain_dev, 3)) / m_R;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			Ktan(1, 1) = (inner_product(temp, dev_stress_n + m_psi_np1 * convert_to_stressLike(dStrain_dev) - dev_sigma0_np1, 1)) / m_R;
 
 			// Solve the system
@@ -327,6 +545,32 @@ void J2CyclicBoundingSurface::plastic_integrator()
 			res_norm = vector_norm(res, 3);
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	//m_stress_vis_n1 = m_D * (m_beta * m_strainRate_n1 + (1.0 - m_beta) * m_strainRate_n);
+	if (ops_Dt > 0.0) { m_stress_vis_n1 = m_D * (dStrain) / ops_Dt; }
+	else { m_stress_vis_n1 = m_stress_vis_n; }
+
+	// m_stress_np1 += (m_stress_vis_n1 - m_stress_vis_n);  //stress update using incremental form
+
+	m_stress_t_n1 = m_stress_np1 + m_stress_vis_n1;
+
+
+	//opserr << " delta T (material) " << ops_Dt << endln;
+
+	//for (int i = 0; i < 6; i++) {
+	//	opserr << " , " << (m_beta * m_strainRate_n1(i) + (1.0 - m_beta) * m_strainRate_n(i));
+	//}
+	//opserr << " end of strainRate ";
+
+	//for (int i = 0; i < 6; i++) {
+	//	opserr << " , " << dStrain(i);
+	//}
+	//opserr << " end dStrain " << endln;
+	//opserr << " I am in PLASTIC Integrator " << endln;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	return;
 }
 
@@ -380,11 +624,24 @@ Vector J2CyclicBoundingSurface::convert_to_stressLike(Vector v)
 {
 	Vector res = v;
 	for (int ii = 3; ii < 6; ii++)
+<<<<<<< HEAD
 		res(ii) *= 0.5;
+=======
+	    res(ii) *= 0.5;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	return res;
 }
 
+<<<<<<< HEAD
+=======
+const Matrix &
+J2CyclicBoundingSurface::getDampTangent()
+{
+	return m_D;
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // set up for initial elastic
 void
@@ -406,7 +663,13 @@ J2CyclicBoundingSurface::calcInitialTangent()
 
 	I4dev = eye - 1 / 3 * I2xI2;
 
+<<<<<<< HEAD
 	m_Ce = m_bulk * I2xI2 + 2 * m_shear*I4dev;
+=======
+	//m_Ce = m_bulk * I2xI2 + 2 * m_shear*I4dev;
+	m_Ce = m_bulk * I2xI2 + m_shear * I4dev;
+	m_D  = m_chi * m_Ce;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	return;
 
@@ -417,7 +680,10 @@ J2CyclicBoundingSurface::calcInitialTangent()
 double J2CyclicBoundingSurface::H(double kappa)
 {
 	if (kappa < 0) return 1.0e-10;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	return    m_h_par * pow(kappa, m_m_par);
 }
 
@@ -454,7 +720,11 @@ NDMaterial * J2CyclicBoundingSurface::getCopy(const char * type)
 
 	if (strcmp(type, "ThreeDimensional") == 0 || strcmp(type, "3D") == 0) {
 		J2CyclicBoundingSurface *clone;
+<<<<<<< HEAD
 		clone = new J2CyclicBoundingSurface(this->getTag(), m_shear, m_bulk, m_su, m_density, m_h_par, m_m_par, m_kappa_inf, m_beta);
+=======
+		clone = new J2CyclicBoundingSurface(this->getTag(), m_shear, m_bulk, m_su, m_density, m_h_par, m_m_par, m_h0_par, m_chi, m_beta);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		return clone;
 	}
 	else {
@@ -471,6 +741,11 @@ J2CyclicBoundingSurface::commitState()
 	m_kappa_n  = m_kappa_np1;
 	m_psi_n    = m_psi_np1;
 	m_strain_n = m_strain_np1;
+<<<<<<< HEAD
+=======
+	m_strainRate_n = m_strainRate_n1;
+	m_stress_vis_n = m_stress_vis_n1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	return 0;
 }
@@ -570,7 +845,15 @@ J2CyclicBoundingSurface::setTrialStrain(const Vector &strain_from_element)
 int
 J2CyclicBoundingSurface::setTrialStrain(const Vector &v, const Vector &r)
 {
+<<<<<<< HEAD
 	return this->setTrialStrain(v);
+=======
+	m_strainRate_n1 = r;
+	m_strain_np1 = v;
+	this->integrate();
+
+	return 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 // send back the strain
@@ -584,7 +867,12 @@ J2CyclicBoundingSurface::getStrain()
 const Vector&
 J2CyclicBoundingSurface::getStress()
 {
+<<<<<<< HEAD
 	return m_stress_np1;
+=======
+	//return m_stress_np1;
+	return m_stress_t_n1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
@@ -595,10 +883,16 @@ J2CyclicBoundingSurface::getTangent()
 	// Force elastic response
 	if (m_ElastFlag == 0) {
 		return	m_Ce;
+<<<<<<< HEAD
 
 	}
 	// ElastoPlastic response
 	else {
+=======
+	}
+	// ElastoPlastic response
+	else if (m_ElastFlag == 1) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		// only the symetric part
 		Matrix I2xI2(6, 6), I4dev(6, 6), eye(6, 6);
 		for (unsigned int i = 0; i < 3; i++)
@@ -613,12 +907,32 @@ J2CyclicBoundingSurface::getTangent()
 			}
 		I4dev = eye - 1 / 3 * I2xI2;
 
+<<<<<<< HEAD
 		m_Cep = m_bulk * I2xI2 + m_psi_np1 * I4dev;
+=======
+		m_Cep = m_bulk * I2xI2 + 0.5 * m_psi_np1 * I4dev;
+
+		if (ops_Dt > 0.0) m_Cep += (1.0 / ops_Dt) * m_D; //Adding viscous damping contribution to Cep
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 		return m_Cep;
 		//return m_Ce;
 	}
+<<<<<<< HEAD
 
+=======
+	//ViscoElastic response
+	else if (m_ElastFlag == 2) {
+
+		m_Cep = m_Ce;		
+		if (ops_Dt > 0.0) m_Cep += (1.0 / ops_Dt) * m_D; //Adding viscous damping contribution to Cep
+		return m_Cep;
+	}
+	else{
+	opserr << "\n ERROR! J2CyclicBoundingSurface m_ElastFlag not valid - returning Ce" << endln;
+	return	m_Ce;
+	}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 }
 

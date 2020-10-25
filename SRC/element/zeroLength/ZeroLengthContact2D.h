@@ -179,7 +179,11 @@ class ZeroLengthContact2D: public Element
   // Normal and Tangental Vectors for Elemental Nodes, (4*1)
   Vector N;
   Vector T;
+<<<<<<< HEAD
   Vector ContactNormal;  // out normal of master element
+=======
+  Vector ContactNormal;  // out normal of primary element
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   int ContactFlag;                    // 0: not contact; 1: stick; 2: slide
   int numDOF;	                        // number of dof for ZeroLength

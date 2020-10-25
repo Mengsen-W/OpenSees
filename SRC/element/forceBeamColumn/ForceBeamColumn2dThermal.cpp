@@ -87,9 +87,15 @@ Matrix ForceBeamColumn2dThermal::theMatrix(6,6);
 Vector ForceBeamColumn2dThermal::theVector(6);
 double ForceBeamColumn2dThermal::workArea[200];
 
+<<<<<<< HEAD
 Vector *ForceBeamColumn2dThermal::vsSubdivide = 0;
 Matrix *ForceBeamColumn2dThermal::fsSubdivide = 0;
 Vector *ForceBeamColumn2dThermal::SsrSubdivide = 0;
+=======
+Vector ForceBeamColumn2dThermal::vsSubdivide[maxNumSections];
+Matrix ForceBeamColumn2dThermal::fsSubdivide[maxNumSections];
+Vector ForceBeamColumn2dThermal::SsrSubdivide[maxNumSections];
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 void* OPS_ForceBeamColumn2dThermal()
 {
@@ -173,6 +179,7 @@ ForceBeamColumn2dThermal::ForceBeamColumn2dThermal():
 {
   theNodes[0] = 0;  
   theNodes[1] = 0;
+<<<<<<< HEAD
 
   if (vsSubdivide == 0)
     vsSubdivide  = new Vector [maxNumSections];
@@ -184,6 +191,8 @@ ForceBeamColumn2dThermal::ForceBeamColumn2dThermal():
     opserr << "ForceBeamColumn2dThermal::ForceBeamColumn2dThermal() -- failed to allocate Subdivide arrays";   
     exit(-1);
   }
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 // constructor which takes the unique element tag, sections,
@@ -228,6 +237,7 @@ ForceBeamColumn2dThermal::ForceBeamColumn2dThermal (int tag, int nodeI, int node
   if(Vsth0==0)
 	  Vsth0 = new Vector[maxNumSections];
   
+<<<<<<< HEAD
   if (vsSubdivide == 0)
     vsSubdivide  = new Vector [maxNumSections];
   if (fsSubdivide == 0)
@@ -239,6 +249,8 @@ ForceBeamColumn2dThermal::ForceBeamColumn2dThermal (int tag, int nodeI, int node
     exit(-1);
   }
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   for (int m=0; m<numSections; m++) {
  Vsth0[m] = Vector(2);
  Vsth0[m].Zero();
@@ -287,7 +299,11 @@ ForceBeamColumn2dThermal::~ForceBeamColumn2dThermal()
     delete Ki;
 
   if(Vsth0!=0)
+<<<<<<< HEAD
 	  delete Vsth0;
+=======
+    delete [] Vsth0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 int
@@ -3031,11 +3047,20 @@ ForceBeamColumn2dThermal::setParameter(const char **argv, int argc, Parameter &p
 
   int result = -1;
 
+<<<<<<< HEAD
   if (strcmp(argv[0],"rho") == 0)
     return param.addObject(1, this);
   
   // section response -
   else if (strstr(argv[0],"sectionX") != 0) {
+=======
+  if (strcmp(argv[0],"rho") == 0) {
+    param.setValue(rho);
+    return param.addObject(1, this);
+  }
+  // section response -
+  if (strstr(argv[0],"sectionX") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (argc > 2) {
       float sectionLoc = atof(argv[1]);
 
@@ -3059,7 +3084,11 @@ ForceBeamColumn2dThermal::setParameter(const char **argv, int argc, Parameter &p
   }
 
   // If the parameter belongs to a section or lower
+<<<<<<< HEAD
   else if (strstr(argv[0],"section") != 0) {
+=======
+  if (strstr(argv[0],"section") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     if (argc < 3)
       return -1;
@@ -3084,7 +3113,11 @@ ForceBeamColumn2dThermal::setParameter(const char **argv, int argc, Parameter &p
     */
   }
   
+<<<<<<< HEAD
   else if (strstr(argv[0],"integration") != 0) {
+=======
+  if (strstr(argv[0],"integration") != 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     if (argc < 2)
       return -1;

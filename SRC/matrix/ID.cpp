@@ -363,7 +363,11 @@ ID::operator[](int x)
     
 
 int 
+<<<<<<< HEAD
 ID::resize(int newSize){
+=======
+ID::resize(int newSize, int fill_value){
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   // first check that newSize is valid
   if (newSize <= 0) {
@@ -383,7 +387,11 @@ ID::resize(int newSize){
     // without having to go get more space
     
     for (int i=sz; i<newSize; i++)
+<<<<<<< HEAD
       data[i] = 0;
+=======
+      data[i] = fill_value;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     sz = newSize;
 
   } else if (newSize > arraySize) {
@@ -397,7 +405,11 @@ ID::resize(int newSize){
 	newData[i] = data[i];
       // zero the new
       for (int j=sz; j<newSize; j++)
+<<<<<<< HEAD
 	newData[j] = 0;
+=======
+	newData[j] = fill_value;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
       
       sz = newSize;
       // release the memory held by the old
@@ -417,6 +429,17 @@ ID::resize(int newSize){
 
 
 
+<<<<<<< HEAD
+=======
+int 
+ID::fill(int fill_value){
+  for (int i=0; i<sz; i++)
+    data[i] = fill_value;
+  return 0;
+}
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 // ID &operator=(const ID  &V):
 //	the assignment operator, This is assigned to be a copy of V. if sizes
 //	are not compatable this.data [] is deleted. The data pointers will not

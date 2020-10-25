@@ -39,6 +39,7 @@ extern void *OPS_VelDepMultiLinear();
 extern void *OPS_VelNormalFrcDep();
 extern void *OPS_VelPressureDep();
 
+<<<<<<< HEAD
 extern int OPS_ResetInputNoBuilder(ClientData clientData,
     Tcl_Interp *interp,
     int cArg,
@@ -46,6 +47,8 @@ extern int OPS_ResetInputNoBuilder(ClientData clientData,
     TCL_Char **argv,
     Domain *domain);
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 static void printCommand(int argc, TCL_Char **argv)
 {

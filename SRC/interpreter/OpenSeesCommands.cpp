@@ -69,6 +69,10 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <NewtonRaphson.h>
 #include <TransformationConstraintHandler.h>
 #include <Newmark.h>
+<<<<<<< HEAD
+=======
+#include <GimmeMCK.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <ProfileSPDLinSolver.h>
 #include <ProfileSPDLinDirectSolver.h>
 #include <ProfileSPDLinSOE.h>
@@ -97,15 +101,53 @@ UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 #include <NewtonLineSearch.h>
 #include <FileDatastore.h>
 #include <Mesh.h>
+<<<<<<< HEAD
 
 #ifdef _PARALLEL_INTERPRETERS
+=======
+#ifdef _MUMPS
+#include <MumpsSolver.h>
+#include <MumpsSOE.h>
+#endif
+#include <BackgroundMesh.h>
+
+#ifdef _PARALLEL_INTERPRETERS
+bool setMPIDSOEFlag = false;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <mpi.h>
 #include <MPI_MachineBroker.h>
 #include <ParallelNumberer.h>
 #include <DistributedDisplacementControl.h>
+<<<<<<< HEAD
 #include <MumpsParallelSOE.h>
 #include <MumpsParallelSolver.h>
 #endif
+=======
+#include <DistributedBandSPDLinSOE.h>
+#include <DistributedSparseGenColLinSOE.h>
+#include <DistributedSparseGenRowLinSOE.h>
+#include <DistributedBandGenLinSOE.h>
+#include <DistributedDiagonalSOE.h>
+#include <DistributedDiagonalSolver.h>
+#include <MPIDiagonalSOE.h>
+#include <MPIDiagonalSolver.h>
+#define MPIPP_H
+#include <DistributedSuperLU.h>
+#include <DistributedProfileSPDLinSOE.h>
+#ifdef _MUMPS
+#include <MumpsParallelSOE.h>
+#include <MumpsParallelSolver.h>
+#endif
+#elif _PARALLEL_PROCESSING
+#include <mpi.h>
+#include <PartitionedDomain.h>
+#ifdef _MUMPS
+#include <MumpsParallelSOE.h>
+#include <MumpsParallelSolver.h>
+#endif
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 
 // active object
@@ -305,7 +347,11 @@ OpenSeesCommands::eigen(int typeSolver, double shift,
 	for (int i=0; i<numEigen; i++) {
 	    data[i] = eigenvalues(i);
 	}
+<<<<<<< HEAD
 	OPS_SetDoubleOutput(&numEigen, data);
+=======
+	OPS_SetDoubleOutput(&numEigen, data, false);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	delete [] data;
     }
 
@@ -318,7 +364,11 @@ int* OPS_GetNumEigen()
     if (cmds == 0) return 0;                                                    
     numEigen = cmds->getNumEigen();                                             
     int numdata = 1;                                                            
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&numdata, &numEigen) < 0) {                            
+=======
+    if (OPS_SetIntOutput(&numdata, &numEigen, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         opserr << "WARNING failed to set output\n";                             
         return 0;                                                               
     }                                                                           
@@ -548,6 +598,15 @@ OpenSeesCommands::setStaticAnalysis()
     if (theEigenSOE != 0) {
 	theStaticAnalysis->setEigenSOE(*theEigenSOE);
     }
+<<<<<<< HEAD
+=======
+
+#ifdef _PARALLEL_INTERPRETERS
+    if (setMPIDSOEFlag) {
+        ((MPIDiagonalSOE*)theSOE)->setAnalysisModel(*theAnalysisModel);
+    }
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 int
@@ -629,6 +688,15 @@ OpenSeesCommands::setPFEMAnalysis()
 	theTransientAnalysis->setEigenSOE(*theEigenSOE);
     }
 
+<<<<<<< HEAD
+=======
+#ifdef _PARALLEL_INTERPRETERS
+    if (setMPIDSOEFlag) {
+        ((MPIDiagonalSOE*)theSOE)->setAnalysisModel(*theAnalysisModel);
+    }
+#endif
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return 0;
 }
 
@@ -767,7 +835,15 @@ OpenSeesCommands::setTransientAnalysis()
     if (theEigenSOE != 0) {
 	theTransientAnalysis->setEigenSOE(*theEigenSOE);
     }
+<<<<<<< HEAD
 
+=======
+#ifdef _PARALLEL_INTERPRETERS
+	if (setMPIDSOEFlag) {
+	  ((MPIDiagonalSOE*) theSOE)->setAnalysisModel(*theAnalysisModel);
+	}
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 void
@@ -826,6 +902,10 @@ OpenSeesCommands::wipe()
 
     // wipe all meshes
     OPS_clearAllMesh();
+<<<<<<< HEAD
+=======
+    OPS_getBgMesh().clearAll();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     // time set to zero
     ops_Dt = 0.0;
@@ -904,12 +984,20 @@ int OPS_GetIntInput(int *numData, int*data)
     return interp->getInt(data, *numData);
 }
 
+<<<<<<< HEAD
 int OPS_SetIntOutput(int *numData, int*data)
 {
     if (cmds == 0) return 0;
     DL_Interpreter* interp = cmds->getInterpreter();
     if (numData == 0 || data == 0) return -1;
     return interp->setInt(data, *numData);
+=======
+int OPS_SetIntOutput(int *numData, int*data, bool scalar)
+{
+    if (cmds == 0) return 0;
+    DL_Interpreter* interp = cmds->getInterpreter();
+    return interp->setInt(data, *numData, scalar);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 int OPS_GetDoubleInput(int *numData, double *data)
@@ -920,12 +1008,20 @@ int OPS_GetDoubleInput(int *numData, double *data)
     return interp->getDouble(data, *numData);
 }
 
+<<<<<<< HEAD
 int OPS_SetDoubleOutput(int *numData, double *data)
 {
     if (cmds == 0) return 0;
     DL_Interpreter* interp = cmds->getInterpreter();
     if (numData == 0 || data == 0) return -1;
     return interp->setDouble(data, *numData);
+=======
+int OPS_SetDoubleOutput(int *numData, double *data, bool scalar)
+{
+    if (cmds == 0) return 0;
+    DL_Interpreter* interp = cmds->getInterpreter();
+    return interp->setDouble(data, *numData, scalar);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 const char * OPS_GetString(void)
@@ -964,6 +1060,16 @@ int OPS_GetNDM()
     return cmds->getNDM();
 }
 
+<<<<<<< HEAD
+=======
+int OPS_Error(char *errorMessage, int length)
+{
+    opserr << errorMessage;
+    opserr << endln;
+    return 0;
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int OPS_ResetCurrentInputArg(int cArg)
 {
     if (cArg == 0) {
@@ -1094,8 +1200,19 @@ int OPS_System()
 
 
     } else if (strcmp(type,"MPIDiagonal") == 0) {
+<<<<<<< HEAD
 	// Diagonal SOE & SOLVER
 	theSOE = (LinearSOE*)OPS_DiagonalDirectSolver();
+=======
+#ifdef _PARALLEL_INTERPRETERS
+        MPIDiagonalSolver* theSolver = new MPIDiagonalSolver();
+        theSOE = new MPIDiagonalSOE(*theSolver);
+        setMPIDSOEFlag = true;
+#else
+	// Diagonal SOE & SOLVER
+	theSOE = (LinearSOE*)OPS_DiagonalDirectSolver();
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     } else if (strcmp(type,"SProfileSPD") == 0) {
 	// PROFILE SPD SOE * SOLVER
@@ -1106,6 +1223,23 @@ int OPS_System()
 
 	theSOE = (LinearSOE*)OPS_ProfileSPDLinDirectSolver();
 
+<<<<<<< HEAD
+=======
+#ifdef _PARALLEL_INTERPRETERS
+    } else if (strcmp(type, "ParallelProfileSPD") == 0) {
+        ProfileSPDLinSolver* theSolver = new ProfileSPDLinDirectSolver();
+        DistributedProfileSPDLinSOE* theParallelSOE = new DistributedProfileSPDLinSOE(*theSolver);
+        theSOE = theParallelSOE;
+        auto theMachineBroker = cmds->getMachineBroker();
+        auto rank = theMachineBroker->getPID();
+        auto numChannels = cmds->getNumChannels();
+        auto theChannels = cmds->getChannels();
+        theParallelSOE->setProcessID(rank);
+        theParallelSOE->setChannels(numChannels, theChannels);
+    
+#endif
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     } else if (strcmp(type, "PFEM") == 0) {
 	// PFEM SOE & SOLVER
 
@@ -1119,6 +1253,7 @@ int OPS_System()
 
 		theSOE = (LinearSOE*)OPS_PFEMCompressibleSolver();
 
+<<<<<<< HEAD
 	    } else if (strcmp(type, "-laplace") == 0) {
 
 	    	theSOE = (LinearSOE*)OPS_PFEMSolver_Laplace();
@@ -1163,6 +1298,15 @@ int OPS_System()
 // #endif
 
 	    }
+=======
+	    } else if(strcmp(type, "-mumps") == 0) {
+		
+	    	theSOE = (LinearSOE*)OPS_PFEMSolver_Mumps();
+
+	    } else if (strcmp(type, "-umfpack") == 0) {
+	    theSOE = (LinearSOE*)OPS_PFEMSolver_Umfpack();
+        }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	}
 
 
@@ -1386,6 +1530,12 @@ int OPS_Integrator()
     } else if (strcmp(type,"Newmark") == 0) {
 	ti = (TransientIntegrator*)OPS_Newmark();
 
+<<<<<<< HEAD
+=======
+    } else if (strcmp(type,"GimmeMCK") == 0 || strcmp(type,"ZZTop") == 0) {
+	ti = (TransientIntegrator*)OPS_GimmeMCK();
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     } else if (strcmp(type,"TRBDF2") == 0 || strcmp(type,"Bathe") == 0) {
 	ti = (TransientIntegrator*)OPS_TRBDF2();
 
@@ -1668,7 +1818,11 @@ int OPS_analyze()
     }
 
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&numdata, &result) < 0) {
+=======
+    if (OPS_SetIntOutput(&numdata, &result, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr<<"WARNING failed to set output\n";
 	return -1;
     }
@@ -1830,13 +1984,27 @@ int OPS_printA()
 	    theTransientIntegrator->formTangent(0);
 	}
 
+<<<<<<< HEAD
+=======
+    PFEMLinSOE* pfemsoe = dynamic_cast<PFEMLinSOE*>(theSOE);
+    if (pfemsoe != 0) {
+        pfemsoe->saveK(*output);
+        outputFile.close();
+        return 0;
+    }
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	Matrix *A = const_cast<Matrix*>(theSOE->getA());
 	if (A != 0) {
 	    if (ret) {
 		int size = A->noRows() * A->noCols();
 		if (size >0) {
 		    double& ptr = (*A)(0,0);
+<<<<<<< HEAD
 		    if (OPS_SetDoubleOutput(&size, &ptr) < 0) {
+=======
+		    if (OPS_SetDoubleOutput(&size, &ptr, false) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			opserr << "WARNING: printA - failed to set output\n";
 			return -1;
 		    }
@@ -1844,7 +2012,25 @@ int OPS_printA()
 	    } else {
 		*output << *A;
 	    }
+<<<<<<< HEAD
 	}
+=======
+	} else {
+        int size = 0;
+        double *ptr = 0;
+        if (OPS_SetDoubleOutput(&size, ptr, false) < 0) {
+            opserr << "WARNING: printA - failed to set output\n";
+            return -1;
+        }
+	}
+    } else {
+        int size = 0;
+        double *ptr = 0;
+        if (OPS_SetDoubleOutput(&size, ptr, false) < 0) {
+            opserr << "WARNING: printA - failed to set output\n";
+            return -1;
+        }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 
     // close the output file
@@ -1891,14 +2077,38 @@ int OPS_printB()
 	    int size = b.Size();
 	    if (size > 0) {
 		double &ptr = b(0);
+<<<<<<< HEAD
 		if (OPS_SetDoubleOutput(&size, &ptr) < 0) {
 		    opserr << "WARNING: printb - failed to set output\n";
 		    return -1;
 		}
+=======
+		if (OPS_SetDoubleOutput(&size, &ptr, false) < 0) {
+		    opserr << "WARNING: printb - failed to set output\n";
+		    return -1;
+		}
+	    } else {
+            size = 0;
+            double *ptr2 = 0;
+            if (OPS_SetDoubleOutput(&size, ptr2, false) < 0) {
+                opserr << "WARNING: printA - failed to set output\n";
+                return -1;
+            }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    }
 	} else {
 	    *output << b;
 	}
+<<<<<<< HEAD
+=======
+    } else {
+        int size = 0;
+        double *ptr = 0;
+        if (OPS_SetDoubleOutput(&size, ptr, false) < 0) {
+            opserr << "WARNING: printA - failed to set output\n";
+            return -1;
+        }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     }
 
     // close the output file
@@ -2371,7 +2581,11 @@ int OPS_getCTestNorms()
 	    data[i] = norms(i);
 	}
 
+<<<<<<< HEAD
 	if (OPS_SetDoubleOutput(&numdata, data) < 0) {
+=======
+	if (OPS_SetDoubleOutput(&numdata, data, false) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    opserr << "WARNING failed to set test norms\n";
 	    delete [] data;
 	    return -1;
@@ -2392,7 +2606,11 @@ int OPS_getCTestIter()
     if (theTest != 0) {
 	int res = theTest->getNumTests();
 	int numdata = 1;
+<<<<<<< HEAD
 	if (OPS_SetIntOutput(&numdata, &res) < 0) {
+=======
+	if (OPS_SetIntOutput(&numdata, &res, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    opserr << "WARNING failed to set test iter\n";
 	    return -1;
 	}
@@ -2885,7 +3103,11 @@ int OPS_totalCPU()
 
     double value = theAlgorithm->getTotalTimeCPU();
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }
@@ -2904,7 +3126,11 @@ int OPS_solveCPU()
 
     double value = theAlgorithm->getSolveTimeCPU();
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }
@@ -2923,7 +3149,11 @@ int OPS_accelCPU()
 
     double value = theAlgorithm->getAccelTimeCPU();
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }
@@ -2942,7 +3172,11 @@ int OPS_numFact()
 
     double value = theAlgorithm->getNumFactorizations();
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }
@@ -2961,7 +3195,11 @@ int OPS_numIter()
 
     int value = theAlgorithm->getNumIterations();
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetIntOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }
@@ -2980,7 +3218,11 @@ int OPS_systemSize()
 
     int value = theSOE->getNumEqn();
     int numdata = 1;
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetIntOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }
@@ -3096,6 +3338,10 @@ void* OPS_ParallelDisplacementControl() {
 void* OPS_MumpsSolver() {
     int icntl14 = 20;
     int icntl7 = 7;
+<<<<<<< HEAD
+=======
+    int matType = 0; // 0: unsymmetric, 1: symmetric positive definite, 2: symmetric general
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     while (OPS_GetNumRemainingInputArgs() > 2) {
         const char* opt = OPS_GetString();
         int num = 1;
@@ -3109,14 +3355,34 @@ void* OPS_MumpsSolver() {
                 opserr << "WARNING: failed to get icntl7\n";
                 return 0;
             }
+<<<<<<< HEAD
+=======
+        } else if (strcmp(opt, "-matrixType") == 0) {
+            if (OPS_GetIntInput(&num, &matType) < 0) {
+                opserr << "WARNING: failed to get -matrixType. Unsymmetric matrix assumed\n";
+                return 0;
+            }
+            if (matType < 0 || matType > 2) {
+                opserr << "Mumps Warning: wrong -matrixType value (" << matType << "). Unsymmetric matrix assumed\n";
+                matType = 0;
+            }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         }
     }
 
 #ifdef _PARALLEL_INTERPRETERS
+<<<<<<< HEAD
     MumpsParallelSOE* soe = 0;
 
     MumpsParallelSolver *solver= new MumpsParallelSolver(icntl7, icntl14);
     soe = new MumpsParallelSOE(*solver);
+=======
+#ifdef _MUMPS
+    MumpsParallelSOE* soe = 0;
+
+    MumpsParallelSolver *solver= new MumpsParallelSolver(icntl7, icntl14);
+    soe = new MumpsParallelSOE(*solver, matType);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     MachineBroker* machine = cmds->getMachineBroker();
     Channel** channels = cmds->getChannels();
@@ -3126,8 +3392,18 @@ void* OPS_MumpsSolver() {
     soe->setProcessID(rank);
     soe->setChannels(numChannels, channels);
     return soe;
+<<<<<<< HEAD
 #else
     return 0;
+=======
+#endif
+#else
+#ifdef _MUMPS
+    MumpsSolver *theSolver = new MumpsSolver(icntl7, icntl14);
+    theSOE = new MumpsSOE(*theSolver, matType);
+    return theSOE;
+#endif
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #endif
 
 }

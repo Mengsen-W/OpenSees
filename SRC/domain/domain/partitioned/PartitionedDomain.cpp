@@ -65,6 +65,11 @@
 
 #include <MapOfTaggedObjects.h>
 #include <MapOfTaggedObjectsIter.h>
+<<<<<<< HEAD
+=======
+#include <iostream>
+#include <sys/time.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 typedef map<int, int>         MAP_INT;
 typedef MAP_INT::value_type   MAP_INT_TYPE;
@@ -1199,11 +1204,19 @@ PartitionedDomain::commit(void)
   }
 
   // now we load balance if we have subdomains and a partitioner
+<<<<<<< HEAD
+=======
+  /* turning off load balancing
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   int numSubdomains = this->getNumSubdomains();
   if (numSubdomains != 0 && theDomainPartitioner != 0)  {
     Graph &theSubGraphs = this->getSubdomainGraph();
     theDomainPartitioner->balance(theSubGraphs);
   }
+<<<<<<< HEAD
+=======
+  */
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   return 0;
 }

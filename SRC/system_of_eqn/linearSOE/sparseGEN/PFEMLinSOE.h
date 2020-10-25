@@ -37,6 +37,10 @@
 
 
 #include <LinearSOE.h>
+<<<<<<< HEAD
+=======
+#include <OPS_Stream.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <Vector.h>
 #include <ID.h>
 extern "C" {
@@ -54,6 +58,11 @@ class PFEMLinSOE : public LinearSOE
 
     virtual ~PFEMLinSOE();
 
+<<<<<<< HEAD
+=======
+    virtual int solve(void);
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     virtual int getNumEqn(void) const;
     virtual int setSize(Graph& theGraph);
     virtual int addA(const Matrix &, const ID &, double fact = 1.0);
@@ -83,6 +92,15 @@ class PFEMLinSOE : public LinearSOE
     friend class PFEMSolver_Laplace;
     friend class PFEMSolver_LumpM;
 
+<<<<<<< HEAD
+=======
+    virtual bool isFluidID(const ID& id) const;
+    virtual bool skipFluid() const;
+    virtual int getStage() const {return stage;}
+    virtual void setStage(int s) {stage = s;}
+    void saveK(OPS_Stream& output);
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 private:
 
     virtual int setDofIDs(int size,int& Ssize, int&Fsize, int& Isize,int& Psize,int& Pisize);
@@ -93,6 +111,11 @@ private:
     cs* M, *Gft, *Git, *L, *Qt;
     Vector X, B, Mhat, Mf;
     ID dofType, dofID;
+<<<<<<< HEAD
+=======
+    int assemblyFlag;
+    int stage;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

@@ -86,7 +86,11 @@ OPS_Parameter()
 	    return -1;
 	}
 
+<<<<<<< HEAD
 	if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+	if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    opserr << "WARING: parameter - failed to set parameter tag\n";
 	    return -1;
 	}
@@ -111,7 +115,11 @@ OPS_Parameter()
 	    return -1;
 	}
 
+<<<<<<< HEAD
 	if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+	if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    opserr << "WARING: parameter - failed to set parameter tag\n";
 	    return -1;
 	}
@@ -151,7 +159,11 @@ OPS_Parameter()
 		    return -1;
 		}
 
+<<<<<<< HEAD
 		if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+		if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		    opserr << "WARING: parameter - failed to set parameter tag\n";
 		    return -1;
 		}
@@ -197,7 +209,11 @@ OPS_Parameter()
 		    return -1;
 		}
 
+<<<<<<< HEAD
 		if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+		if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		    opserr << "WARING: parameter - failed to set parameter tag\n";
 		    return -1;
 		}
@@ -352,7 +368,11 @@ OPS_Parameter()
 	theDomain->addParameter(newParameter);
     }
 
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+    if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARING: parameter - failed to set parameter tag\n";
 	return -1;
     }
@@ -492,7 +512,11 @@ OPS_addToParameter()
 
     }
 
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+    if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARING: parameter - failed to set parameter tag\n";
 	return -1;
     }
@@ -542,7 +566,11 @@ OPS_updateParameter()
 
     theDomain->updateParameter(paramTag, newValue);
 
+<<<<<<< HEAD
     if (OPS_SetIntOutput(&num, &paramTag) < 0) {
+=======
+    if (OPS_SetIntOutput(&num, &paramTag, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARING: parameter - failed to set parameter tag\n";
 	return -1;
     }
@@ -564,12 +592,23 @@ int OPS_getParamTags()
 	tags.push_back(theParam->getTag());
     }
 
+<<<<<<< HEAD
     if (tags.empty()) return 0;
 
     int size = (int)tags.size();
     int* data = &tags[0];
 
     if (OPS_SetIntOutput(&size, data) < 0) {
+=======
+    int size = 0;
+    int* data = 0;
+    if (!tags.empty()) {
+        size = (int) tags.size();
+        data = &tags[0];
+    }
+
+    if (OPS_SetIntOutput(&size, data, false) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set outputs\n";
 	return -1;
     }
@@ -604,7 +643,11 @@ int OPS_getParamValue()
 
     double value = theParam->getValue();
 
+<<<<<<< HEAD
     if (OPS_SetDoubleOutput(&numdata, &value) < 0) {
+=======
+    if (OPS_SetDoubleOutput(&numdata, &value, true) < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	opserr << "WARNING failed to set output\n";
 	return -1;
     }

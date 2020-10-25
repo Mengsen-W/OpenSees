@@ -212,9 +212,15 @@ ThreePointCurve::checkElementState(double springForce)
 		}
 	}
 
+<<<<<<< HEAD
 	double deform;	// value of deformation parameter from element
 	double force;	// value of force parameter from element
 	int result; //junk variable
+=======
+	double deform;   // value of deformation parameter from element
+	double force;    // value of force parameter from element
+	int result = 0;  //junk variable
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 
 	// Based on "defType" and "forType" calculate

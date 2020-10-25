@@ -63,6 +63,16 @@
 #include <SSPquadUP.h>
 #include <SSPquad.h>
 #include <elementAPI.h>
+<<<<<<< HEAD
+=======
+#include <TimeSeries.h>
+
+#include <FourNodeQuad.h>
+#include <FourNodeQuadUP.h>
+#include <Nine_Four_Node_QuadUP.h>
+#include <FluidSolidPorousMaterial.h>
+#include <PressureDependMultiYield.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 // Controls on internal iteration between spring components
 const int PYmaxIterations = 20;

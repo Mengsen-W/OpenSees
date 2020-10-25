@@ -383,4 +383,30 @@ PlateFromPlaneStressMaterial::recvSelf(int commitTag, Channel &theChannel, FEM_O
   
   return res;
 }
+<<<<<<< HEAD
  
+=======
+
+//setResponse - added by V.K. Papanikolaou [AUTh] - start
+Response*
+PlateFromPlaneStressMaterial::setResponse(const char** argv, int argc, OPS_Stream& output)
+{
+    if (strcmp(argv[0], "Tangent") == 0 || strcmp(argv[0], "tangent") == 0 ||
+        strcmp(argv[0], "stress") == 0 || strcmp(argv[0], "stresses") == 0 ||
+        strcmp(argv[0], "strain") == 0 || strcmp(argv[0], "strains") == 0) {
+        
+        return NDMaterial::setResponse(argv, argc, output);  // for stresses/strains, get response from NDMaterial
+    }
+
+    // for material-specific output
+
+    Response *theResponse = 0;
+    theResponse = theMat->setResponse(argv, argc, output);
+
+    if (theResponse == 0) 
+        return NDMaterial::setResponse(argv, argc, output);  // not implemented, get default (zero) response from NDMaterial
+
+    return theResponse;  // implemented, get damage response from theMat
+}
+//setResponse - added by V.K. Papanikolaou [AUTh] - end
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

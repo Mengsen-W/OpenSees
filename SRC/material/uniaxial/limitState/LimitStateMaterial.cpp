@@ -43,6 +43,10 @@
 // All code specific to LimitStateMaterial separated by ////////////////
 
 #include <stdlib.h>
+<<<<<<< HEAD
+=======
+#include "LimitCurve.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #include <LimitStateMaterial.h>
 #include <G3Globals.h>
@@ -114,6 +118,10 @@ void* OPS_LimiStateMaterial()
     }
 
     double beta = 0.0;
+<<<<<<< HEAD
+=======
+    numdata = 1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (argc == 20 || argc == 16 || argc >= 22 ) {
 	if (OPS_GetDoubleInput(&numdata,&beta) < 0) {
 	    opserr << "WARNING invalid beta\n";

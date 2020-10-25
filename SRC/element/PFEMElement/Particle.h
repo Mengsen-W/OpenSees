@@ -54,6 +54,10 @@ public:
     void setVel(const VDouble &vel) {
         if (!updated) {
             this->velocity = vel;
+<<<<<<< HEAD
+=======
+            this->coordn = this->coord;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             updated = true;
         }
     }
@@ -61,6 +65,10 @@ public:
     void incrVel(const VDouble &dv) {
         if (!updated) {
             this->velocity += dv;
+<<<<<<< HEAD
+=======
+            this->coordn = this->coord;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             updated = true;
         }
     }
@@ -92,6 +100,11 @@ public:
 
     const VDouble &getCrds() const { return coord; }
 
+<<<<<<< HEAD
+=======
+    const VDouble &getCrdsn() const { return coordn; }
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     const VDouble &getVel() const { return velocity; }
 
     const VDouble &getAccel() const { return accel; }
@@ -108,8 +121,15 @@ public:
 
     double getDt() const { return dt; }
 
+<<<<<<< HEAD
 private:
     VDouble coord;
+=======
+    size_t getTag() const {return tag;}
+
+private:
+    VDouble coord, coordn;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     VDouble velocity;
     VDouble accel;
     double pressure, pdot;
@@ -117,6 +137,12 @@ private:
     bool updated;
     double dt;
     bool fixed;
+<<<<<<< HEAD
+=======
+    size_t tag;
+
+    static size_t curr_tag;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 

@@ -36,7 +36,11 @@
 
 
 #include <AlgorithmIncrements.h>
+<<<<<<< HEAD
 #include <EquiSolnAlgo.h>
+=======
+#include "equiSolnAlgo/EquiSolnAlgo.h"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <LinearSOE.h>
 #include <stdlib.h>
 #include <string.h>

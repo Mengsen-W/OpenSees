@@ -26,6 +26,10 @@ all:         $(OBJS)
 	@$(CD) $(FE)/element/triangle; $(MAKE);
 	@$(CD) $(FE)/element/PFEMElement; $(MAKE);
 	@$(CD) $(FE)/element/dispBeamColumn; $(MAKE);
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/element/mixedBeamColumn; $(MAKE);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	@$(CD) $(FE)/element/elasticBeamColumn; $(MAKE);
 	@$(CD) $(FE)/element/updatedLagrangianBeamColumn; $(MAKE);
 	@$(CD) $(FE)/element/forceBeamColumn; $(MAKE);
@@ -47,6 +51,10 @@ all:         $(OBJS)
 	@$(CD) $(FE)/element/catenaryCable; $(MAKE);
 	@$(CD) $(FE)/element/tetrahedron; $(MAKE);
 	@$(CD) $(FE)/element/absorbentBoundaries; $(MAKE);
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/element/gradientInelasticBeamColumn; $(MAKE);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 # Miscellaneous
 tidy:	
@@ -71,6 +79,10 @@ spotless: clean
 	@$(CD) $(FE)/element/triangle; $(MAKE) wipe;
 	@$(CD) $(FE)/element/PFEMElement; $(MAKE) wipe;
 	@$(CD) $(FE)/element/dispBeamColumn; $(MAKE) wipe;
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/element/mixedBeamColumn; $(MAKE) wipe;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	@$(CD) $(FE)/element/elasticBeamColumn; $(MAKE) wipe;
 	@$(CD) $(FE)/element/updatedLagrangianBeamColumn; $(MAKE) wipe;
 	@$(CD) $(FE)/element/forceBeamColumn; $(MAKE) wipe;
@@ -92,6 +104,10 @@ spotless: clean
 	@$(CD) $(FE)/element/catenaryCable; $(MAKE) wipe;
 	@$(CD) $(FE)/element/tetrahedron; $(MAKE) wipe;
 	@$(CD) $(FE)/element/absorbentBoundaries; $(MAKE) wipe;
+<<<<<<< HEAD
+=======
+	@$(CD) $(FE)/element/gradientInelasticBeamColumn; $(MAKE) wipe;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 wipe: spotless
 

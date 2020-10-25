@@ -1494,7 +1494,11 @@ TclCommand_addNDMaterial(ClientData clientData, Tcl_Interp *interp,
 
 extern int
 TclModelBuilderSectionCommand (ClientData clienData, Tcl_Interp *interp, int argc,
+<<<<<<< HEAD
 				  TCL_Char **argv, TclModelBuilder *theTclBuilder);
+=======
+			       TCL_Char **argv, Domain *theDomain, TclModelBuilder *theTclBuilder);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 int
 TclCommand_addSection(ClientData clientData, Tcl_Interp *interp, 
@@ -1502,7 +1506,11 @@ TclCommand_addSection(ClientData clientData, Tcl_Interp *interp,
                           
 {
   return TclModelBuilderSectionCommand(clientData, interp, 
+<<<<<<< HEAD
 				       argc, argv, theTclBuilder);
+=======
+				       argc, argv, theTclDomain, theTclBuilder);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
@@ -2277,8 +2285,12 @@ TclCommand_addElementalLoad(ClientData clientData, Tcl_Interp *interp, int argc,
 	  //(2) 5 temperature points, i.e. 4 layers
 	  //(3) 2 temperature points, i.e. 1 layers: linear or uniform
 
+<<<<<<< HEAD
 	  double t1, locY1, t2, locY2, t3, locY3, t4, locY4, t5, locY5,
 		  t6, locY6, t7, locY7, t8, locY8, t9, locY9;
+=======
+	  double t1, locY1, t2, locY2; //t3, locY3, t4, locY4, t5, locY5, t6, locY6, t7, locY7, t8, locY8, t9, locY9;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	  // 9 temperature points are given,i.e. 8 layers are defined; Also the 9 corresponding vertical coordinate is given.
 	  // the temperature at each fiber is obtained by interpolating of temperatures at the nearby temperature points.
 	  //Start to add source file
@@ -4218,9 +4230,15 @@ TclCommand_doBlock2D(ClientData clientData, Tcl_Interp *interp, int argc,
   //  int numNodes = nodeTags.Size();
 
   // assumes 15 is largest string for individual nodeTags
+<<<<<<< HEAD
   count = 10 + strlen(eleType) + strlen(additionalEleArgs) + 15 * (numNodes+1);
   char *eleCommand = new char[count];
   int initialCount = 8 + strlen(eleType);
+=======
+  count = int(10 + strlen(eleType) + strlen(additionalEleArgs) + 15 * (numNodes+1));
+  char *eleCommand = new char[count];
+  int initialCount = int(8 + strlen(eleType));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   int  eleID = startEleNum; 
   if (numNodes == 9) {
@@ -4388,9 +4406,15 @@ TclCommand_doBlock3D(ClientData clientData, Tcl_Interp *interp, int argc,
   int numNodes = nodeTags.Size();
 
   // assumes 15 is largest string for individual nodeTags
+<<<<<<< HEAD
   count = 10 + strlen(eleType) + strlen(additionalEleArgs) + 15 * (numNodes+1);
   char *eleCommand = new char[count];
   int initialCount = 8 + strlen(eleType);
+=======
+  count = int(10 + strlen(eleType) + strlen(additionalEleArgs) + 15 * (numNodes+1));
+  char *eleCommand = new char[count];
+  int initialCount = int(8 + strlen(eleType));
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   int  eleID = startEleNum;  
   for (kk=0; kk<numZ; kk++) {

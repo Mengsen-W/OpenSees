@@ -56,7 +56,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utility", "proj\utility\uti
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSeesPy", "proj\openSeesPy\OpenSeesPy.vcxproj", "{F26CA968-C7ED-4246-A732-388C23BF8822}"
 EndProject
+<<<<<<< HEAD
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSeesPy36", "proj\openSeesPy36\OpenSeesPy36.vcxproj", "{5E3E057B-AE7B-434B-9FC1-C238893D901E}"
+=======
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSeesPy38", "proj\openSeesPy38\OpenSeesPy38.vcxproj", "{5E3E057B-AE7B-434B-9FC1-C238893D901E}"
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -60,12 +60,21 @@ extern void* OPS_PVDRecorder();
 extern void* OPS_GmshRecorder();
 extern void* OPS_MPCORecorder();
 extern void* OPS_VTK_Recorder();
+<<<<<<< HEAD
+=======
+extern void* OPS_ElementRecorderRMS();
+extern void* OPS_NodeRecorderRMS();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 
  #include <NodeIter.h>
  #include <ElementIter.h>
  #include <Node.h>
  #include <Element.h>
+<<<<<<< HEAD
+=======
+#include <Parameter.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  #include <DamageModel.h>
  #include <DamageRecorder.h>
  #include <MeshRegion.h>
@@ -93,6 +102,7 @@ extern void* OPS_VTK_Recorder();
 
  //extern TclModelBuilder *theDamageTclModelBuilder;
 
+<<<<<<< HEAD
  extern int OPS_ResetInputNoBuilder(ClientData clientData, 
 				    Tcl_Interp *interp,  
 				    int cArg, 
@@ -100,6 +110,8 @@ extern void* OPS_VTK_Recorder();
 				    TCL_Char **argv, 
 				    Domain *domain);
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  typedef struct externalRecorderCommand {
    char *funcName;
    void *(*funcPtr)();
@@ -653,15 +665,25 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        const char *fileNameinf = 0;
 
        //  end of new
+<<<<<<< HEAD
        int numSlaveEle = 0;
+=======
+       int numSecondaryEle = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
        // create an ID to hold ele tags
        //ID eleIDs(numEle, numEle+1); 
        ID eleIDs;
        eleIDs = ID(1);
+<<<<<<< HEAD
        ID slaveEleIDs = ID(1);
        slaveEleIDs[0] = 0;
        bool slaveFlag = false;
+=======
+       ID secondaryEleIDs = ID(1);
+       secondaryEleIDs[0] = 0;
+       bool secondaryFlag = false;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
        ID secIDs = 0;
        //	secIDs = 0;
 
@@ -730,8 +752,13 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 
 	 //    end of new
 
+<<<<<<< HEAD
 	 else if ((strcmp(argv[loc],"-slave") == 0)) {
 	   slaveFlag = true;
+=======
+	 else if ((strcmp(argv[loc],"-slave") == 0) || (strcmp(argv[loc],"-secondary") == 0)) {
+	   secondaryFlag = true;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	   loc++;
 	 }
 
@@ -751,11 +778,19 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   loc++;
 	   int eleTag;
 	   while (loc < argc && Tcl_GetInt(interp, argv[loc], &eleTag) == TCL_OK) {
+<<<<<<< HEAD
 	     if (slaveFlag == false)
 	       eleIDs[numEle++] = eleTag;
 	     else
 	       slaveEleIDs[numSlaveEle++] = eleTag;
 	     slaveFlag = false;
+=======
+	     if (secondaryFlag == false)
+	       eleIDs[numEle++] = eleTag;
+	     else
+	       secondaryEleIDs[numSecondaryEle++] = eleTag;
+	     secondaryFlag = false;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	     loc++;
 	   }
 
@@ -804,12 +839,21 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   }
 
 	   for (int i=start; i<=end; i++)
+<<<<<<< HEAD
 	     if (slaveFlag == false)
 	       eleIDs[numEle++] = i;
 	     else
 	       slaveEleIDs[numSlaveEle++] = i;
 
 	   slaveFlag = false;    
+=======
+	     if (secondaryFlag == false)
+	       eleIDs[numEle++] = i;
+	     else
+	       secondaryEleIDs[numSecondaryEle++] = i;
+
+	   secondaryFlag = false;    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	   loc += 3;
 	 } 
 
@@ -832,12 +876,21 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   }      
 	   const ID &eleRegion = theRegion->getElements();
 	   for (int i=0; i<eleRegion.Size(); i++)
+<<<<<<< HEAD
 	     if (slaveFlag == false)
 	       eleIDs[numEle++] = eleRegion(i);
 	     else
 	       slaveEleIDs[numSlaveEle++] = eleRegion(i);
 
 	   slaveFlag = false;
+=======
+	     if (secondaryFlag == false)
+	       eleIDs[numEle++] = eleRegion(i);
+	     else
+	       secondaryEleIDs[numSecondaryEle++] = eleRegion(i);
+
+	   secondaryFlag = false;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	   loc += 2;
 	 } 
 
@@ -1023,7 +1076,11 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        (*theRecorder) = new RemoveRecorder( nodeTag, 
 					    eleIDs, 
 					    secIDs, 
+<<<<<<< HEAD
 					    slaveEleIDs, 
+=======
+					    secondaryEleIDs, 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 					    remCriteria, 
 					    theDomain,
 					    *theOutputStream,
@@ -1055,7 +1112,13 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        }    
 
        // AddingSensitivity:BEGIN ///////////////////////////////////
+<<<<<<< HEAD
        int sensitivity = 0;
+=======
+       //int sensitivity = 0;
+       int paramTag = 0;
+       int gradIndex = -1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
        // AddingSensitivity:END /////////////////////////////////////
 
        TCL_Char *responseID = 0;
@@ -1321,11 +1384,27 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
  // AddingSensitivity:BEGIN //////////////////////////////////////
 	 else if (strcmp(argv[pos],"-sensitivity") == 0) {
 		 pos++;
+<<<<<<< HEAD
 		 if (Tcl_GetInt(interp, argv[pos], &sensitivity) != TCL_OK) {
 			 opserr << "ERROR: Invalid gradient number to node recorder." << endln;
 			 return TCL_ERROR;
 		 }
 		 pos++;
+=======
+		 if (Tcl_GetInt(interp, argv[pos], &paramTag) != TCL_OK) {
+			 opserr << "ERROR: Invalid parameter tag to node recorder." << endln;
+			 return TCL_ERROR;
+		 }
+		 pos++;
+
+		 // Now get gradIndex from parameter tag
+		 Parameter *theParameter = theDomain.getParameter(paramTag);
+		 if (theParameter == 0) {
+		   opserr << "NodeRecorder: parameter " << paramTag << " not found" << endln;
+		   return TCL_ERROR;
+		 }
+		 gradIndex = theParameter->getGradIndex();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	 }
  // AddingSensitivity:END ////////////////////////////////////////
 	 else	 
@@ -1377,7 +1456,11 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 
 	 (*theRecorder) = new NodeRecorder(theDofs, 
 					   theNodes, 
+<<<<<<< HEAD
 					   sensitivity,
+=======
+					   gradIndex,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 					   responseID, 
 					   theDomain, 
 					   *theOutputStream, 
@@ -1834,6 +1917,21 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
        (*theRecorder) = (Recorder*) OPS_VTK_Recorder();
      }
+<<<<<<< HEAD
+=======
+     else if (strcmp(argv[1],"ElementRMS") == 0) {
+       OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
+       (*theRecorder) = (Recorder*) OPS_ElementRecorderRMS();
+     }
+     else if (strcmp(argv[1],"NodeRMS") == 0) {
+       OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
+       (*theRecorder) = (Recorder*) OPS_NodeRecorderRMS();
+     }
+     else if (strcmp(argv[1],"vtk") == 0 || strcmp(argv[1],"VTK") == 0) {
+       OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
+       (*theRecorder) = (Recorder*) OPS_VTK_Recorder();
+     }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
      else if (strcmp(argv[1], "mpco") == 0) {
        OPS_ResetInputNoBuilder(clientData, interp, 2, argc, argv, &theDomain);
        (*theRecorder) = (Recorder*)OPS_MPCORecorder();

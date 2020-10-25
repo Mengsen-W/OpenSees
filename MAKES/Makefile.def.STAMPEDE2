@@ -25,6 +25,7 @@ BASE  =
 
 FE    = $(HOME)/OpenSees/SRC
 
+<<<<<<< HEAD
 #PROGRAMMING_MODE = SEQUENTIAL
 #PROGRAMMING_MODE = PARALLEL
 #PROGRAMMING_MODE = PARALLEL_INTERPRETERS
@@ -36,6 +37,19 @@ OpenSees_PROGRAM = $(HOME)/bin/OpenSeesSP
 endif
 ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
 OpenSees_PROGRAM = $(HOME)/bin/OpenSeesMP
+=======
+PROGRAMMING_MODE = SEQUENTIAL
+#PROGRAMMING_MODE = PARALLEL
+#PROGRAMMING_MODE = PARALLEL_INTERPRETERS
+
+OpenSees_PROGRAM = $(HOME)/fmkBin/OpenSees
+
+ifeq ($(PROGRAMMING_MODE), PARALLEL)
+OpenSees_PROGRAM = $(HOME)/fmkBin/OpenSeesSP
+endif
+ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
+OpenSees_PROGRAM = $(HOME)/fmkBin/OpenSeesMP
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 endif
 
 # %---------------------------------%
@@ -53,7 +67,10 @@ RELIABILITY = NO_RELIABILITY
 
 GRAPHICS = NONE
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 BLASdir      = $(HOME)/OpenSees/OTHER/BLAS
 CBLASdir     = $(HOME)/OpenSees/OTHER/CBLAS
 AMDdir    = $(HOME)/OpenSees/OTHER/AMD
@@ -123,6 +140,10 @@ CSPARSE_LIBRARY     = $(HOME)/lib/libCSparse.a
 DISTRIBUTED_SUPERLU_LIBRARY     = $(HOME)/lib/libDistributedSuperLU.a
 
 ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 DISTRIBUTED_SUPERLU_LIBRARY     = 
 LAPACK_LIBRARY      = $(HOME)/lib/libLapack.a
 BLAS_LIBRARY        = $(HOME)/lib/libBlas.a
@@ -170,6 +191,7 @@ MPI_BIN = $(MPI_DIR)/bin
 
 ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
 
+<<<<<<< HEAD
 #CC++            =  $(ICC_BIN)/icpc
 #CC              =  $(ICC_BIN)/icc
 
@@ -177,6 +199,20 @@ ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
 CC++ = g++
 CC = gcc
 FC = gfortran
+=======
+CC++            =  $(ICC_BIN)/icpc
+CC              =  $(ICC_BIN)/icc
+FC              =  $(IFC_BIN)/ifort
+
+#CC++ = g++
+#CC = gcc
+#FC = gfortran
+
+OPT_FLAG = -O2
+
+COMP_FLAG = -DMPICH_IGNORE_CXX_SEEK 
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 F90              =  $(FC)
 LINKER           = $(CC++)
@@ -191,8 +227,26 @@ FORTRAN             =  $(FC)
 
 LINKER          =  $(CC++)
 
+<<<<<<< HEAD
 endif
 
+=======
+#OPT_FLAG = -fPIC
+#OPT_FLAG = -O2 -xCORE-AVX2 -axCORE-AVX512,MIC-AVX512
+
+endif
+
+C++FLAGS         = $(PLAINCONCRETE_FLAG) $(DAMAGE2P_FLAG) -D_LINUX -D_UNIX  $(GRAPHIC_FLAG) $(RELIABILITY_FLAG) $(DEBUG_FLAG) $(OPT_FLAG) $(COMP_FLAG) $(H5DRM_FLAG) \
+		$(PROGRAMMING_FLAG)  $(PETSC_FLAG) $(MUMPS_FLAG) \
+		-D_TCL85 -D_BLAS 
+
+CFLAGS          =  $(RELIABILITY_FLAG) $(DEBUG_FLAG)$(PROGRAMMING_FLAG) $(OPT_FLAG) $(COMP_FLAG) -D_TCL85 -D_BLAS
+FFLAGS          =  $(OPT_FLAG) $(COMP_FLAG)
+LINKFLAGS       =
+
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 AR		= ar 
 ARCH		= ar 
 
@@ -224,10 +278,16 @@ RELIABILITY_FLAG =
 #DEBUG_FLAG = -p -g
 DEBUG_FLAG = 
 
+<<<<<<< HEAD
+=======
+H5DRM_FLAG = -D_H5DRM
+DAMAGE2P_FLAG = -D_HAVE_Damage2p
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 PLAINCONCRETE_FLAG = -D_HAVE_PSUMAT
 MUMPS_FLAG = 
 PETSC_FLAG =
 
+<<<<<<< HEAD
 #OPT_FLAG = -fPIC
 OPT_FLAG = -O2 
 #OPT_FLAG = -O0
@@ -242,6 +302,8 @@ CFLAGS          =  -I${MKLROOT}/include/intel64/lp64 -I${MKLROOT}/include $(GRAP
 FFLAGS          =  $(OPT_FLAG) $(COMP_FLAG)
 LINKFLAGS       = 
 
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 # Misc
 MAKE            = /usr/bin/gmake
@@ -452,15 +514,31 @@ MACHINE_NUMERICAL_LIBS  = -lm \
   $(RELIABILITY_LIBRARY) \
   $(DISTRIBUTED_SUPERLU_LIBRARY) $(CSPARSE_LIBRARY) \
   $(METIS_LIBRARY) $(PETSC_LIB) $(CBLAS_LIBRARY) \
+<<<<<<< HEAD
   $(LAPACK_LIBRARY) $(MUMPS_LIB) $(BLAS_LIBRARY) $(PARALLEL_LIB)
+=======
+  $(LAPACK_LIBRARY) $(MUMPS_LIB) $(BLAS_LIBRARY) \
+  $(TACC_HDF5_DIR)/lib/libhdf5.a  \
+$(TACC_HDF5_DIR)/lib/libsz.a $(PARALLEL_LIB)
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #  $(DISTRIBUTED_SUPERLU_LIBRARY) $(METIS_LIBRARY) \
 
 ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
 
 #MACHINE_SPECIFIC_LIBS = -mkl=sequential -static-intel -lifcore
+<<<<<<< HEAD
 MACHINE_SPECIFIC_LIBS = -lpthread -lifcore -lgfortran -ldl
 
+=======
+#MACHINE_SPECIFIC_LIBS = -lpthread -lgfortran -ldl
+MACHINE_SPECIFIC_LIBS = -lpthread -static-intel -L$(IFC_LIB) -lifcore
+
+#MACHINE_SPECIFIC_LIBS = /usr/lib/x86_64-redhat-linux6E/lib64/libpthread.a -lgfortran \
+#/usr/lib/x86_64-redhat-linux6E/lib64/libdl.a \
+#/usr/lib/x86_64-redhat-linux6E/lib64/libc.a \
+#/usr/lib/x86_64-redhat-linux6E/lib64/libm.a -static-libgcc
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 else
 
@@ -481,7 +559,11 @@ MACHINE_INCLUDES = -I$(MPICH_HOME)/include \
 	-I$(HOME)/include   \
 	-I$(UMFPACKdir) \
 	-I$(SUPERLUdir) \
+<<<<<<< HEAD
 	-I$(SUPERLU_DISTdir) \
+=======
+	-I$(SUPERLU_DISTdir) -I$(TACC_HDF5_DIR)/include \
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	$(PETSC_INC) $(MUMPS_INCLUDE)
 
 

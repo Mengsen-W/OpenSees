@@ -85,7 +85,16 @@ class TransformationDOF_Group: public DOF_Group
     void incrNodeVel(const Vector &udot);
     void incrNodeAccel(const Vector &udotdot);
 
+<<<<<<< HEAD
     virtual void setEigenvector(int mode, const Vector &eigenvalue);
+=======
+    const Vector & getTrialDisp();
+    const Vector & getTrialVel();
+    const Vector & getTrialAccel();
+
+    virtual void setEigenvector(int mode, const Vector &eigenvalue);
+    virtual const Matrix &getEigenvectors(void);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
     int addSP_Constraint(SP_Constraint &theSP);
     int enforceSPs(int doMP);

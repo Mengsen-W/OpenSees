@@ -30,8 +30,13 @@
 // Revision: A
 //
 // Description: This file contains the class definition for ArcLength.
+<<<<<<< HEAD
 // ArcLength is an algorithmic class for performing a static analysis
 // using the arc length scheme, that is within a load step the following
+=======
+// ArcLength is an algorithmic class for perfroming a static analysis
+// using the arc length scheme, that is within a load step the follwing
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 // constraint is enforced: 
 //  i=1        delta U^T delta U + alpha^2 delta lambda^2 = delta s^2
 //  i>1        dU^T delta U + alpha^2 dLambda delta lambda = 0
@@ -44,17 +49,29 @@
 #define ArcLength_h
 
 #include <StaticIntegrator.h>
+<<<<<<< HEAD
 
+=======
+#include <Vector.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 class LinearSOE;
 class AnalysisModel;
 class FE_Element;
 class Vector;
+<<<<<<< HEAD
 
+=======
+class Domain;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 class ArcLength : public StaticIntegrator
 {
   public:
     ArcLength(double arcLength, double alpha = 1.0);
+<<<<<<< HEAD
 
+=======
+ //   ArcLength(int node, int dof,Domain *domain);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     ~ArcLength();
 
     int newStep(void);    
@@ -66,16 +83,50 @@ class ArcLength : public StaticIntegrator
 			 FEM_ObjectBroker &theBroker);
 
     void Print(OPS_Stream &s, int flag =0);    
+<<<<<<< HEAD
     
+=======
+
+   //////////////////////////Sensitivity Begin/////////////////
+      void formTangDispSensitivity(int gradNumber);
+      double formdLambdaDh(int gradNumber);
+      double getLambdaSensitivity(int gradNumber);
+      int formSensitivityRHS(int gradNum);// it's been modified to compute dLambdadh and dUdh
+      int formIndependentSensitivityRHS();
+      int saveSensitivity(const Vector &v, int gradNum, int numGrads);
+      int saveLambdaSensitivity(double dlambdadh, int gradNum, int numGrads);
+      int commitSensitivity(int gradNum, int numGrads);
+      int computeSensitivities(void);// this function is modified to obtain both dLambdadh and dUdh 
+      int formEleResidual(FE_Element *theEle);
+  bool computeSensitivityAtEachIteration();// A key that return 1 for loadControl and 2 for DisplacementControl
+ void formResidualDispSensitivity( int gradNumber);
+
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   protected:
     
   private:
     double arcLength2;
     double alpha2;
+<<<<<<< HEAD
     Vector *deltaUhat, *deltaUbar, *deltaU, *deltaUstep;
     Vector *phat; // the reference load vector
     double deltaLambdaStep, currentLambda;
     int signLastDeltaLambdaStep;
+=======
+    double a,b,c,b24ac;
+        Vector *deltaUhat, *deltaUbar, *deltaU, *deltaUstep;
+	Vector *deltaUstep2; // will be in the sensitivity part
+    Vector *phat; // the reference load vector
+    Vector *dUhatdh, *dphatdh,*dLAMBDAdh, *dUIJdh,*dDeltaUstepdh,*sensU,*Residual;
+    double deltaLambdaStep,dDeltaLambdaStepdh, currentLambda, dlambdaJdh;
+    int signLastDeltaLambdaStep;
+    
+    double dLAMBDA, dLAMBDA2; // Need it to be called when deriving dLambda1dh.
+    double dlambda1dh;
+    int gradNumber;
+   int sensitivityFlag;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 };
 
 #endif

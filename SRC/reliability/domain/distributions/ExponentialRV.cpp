@@ -109,7 +109,11 @@ double
 ExponentialRV::getPDFvalue(double rvValue)
 {
 	double result;
+<<<<<<< HEAD
 	if ( 0.0 < rvValue ) {
+=======
+	if ( 0.0 <= rvValue ) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		result = lambda * exp(-lambda * rvValue);
 	}
 	else {
@@ -123,7 +127,11 @@ double
 ExponentialRV::getCDFvalue(double rvValue)
 {
 	double result;
+<<<<<<< HEAD
 	if ( 0.0 < rvValue ) {
+=======
+	if ( 0.0 <= rvValue ) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		result = 1 - exp(-lambda*rvValue);
 	}
 	else {

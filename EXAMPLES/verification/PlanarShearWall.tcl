@@ -102,7 +102,11 @@ foreach eleType {quad SSPquad} {
 	    algorithm Linear
 	    numberer RCM
 	    constraints Plain 
+<<<<<<< HEAD
 	    system SparseGeneral -piv
+=======
+	    system Umfpack
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    analysis Static 
 	    
 	    analyze 1
@@ -187,8 +191,12 @@ foreach numFloor {6 3 1} {
 	algorithm Linear
 	numberer RCM
 	constraints Plain
+<<<<<<< HEAD
      system ProfileSPD	
 	#system UmfPack
+=======
+	system UmfPack
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	analysis Static 
 	
 	analyze 1
@@ -280,8 +288,12 @@ foreach eleType {stdBrick SSPbrick} {
 	    algorithm Linear
 	    numberer RCM
 	    constraints Plain 
+<<<<<<< HEAD
 	    system ProfileSPD
 	    #system SparseGeneral -piv
+=======
+	    system Umfpack
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    analysis Static 
 	    
 	    analyze 1

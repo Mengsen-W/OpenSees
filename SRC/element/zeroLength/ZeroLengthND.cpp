@@ -55,6 +55,11 @@ Vector ZeroLengthND::P12(12);
 
 Vector ZeroLengthND::v2(2);
 Vector ZeroLengthND::v3(3);
+<<<<<<< HEAD
+=======
+Vector ZeroLengthND::v5(5);
+Vector ZeroLengthND::v6(6);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 //  Constructor:
 //  responsible for allocating the necessary space needed by each object
@@ -137,17 +142,30 @@ end1Ptr(0), end2Ptr(0), theNDMaterial(0), the1DMaterial(0), order(0)
 {
 	// Obtain copy of Nd material model
 	theNDMaterial = theNDmat.getCopy();
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	if (theNDMaterial == 0) {
 		opserr << "ZeroLengthND::zeroLengthND-- failed to get copy of NDMaterial\n";
 		exit(-1);
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	// Get the material order
 	order = theNDMaterial->getOrder();
 
 	// Check material order
+<<<<<<< HEAD
 	if (order < 2 || order > 3) {
 		opserr << "ZeroLengthND::  -- NDMaterial not of order 2 or 3\n";
+=======
+	if (order < 2 || order > 6 || order == 4) {
+		opserr << "ZeroLengthND::  -- NDMaterial not of order 2, 3, 5, or 6\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		exit(-1);
 	}
 
@@ -183,8 +201,13 @@ end1Ptr(0), end2Ptr(0), theNDMaterial(0), the1DMaterial(0), order(0)
 	// Get the material order
 	order = theNDMaterial->getOrder();
 
+<<<<<<< HEAD
 	if (order != 2) {
 		opserr << "ZeroLengthND::ZeroLengthND-- NDMaterial not of order 2\n";
+=======
+	if (order < 2 || order > 6 || order == 4) {
+		opserr << "ZeroLengthND::ZeroLengthND-- NDMaterial not of order 2, 3, 5, or 6\n";
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		exit(-1);
 	}
 
@@ -544,7 +567,11 @@ ZeroLengthND::getResistingForce()
 const Vector &
 ZeroLengthND::getResistingForceIncInertia()
 {	
+<<<<<<< HEAD
     // There is no mass, so return
+=======
+    // There is no length, so return
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return this->getResistingForce();
 }
 
@@ -677,8 +704,17 @@ ZeroLengthND::recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &the
 
 		if (order == 2)
 			v = &v2;
+<<<<<<< HEAD
 		else
 			v = &v3;
+=======
+		if (order == 3)
+			v = &v3;
+		if (order == 5)
+		  v = &v5;
+		if (order == 6)
+		  v = &v6;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	}
 
 	int classTag = idData(7);
@@ -989,8 +1025,17 @@ ZeroLengthND::setTransformation(void)
 
 	if (order == 2)
 		v = &v2;
+<<<<<<< HEAD
 	else
 		v = &v3;
+=======
+	if (order == 3)
+		v = &v3;
+	if (order == 5)
+	  v = &v5;
+	if (order == 6)
+	  v = &v6;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 	// Set a reference to make the syntax nicer
 	Matrix &tran = *A;
@@ -1001,12 +1046,22 @@ ZeroLengthND::setTransformation(void)
 		if (numDOF == 6) {
 			tran(i,3) = transformation(i,0);
 			tran(i,4) = transformation(i,1);
+<<<<<<< HEAD
 			tran(i,5) = 0.0;
+=======
+			tran(i,5) = transformation(i,2);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		}
 		else if (numDOF == 12) {
 			tran(i,6) = transformation(i,0);
 			tran(i,7) = transformation(i,1);
 			tran(i,8) = transformation(i,2);
+<<<<<<< HEAD
+=======
+			tran(i,9) = transformation(i,0);
+			tran(i,10) = transformation(i,1);
+			tran(i,11) = transformation(i,2);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		}
 
 		// Fill in first half of transformation matrix with negative sign

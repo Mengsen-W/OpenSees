@@ -74,7 +74,16 @@ void* OPS_GenericClient()
     while (OPS_GetNumRemainingInputArgs() > 0) {
         int node;
         numdata = 1;
+<<<<<<< HEAD
         if (OPS_GetIntInput(&numdata, &node) < 0) {
+=======
+        int numArgs = OPS_GetNumRemainingInputArgs();
+        if (OPS_GetIntInput(&numdata, &node) < 0) {
+            if (numArgs > OPS_GetNumRemainingInputArgs()) {
+                // move current arg back by one
+                OPS_ResetCurrentInputArg(-1);
+            }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             break;
         }
         nodes(numNodes++) = node;
@@ -86,8 +95,14 @@ void* OPS_GenericClient()
     ID *dofs = new ID[numNodes];
     for (int i = 0; i < numNodes; i++) {
         type = OPS_GetString();
+<<<<<<< HEAD
         if (strcmp(type, "-dof") != 0) {
             opserr << "WARNING expecting -dof dofNdi\n";
+=======
+        if (strcmp(type, "-dof") != 0 && strcmp(type, "-dir") != 0) {
+            opserr << "WARNING expecting -dof dofNd"
+                << i+1 << ", but got " << type << endln;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             return 0;
         }
         ID dofsi(ndf);
@@ -95,7 +110,16 @@ void* OPS_GenericClient()
         while (OPS_GetNumRemainingInputArgs() > 0) {
             int dof;
             numdata = 1;
+<<<<<<< HEAD
             if (OPS_GetIntInput(&numdata, &dof) < 0) {
+=======
+            int numArgs = OPS_GetNumRemainingInputArgs();
+            if (OPS_GetIntInput(&numdata, &dof) < 0) {
+                if (numArgs > OPS_GetNumRemainingInputArgs()) {
+                    // move current arg back by one
+                    OPS_ResetCurrentInputArg(-1);
+                }
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
                 break;
             }
             if (dof < 1 || ndf < dof) {
@@ -123,6 +147,7 @@ void* OPS_GenericClient()
     }
     
     // options
+<<<<<<< HEAD
     char *ipAddr = { "127.0.0.1" };
     int ssl = 0, udp = 0;
     int dataSize = 256;
@@ -130,6 +155,13 @@ void* OPS_GenericClient()
     if (OPS_GetNumRemainingInputArgs() < 1) {
         return new GenericClient(tag, nodes, dofs, ipPort);
     }
+=======
+    char* ipAddr = new char[10];
+    strcpy(ipAddr, "127.0.0.1");
+    int ssl = 0, udp = 0;
+    int dataSize = 256;
+    int doRayleigh = 1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     while (OPS_GetNumRemainingInputArgs() > 0) {
         type = OPS_GetString();
@@ -138,7 +170,11 @@ void* OPS_GenericClient()
             strcmp(type, "-dataSize") != 0 &&
             strcmp(type, "-noRayleigh") != 0 &&
             strcmp(type, "-doRayleigh") != 0) {
+<<<<<<< HEAD
             delete ipAddr;
+=======
+            delete[] ipAddr;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
             ipAddr = new char[strlen(type) + 1];
             strcpy(ipAddr, type);
         }
@@ -171,6 +207,11 @@ void* OPS_GenericClient()
     Element *theEle = new GenericClient(tag, nodes, dofs, ipPort,
         ipAddr, ssl, udp, dataSize, doRayleigh);
 
+<<<<<<< HEAD
+=======
+    delete[] ipAddr;
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return theEle;
 }
 
@@ -217,7 +258,12 @@ GenericClient::GenericClient(int tag, ID nodes, ID *dof, int _port,
     }
     
     // save ipAddress
+<<<<<<< HEAD
     machineInetAddr = machineinetaddr;
+=======
+    machineInetAddr = new char[strlen(machineinetaddr) + 1];
+    strcpy(machineInetAddr,machineinetaddr);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     // set the vector sizes and zero them
     basicDOF.resize(numBasicDOF);
@@ -262,11 +308,19 @@ GenericClient::~GenericClient()
     // invoke the destructor on any objects created by the object
     // that the object still holds a pointer to
     if (theNodes != 0)
+<<<<<<< HEAD
         delete [] theNodes;
     if (theDOF != 0)
         delete [] theDOF;
     if (machineInetAddr != 0)
         delete [] machineInetAddr;
+=======
+        delete[] theNodes;
+    if (theDOF != 0)
+        delete[] theDOF;
+    if (machineInetAddr != 0)
+        delete[] machineInetAddr;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     if (db != 0)
         delete db;
@@ -285,11 +339,19 @@ GenericClient::~GenericClient()
     if (sendData != 0)
         delete sendData;
     if (sData != 0)
+<<<<<<< HEAD
         delete [] sData;
     if (recvData != 0)
         delete recvData;
     if (rData != 0)
         delete [] rData;
+=======
+        delete[] sData;
+    if (recvData != 0)
+        delete recvData;
+    if (rData != 0)
+        delete[] rData;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (theChannel != 0)
         delete theChannel;
 }
@@ -702,11 +764,19 @@ int GenericClient::recvSelf(int commitTag, Channel &rChannel,
 {
     // delete dynamic memory
     if (theNodes != 0)
+<<<<<<< HEAD
         delete [] theNodes;
     if (theDOF != 0)
         delete [] theDOF;
     if (machineInetAddr != 0)
         delete [] machineInetAddr;
+=======
+        delete[] theNodes;
+    if (theDOF != 0)
+        delete[] theDOF;
+    if (machineInetAddr != 0)
+        delete[] machineInetAddr;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     // receive element parameters
     static Vector data(12);
@@ -714,7 +784,11 @@ int GenericClient::recvSelf(int commitTag, Channel &rChannel,
     this->setTag((int)data(0));
     numExternalNodes = (int)data(1);
     port = (int)data(2);
+<<<<<<< HEAD
     machineInetAddr = new char [(int)data(3) + 1];
+=======
+    machineInetAddr = new char[int(data(3) + 1)];
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     ssl = (int)data(4);
     udp = (int)data(5);
     dataSize = (int)data(6);

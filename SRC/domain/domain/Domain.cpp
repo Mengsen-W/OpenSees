@@ -87,6 +87,10 @@
 Domain       *ops_TheActiveDomain = 0;
 double        ops_Dt = 0.0;
 bool          ops_InitialStateAnalysis = false;
+<<<<<<< HEAD
+=======
+int           ops_Creep = 0;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 Domain::Domain()
 :theRecorders(0), numRecorders(0),
@@ -1751,6 +1755,20 @@ Domain::setCommittedTime(double newTime)
     dT = currentTime - committedTime;
 }
 
+<<<<<<< HEAD
+=======
+void
+Domain::setCreep(int newCreep)
+{
+  ops_Creep = newCreep;
+}
+
+int
+Domain::getCreep(void) const
+{
+  return ops_Creep;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 void
 Domain::applyLoad(double timeStep)
@@ -3517,3 +3535,42 @@ Domain::getRecorder(int tag)
 	return res;
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+int Domain::activateElements(const ID& elementList)
+{
+    ElementIter& iter = getElements();
+    Element* theElement;
+    for (int i = 0; i < elementList.Size(); ++i)
+    {
+        int eleTag = elementList(i);
+        Element* theElement = this->getElement(eleTag);
+        if (theElement != 0)
+        {
+            theElement->activate();
+        }
+    }
+    return 0;
+}
+
+
+
+int Domain::deactivateElements(const ID& elementList)
+{
+    // ElementIter& iter = getElements();
+    Element* theElement;
+    for (int i = 0; i < elementList.Size(); ++i)
+    {
+        int eleTag = elementList(i);
+        Element* theElement = this->getElement(eleTag);
+        if (theElement != 0)
+        {
+            theElement->deactivate();
+        }
+    }
+    return 0;
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

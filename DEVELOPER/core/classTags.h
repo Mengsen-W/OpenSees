@@ -718,6 +718,12 @@
 #define ELE_TAG_PFEMElement2DQuasi        187
 #define ELE_TAG_MINI                      188
 #define ELE_TAG_PFEMElement3DBubble       189
+<<<<<<< HEAD
+=======
+#define ELE_TAG_NineNodeQuad              207
+#define ELE_TAG_EightNodeQuad             208
+#define ELE_TAG_SixNodeTri                209
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #define FRN_TAG_Coulomb            1
 #define FRN_TAG_VelDependent       2
@@ -902,6 +908,11 @@
 #define INTEGRATOR_TAGS_KRAlphaExplicit                 53
 #define INTEGRATOR_TAGS_KRAlphaExplicit_TP              54
 #define INTEGRATOR_TAGS_ExplicitDifference              55
+<<<<<<< HEAD
+=======
+#define INTEGRATOR_TAGS_EQPath                          56
+#define INTEGRATOR_TAGS_GimmeMCK                        57
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
 #define LinSOE_TAGS_FullGenLinSOE		1
 #define LinSOE_TAGS_BandGenLinSOE		2

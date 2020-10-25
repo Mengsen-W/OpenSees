@@ -40,7 +40,10 @@
 #include <Vector.h>
 #include <DOF_Group.h>
 #include <DOF_GrpIter.h>
+<<<<<<< HEAD
 #include <AnalysisModel.h>
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <Channel.h>
 #include <FEM_ObjectBroker.h>
 
@@ -363,6 +366,15 @@ int TRBDF2::update(const Vector &deltaU)
 }    
 
 
+<<<<<<< HEAD
+=======
+const Vector &
+TRBDF2::getVel()
+{
+  return *Udot;
+}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 int TRBDF2::sendSelf(int cTag, Channel &theChannel)
 {
     return 0;

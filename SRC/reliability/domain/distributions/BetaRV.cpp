@@ -100,7 +100,11 @@ double
 BetaRV::getPDFvalue(double rvValue)
 {
 	double result;
+<<<<<<< HEAD
 	if ( a <= rvValue && rvValue <= b ) {
+=======
+	if ( ((q<1.0 && rvValue > a) || (q >= 1.0 && rvValue >= a)) && ((r < 1.0 && rvValue < b) || (r >= 1.0 && rvValue <= b))) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		double par1 = pow(rvValue-a,q-1.0);
 		double par2 = pow(b-rvValue,r-1.0);
 		double par3 = betaFunction(q,r);
@@ -113,6 +117,7 @@ BetaRV::getPDFvalue(double rvValue)
 	return result;
 }
 
+<<<<<<< HEAD
 
 double
 BetaRV::getCDFvalue(double rvValue)
@@ -146,6 +151,23 @@ BetaRV::getCDFvalue(double rvValue)
 	}
 
 	return result;
+=======
+double
+BetaRV::getCDFvalue(double rvValue)
+{
+	if (rvValue <= a) {
+		return 0.0;
+	}
+	if (rvValue >= b) {
+		return 1.0;
+	}
+
+	double z = (rvValue - a) / (b - a);
+	double Ix = incompleteBetaFunction(q, r, z);
+	//opserr << "x = " << rvValue << " z = " << z << " Ix = " << Ix;
+
+	return Ix;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 }
 
 
@@ -161,7 +183,13 @@ BetaRV::getInverseCDFvalue(double probValue)
 	// In our case the function f(x) is: f(x) = probValue - getCDFvalue(x)
 	// The derivative of the function can be found approximately by a
 	// finite difference scheme where e.g. stdv/200 is used as perturbation.
+<<<<<<< HEAD
 	double tol = 0.000001;
+=======
+
+	// Newton method does not converge in general starting from mean particularly when q and/or r are < 1.0
+	double tol = 1e-6;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	double x_old = getMean();   // Start at the mean of the random variable
 	double x_new;
 	double f;
@@ -180,8 +208,45 @@ BetaRV::getInverseCDFvalue(double probValue)
 		df = ( perturbed_f - f ) / h;
 
 		if ( fabs(df) < 1.0e-15) {
+<<<<<<< HEAD
 			opserr << "WARNING: BetaRV::getInverseCDFvalue() -- zero derivative " << endln
 				<< " in Newton algorithm. " << endln;
+=======
+			/*opserr << "WARNING: BetaRV::getInverseCDFvalue() -- zero derivative " << " in Newton algorithm. " << endln;
+			opserr << "Switch bisection method" << endln;*/
+			// In case of zero derivative in Newton MEthod (This often happen because we went outside the boundaries)
+			// We use slower but robust bisection method
+			double x_A, x_B;
+			double f_A, f_B, f_M;
+			x_A = a;
+			x_B = b;
+			f_A = probValue - getCDFvalue(x_A);
+			f_B = probValue - getCDFvalue(x_B);
+			for (int j = 1; j <= 200; j++) {
+				x_new = (x_A + x_B) / 2.0;
+				f_M = probValue - getCDFvalue(x_new);
+				if (fabs(f_M) < tol) {
+					return x_new;
+				}
+				else {
+					if (i == 200) {
+						opserr << "WARNING: Did not converge to find inverse CDF!" << endln;
+						return 0.0;
+					}
+					if (f_M * f_A < 0) {
+						// The zero is between A and M
+						x_B = x_new;
+						f_B = f_M;
+					}
+					else {
+						// The zero is between M and B
+						x_A = x_new;
+						f_A = f_M;
+					}
+				}
+			}
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 		}
 		else {
 
@@ -189,7 +254,12 @@ BetaRV::getInverseCDFvalue(double probValue)
 			x_new = x_old - f/df;
 			
 			// Check convergence; quit or continue
+<<<<<<< HEAD
 			if (fabs(1.0-fabs(x_old/x_new)) < tol) {
+=======
+			// Changed the tolerance check because if x_new is zero it doesn't work
+			if (fabs(probValue - getCDFvalue(x_new)) < tol) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 				return x_new;
 			}
 			else {

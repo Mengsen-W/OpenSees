@@ -43,9 +43,12 @@
     <Filter Include="analysis\rootFinding">
       <UniqueIdentifier>{3ace3745-688a-4976-ab11-41386fa095e9}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="analysis\telm">
       <UniqueIdentifier>{533b4899-eb81-4128-98e7-c7e1237ed9ea}</UniqueIdentifier>
     </Filter>
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     <Filter Include="analysis\gradient">
       <UniqueIdentifier>{4cddb45d-3f95-4cc3-9a5e-eca4b1ccbd98}</UniqueIdentifier>
     </Filter>
@@ -264,6 +267,7 @@
     <ClCompile Include="..\..\..\SRC\reliability\analysis\rootFinding\ZeroFindingAlgorithm.cpp">
       <Filter>analysis\rootFinding</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\..\SRC\reliability\analysis\telm\Analyzer.cpp">
       <Filter>analysis\telm</Filter>
     </ClCompile>
@@ -393,6 +397,8 @@
     <ClCompile Include="..\..\..\SRC\reliability\analysis\telm\ranrotw.cpp">
       <Filter>analysis\telm</Filter>
     </ClCompile>
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     <ClCompile Include="..\..\..\SRC\reliability\analysis\gradient\FiniteDifferenceGradient.cpp">
       <Filter>analysis\gradient</Filter>
     </ClCompile>
@@ -773,6 +779,7 @@
     <ClInclude Include="..\..\..\SRC\reliability\analysis\rootFinding\ZeroFindingAlgorithm.h">
       <Filter>analysis\rootFinding</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\..\..\SRC\reliability\analysis\telm\Analyzer.h">
       <Filter>analysis\telm</Filter>
     </ClInclude>
@@ -887,6 +894,8 @@
     <ClInclude Include="..\..\..\SRC\reliability\analysis\telm\randomc.h">
       <Filter>analysis\telm</Filter>
     </ClInclude>
+=======
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     <ClInclude Include="..\..\..\SRC\reliability\analysis\gradient\FiniteDifferenceGradient.h">
       <Filter>analysis\gradient</Filter>
     </ClInclude>

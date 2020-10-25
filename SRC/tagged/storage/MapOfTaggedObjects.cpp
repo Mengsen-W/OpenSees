@@ -78,6 +78,7 @@ MapOfTaggedObjects::addComponent(TaggedObject *newComponent)
     int tag = newComponent->getTag();
 
     // check if the ele already in map, if not we add
+<<<<<<< HEAD
     theEle = theMap.find(tag);
     if (theEle == theMap.end()) {
 	theMap.insert(MAP_TAGGED_TYPE(tag,newComponent));
@@ -99,6 +100,34 @@ MapOfTaggedObjects::addComponent(TaggedObject *newComponent)
       return false;
     }
     
+=======
+    std::pair<MAP_TAGGED_ITERATOR,bool> res = theMap.insert(MAP_TAGGED_TYPE(tag,newComponent));    
+    if (res.second == false) {
+      opserr << "MapOfTaggedObjects::addComponent - not adding as one with similar tag exists, tag: " <<
+	tag << "\n";
+      return false;
+    }
+
+    /*
+    theEle = theMap.find(tag);
+    if (theEle == theMap.end()) {
+      theMap.insert(MAP_TAGGED_TYPE(tag,newComponent));
+      
+      // check if sucessfully added 
+      theEle = theMap.find(tag);
+      if (theEle == theMap.end()) {
+	opserr << "MapOfTaggedObjects::addComponent - map STL failed to add object with tag : " << 
+	  newComponent->getTag() << "\n";
+	return false;
+      }
+    }  else {	
+      opserr << "MapOfTaggedObjects::addComponent - not adding as one with similar tag exists, tag: " <<
+	tag << "\n";
+      return false;
+    }
+    */
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     return true;  // o.k.
 }
 
@@ -198,6 +227,10 @@ MapOfTaggedObjects::clearAll(bool invokeDestructor)
 void
 MapOfTaggedObjects::Print(OPS_Stream &s, int flag)
 {
+<<<<<<< HEAD
+=======
+    s << "\nnumComponents: " << this->getNumComponents();
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     // go through the array invoking Print on non-zero entries
     MAP_TAGGED_ITERATOR p = theMap.begin();
     while (p != theMap.end()) {

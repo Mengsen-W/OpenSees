@@ -23,6 +23,7 @@
 // Description: This file contains the class definition for TzLiq1.
 // 
 
+<<<<<<< HEAD
 #include <UniaxialMaterial.h>
 #include <Domain.h>
 #include <FourNodeQuad.h>
@@ -39,6 +40,21 @@
 
 class TzLiq1 : public TzSimple1
 {
+=======
+#include "TzSimple1.h"
+#include <UniaxialMaterial.h>
+#include <Domain.h>
+
+#include <string>
+
+class FourNodeQuad;
+class TimeSeries;
+
+//#include <SSPquadUP.h>
+//#include <SSPquad.h>
+
+class TzLiq1 : public TzSimple1 {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
   public:
     TzLiq1(int tag, int classtag, int tzType, double tult, double z50,
 		      double dashpot, int solidElem1, int solidElem2, Domain *theDomain);

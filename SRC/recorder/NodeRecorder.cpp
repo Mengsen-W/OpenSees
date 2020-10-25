@@ -29,6 +29,10 @@
 
 #include <NodeRecorder.h>
 #include <Domain.h>
+<<<<<<< HEAD
+=======
+#include <Parameter.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <Node.h>
 #include <NodeIter.h>
 #include <Vector.h>
@@ -89,7 +93,11 @@ OPS_NodeRecorder()
     const char *inetAddr = 0;
     int inetPort;
     
+<<<<<<< HEAD
     int sensitivity = 0;
+=======
+    int gradIndex = -1;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     
     TimeSeries **theTimeSeries = 0;
     
@@ -288,7 +296,11 @@ OPS_NodeRecorder()
     Domain* domain = OPS_GetDomain();
     if (domain == 0)
         return 0;
+<<<<<<< HEAD
     NodeRecorder* recorder = new NodeRecorder(dofs, &nodes, sensitivity,
+=======
+    NodeRecorder* recorder = new NodeRecorder(dofs, &nodes, gradIndex,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
         responseID, *domain, *theOutputStream,
         dT, echoTimeFlag, theTimeSeries);
     
@@ -302,7 +314,11 @@ NodeRecorder::NodeRecorder()
  theDomain(0), theOutputHandler(0),
  echoTimeFlag(true), dataFlag(0), 
  deltaT(0), nextTimeStampToRecord(0.0), 
+<<<<<<< HEAD
  sensitivity(0),
+=======
+ gradIndex(-1),
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  initializationDone(false), numValidNodes(0), addColumnInfo(0), theTimeSeries(0), timeSeriesValues(0)
 {
 
@@ -311,7 +327,11 @@ NodeRecorder::NodeRecorder()
 
 NodeRecorder::NodeRecorder(const ID &dofs, 
 			   const ID *nodes, 
+<<<<<<< HEAD
 			   int psensitivity,
+=======
+			   int pgradIndex,
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 			   const char *dataToStore,
 			   Domain &theDom,
 			   OPS_Stream &theOutput,
@@ -323,7 +343,11 @@ NodeRecorder::NodeRecorder(const ID &dofs,
  theDomain(&theDom), theOutputHandler(&theOutput),
  echoTimeFlag(timeFlag), dataFlag(0), 
  deltaT(dT), nextTimeStampToRecord(0.0), 
+<<<<<<< HEAD
  sensitivity(psensitivity), 
+=======
+ gradIndex(pgradIndex), 
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
  initializationDone(false), numValidNodes(0), addColumnInfo(0), 
  theTimeSeries(theSeries), timeSeriesValues(0)
 {
@@ -419,19 +443,46 @@ NodeRecorder::NodeRecorder(const ID &dofs,
     else
       dataFlag = 10;
   } else if ((strncmp(dataToStore, "sensitivity",11) == 0)) {
+<<<<<<< HEAD
     int grad = atoi(&(dataToStore[11]));
+=======
+    int paramTag = atoi(&(dataToStore[11]));
+    Parameter *theParameter = theDomain->getParameter(paramTag);
+    int grad = -1;
+    if (theParameter != 0)
+      grad = theParameter->getGradIndex();
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (grad > 0)
       dataFlag = 1000 + grad;
     else
       dataFlag = 10;
   } else if ((strncmp(dataToStore, "velSensitivity",14) == 0)) {
+<<<<<<< HEAD
     int grad = atoi(&(dataToStore[14]));
+=======
+    int paramTag = atoi(&(dataToStore[14]));
+    Parameter *theParameter = theDomain->getParameter(paramTag);
+    int grad = -1;
+    if (theParameter != 0)
+      grad = theParameter->getGradIndex();
+    
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (grad > 0)
       dataFlag = 2000 + grad;
     else
       dataFlag = 10;
   } else if ((strncmp(dataToStore, "accSensitivity",14) == 0)) {
+<<<<<<< HEAD
     int grad = atoi(&(dataToStore[14]));
+=======
+    int paramTag = atoi(&(dataToStore[14]));
+    Parameter *theParameter = theDomain->getParameter(paramTag);
+    int grad = -1;
+    if (theParameter != 0)
+      grad = theParameter->getGradIndex();
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
     if (grad > 0)
       dataFlag = 3000 + grad;
     else
@@ -556,8 +607,14 @@ NodeRecorder::record(int commitTag, double timeStamp)
 
 	Node *theNode = theNodes[i];
 	if (dataFlag == 0) {
+<<<<<<< HEAD
 	  // AddingSensitivity:BEGIN ///////////////////////////////////
 	  if (sensitivity==0) {
+=======
+
+	  // AddingSensitivity:BEGIN ///////////////////////////////////
+	  if (gradIndex < 0) {
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    const Vector &theResponse = theNode->getTrialDisp();
 	    for (int j=0; j<numDOF; j++) {
 
@@ -579,13 +636,21 @@ NodeRecorder::record(int commitTag, double timeStamp)
 	    for (int j=0; j<numDOF; j++) {
 	      int dof = (*theDofs)(j);
 	      
+<<<<<<< HEAD
 	      response(cnt) = theNode->getDispSensitivity(dof+1, sensitivity);
+=======
+	      response(cnt) = theNode->getDispSensitivity(dof+1, gradIndex);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	      cnt++;
 	    }
 	  }
 	  
 	  // AddingSensitivity:END /////////////////////////////////////
 	} else if (dataFlag == 1) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	  const Vector &theResponse = theNode->getTrialVel();
 	  for (int j=0; j<numDOF; j++) {
 
@@ -656,6 +721,10 @@ NodeRecorder::record(int commitTag, double timeStamp)
 
 	    cnt++;
 	  }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	} else if (dataFlag == 3) {
 	  const Vector &theResponse = theNode->getIncrDisp();
 	  for (int j=0; j<numDOF; j++) {
@@ -751,9 +820,14 @@ NodeRecorder::record(int commitTag, double timeStamp)
 	  
 	  for (int j=0; j<numDOF; j++) {
 	    int dof = (*theDofs)(j);
+<<<<<<< HEAD
 	    dof += 1; // Terje uses 1 through DOF for the dof indexing; the fool then subtracts 1 
 	    // his code!!
 	    response(cnt) = theNode->getDispSensitivity(dof, grad-1);  // Quan May 2009, the one above is not my comment! 
+=======
+	    dof += 1; // Terje uses 1 through DOF for the dof indexing
+	    response(cnt) = theNode->getDispSensitivity(dof, grad);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    cnt++;
 	  }
 	  
@@ -762,9 +836,14 @@ NodeRecorder::record(int commitTag, double timeStamp)
 	  
 	  for (int j=0; j<numDOF; j++) {
 	    int dof = (*theDofs)(j);
+<<<<<<< HEAD
 	    dof += 1; // Terje uses 1 through DOF for the dof indexing; the fool then subtracts 1 
 	    // his code!!
 	    response(cnt) = theNode->getVelSensitivity(dof, grad-1); // Quan May 2009
+=======
+	    dof += 1; // Terje uses 1 through DOF for the dof indexing
+	    response(cnt) = theNode->getVelSensitivity(dof, grad);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    cnt++;
 	  }
 	  
@@ -774,9 +853,14 @@ NodeRecorder::record(int commitTag, double timeStamp)
 	  
 	  for (int j=0; j<numDOF; j++) {
 	    int dof = (*theDofs)(j);
+<<<<<<< HEAD
 	    dof += 1; // Terje uses 1 through DOF for the dof indexing; the fool then subtracts 1 
 	    // his code!!
 	    response(cnt) = theNode->getAccSensitivity(dof, grad-1);// Quan May 2009
+=======
+	    dof += 1; // Terje uses 1 through DOF for the dof indexing
+	    response(cnt) = theNode->getAccSensitivity(dof, grad);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	    cnt++;
 	  }
 	}
@@ -865,7 +949,11 @@ NodeRecorder::sendSelf(int commitTag, Channel &theChannel)
     idData(3) = 0;
 
   idData(4) = dataFlag;
+<<<<<<< HEAD
   idData(5) = sensitivity;
+=======
+  idData(5) = gradIndex;
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   idData(6) = this->getTag();
   if (theTimeSeries == 0)
@@ -962,7 +1050,11 @@ NodeRecorder::recvSelf(int commitTag, Channel &theChannel,
     echoTimeFlag = false;    
 
   dataFlag = idData(4);
+<<<<<<< HEAD
   sensitivity = idData(5);
+=======
+  gradIndex = idData(5);
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
   //
   // get the DOF ID data
@@ -1283,4 +1375,8 @@ double NodeRecorder::getRecordedValue(int clmnId, int rowOffset, bool reset)
 		return res;
 	res = response(clmnId);
 	return res;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0

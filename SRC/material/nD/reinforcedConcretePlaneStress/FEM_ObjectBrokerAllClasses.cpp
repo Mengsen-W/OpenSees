@@ -158,6 +158,12 @@
 #include <FourNodeQuad.h>
 #include <EnhancedQuad.h>
 #include <NineNodeMixedQuad.h>
+<<<<<<< HEAD
+=======
+#include <NineNodeQuad.h>
+#include <EightNodeQuad.h>
+#include <SixNodeTri.h>
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 #include <ConstantPressureVolumeQuad.h>
 #include <ElasticBeam2d.h>
 #include <ElasticBeam3d.h>
@@ -495,6 +501,18 @@ FEM_ObjectBrokerAllClasses::getNewElement(int classTag)
 	case ELE_TAG_FourNodeQuad:  
 	     return new FourNodeQuad(); 	     
 	     
+<<<<<<< HEAD
+=======
+	case ELE_TAG_NineNodeQuad:
+	     return new NineNodeQuad();
+
+	case ELE_TAG_EightNodeQuad:
+	     return new EightNodeQuad();
+
+	case ELE_TAG_SixNodeTri:
+	     return new SixNodeTri();
+
+>>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 	case ELE_TAG_ElasticBeam2d:
 		return new ElasticBeam2d();
 
