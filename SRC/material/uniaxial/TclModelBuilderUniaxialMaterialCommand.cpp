@@ -166,8 +166,6 @@ extern void *OPS_ElasticPowerFunc(void);
 extern void *OPS_UVCuniaxial(void);
 extern void *OPS_DegradingPinchedBW(void);
 extern void *OPS_SLModel(void);
-extern void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc,
-                                        TCL_Char **argv);
 
 // extern int TclCommand_ConfinedConcrete02(ClientData clientData, Tcl_Interp
 // *interp, int argc, 					 TCL_Char **argv,
@@ -183,6 +181,10 @@ extern UniaxialMaterial *Tcl_addWrapperUniaxialMaterial(matObj *,
                                                         int argc,
                                                         TCL_Char **argv);
 
+// mengsen add
+extern void *OPS_SteelFiberCompositeBar(void);
+extern void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc,
+                                        TCL_Char **argv);
 #include <packages.h>
 
 typedef struct uniaxialPackageCommand {
@@ -261,6 +263,7 @@ int TclModelBuilderUniaxialMaterialCommand(ClientData clientData,
 
   }
 
+  // GeneralElasticMaterial
   else if (strcmp(argv[1], "GeneralElasticMaterial") == 0) {
     void *theMat = OPS_GeneralElasticMaterial(interp, argc, argv);
 
@@ -269,6 +272,15 @@ int TclModelBuilderUniaxialMaterialCommand(ClientData clientData,
     } else {
       return TCL_ERROR;
     }
+  }
+  // SteelFiberCompositeBar
+  else if (strcmp(argv[1], "SteelFiberCompositeBar") == 0) {
+    void *theMat = OPS_SteelFiberCompositeBar();
+    if (theMat != 0)
+      theMaterial = (UniaxialMaterial *)theMat;
+    else
+      return TCL_ERROR;
+
   }
 
   // SAJalali

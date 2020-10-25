@@ -1352,7 +1352,10 @@
     <ClCompile Include="..\..\..\SRC\material\nD\IncrementalElasticIsotropicThreeDimensional.cpp">
       <Filter>nD\elasticIsotropic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SRC\material\GeneralElastic.cpp">
+    <ClCompile Include="..\..\..\SRC\material\uniaxial\GeneralElastic.cpp">
+      <Filter>uniaxial</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\SRC\material\uniaxial\SteelFiberCompositeBar.cpp">
       <Filter>uniaxial</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2531,7 +2534,10 @@
     <ClInclude Include="..\..\..\SRC\material\nD\IncrementalElasticIsotropicThreeDimensional.h">
       <Filter>nD\elasticIsotropic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SRC\material\GeneralElastic.h">
+    <ClInclude Include="..\..\..\SRC\material\uniaxial\SteelFiberCompositeBar.h">
+      <Filter>uniaxial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\SRC\material\uniaxial\GeneralElastic.h">
       <Filter>uniaxial</Filter>
     </ClInclude>
   </ItemGroup>

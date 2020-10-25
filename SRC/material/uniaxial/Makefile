@@ -134,6 +134,7 @@ OBJS       = UniaxialMaterial.o \
 	PlateBearingConnectionThermal.o \
 	DegradingPinchedBW.o \
 	GeneralElectric.o \
+	SteelFiberCompositeBar \
         TclModelBuilderUniaxialMaterialCommand.o
 
 all:         $(OBJS)
@@ -149,7 +150,7 @@ all:         $(OBJS)
 
 # Miscellaneous
 
-tidy:   
+tidy:
 	@$(RM) $(RMFLAGS) Makefile.bak *~ #*# core
 
 clean: tidy
