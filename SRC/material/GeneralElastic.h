@@ -67,7 +67,8 @@ class GeneralElastic : public UniaxialMaterial {
 
   void Print(OPS_Stream &s, int flag = 0);
 
-  Response *setResponse(const char **argv, int argc, OPS_Stream &theOutput) override;
+  Response *setResponse(const char **argv, int argc,
+                        OPS_Stream &theOutput) override;
   int getResponse(int responseID, Information &matInfo) override;
 
  protected:

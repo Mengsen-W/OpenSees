@@ -28,7 +28,6 @@
 //
 // Description: This file contains the class definition for
 // GeneralElastic.h adapted to user defined envelope
-//   - Linear envelope with array
 //
 // What: "@(#) GeneralElastic.hh, revA"
 
@@ -42,7 +41,7 @@
 void *OPS_GeneralElasticMaterial(Tcl_Interp *interp, int argc,
                                  TCL_Char **argv) {
   if (argc < 3) {
-    opserr << "WARNING insufficient arguments\n";
+    opserr << "WARNING insufficient arguments" << endln;
     opserr << "Want: uniaxialMaterial GeneralElasticMaterial tag? -strain {} "
               "-stress {}"
            << endln;
@@ -152,33 +151,36 @@ int GeneralElastic::setTrialStrain(double strain, double strainRate) {
   if (fabs(strain) < 1.0e-14) sign = 0;
   if (strain < -1.0e-14) sign = -1;
 
-  trialStrainRate = strain;
+  trialStrain= strain;
   trialStrainRate = strainRate;
 
   int i = 0;
 
   while ((i < backboneStrain->Size()) &&
-         (fabs(trialStrain) > (*backboneStrain)[i] + 1.0e-14)) {
+         (fabs(trialStrain) > (*backboneStrain)(i) + 1.0e-14)) {
     ++i;
   }
+
   if (i == 0) {
     trialStress = 0.0;
-    tangent = ((*backboneStress)[1] - (*backboneStress)[0]) /
-              ((*backboneStrain)[1] - (*backboneStrain)[0]);
+    tangent = ((*backboneStress)(1) - (*backboneStress)(0)) /
+              ((*backboneStrain)(1) - (*backboneStrain)(0));
   } else if (i == backboneStrain->Size()) {
     // to big strain, keep horizontal
-    trialStress = sign * (*backboneStress)[i - 1];
+    trialStress = sign * (*backboneStress)(i - 1);
     tangent = 0.0;
   } else {
     // init stress + delta trial strain * delta(backboneStress) / delta(init
     // backboneStrain)
 
+    trialStress = (*backboneStress)(i - 1) +
+                  (fabs(trialStrain) - (*backboneStrain)(i - 1)) *
+                      ((*backboneStress)(i) - (*backboneStress)(i - 1)) /
+                      ((*backboneStrain)(i) - (*backboneStrain)(i - 1));
+    trialStress *= sign;
+
     tangent = ((*backboneStress)[i] - (*backboneStress)[i - 1]) /
               ((*backboneStrain)[i] - (*backboneStrain)[i - 1]);
-
-    trialStress = (*backboneStress)[i - 1] +
-                  (fabs(trialStrain) - (*backboneStrain)[i - 1]) * tangent;
-    trialStress *= sign;
   }
 
   if (fabs(tangent) < 1.0e-14) {
