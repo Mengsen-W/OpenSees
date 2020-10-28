@@ -133,9 +133,12 @@ protected:
 	const Vector& getRayleighDampingForces(void);
 #endif
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
+=======
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
     double alphaM, betaK, betaK0, betaKc;
     Matrix *Kc; // pointer to hold last committed matrix if needed for rayleigh damping
 

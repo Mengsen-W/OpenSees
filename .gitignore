@@ -15,9 +15,16 @@
 *.pch
 
 # Compiled Dynamic libraries
+<<<<<<< HEAD
 *.so
 *.dylib
 *.dll
+=======
+*.so*
+*.dylib
+*.dll
+*.pyd
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
 
 # Fortran module files
 *.mod
@@ -42,6 +49,20 @@
 obj
 *.exp
 
+<<<<<<< HEAD
+=======
+# CLion
+.gitignore
+.idea
+cmake-build-debug
+cmake-build-release
+CMakeLists.txt
+.dropbox.attr
+
+# VSCode
+.vscode
+
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
 # OTHER
 Makefile.def
 PlainConcrete.f
@@ -63,3 +84,10 @@ Faria1998PlaneStress2d.cpp
 Faria1998PlaneStress2d.h
 Faria1998ThreeDimensional.cpp
 Faria1998ThreeDimensional.h
+<<<<<<< HEAD
+=======
+SRC/interpreter/pythonInterpreter
+SRC/interpreter/tclInterpreter
+SRC/interpreter/openseespy
+SRC/interpreter/openseestcl
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3

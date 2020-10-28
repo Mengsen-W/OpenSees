@@ -107,6 +107,10 @@
     <ClCompile Include="..\..\..\SRC\recorder\DatastoreRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\DriftRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\ElementRecorder.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="..\..\..\SRC\recorder\ElementRecorderRMS.cpp" />
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
     <ClCompile Include="..\..\..\SRC\recorder\EnvelopeDriftRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\EnvelopeElementRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\EnvelopeNodeRecorder.cpp" />
@@ -116,6 +120,10 @@
     <ClCompile Include="..\..\..\SRC\recorder\MaxNodeDispRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\MPCORecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\NodeRecorder.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="..\..\..\SRC\recorder\NodeRecorderRMS.cpp" />
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
     <ClCompile Include="..\..\..\SRC\recorder\NormElementRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\NormEnvelopeElementRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\PatternRecorder.cpp" />
@@ -132,9 +140,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SRC\recorder\DamageRecorder.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\..\..\SRC\recorder\EnvelopeDriftRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\GmshRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\MPCORecorder.h" />
+=======
+    <ClInclude Include="..\..\..\SRC\recorder\ElementRecorderRMS.h" />
+    <ClInclude Include="..\..\..\SRC\recorder\EnvelopeDriftRecorder.h" />
+    <ClInclude Include="..\..\..\SRC\recorder\GmshRecorder.h" />
+    <ClInclude Include="..\..\..\SRC\recorder\MPCORecorder.h" />
+    <ClInclude Include="..\..\..\SRC\recorder\NodeRecorderRMS.h" />
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
     <ClInclude Include="..\..\..\SRC\recorder\NormElementRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\NormEnvelopeElementRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\PVDRecorder.h" />

@@ -466,6 +466,7 @@
 // PM4Silt material - L.Chen
 #define ND_TAG_PM4Silt                        14022
 <<<<<<< HEAD
+<<<<<<< HEAD
 // J2CyclicBoundingSurface material - D.Turello
 #define ND_TAG_J2CyclicBoundingSurface        14023
 
@@ -475,6 +476,13 @@
 #define ND_TAG_J2CyclicBoundingSurface3D          14024
 #define ND_TAG_J2CyclicBoundingSurfacePlaneStrain 14025
 >>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
+=======
+// J2CyclicBoundingSurface material - D.Turello
+#define ND_TAG_J2CyclicBoundingSurface            14023
+#define ND_TAG_J2CyclicBoundingSurface3D          14024
+#define ND_TAG_J2CyclicBoundingSurfacePlaneStrain 14025
+
+>>>>>>> 4825e2eafd2ef59003b3e8c4560b778b1b8739f3
 // MultiaxialCyclicPlasticity, add by Gang Wang
 #define ND_TAG_MultiaxialCyclicPlasticity             10031
 #define ND_TAG_MultiaxialCyclicPlasticity3D           10032
