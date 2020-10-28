@@ -49,11 +49,13 @@ obj
 .idea
 cmake-build-debug
 cmake-build-release
-CMakeLists.txt
+# CMakeLists.txt
 .dropbox.attr
 
 # VSCode
 .vscode
+build
+.history
 
 # OTHER
 Makefile.def
