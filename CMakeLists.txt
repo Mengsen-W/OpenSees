@@ -52,28 +52,28 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNODEBUG")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-find_package(Boost REQUIRED)
-find_package(Threads REQUIRED)
-find_package(Protobuf REQUIRED)
+# find_package(Boost REQUIRED)
+# find_package(Threads REQUIRED)
+# find_package(Protobuf REQUIRED)
 
-find_library(YAML NAMES yaml-cpp)
-find_library(JSON NAMES jsoncpp )
+# find_library(YAML NAMES yaml-cpp)
+# find_library(JSON NAMES jsoncpp )
 
-if(YAML)
-  message(STATUS "found yaml-cpp")
-endif()
+# if(YAML)
+#   message(STATUS "found yaml-cpp")
+# endif()
 
-if(JSON)
-  message(STATUS "found jsoncpp")
-endif()
+# if(JSON)
+#   message(STATUS "found jsoncpp")
+# endif()
 
-include_directories(${PROJECT_SOURCE_DIR})
-include_directories(${Boost_INCLUDES_DIR})
+# include_directories(${PROJECT_SOURCE_DIR})
+# include_directories(${Boost_INCLUDES_DIR})
 
-string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
-message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
+# string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
+# message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/mengSen/base)
+# add_subdirectory(${PROJECT_SOURCE_DIR}/mengSen/base)
 
 # add_executable(main.out
 #   main.cpp
