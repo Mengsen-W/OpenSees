@@ -74,7 +74,11 @@ void* OPS_PVDRecorder();
 <<<<<<< HEAD
 =======
 void* OPS_AlgorithmRecorder();
+<<<<<<< HEAD
 >>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
+=======
+void* OPS_RemoveRecorder();
+>>>>>>> b5348425eb24572de19ac74f8c63c1b5ec600c57
 BackgroundMesh& OPS_getBgMesh();
 
 //void* OPS_DriftRecorder();
@@ -100,6 +104,10 @@ namespace {
         recordersMap.insert(std::make_pair("EnvelopeElement", &OPS_EnvelopeElementRecorder));
 	recordersMap.insert(std::make_pair("PVD", &OPS_PVDRecorder));
 	recordersMap.insert(std::make_pair("BgPVD", &OPS_PVDRecorder));
+	recordersMap.insert(std::make_pair("Remove", &OPS_RemoveRecorder));
+	recordersMap.insert(std::make_pair("ElementRemoval", &OPS_RemoveRecorder));
+	recordersMap.insert(std::make_pair("NodeRemoval", &OPS_RemoveRecorder));
+	recordersMap.insert(std::make_pair("Collapse", &OPS_RemoveRecorder));
         //recordersMap.insert(std::make_pair("Drift", &OPS_DriftRecorder));
         //recordersMap.insert(std::make_pair("Pattern", &OPS_PatternRecorder));
 
@@ -147,6 +155,14 @@ int OPS_Recorder()
 	    delete theRecorder;
 	    return -1;
 	}
+    }
+
+    // set recorder tag as result
+    int size = 1;
+    int tag = theRecorder->getTag();
+    if (OPS_SetIntOutput(&size, &tag, true) < 0) {
+        opserr << "ERROR: failed to return recorder tag\n";
+        return -1;
     }
 
     return 0;
