@@ -62,6 +62,7 @@
 #include <SteelBRB.h>             //Quan & Michele
 #include <SmoothPSConcrete.h>      //Quan & Michele
 #include <SelfCenteringMaterial.h> //JAE
+#include <ASD_SMA_3K.h> //LA
 
 #include <KikuchiAikenHDR.h>
 #include <KikuchiAikenLRB.h>
@@ -146,8 +147,12 @@ extern void *OPS_ElasticMaterialThermal(void); //L.Jiang[SIF]
 <<<<<<< HEAD
 =======
 //extern void *OPS_PlateBearingConnectionThermal(void);
+<<<<<<< HEAD
 >>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
 
+=======
+extern void* OPS_ASD_SMA_3K(void); // Luca Aceto
+>>>>>>> 14f29837d9191cd22806525a9339dab4d1e43b7e
 extern void *OPS_BWBN(void);
 extern void *OPS_IMKPeakOriented(void);
 extern void *OPS_IMKBilin(void);
@@ -2641,6 +2646,15 @@ TclModelBuilderUniaxialMaterialCommand (ClientData clientData, Tcl_Interp *inter
       
       theMaterial = new ECC01(tag, SIGT0, EPST0, SIGT1, EPST1, EPST2, SIGC0, EPSC0, EPSC1, 
 			      ALPHAT1, ALPHAT2, ALPHAC, ALPHACU, BETAT, BETAC);
+    }
+
+
+    else if (strcmp(argv[1], "ASD_SMA_3K") == 0) {
+      void *theMat = OPS_ASD_SMA_3K();
+      if (theMat != 0)
+        theMaterial = (UniaxialMaterial *)theMat;
+      else
+        return TCL_ERROR;
     }
 
 

@@ -235,7 +235,11 @@
 
 =======
 #define MAT_TAG_PlateBearingConnectionThermal 215
+<<<<<<< HEAD
 >>>>>>> ad2965e00858958011abb8d72d2ec3efc732a9a0
+=======
+#define MAT_TAG_ASD_SMA_3K                    216
+>>>>>>> 14f29837d9191cd22806525a9339dab4d1e43b7e
 
 
 #define MAT_TAG_FedeasMaterial    1000

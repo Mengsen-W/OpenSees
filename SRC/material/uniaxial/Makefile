@@ -38,6 +38,7 @@ OBJS       = UniaxialMaterial.o \
 	Cast.o \
         HardeningMaterial.o \
         HardeningMaterial2.o \
+	ASD_SMA_3K.o \
 	Concrete01.o \
 	Concrete02Thermal.o \
 	Steel02Thermal.o \
